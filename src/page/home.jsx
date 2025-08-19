@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NutritionHeader from "../components/partials/Header/nutritionsheader";
 import HomeNutritionFooter from "../components/partials/Footer/footer";
 import BookingForm from "./sample-booking-form";
-import BookingFormModal from "../components/modals/BookingFormModal";
+import BookingFormModal from "../components/popup/BookingFormModal";
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 

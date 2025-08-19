@@ -14,18 +14,38 @@ import Home from "./page/home";
 
 import $ from "jquery";
 import ThankYou from "./components/thank-you";
+import UserProfile from "./page/account/profile";
+import { Toaster } from "react-hot-toast";
 window.jQuery = $;
 window.$ = $;
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/thank-you" element={<ThankYou />} />
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/thank-you" element={<ThankYou />} />
+                <Route path="/profile" element={<UserProfile />} />
+            </Routes>
+            <Toaster 
+                position="top-right"
+                autoClose={3000}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                toastStyle={{
+                    backgroundColor: "#000", 
+                    color: "#bff747", 
+                    fontWeight: "500",
+                    borderRadius: "8px",
+                }}
+                icon={false}
+            />
+        </Router>
+    );
 }
 
 export default App;
