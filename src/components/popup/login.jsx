@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
-import { axiosInstance } from "../../config/api";
+import { axiosInstance } from "../../assets/js/config/api";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -160,7 +160,7 @@ const LoginModal = ({ onClose }) => {
     <>
       {/* Login Popup  */}
       <Modal show={showModal} onHide={handleClose} centered>
-        <Modal.Header closeButton className="border-0">
+        <Modal.Header closeButton className="border-0 bg-dark text-white">
           <Modal.Title>
             <div className="text-center">
               <Link to="/">
@@ -178,18 +178,18 @@ const LoginModal = ({ onClose }) => {
             </div>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bg-dark text-white">
           <Form onSubmit={(e) => e.preventDefault()}>
             <Form.Group
               controlId="formBasicUsername"
               className="mb-4 text-center"
             >
-              <Form.Label className="label_modal text-center mb-2">
+              <Form.Label className="label_modal text-center mb-2 text-white">
                 OTP Verification
               </Form.Label>
               <Form.Control
                 type="text"
-                className="fr"
+                className="fr bg-light text-white border-secondary"
                 placeholder="Enter mobile number"
                 onChange={(e) => setMobileNumber(e.target.value)}
               />
@@ -201,37 +201,22 @@ const LoginModal = ({ onClose }) => {
                 width: "100%",
                 color: "#fff",
                 margin: "0",
-                backgroundColor: '#86c33a',
-                border: 'transparent',
-                borderRadius: '23px',
-                marginBottom: '10px',
+                backgroundColor: "#86c33a",
+                border: "transparent",
+                borderRadius: "23px",
+                marginBottom: "10px",
               }}
               onClick={handleLogin}
             >
               Log In
             </Button>
           </Form>
-          {/* <div className="text-center">
-            <Button
-              onClick={handleSignUpInternational}
-              style={{
-                background: "none",
-                border: "none",
-                color: "#000",
-                textDecorationLine: "underline!important",
-                fontSize: "18px",
-                display: "inline-block",
-              }}
-              className="mt-3"
-            >
-              Login For International Student
-            </Button>
-          </div> */}
         </Modal.Body>
-      </Modal >
+      </Modal>
+
       {/* Otp Popup  */}
       <Modal Modal show={otpDialogOpen} onHide={handleCloseOtpModal} centered >
-        <Modal.Header closeButton className="border-0">
+        <Modal.Header closeButton className="border-0 bg-dark text-white">
           <Modal.Title>
             <div className="text-center">
               <Link to="/">
@@ -249,7 +234,7 @@ const LoginModal = ({ onClose }) => {
             </div>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="border-0 bg-dark text-white">
           <Form onSubmit={(e) => e.preventDefault()}>
             <Form.Group
               controlId="formBasicUsername"
@@ -274,10 +259,10 @@ const LoginModal = ({ onClose }) => {
                 width: "100%",
                 color: "#fff",
                 margin: "0",
-                backgroundColor: '#86c33a',
-                border: 'transparent',
-                borderRadius: '23px',
-                marginBottom: '10px',
+                backgroundColor: "#86c33a",
+                border: "transparent",
+                borderRadius: "23px",
+                marginBottom: "10px",
               }}
               onClick={handleOtpSubmit}
             >

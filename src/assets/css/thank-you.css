@@ -27,7 +27,7 @@
   width: 80px;
   height: 80px;
   margin: 0 auto;
-  border: 3px solid #bff747;
+  border: 3px solid #88c349;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@
 }
 
 .check-mark-icon {
-  color: #bff747;
+  color: #88c349;
   font-size: 40px;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .order-details-title {
-  color: #bff747;
+  color: #88c349;
   margin-bottom: 15px;
   font-size: 1.5rem;
 }
@@ -90,7 +90,7 @@
 }
 
 .order-info-value {
-  color: #bff747;
+  color: #88c349;
   text-align: center;
   margin: 5px 0;
 }

@@ -68,9 +68,9 @@ function UserProfile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setLoading(true); // 🔥 loader start
+        setLoading(true);
         await updateData();
-        setLoading(false); // 🔥 loader stop
+        setLoading(false);
     };
 
     useEffect(() => {

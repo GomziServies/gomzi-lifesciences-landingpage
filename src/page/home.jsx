@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import NutritionHeader from "../components/partials/Header/nutritionsheader";
-import HomeNutritionFooter from "../components/partials/Footer/footer";
-import BookingForm from "./sample-booking-form";
-import BookingFormModal from "../components/popup/BookingFormModal";
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 
@@ -12,13 +9,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const productsData = [
-    { name: "Peanut Butter", price: 499, image: "/assets/images/product-images/gomzi-nutrition-chocolate-crunchy-peanut-butter-1.webp", icon: "/assets/images/icon-service-1.svg" },
-    { name: "Whey Protein", price: 4200, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp", icon: "/assets/images/icon-service-3.svg" },
-    { name: "Mass Gainer", price: 2200, image: "/assets/images/product-images/gomzi-nutrition-mass-gainer-powder-1-1kg.webp", icon: "/assets/images/icon-service-4.svg" },
-    { name: "Creatine", price: 1299, image: "/assets/images/product-images/refuel-creatine-cola-1.webp", icon: "/assets/images/icon-service-6.svg" },
-    { name: "Egnite", price: 2500, image: "/assets/images/product-images/refuel-ignite-green-apple-1.webp", icon: "/assets/images/icon-service-1.svg" },
-    { name: "Energy Drink", price: 90, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp", icon: "/assets/images/icon-service-5.svg" },
-    { name: "Protein Bar", price: 1299, image: "/assets/images/product-images/gomzi-nutrition-chocolate-protein-bar-1.webp", icon: "/assets/images/icon-service-2.svg" },
+    { name: "Whey Protein", price: 4200, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
+    { name: "Peanut Butter", price: 499, image: "/assets/images/product-images/gomzi-nutrition-chocolate-crunchy-peanut-butter-1.webp"},
+    { name: "Mass Gainer", price: 2200, image: "/assets/images/product-images/gomzi-nutrition-mass-gainer-powder-1-1kg.webp" },
+    { name: "Creatine", price: 1299, image: "/assets/images/product-images/refuel-creatine-cola-1.webp"},
+    { name: "Egnite", price: 2500, image: "/assets/images/product-images/refuel-ignite-green-apple-1.webp" },
+    { name: "Energy Drink", price: 90, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp"},
+    { name: "Protein Bar", price: 1299, image: "/assets/images/product-images/gomzi-nutrition-chocolate-protein-bar-1.webp"},
 ];
 
 const testimonialsData = [
@@ -50,10 +47,9 @@ const testimonialsData = [
 const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
 export default function Home() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
-        // Initialize Swiper for testimonials
+        
         new Swiper('.testimonial-slider .swiper', {
             modules: [Navigation, Pagination],
             slidesPerView: 1,
@@ -92,12 +88,8 @@ export default function Home() {
 
                                 <div className="hero-content-body wow fadeInUp" data-wow-delay="0.4s">
                                     <div className="hero-btn">
-                                        <button onClick={() => setIsModalOpen(true)} className="btn-default">Start Your Brand Now</button>
+                                        <button onClick={() => window.location.href ="/booking-page"} className="btn-default">Start Your Brand Now</button>
                                     </div>
-
-                                    <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                                        <BookingForm isModal={true} />
-                                    </BookingFormModal>
 
                                 </div>
                             </div>
@@ -258,10 +250,10 @@ export default function Home() {
                                     </div>
                                     <div className="service-body">
                                         <div className="service-content-box">
-                                            <div className="icon-box">
+                                            {/* <div className="icon-box">
                                                 <img src={getAssetPath(product.icon)} alt="" />
-                                            </div>
-                                            <div className="service-box-content">
+                                            </div> */}
+                                            <div className="service-box-content ps-3">
                                                 <h3 className="mb-2 mt-2">{product.name}</h3>
                                                 <p>₹ {product.price}</p>
                                             </div>

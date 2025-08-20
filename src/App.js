@@ -11,11 +11,13 @@ import "./assets/css/slicknav.min.css";
 import "./assets/css/swiper-bundle.min.css";
 
 import Home from "./page/home";
+import ThankYou from "./components/thank-you";
+import Booking from "./page/booking";
+import UserProfile from "./page/account/profile";
+
+import { Toaster } from "react-hot-toast";
 
 import $ from "jquery";
-import ThankYou from "./components/thank-you";
-import UserProfile from "./page/account/profile";
-import { Toaster } from "react-hot-toast";
 window.jQuery = $;
 window.$ = $;
 
@@ -26,6 +28,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/thank-you" element={<ThankYou />} />
                 <Route path="/profile" element={<UserProfile />} />
+                <Route path="/booking-page" element={<Booking />} />
             </Routes>
             <Toaster 
                 position="top-right"

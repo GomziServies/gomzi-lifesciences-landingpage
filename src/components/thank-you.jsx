@@ -38,12 +38,17 @@ const ThankYou = () => {
                                 </div>
 
                                 <div className="action-buttons">
-                                    <Link
+                                    <button
                                         to="/"
                                         className="btn-highlighted me-3 w-50"
+                                        onClick={() => {
+                                            // Force a full page reload when navigating to home
+                                            window.location.href = '/';
+                                            return false;
+                                        }}
                                     >
                                         Back to Home
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
                         </div>

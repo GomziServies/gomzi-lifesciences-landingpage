@@ -47,7 +47,7 @@ function NutritionHeader() {
             <div className="container d-flex justify-content-between align-items-center">
               {/* Logo Start */}
               <a className="navbar-brand" href="./">
-                <img src={getAssetPath('/assets/images/favicon.ico')} alt="Logo" className="logo-h" />
+                <img src={getAssetPath('/assets/images/logo192.png')} alt="Logo" className="logo-h" />
               </a>
 
               {/* User Menu */}

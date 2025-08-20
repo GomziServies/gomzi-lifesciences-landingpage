@@ -4,18 +4,17 @@ import '../../assets/css/modal.css';
 const BookingFormModal = ({ isOpen, onClose, children }) => {
 
     useEffect(() => {
-        const originalOverflow = document.body.style.overflow;
-
         if (isOpen) {
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add("modal-open");
         } else {
-            document.body.style.overflow = originalOverflow;
+            document.body.classList.remove("modal-open");
         }
 
         return () => {
-            document.body.style.overflow = originalOverflow;
+            document.body.classList.remove("modal-open");
         };
     }, [isOpen]);
+
 
     if (!isOpen) return null;
 
