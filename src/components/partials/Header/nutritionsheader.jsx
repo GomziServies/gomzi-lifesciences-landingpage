@@ -80,7 +80,7 @@ function NutritionHeader() {
                           }}
                         >
                           <Link 
-                            to="/profile" 
+                            onClick={() => window.location.href = '/profile'} // to="/profile" kerva thi redirect ma loader aave chhe
                             className="d-block w-100 text-center px-3 py-2 text-dark text-decoration-none"
                             style={{ fontSize: '14px' }}
                           >

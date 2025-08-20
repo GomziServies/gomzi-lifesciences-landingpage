@@ -16,7 +16,7 @@ function UserProfile() {
         profile_image: null,
     });
 
-    const [loading, setLoading] = useState(false); // 🔥 loader state
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({

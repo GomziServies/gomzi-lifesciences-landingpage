@@ -101,24 +101,26 @@ export const createOrder = async (orderData) => {
                 text: "Please check your email for the invoice.",
                 icon: "success",
             }).then(() => {
-                
+
                 localStorage.removeItem("tmp_ProductPurchasePayload");
-               
+
                 // Redirect to Order Page
-                window.location.href = "/thank-you";
+                // window.location.href = "/thank-you";
             });
 
             return { showLoginModal: false, success: true };
         } else if (result && result.data) {
             result.data.data.handler = () => {
                 localStorage.removeItem("tmp_ProductPurchasePayload");
+                // Download quotation after successful payment
+                if (typeof orderData.downloadQuotationPDF === 'function') {
+                    orderData.downloadQuotationPDF();
+                }
                 Swal.fire({
                     title: "Success",
-                    text: "Please check your email for the invoice.",
+                    text: "Your payment is successful. The quotation will be downloaded automatically.",
                     icon: "success",
                 }).then(() => {
-                    
-                    // Redirect to thank you page
                     window.location.href = "/thank-you";
                 });
             };
@@ -132,14 +134,15 @@ export const createOrder = async (orderData) => {
         } else if (result && result.status === 200) {
             result.data.data.handler = () => {
                 localStorage.removeItem("tmp_ProductPurchasePayload");
+                // Download quotation after successful payment
+                if (typeof orderData.downloadQuotationPDF === 'function') {
+                    orderData.downloadQuotationPDF();
+                }
                 Swal.fire({
                     title: "Success",
-                    text: "Please check your email for the invoice.",
+                    text: "Your payment is successful. The quotation will be downloaded automatically.",
                     icon: "success",
                 }).then(() => {
-                    
-
-                    
                     window.location.href = "/thank-you";
                 });
             };

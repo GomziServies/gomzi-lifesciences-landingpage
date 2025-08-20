@@ -4,6 +4,8 @@ import { Toaster, toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { createOrder } from '../assets/js/config/api';
 import Swal from 'sweetalert2';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import '../assets/css/style.css';
 
 const Booking = () => {
@@ -54,6 +56,15 @@ const Booking = () => {
     const handleProductChange = (index, field, value) => {
         const newProductLines = [...productLines];
 
+        if (field === 'product') {
+            // Check if the product is already selected in another line
+            const isDuplicate = productLines.some((line, i) => i !== index && line.product === value);
+            if (isDuplicate) {
+                toast.error('This product is already added. Please select a different product.');
+                return;
+            }
+        }
+
         newProductLines[index][field] = value;
 
         if (field === 'product' || field === 'quantity') {
@@ -68,9 +79,13 @@ const Booking = () => {
     };
 
     const addProductLine = () => {
+        if (productLines.length >= 9) {
+            toast.error('Maximum 9 products can be added');
+            return;
+        }
         setProductLines([
             ...productLines,
-            { id: productLines.length + 1, product: "", quantity: "", price: 0, total: 0 }
+            { product: "", quantity: "", price: 0, total: 0 }
         ]);
     };
 
@@ -118,54 +133,8 @@ const Booking = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
 
-        toast.dismiss();
-
-        // Real-time validation based on field type
-        if (value.trim() !== '') {
-            switch (name) {
-                case 'mobile':
-                    if (!/^\d{10}$/.test(value)) {
-                        toast.error('Enter a valid 10-digit mobile number');
-                    }
-                    break;
-                case 'email':
-                    if (!/\S+@\S+\.\S+/.test(value)) {
-                        toast.error('Enter a valid email address');
-                    }
-                    break;
-                case 'pin_code':
-                    if (!/^\d{6}$/.test(value)) {
-                        toast.error('Enter a valid 6-digit pin code');
-                    }
-                    break;
-                case 'city':
-                case 'state':
-                case 'country':
-                    if (/\d/.test(value)) {
-                        toast.error(`${name.charAt(0).toUpperCase() + name.slice(1)} should not contain numbers`);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        } else {
-            const fieldNames = {
-                name: 'Name',
-                mobile: 'Mobile number',
-                email: 'Email',
-                address_line_1: 'Street address',
-                address_line_2: 'Area/Colony',
-                city: 'City',
-                state: 'State',
-                country: 'Country',
-                pin_code: 'Pin code',
-                product: 'Product',
-                quantity: 'Quantity'
-            };
-            toast.error(`${fieldNames[name]} is required`);
-        }
     };
+
 
     const validateForm = () => {
         toast.dismiss();
@@ -182,28 +151,19 @@ const Booking = () => {
             { condition: /\d/.test(formData.country), message: "Country name should not contain numbers" },
         ];
 
-        // Validate product lines
+
         const productValidation = productLines.every((line, index) => {
             if (!line.product) {
-                toast.error(`Select a product for line ${index + 1}`, {
-                    duration: 3000,
-                    icon: '❌'
-                });
+                toast.error(`Select a product for line ${index + 1}`);
                 return false;
             }
             if (!line.quantity) {
-                toast.error(`Enter quantity for ${line.product}`, {
-                    duration: 3000,
-                    icon: '❌'
-                });
+                toast.error(`Enter quantity for ${line.product || "this product"}`);
                 return false;
             }
             const qty = parseInt(line.quantity);
             if (qty < 100) {
-                toast.error(`Quantity for ${line.product} must be minimum 100 units. You entered: ${qty}`, {
-                    duration: 3000,
-                    icon: '❌'
-                });
+                toast.error(`Quantity for ${line.product} must be minimum 100 units. You entered: ${qty}`);
                 return false;
             }
             return true;
@@ -213,16 +173,14 @@ const Booking = () => {
 
         for (const validation of validations) {
             if (validation.condition) {
-                toast.error(validation.message, {
-                    duration: 3000,
-                    icon: '❌'
-                });
+                toast.error(validation.message);
                 return false;
             }
         }
 
         return true;
     };
+
 
     const loadRazorpay = () => {
         return new Promise((resolve) => {
@@ -277,9 +235,9 @@ const Booking = () => {
                 payment_mode: 'ONLINE',
                 name: formData.name,
                 email: formData.email,
-                mobile: formData.mobile
+                mobile: formData.mobile,
+                downloadQuotationPDF: downloadQuotationPDF // Pass the function to createOrder
             };
-
 
             const result = await createOrder(orderData);
 
@@ -287,17 +245,45 @@ const Booking = () => {
                 toast.error(result.message);
                 return;
             }
+            console.log("Order created successfully:", result);
 
-            if (orderData.payment_mode === 'ONLINE') {
-                const razorpay = new window.Razorpay(result.data);
-                razorpay.open();
-            } else {
-                toast.success('Order placed successfully!');
-                navigate('/thank-you');
-            }
+            // downloadQuotationPDF(); 
+
 
         } catch (error) {
             toast.error('Something went wrong. Please try again later.');
+        }
+    };
+
+
+    const downloadQuotationPDF = async () => {
+
+        const quotationContent = document.getElementById("quotationContent");
+        if (quotationContent) {
+
+
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4',
+            })
+
+            // Add margins
+            const margin = 10
+            const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin
+            const contentHeight = doc.internal.pageSize.getHeight() - 2 * margin
+
+            html2canvas(quotationContent, { scale: 2, useCORS: true }).then((canvas) => {
+                const imgData = canvas.toDataURL('image/jpeg', 1)
+
+                doc.addImage(imgData, 'jpeg', margin, margin, contentWidth, contentHeight)
+
+                const pdfName = `Quotation_${formData?.name || "Customer"}.pdf`
+                doc.save(pdfName)
+
+            })
+        } else {
+            console.error('Quotation content not found.')
         }
     };
 
@@ -453,7 +439,7 @@ const Booking = () => {
                                     <input
                                         type="number"
                                         className="form-control bg-dark text-light"
-                                        placeholder="Enter Quantity"
+                                        placeholder="Quantity"
                                         value={line.quantity}
                                         onChange={(e) => handleProductChange(index, 'quantity', e.target.value)}
                                         min="100"
@@ -465,7 +451,7 @@ const Booking = () => {
                                 <div className="form-group col-md-2 mb-4">
                                     <input
                                         type="text"
-                                        className="form-control bg-dark text-light"
+                                        className="form-control bg-dark text-warning"
                                         value={line.price ? `₹${line.price}` : ""}
                                         placeholder="Rate"
                                         readOnly
@@ -481,7 +467,7 @@ const Booking = () => {
                                 >
                                     <input
                                         type="text"
-                                        className="form-control bg-dark text-light"
+                                        className="form-control bg-dark text-warning"
                                         value={line.total ? `₹${line.total}` : ""}
                                         placeholder="Total Price"
                                         readOnly
@@ -537,230 +523,246 @@ const Booking = () => {
             </div>
 
             <div
-                className='col-md-6 mt-3'
-                id='quotationContent'>
-                <div className='card'>
-                    <div className='card-body'>
+                className="col-md-6 mt-3"
+                id="quotationContent"
+            >
+                <div className="card">
+                    <div className="card-body">
                         <div>
-                            <p className='fw-bold fs-5 text-center mb-2'>QUOTATION</p>
-                            <div className='border border-black'>
-                                <div className='invoice-header row mt-2 p-3 align-items-start'>
-                                    <div className='col-md-8'>
-                                        <p className='fs-4 mb-1'>
+                            <p className="fw-bold fs-5 text-center mb-2">QUOTATION</p>
+                            <div className="border border-black pdf-h">
+                                {/* HEADER */}
+                                <div className="invoice-header row mt-2 p-3 align-items-start">
+                                    <div className="col-md-8">
+                                        <p className="fs-4 mb-1">
                                             <b>Gomzi Lifesciences LLP</b>
                                         </p>
 
                                         <p
-                                            style={{ fontSize: '12px' }}
-                                            className='mt-1 mb-1'>
-
-                                            323 3'rd floor, Laxmi Enclave-1, opp. Gajera School, Chitrakut Society, Katargam, Surat, Gujarat 395004
+                                            style={{ fontSize: "12px" }}
+                                            className="mt-1 mb-1"
+                                        >
+                                            323 3'rd floor, Laxmi Enclave-1, opp. Gajera School, Chitrakut
+                                            Society, Katargam, Surat, Gujarat 395004
                                         </p>
 
                                         <p
-                                            style={{ fontSize: '12px' }}
-                                            className='mb-1'>
-                                            Phone no.:
-                                            <strong>
-                                                8320077993
-                                            </strong>
+                                            style={{ fontSize: "12px" }}
+                                            className="mb-1"
+                                        >
+                                            Phone no.: <strong>8320077993</strong>
                                         </p>
                                         <p
-                                            style={{ fontSize: '12px' }}
-                                            className='mb-1'>
-                                            Email:
-                                            <strong id='emailLabel'>
-
-                                                Sales@Gomzilifesciences.In
-                                            </strong>
+                                            style={{ fontSize: "12px" }}
+                                            className="mb-1"
+                                        >
+                                            Email:{" "}
+                                            <strong id="emailLabel">Sales@Gomzilifesciences.In</strong>
                                         </p>
                                         <p
-                                            style={{ fontSize: '12px' }}
-                                            className='mb-1'>
-                                            GSTIN:
-                                            <strong>24ABBFG3336P1Z9</strong>
-                                            , State: Gujarat
+                                            style={{ fontSize: "12px" }}
+                                            className="mb-1"
+                                        >
+                                            GSTIN: <strong>24ABBFG3336P1Z9</strong>, State: Gujarat
                                         </p>
                                     </div>
-                                    <div className='col-md-4'>
-                                        <div className='text-center'>
+                                    <div className="col-md-4">
+                                        <div className="text-center">
                                             <img
-                                                src='/assets/images/logo192.png'
-                                                width='60%'
-                                                alt='Company Logo'
+                                                src="/assets/images/logo/gomzi-nutrition.png"
+                                                width="60%"
+                                                alt="Company Logo"
                                             />
                                         </div>
                                     </div>
                                 </div>
-                                <div className='invoice-details d-flex'>
-                                    <div className='col-md-5 border border-black px-0'>
-                                        <div className='quotation-bill-to border-bottom border-black'>Bill To</div>
+
+                                {/* BILL TO */}
+                                <div className="invoice-details d-flex">
+                                    <div className="col-md-5 border border-black px-0">
+                                        <div className="quotation-bill-to border-bottom border-black">
+                                            Bill To
+                                        </div>
                                         <strong>
                                             <p
-                                                className='mt-2 px-2'
-                                                style={{ fontSize: '14px' }}
-                                                id='inv-name'>
-                                                {formData.name || '-'}
+                                                className="mt-2 px-2"
+                                                style={{ fontSize: "14px" }}
+                                                id="inv-name"
+                                            >
+                                                {formData.name || "-"}
                                             </p>
                                         </strong>
                                         <strong>
                                             <p
-                                                className='px-2'
-                                                style={{ fontSize: '14px' }}
-                                                id='inv-email'>
-                                                {formData.email || '-'}
+                                                className="px-2"
+                                                style={{ fontSize: "14px" }}
+                                                id="inv-email"
+                                            >
+                                                {formData.email || "-"}
                                             </p>
                                         </strong>
                                     </div>
-                                    <div className='col-md-7 border border-black text-right'>
-                                        <div className='bill-name-date px-2'>
-                                            <p className=''>
+                                    <div className="col-md-7 border border-black text-right">
+                                        <div className="bill-name-date px-2">
+                                            <p>
                                                 <strong>Date :-</strong>
-                                                <span id='inv-date'>{formData.date || '-'}</span>
+                                                <span id="inv-date">{formData.date || "-"}</span>
                                             </p>
-                                            <p className=''>
+                                            <p>
                                                 <strong>Phone No. :-</strong>
-                                                <span id='inv-mobile'>{formData.mobile || '-'}</span>
+                                                <span id="inv-mobile">{formData.mobile || "-"}</span>
                                             </p>
-                                            <p className=''>
+                                            <p>
                                                 <strong>Address :-</strong>
-                                                <span id='inv-address'>{formData.address_line_1 + formData.address_line_2 + formData.city + formData.state || '-'}</span>
+                                                <span id="inv-address">
+                                                    {formData.address_line_1 +
+                                                        " " +
+                                                        formData.address_line_2 +
+                                                        " " +
+                                                        formData.city +
+                                                        " " +
+                                                        formData.state || "-"}
+                                                </span>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='invoice-items quotation-items'>
-                                    <table className='border border-black'>
+
+                                {/* ITEMS TABLE */}
+                                <div className="invoice-items quotation-items">
+                                    <table className="border border-black w-100">
                                         <thead>
                                             <tr>
-                                                <th className='border border-black'>Product</th>
-                                                <th className='border border-black'>Quantity</th>
-                                                <th className='border border-black'>Amount</th>
-                                                <th className='border border-black'>Total</th>
+                                                <th className="border border-black">Product</th>
+                                                <th className="border border-black">Rate</th>
+                                                <th className="border border-black">Quantity</th>
+                                                <th className="border border-black">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {formData.productLines?.length == 0 ? (
+                                            {productLines?.length === 0 ? (
                                                 <tr>
-                                                    <td className='border border-black'>
-                                                        <div id='inv-product'>-</div>
-                                                    </td>
-                                                    <td className='border border-black'>
-                                                        <span className='inv-paid'>-</span>
-                                                    </td>
-                                                    <td className='border border-black'>
-                                                        <span className='inv-total'>-</span>
-                                                    </td>
-                                                    <td className='border border-black'>
-                                                        <span className='inv-total'>-</span>
-                                                    </td>
+                                                    <td className="border border-black">-</td>
+                                                    <td className="border border-black">-</td>
+                                                    <td className="border border-black">-</td>
+                                                    <td className="border border-black">-</td>
                                                 </tr>
                                             ) : (
-                                                formData.productLines?.map((item, index) => {
-                                                    return (
-                                                        <tr>
-                                                            <td>
-                                                                <div id='inv-product'>{item.item_name}</div>
-                                                            </td>
-                                                            <td>
-                                                                <span className='inv-paid'>{item.quantity || '-'}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span className='inv-total'>{item.amount || '-'}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span className='inv-total'>
-                                                                    {item.totalAmount ? item.totalAmount : '-'}
-                                                                </span>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
+                                                productLines?.map((item, index) => (
+                                                    <tr key={index}>
+                                                        <td>{item.product}</td>
+                                                        <td>{item.price || "-"}</td>
+                                                        <td>{item.quantity || "-"}</td>
+                                                        <td>{item.total ? item.total : "-"}</td>
+                                                    </tr>
+                                                ))
                                             )}
                                         </tbody>
                                     </table>
                                 </div>
-                                <div className='invoice-details d-flex'>
-                                    <div className='col-md-12 border border-black px-0'>
-                                        <div className='quotation-bill-to px-2 border-bottom border-black'>Amount :-</div>
-                                        <div className='bill-name-date px-2'>
-                                            <p className=''>
+
+                                {/* TOTAL */}
+                                <div className="invoice-details d-flex">
+                                    <div className="col-md-12 border border-black px-0">
+                                        <div className="quotation-bill-to px-2 border-bottom border-black">
+                                            Amount :-
+                                        </div>
+                                        <div className="bill-name-date px-2">
+                                            <p>
                                                 <strong>Total Amount :-</strong>
-                                                <span className='inv-total'> {formData.net_amount || '-'}</span>
+                                                <span className="inv-total">
+                                                    {productLines?.reduce(
+                                                        (sum, line) => sum + (line.total || 0),
+                                                        0
+                                                    ) || "-"}
+                                                </span>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='invoice-details d-flex'>
-                                    <div className='col-md-7 border border-black px-0'>
-                                        <div className='quotation-bill-to px-2 border-bottom border-black'>
+
+                                {/* TERMS & ADMIN */}
+                                <div className="invoice-details d-flex">
+                                    <div className="col-md-7 border border-black px-0">
+                                        <div className="quotation-bill-to px-2 border-bottom border-black">
                                             Terms and Conditions :-
                                         </div>
-                                        <div className='px-2'>
-                                            <p
-                                                style={{ fontSize: '13px' }}
-                                                className='mt-1'>
-                                                <strong>*</strong> GST will be applicable additionally on all payments.
+                                        <div className="px-2">
+                                            <p style={{ fontSize: "13px" }} className="mt-1">
+                                                <strong>*</strong> GST will be applicable additionally on all
+                                                payments.
                                             </p>
-                                            <p style={{ fontSize: '13px' }}>
-                                                <strong>*</strong> Courier charges will be borne by the customer additionally.
+                                            <p style={{ fontSize: "13px" }}>
+                                                <strong>*</strong> Courier charges will be borne by the
+                                                customer additionally.
                                             </p>
-                                            <p style={{ fontSize: '13px' }}>
-                                                <strong>*</strong> Payment made is non-refundable, non-transferable, and non-cancellable.
+                                            <p style={{ fontSize: "13px" }}>
+                                                <strong>*</strong> Payment made is non-refundable,
+                                                non-transferable, and non-cancellable.
                                             </p>
-                                            <p style={{ fontSize: '13px' }}>
-                                                <strong>*</strong> 70% advance payment is required to confirm the order, and the balance 30% payment is due upon delivery, which will be verified through a video shared with the customer.
+                                            <p style={{ fontSize: "13px" }}>
+                                                <strong>*</strong> 70% advance payment is required to confirm
+                                                the order, and the balance 30% payment is due upon delivery,
+                                                which will be verified through a video shared with the
+                                                customer.
                                             </p>
                                         </div>
                                     </div>
-                                    <div className='col-md-5 border border-black px-0'>
-                                        <div className='quotation-bill-to px-2 border-bottom border-black'>Administrator :-</div>
-                                        <div className='px-2'>
+                                    <div className="col-md-5 border border-black px-0">
+                                        <div className="quotation-bill-to px-2 border-bottom border-black">
+                                            Administrator :-
+                                        </div>
+                                        <div className="px-2">
                                             <img
                                                 src="assets/images/sign/goutam_sir.png"
-                                                alt='sign'
-                                                width='100%'
+                                                alt="sign"
+                                                width="100%"
                                             />
                                         </div>
                                     </div>
-
                                 </div>
-                                <div className='invoice-details d-flex'>
-                                    <div className='col-12 border border-black px-0'>
-                                        <div className='bill-to px-2 border-bottom border-black'>Payment Details</div>
-                                        <div className='d-flex'>
-                                            <div className='px-2'>
+
+                                {/* PAYMENT DETAILS */}
+                                <div className="invoice-details d-flex">
+                                    <div className="col-12 border border-black px-0">
+                                        <div className="bill-to px-2 border-bottom border-black">
+                                            Payment Details
+                                        </div>
+                                        <div className="d-flex">
+                                            <div className="p-2">
                                                 <img
                                                     src="/assets/images/payment-qr-code/payment_scan.png"
-                                                    alt='sign'
-                                                    width='120px'
+                                                    alt="payment"
+                                                    width="120px"
                                                 />
                                             </div>
-                                            <div className='bill-name-date px-2'>
-                                                <p className='my-1'>
+                                            <div className="bill-name-date px-2">
+                                                <p className="my-1">
                                                     <strong>Bank Name: Axis Bank Adajan</strong>
                                                 </p>
-                                                <p className='my-1'>
+                                                <p className="my-1">
                                                     <strong>Account Holder Name: Gomzi life Science LLP</strong>
                                                 </p>
-                                                <p className='my-1'>
+                                                <p className="my-1">
                                                     <strong>Account Number: 924020043956068</strong>
                                                 </p>
-                                                <p className='my-1'>
+                                                <p className="my-1">
                                                     <strong>IFSC: UTIB0000566</strong>
                                                 </p>
-                                                <p className='my-1'>
+                                                <p className="my-1">
                                                     <strong>Account Type: Current Account</strong>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {/* END */}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <Toaster
                 position="top-right"
