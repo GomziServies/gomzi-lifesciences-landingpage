@@ -7,10 +7,18 @@ import Swal from 'sweetalert2';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import '../assets/css/style.css';
+import { isUserLoggedIn } from '../utils/auth';
 
 const Booking = () => {
-
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isUserLoggedIn()) {
+            navigate('/', { replace: true });
+            toast.dismiss();
+            toast.error('Please login to access this page');
+        }
+    }, [navigate]);
 
     const productsData = React.useMemo(() => [
         { name: "Whey Protein", price: 1170 },
@@ -151,6 +159,12 @@ const Booking = () => {
             { condition: /\d/.test(formData.country), message: "Country name should not contain numbers" },
         ];
 
+        for (const validation of validations) {
+            if (validation.condition) {
+                toast.error(validation.message);
+                return false;
+            }
+        }
 
         const productValidation = productLines.every((line, index) => {
             if (!line.product) {
@@ -161,22 +175,12 @@ const Booking = () => {
                 toast.error(`Enter quantity for ${line.product || "this product"}`);
                 return false;
             }
-            const qty = parseInt(line.quantity);
-            if (qty < 100) {
-                toast.error(`Quantity for ${line.product} must be minimum 100 units. You entered: ${qty}`);
-                return false;
-            }
+
             return true;
         });
 
         if (!productValidation) return false;
 
-        for (const validation of validations) {
-            if (validation.condition) {
-                toast.error(validation.message);
-                return false;
-            }
-        }
 
         return true;
     };
@@ -236,18 +240,10 @@ const Booking = () => {
                 name: formData.name,
                 email: formData.email,
                 mobile: formData.mobile,
-                downloadQuotationPDF: downloadQuotationPDF // Pass the function to createOrder
+                downloadQuotationPDF: downloadQuotationPDF
             };
 
             const result = await createOrder(orderData);
-
-            if (!result.success) {
-                toast.error(result.message);
-                return;
-            }
-            console.log("Order created successfully:", result);
-
-            // downloadQuotationPDF(); 
 
 
         } catch (error) {

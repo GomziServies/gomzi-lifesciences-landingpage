@@ -1,22 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NutritionHeader from "../components/partials/Header/nutritionsheader";
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
+import { isUserLoggedIn } from '../utils/auth';
+import toast from "react-hot-toast";
+import LoginModal from "../components/popup/login";
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+// const productsData = [
+//     { name: "Whey Protein", price: 1170, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
+//     { name: "Peanut Butter", price: 150, image: "/assets/images/product-images/gomzi-nutrition-chocolate-crunchy-peanut-butter-1.webp" },
+//     { name: "Mass Gainer", price: 420, image: "/assets/images/product-images/gomzi-nutrition-mass-gainer-powder-1-1kg.webp" },
+//     { name: "Creatine - flavoured", price: 350, image: "/assets/images/product-images/refuel-creatine-cola-1.webp" },
+//     { name: "Creatine - Unflavoured", price: 320, image: "/assets/images/product-images/refuel-creatine-cola-1.webp" },
+//     { name: "Energy Drink - Bottle", price: 30, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+//     { name: "Energy Drink - Can", price: 45, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+//     { name: "Protein Bar", price: 55, image: "/assets/images/product-images/gomzi-nutrition-chocolate-protein-bar-1.webp" },
+// ];
 const productsData = [
-    { name: "Whey Protein", price: 4200, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
-    { name: "Peanut Butter", price: 499, image: "/assets/images/product-images/gomzi-nutrition-chocolate-crunchy-peanut-butter-1.webp"},
-    { name: "Mass Gainer", price: 2200, image: "/assets/images/product-images/gomzi-nutrition-mass-gainer-powder-1-1kg.webp" },
-    { name: "Creatine", price: 1299, image: "/assets/images/product-images/refuel-creatine-cola-1.webp"},
-    { name: "Egnite", price: 2500, image: "/assets/images/product-images/refuel-ignite-green-apple-1.webp" },
-    { name: "Energy Drink", price: 90, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp"},
-    { name: "Protein Bar", price: 1299, image: "/assets/images/product-images/gomzi-nutrition-chocolate-protein-bar-1.webp"},
+  { name: "Whey Protein", price: 1170, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
+  { name: "Whey Blend", price: 1300, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
+  { name: "Whey Concentrate", price: 1630, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
+  { name: "Whey Isolate", price: 3000, image: "/assets/images/product-images/whey-protein-isolate-1-1kg.webp" },
+  { name: "Peanut Butter", price: 150, image: "/assets/images/product-images/gomzi-nutrition-chocolate-crunchy-peanut-butter-1.webp" },
+  { name: "Mass Gainer", price: 420, image: "/assets/images/product-images/gomzi-nutrition-mass-gainer-powder-1-1kg.webp" },
+  { name: "Creatine - flavoured", price: 350, image: "/assets/images/product-images/refuel-creatine-cola-1.webp" },
+  { name: "Creatine - Unflavoured", price: 320, image: "/assets/images/product-images/refuel-creatine-cola-1.webp" },
+  { name: "Pre-Workout", price: 440, image: "/assets/images/product-images/refuel-creatine-cola-1.webp" },
+  { name: "EAA", price: 490, image: "/assets/images/product-images/spark-eaa-1.webp" },
+  { name: "BCAA", price: 490, image: "/assets/images/product-images/spark-eaa-1.webp" },
+  { name: "Protein Bar", price: 55, image: "/assets/images/product-images/gomzi-nutrition-chocolate-protein-bar-1.webp" },
+  { name: "Energy Drink - Bottle", price: 30, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+  { name: "Energy Drink - Can", price: 45, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+  { name: "Multivitamin Tablets", price: 340, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+  { name: "Omega 3", price: 225, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+  { name: "Ashwagandha", price: 100, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+  { name: "Moringa Tablets", price: 75, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+  { name: "Shilajit", price: 70, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
 ];
+ 
+
 
 const testimonialsData = [
     {
@@ -47,9 +74,10 @@ const testimonialsData = [
 const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
 export default function Home() {
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     useEffect(() => {
-        
+
         new Swiper('.testimonial-slider .swiper', {
             modules: [Navigation, Pagination],
             slidesPerView: 1,
@@ -67,8 +95,7 @@ export default function Home() {
     }, []);
     return (
         <>
-            {/* Preloader Start */}
-
+            {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
             <NutritionHeader />
 
             <div className="hero">
@@ -82,13 +109,19 @@ export default function Home() {
                             <div className="hero-content">
                                 <div className="section-title">
                                     <h3 className="wow fadeInUp">welcome to our Gomzi Nutrition website</h3>
-                                    <h2 className="text-anime-style-2" data-cursor="-opaque">Your Nutrition Brand,<span> Our Premium Products</span> – Launch Today!</h2>
+                                    <h2 className="text-anime-style-2" data-cursor="-opaque">Your Nutrition Brand,<span> Our Premium Products</span> – Launch Today !</h2>
                                     <p className="wow fadeInUp" data-wow-delay="0.2s"> Peanut Butter, Protein Bars, Whey Protein & Energy Drinks – Fully White-Labeled for Your Brand .</p>
                                 </div>
 
                                 <div className="hero-content-body wow fadeInUp" data-wow-delay="0.4s">
                                     <div className="hero-btn">
-                                        <button onClick={() => window.location.href ="/booking-page"} className="btn-default">Start Your Brand Now</button>
+                                        <button onClick={() => {
+                                            if (isUserLoggedIn()) {
+                                                window.location.href = '/booking-page';
+                                            } else {
+                                                setShowLoginModal(true);
+                                            }
+                                        }} className="btn-default">Start Your Brand Now</button>
                                     </div>
 
                                 </div>
@@ -112,12 +145,10 @@ export default function Home() {
 
 
                                 <div className="hero-image-circle">
-                                    <a href="">
+                                    <button className="btn p-0 border-0">
                                         <img src={getAssetPath('/assets/images/our-agency-circle.png')} alt="" />
-                                    </a>
-                                </div>
-
-                            </div>
+                                    </button>
+                                </div>                            </div>
 
                         </div>
                     </div>
@@ -273,97 +304,6 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* <div className="our-awards">
-                <div className="container">
-                    <div className="row section-row">
-                        <div className="col-lg-12">
-                            <div className="section-title">
-                                <h3 className="wow fadeInUp">awards</h3>
-                                <h2 className="text-anime-style-2" data-cursor="-opaque">Celebrating our <span>achievements</span> in IT excellence</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="our-awards-list">
-                                <div className="awards-list-item wow fadeInUp">
-                                    <div className="award-item-content">
-                                        <h3>IT Project Delivery <span>[2019]</span></h3>
-                                        <p>We create customized social media strategies that align with your brand's.</p>
-                                    </div>
-                                    <div className="award-item-btn">
-                                        <a href="/awards/2019" onClick={(e) => e.preventDefault()}>
-                                            <img src={getAssetPath('/assets/images/arrow-accent.svg')} alt="View 2019 IT Project Delivery award details" />
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="awards-list-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <div className="award-item-content">
-                                        <h3>Technology Integration <span>[2020]</span></h3>
-                                        <p>We create customized social media strategies that align with your brand's.</p>
-                                    </div>
-                                    <div className="award-item-btn">
-                                        <a href="#">
-                                            <img src={getAssetPath('/assets/images/arrow-accent.svg')} alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="awards-list-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <div className="award-item-content">
-                                        <h3>ERP Solution <span>[2021]</span></h3>
-                                        <p>We create customized social media strategies that align with your brand's.</p>
-                                    </div>
-                                    <div className="award-item-btn">
-                                        <a href="#">
-                                            <img src={getAssetPath('/assets/images/arrow-accent.svg')} alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="awards-list-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <div className="award-item-content">
-                                        <h3>Digital Transformation Leader <span>[2022]</span></h3>
-                                        <p>We create customized social media strategies that align with your brand's.</p>
-                                    </div>
-                                    <div className="award-item-btn">
-                                        <a href="#">
-                                            <img src={getAssetPath('/assets/images/arrow-accent.svg')} alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="awards-list-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <div className="award-item-content">
-                                        <h3>Sustainability in Tech Award <span>[2023]</span></h3>
-                                        <p>We create customized social media strategies that align with your brand's.</p>
-                                    </div>
-                                    <div className="award-item-btn">
-                                        <a href="#">
-                                            <img src="assets/images/arrow-accent.svg" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="awards-list-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <div className="award-item-content">
-                                        <h3>Leadership in Cybersecurity <span>[2024]</span></h3>
-                                        <p>We create customized social media strategies that align with your brand's.</p>
-                                    </div>
-                                    <div className="award-item-btn">
-                                        <a href="#">
-                                            <img src="assets/images/arrow-accent.svg" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-
             {/* <div className="why-choose-us">
                 <div className="container">
                     <div className="row align-items-center">
@@ -417,94 +357,6 @@ export default function Home() {
                                     <div className="company-experience-box">
                                         <h3><span className="counter">25</span>+</h3>
                                         <p>years of experience </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-
-
-            {/* <div className="our-projects">
-                <div className="container-fluid">
-                    <div className="row section-row">
-                        <div className="col-lg-12">
-                            <div className="section-title">
-                                <h3 className="wow fadeInUp">Our projects</h3>
-                                <h2 className="text-anime-style-2" data-cursor="-opaque">Delivering successful <span>projects</span>, driving innovation</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="project-slider-box">
-                                <div className="project-item">
-                                    <div className="project-image">
-                                        <figure>
-                                            <img src={getAssetPath('/assets/images/project-1.jpg')} alt="" />
-                                        </figure>
-                                        <div className="project-readmore-btn">
-                                            <a href="project-single.html">
-                                                <img src={getAssetPath('/assets/images/arrow-dark.svg')} alt="" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="project-content">
-                                        <p>Development</p>
-                                        <h3><a href="project-single.html">Unified Development Framework for Teams</a></h3>
-                                    </div>
-                                </div>
-
-                                <div className="project-item">
-                                    <div className="project-image">
-                                        <figure>
-                                            <img src={getAssetPath('/assets/images/project-2.jpg')} alt="" />
-                                        </figure>
-                                        <div className="project-readmore-btn">
-                                            <a href="project-single.html">
-                                                <img src={getAssetPath('/assets/images/arrow-dark.svg')} alt="" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="project-content">
-                                        <p>Integration</p>
-                                        <h3><a href="project-single.html">Our journey of technological excellence</a></h3>
-                                    </div>
-                                </div>
-
-                                <div className="project-item">
-                                    <div className="project-image">
-                                        <figure>
-                                            <img src={getAssetPath('/assets/images/project-3.jpg')} alt="" />
-                                        </figure>
-                                        <div className="project-readmore-btn">
-                                            <a href="project-single.html">
-                                                <img src={getAssetPath('/assets/images/arrow-dark.svg')} alt="" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="project-content">
-                                        <p>Consulting</p>
-                                        <h3><a href="project-single.html">Intelligent Task Management Solutions</a></h3>
-                                    </div>
-                                </div>
-
-                                <div className="project-item">
-                                    <div className="project-image">
-                                        <figure>
-                                            <img src={getAssetPath('/assets/images/project-4.jpg')} alt="" />
-                                        </figure>
-                                        <div className="project-readmore-btn">
-                                            <a href="project-single.html">
-                                                <img src={getAssetPath('/assets/images/arrow-dark.svg')} alt="" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="project-content">
-                                        <p>Infrastructure</p>
-                                        <h3><a href="project-single.html">End-to-end IT project success stories</a></h3>
                                     </div>
                                 </div>
                             </div>

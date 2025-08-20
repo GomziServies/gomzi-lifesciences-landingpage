@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoginModal from "../../popup/login";
 import { Link } from "react-router-dom";
-import "./nutritionsheader.css";
+import "../../../assets/css/nutritionsheader.css";
 import toast from "react-hot-toast";
 
 function NutritionHeader() {

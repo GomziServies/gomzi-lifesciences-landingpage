@@ -1,0 +1,16 @@
+.modal-header {
+  position: relative;
+  padding-right: 3rem !important;
+}
+
+.modal-header .btn-close {
+  position: absolute !important;
+  right: 1rem !important;
+  top: 1rem !important;
+  padding: 0.5rem !important;
+  margin: 0 !important;
+}
+
+.modal-title {
+  width: 100%;
+}

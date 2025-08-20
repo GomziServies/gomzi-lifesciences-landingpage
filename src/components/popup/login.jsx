@@ -4,6 +4,7 @@ import { Modal } from "react-bootstrap";
 import { axiosInstance } from "../../assets/js/config/api";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import '../../assets/css/login.css';
 
 const LoginModal = ({ onClose }) => {
   const [showModal, setShowModal] = useState(true);
@@ -160,7 +161,7 @@ const LoginModal = ({ onClose }) => {
     <>
       {/* Login Popup  */}
       <Modal show={showModal} onHide={handleClose} centered>
-        <Modal.Header closeButton className="border-0 bg-dark text-white">
+        <Modal.Header closeButton className="border-0 bg-dark text-white" closeVariant="white">
           <Modal.Title>
             <div className="text-center">
               <Link to="/">
@@ -178,7 +179,7 @@ const LoginModal = ({ onClose }) => {
             </div>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="bg-dark text-white">
+        <Modal.Body className="bg-dark text-white p-4">
           <Form onSubmit={(e) => e.preventDefault()}>
             <Form.Group
               controlId="formBasicUsername"
@@ -189,7 +190,7 @@ const LoginModal = ({ onClose }) => {
               </Form.Label>
               <Form.Control
                 type="text"
-                className="fr bg-light text-white border-secondary"
+                className="fr bg-light text-dark border-secondary"
                 placeholder="Enter mobile number"
                 onChange={(e) => setMobileNumber(e.target.value)}
               />
@@ -201,7 +202,7 @@ const LoginModal = ({ onClose }) => {
                 width: "100%",
                 color: "#fff",
                 margin: "0",
-                backgroundColor: "#86c33a",
+                backgroundColor: "#88c349",
                 border: "transparent",
                 borderRadius: "23px",
                 marginBottom: "10px",
@@ -216,7 +217,7 @@ const LoginModal = ({ onClose }) => {
 
       {/* Otp Popup  */}
       <Modal Modal show={otpDialogOpen} onHide={handleCloseOtpModal} centered >
-        <Modal.Header closeButton className="border-0 bg-dark text-white">
+        <Modal.Header closeButton className="border-0 bg-dark text-white" closeVariant="white">
           <Modal.Title>
             <div className="text-center">
               <Link to="/">
@@ -234,7 +235,7 @@ const LoginModal = ({ onClose }) => {
             </div>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="border-0 bg-dark text-white">
+        <Modal.Body className="border-0 bg-dark text-white p-4">
           <Form onSubmit={(e) => e.preventDefault()}>
             <Form.Group
               controlId="formBasicUsername"
@@ -259,7 +260,7 @@ const LoginModal = ({ onClose }) => {
                 width: "100%",
                 color: "#fff",
                 margin: "0",
-                backgroundColor: "#86c33a",
+                backgroundColor: "#88c349",
                 border: "transparent",
                 borderRadius: "23px",
                 marginBottom: "10px",
@@ -273,7 +274,7 @@ const LoginModal = ({ onClose }) => {
       </Modal>
       {/* Signup Popup  */}
       <Modal Modal show={showSignUpModal} onHide={handleCloseSignUpModal} centered >
-        <Modal.Header closeButton className="border-0">
+        <Modal.Header closeButton className="border-0 bg-dark text-white" closeVariant="white">
           <Modal.Title>
             <div className="text-center">
               <span
@@ -332,7 +333,7 @@ const LoginModal = ({ onClose }) => {
         onHide={handleCloseEmailOtpModal}
         centered
       >
-        <Modal.Header closeButton className="border-0">
+        <Modal.Header closeButton className="border-0 bg-dark text-white" closeVariant="white">
           <Modal.Title>
             <div className="text-center">
               <span
