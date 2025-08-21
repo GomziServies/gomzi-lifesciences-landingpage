@@ -297,8 +297,6 @@ export default function Home() {
                 </div>
             </div>
 
-
-
             <div className="our-testimonials">
                 <div className="container">
                     <div className="row section-row align-items-center">

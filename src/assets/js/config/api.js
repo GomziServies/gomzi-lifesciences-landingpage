@@ -50,15 +50,15 @@ export const createOrder = async (orderData) => {
             payment_mode, name, email, mobile } = orderData;
 
 
-        const formattedProducts = (Array.isArray(products) ? products : [products]).map(() => ({
+        const SampleProducts = [{
             product_id: "68a2c8e006800a0384e9cc6a",
             quantity: 1,
-            // landing_page: true
-        }));
+            landing_page: true
+        }];
 
 
         const payload = {
-            products: formattedProducts,
+            products: SampleProducts,
             payment_mode,
             address_line_1,
             address_line_2,
