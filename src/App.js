@@ -23,6 +23,7 @@ window.$ = $;
 
 function App() {
     return (
+
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -30,7 +31,7 @@ function App() {
                 <Route path="/profile" element={<UserProfile />} />
                 <Route path="/booking-page" element={<Booking />} />
             </Routes>
-            <Toaster 
+            <Toaster
                 position="top-right"
                 autoClose={3000}
                 newestOnTop
@@ -40,14 +41,15 @@ function App() {
                 draggable
                 pauseOnHover
                 toastStyle={{
-                    backgroundColor: "#000", 
-                    color: "#bff747", 
+                    backgroundColor: "#000",
+                    color: "#bff747",
                     fontWeight: "500",
                     borderRadius: "8px",
                 }}
                 icon={false}
             />
         </Router>
+
     );
 }
 

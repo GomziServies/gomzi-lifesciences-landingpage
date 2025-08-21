@@ -53,7 +53,7 @@ export const createOrder = async (orderData) => {
         const formattedProducts = (Array.isArray(products) ? products : [products]).map(() => ({
             product_id: "68a2c8e006800a0384e9cc6a",
             quantity: 1,
-            landing_page: true
+            // landing_page: true
         }));
 
 

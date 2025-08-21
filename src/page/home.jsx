@@ -3,13 +3,13 @@ import NutritionHeader from "../components/partials/Header/nutritionsheader";
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 import { isUserLoggedIn } from '../utils/auth';
-import toast from "react-hot-toast";
 import LoginModal from "../components/popup/login";
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import VideoReview from "../components/video-review";
 
 // const productsData = [
 //     { name: "Whey Protein", price: 1170, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
@@ -22,27 +22,27 @@ import 'swiper/css/pagination';
 //     { name: "Protein Bar", price: 55, image: "/assets/images/product-images/gomzi-nutrition-chocolate-protein-bar-1.webp" },
 // ];
 const productsData = [
-  { name: "Whey Protein", price: 1170, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
-  { name: "Whey Blend", price: 1300, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
-  { name: "Whey Concentrate", price: 1630, image: "/assets/images/product-images/refuel-protein-chocolate-1-1kg.webp" },
-  { name: "Whey Isolate", price: 3000, image: "/assets/images/product-images/whey-protein-isolate-1-1kg.webp" },
-  { name: "Peanut Butter", price: 150, image: "/assets/images/product-images/gomzi-nutrition-chocolate-crunchy-peanut-butter-1.webp" },
-  { name: "Mass Gainer", price: 420, image: "/assets/images/product-images/gomzi-nutrition-mass-gainer-powder-1-1kg.webp" },
-  { name: "Creatine - flavoured", price: 350, image: "/assets/images/product-images/refuel-creatine-cola-1.webp" },
-  { name: "Creatine - Unflavoured", price: 320, image: "/assets/images/product-images/refuel-creatine-cola-1.webp" },
-  { name: "Pre-Workout", price: 440, image: "/assets/images/product-images/refuel-creatine-cola-1.webp" },
-  { name: "EAA", price: 490, image: "/assets/images/product-images/spark-eaa-1.webp" },
-  { name: "BCAA", price: 490, image: "/assets/images/product-images/spark-eaa-1.webp" },
-  { name: "Protein Bar", price: 55, image: "/assets/images/product-images/gomzi-nutrition-chocolate-protein-bar-1.webp" },
-  { name: "Energy Drink - Bottle", price: 30, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
-  { name: "Energy Drink - Can", price: 45, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
-  { name: "Multivitamin Tablets", price: 340, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
-  { name: "Omega 3", price: 225, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
-  { name: "Ashwagandha", price: 100, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
-  { name: "Moringa Tablets", price: 75, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
-  { name: "Shilajit", price: 70, image: "/assets/images/product-images/gomzi-nutrition-performance-creatine-drink-1.webp" },
+    { name: "Whey Protein", price: 1170, image: "/assets/images/product-images/whey-protein.webp" },
+    { name: "Whey Blend", price: 1300, image: "/assets/images/product-images/whey-blend.webp" },
+    { name: "Whey Concentrate", price: 1630, image: "/assets/images/product-images/whey-concentrate.webp" },
+    { name: "Mass Gainer", price: 420, image: "/assets/images/product-images/mass-gainer.webp" },
+    { name: "Whey Isolate", price: 3000, image: "/assets/images/product-images/whey-isolate.webp" },
+    { name: "Peanut Butter", price: 150, image: "/assets/images/product-images/peanut-butter.webp" },
+    { name: "Creatine - flavoured", price: 350, image: "/assets/images/product-images/creatine-flavored.webp" },
+    { name: "Creatine - Unflavoured", price: 320, image: "/assets/images/product-images/creatine.webp" },
+    { name: "Pre-Workout", price: 440, image: "/assets/images/product-images/pre-workout.webp" },
+    { name: "EAA", price: 490, image: "/assets/images/product-images/eaa.webp" },
+    { name: "BCAA", price: 490, image: "/assets/images/product-images/bcaa.webp" },
+    { name: "Protein Bar", price: 55, image: "/assets/images/product-images/protein-bar.webp" },
+    { name: "Energy Drink - Bottle", price: 30, image: "/assets/images/product-images/energy-drink.webp" },
+    { name: "Energy Drink - Can", price: 45, image: "/assets/images/product-images/energy-drink-can.webp" },
+    { name: "Multivitamin Tablets", price: 340, image: "/assets/images/product-images/multivitamin.webp" },
+    { name: "Omega 3", price: 225, image: "/assets/images/product-images/omega-3.webp" },
+    { name: "Ashwagandha", price: 100, image: "/assets/images/product-images/ashwagandha.webp" },
+    { name: "Moringa Tablets", price: 75, image: "/assets/images/product-images/moringa.webp" },
+    { name: "Shilajit", price: 70, image: "/assets/images/product-images/shilajit.webp" },
 ];
- 
+
 
 
 const testimonialsData = [
@@ -267,10 +267,10 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="row justify-content-center">
                         {productsData.map((product, index) => (
                             <div className="col-lg-4 col-md-6" key={index}>
-                                <div className="service-item wow fadeInUp" data-wow-delay={`${index * 0.2}s`}>
+                                <div className="service-item wow fadeInUp" data-wow-delay={`${index * 0.01}s`}>
                                     <div className="service-image">
                                         <div className="image-wrapper img-fluid object-fit-cover">
                                             <figure className="image-anime">
@@ -285,85 +285,19 @@ export default function Home() {
                                                 <img src={getAssetPath(product.icon)} alt="" />
                                             </div> */}
                                             <div className="service-box-content ps-3">
-                                                <h3 className="mb-2 mt-2">{product.name}</h3>
+                                                <h5 className="mb-2 mt-2">{product.name}</h5>
                                                 <p>₹ {product.price}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div className="service-readmore-btn">
-                                        <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="readmore-btn">read more</a>
-                                    </div> */}
                                 </div>
                             </div>
                         ))}
-
-                        {/* <div className="service-footer wow fadeInUp" data-wow-delay="1.2s">
-                            <p><span>Free</span> Let's make something great work together.<a href="">Get free quote</a></p>
-                        </div> */}
                     </div>
                 </div>
             </div>
 
-            {/* <div className="why-choose-us">
-                <div className="container">
-                    <div className="row align-items-center">
-                        <div className="col-lg-12">
-                            <div className="why-choose-box">
-                                <div className="why-choose-content">
-                                    <div className="section-title">
-                                        <h3 className="wow fadeInUp">why choose us</h3>
-                                        <h2 className="text-anime-style-2" data-cursor="-opaque">Trusted <span>expertise</span> for your technology needs</h2>
-                                        <p className="wow fadeInUp" data-wow-delay="0.2s">Our team brings years of experience and industry-leading expertise to provide tailored IT solutions that meet your business needs.</p>
-                                    </div>
 
-                                    <div className="why-choose-body">
-                                        <div className="why-choose-content-box">
-                                            <div className="why-choose-item wow fadeInUp" data-wow-delay="0.4s">
-                                                <div className="icon-box">
-                                                    <img src={getAssetPath('/assets/images/icon-why-choose-body.svg')} alt="" />
-                                                </div>
-                                                <div className="why-choose-item-content">
-                                                    <h3>24/7 dedicated customer support</h3>
-                                                </div>
-                                            </div>
-
-                                            <div className="why-choose-list wow fadeInUp" data-wow-delay="0.6s">
-                                                <ul>
-                                                    <li>Proven Track Record of Success</li>
-                                                    <li>Customer-Centric Approach to IT</li>
-                                                </ul>
-                                            </div>
-
-                                            <div className="why-choose-btn wow fadeInUp" data-wow-delay="0.8s">
-                                                <a href="" className="btn-default">contact us</a>
-                                            </div>
-                                        </div>
-
-                                        <div className="why-choose-body-img">
-                                            <figure className="image-anime">
-                                                <img src={getAssetPath('/assets/images/why-choose-body-img.jpg')} alt="" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="why-choose-image">
-                                    <div className="why-choose-img">
-                                        <figure className="image-anime">
-                                            <img src={getAssetPath('/assets/images/why-choose-us-img.jpg')} alt="" />
-                                        </figure>
-                                    </div>
-
-                                    <div className="company-experience-box">
-                                        <h3><span className="counter">25</span>+</h3>
-                                        <p>years of experience </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
 
             <div className="our-testimonials">
                 <div className="container">
@@ -434,7 +368,7 @@ export default function Home() {
                 </div>
             </div>
 
-
+            <VideoReview />
 
             <div className="our-faqs">
                 <div className="container">

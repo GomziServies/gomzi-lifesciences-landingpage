@@ -1,11 +1,5 @@
 /* ----------------------------------------------------------------------------------------
-* Author        : Awaiken
-* Template Name : Artistic - IT Company Agency HTML Template
-* File          : CSS File
-* Version       : 1.0
-* ---------------------------------------------------------------------------------------- */
-/* INDEX
-----------------------------------------------------------------------------------------
+
 01. Global Variables
 02. General css
 03. Header css
@@ -1464,10 +1458,10 @@ body:has(.offcanvas) {
   content: "";
   display: block;
   position: absolute;
-  left: -10px;
+  right: 10px;
   bottom: 80px;
   background: url("/public/assets/images/section-bg-shape-2.png") no-repeat;
-  background-position: left bottom;
+  background-position: right bottom;
   background-size: contain;
   width: 220px;
   height: 216px;
@@ -1483,7 +1477,7 @@ body:has(.offcanvas) {
   backdrop-filter: blur(100px);
   -webkit-backdrop-filter: blur(100px);
   border-radius: 20px;
-  padding: 20px;
+  /* padding: 20px; */
   padding-bottom: 0px;
   margin-bottom: 30px;
   overflow: hidden;
@@ -1518,7 +1512,7 @@ body:has(.offcanvas) {
   width: 100%;
   aspect-ratio: 1 / 0.692;
   object-fit: contain !important;
-  background-color: #f3f5f6;
+  background-color: #E2E2E2;
   border-radius: 20px;
   transition: all 0.4s ease-in-out;
 }
@@ -1584,7 +1578,7 @@ body:has(.offcanvas) {
 }
 
 .service-box-content {
-  width: calc(100% - 100px);
+  width: 100% 
 }
 
 .service-box-content p {
@@ -8160,3 +8154,65 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: #88c349 !important;
   font-weight: bold !important;
 }
+
+.video-btn button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 3;
+  border: none;
+  background: transparent;
+}
+
+.newthing {
+  background-color: #ffffff;
+  border-radius: 50%;
+  color: #88c349;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 60px;
+  font-size: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.newthing i {
+  margin-left: 2px;
+  color: #88c349 !important;
+}
+
+.newthing::before,
+.newthing::after {
+  animation: effct 1.8s infinite;
+  background-color: #ffffff;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: -1;
+}
+
+.newthing::before {
+  animation-delay: 0.4s;
+}
+
+.newthing::after {
+  animation-delay: 1s;
+}
+
+@keyframes effct {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
