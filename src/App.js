@@ -11,6 +11,7 @@ import "./assets/css/slicknav.min.css";
 import "./assets/css/swiper-bundle.min.css";
 
 import Home from "./page/home";
+import WheyProtein from "./page/products/whey-protein";
 import ThankYou from "./components/thank-you";
 import Booking from "./page/booking";
 import UserProfile from "./page/account/profile";
@@ -29,7 +30,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/thank-you" element={<ThankYou />} />
                 <Route path="/profile" element={<UserProfile />} />
-                <Route path="/booking-page" element={<Booking />} />
+                <Route path="/booking-page" element={ <Booking /> } />
+                <Route path="/whey-protein" element={ <WheyProtein /> } />
             </Routes>
             <Toaster
                 position="top-right"
