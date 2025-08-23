@@ -21,26 +21,25 @@ const Booking = () => {
     }, [navigate]);
 
     const productsData = React.useMemo(() => [
-        { name: "Whey Protein", price: 1170 },
-        { name: "Whey Blend", price: 1300 },
-        { name: "Whey Concentrate", price: 1630 },
-        { name: "Whey Isolate", price: 3000 },
-        { name: "Peanut Butter", price: 150 },
-        { name: "Mass Gainer", price: 420 },
-        { name: "Creatine - flavoured", price: 350 },
-        { name: "Creatine - Unflavoured", price: 320 },
-        { name: "Pre-Workout", price: 440 },
-        { name: "EAA", price: 490 },
-        { name: "BCAA", price: 490 },
-        { name: "Protein Bar", price: 55 },
-        { name: "Energy Drink - Bottle", price: 30 },
-        { name: "Energy Drink - Can", price: 45 },
-        { name: "Multivitamin Tablets", price: 340 },
-        { name: "Omega 3", price: 225 },
-        { name: "Ashwagandha", price: 100 },
-        { name: "Moringa Tablets", price: 75 },
-        { name: "Shilajit", price: 70 },
-
+        { name: "Whey Protein", price: 1170, moq: "100 kg" },
+        { name: "Whey Blend", price: 1300, moq: "100 kg" },
+        { name: "Whey Concentrate", price: 1630, moq: "100 kg" },
+        { name: "Whey Isolate", price: 3000, moq: "100 kg" },
+        { name: "Peanut Butter", price: 150, moq: "100 kg (500gm)" },
+        { name: "Mass Gainer", price: 420, moq: "100 kg" },
+        { name: "Creatine - flavoured", price: 350, moq: "50 kg (250gm)" },
+        { name: "Creatine - Unflavoured", price: 320, moq: "50 kg (250gm)" },
+        { name: "Pre-Workout", price: 440, moq: "50 kg (250gm)" },
+        { name: "EAA", price: 490, moq: "50 kg (250gm)" },
+        { name: "BCAA", price: 490, moq: "50 kg (250gm)" },
+        { name: "Protein Bar", price: 55, moq: "5000 pcs" },
+        { name: "Energy Drink - Bottle", price: 30, moq: "1000 pcs" },
+        { name: "Energy Drink - Can", price: 45, moq: "24,000 pcs" },
+        { name: "Multivitamin Tablets", price: 340, moq: "120 tabs" },
+        { name: "Omega 3", price: 225, moq: "60 tabs" },
+        { name: "Ashwagandha", price: 100, moq: "120 tabs" },
+        { name: "Moringa Tablets", price: 75, moq: "120 tabs" },
+        { name: "Shilajit", price: 70, moq: "120 tabs" },
     ], []);
 
     const today = new Date().toISOString().split("T")[0];
@@ -414,12 +413,12 @@ const Booking = () => {
                             />
                         </div>
 
-                        <h5 className='m-4 mt-2 mb-5 ms-3 p-0'>Supplements :</h5>
+                        <h5 className='m-4 mt-2 mb-5 ms-3 p-0'>Supplements (only quotation purpose) :</h5>
 
                         {productLines.map((line, index) => (
                             <div key={line.id} className="row mx-0">
                                 {/* Product select */}
-                                <div className="form-group col-md-4 mb-4">
+                                <div className="form-group col-md-3 mb-4">
                                     <select
                                         className="form-control bg-dark text-light"
                                         value={line.product}
@@ -428,11 +427,11 @@ const Booking = () => {
                                     >
                                         <option value="">Select Product</option>
                                         {productsData.map((p) => {
-                                            // Check if this product is already selected in any other line
+
                                             const isSelected = productLines.some(
                                                 (productLine, i) => i !== index && productLine.product === p.name
                                             );
-                                            // Only show option if it's not already selected
+
                                             return !isSelected && (
                                                 <option key={p.name} value={p.name}>{p.name}</option>
                                             );
@@ -453,6 +452,19 @@ const Booking = () => {
                                     />
                                 </div>
 
+                                {/* MOQ */}
+                                <div className="form-group col-md-2 mb-4">
+                                    <input
+                                        type="text"
+                                        placeholder='Moq'
+                                        className="form-control bg-dark text-light"
+                                        value={
+                                            productsData.find((p) => p.name === line.product)?.moq || ""
+                                        }
+                                        readOnly
+                                    />
+                                </div>
+
                                 {/* Price */}
                                 <div className="form-group col-md-2 mb-4">
                                     <input
@@ -466,10 +478,7 @@ const Booking = () => {
 
                                 {/* Total Price => col-3 if single OR old lines, else col-2 for last line */}
                                 <div
-                                    className={`form-group ${productLines.length === 1 || index !== productLines.length - 1
-                                        ? "col-md-3"
-                                        : "col-md-2"
-                                        } mb-4`}
+                                    className={`form-group col-md-2 mb-4`}
                                 >
                                     <input
                                         type="text"
@@ -481,7 +490,7 @@ const Booking = () => {
                                 </div>
 
                                 {/* Delete button => hide if only 1 line, else show for all */}
-                                {productLines.length > 1 && (
+                                {productLines.length >= 1 && (
                                     <div className="form-group col-md-1 mb-4">
                                         <button
                                             type="button"
@@ -496,15 +505,18 @@ const Booking = () => {
 
                                 {/* Add button => only last line */}
                                 {index === productLines.length - 1 && (
-                                    <div className="form-group col-md-1 mb-4">
-                                        <button
-                                            type="button"
-                                            className="form-control bg-dark text-light border border-1 border-primary d-flex justify-content-center align-items-center"
-                                            onClick={addProductLine}
-                                        >
-                                            <i className="fas fa-plus fs-5 text-primary"></i>
-                                        </button>
 
+                                    <div className="row justify-content-end p-0 m-auto">
+                                        <div className="form-group col-md-1 mb-4">
+                                            <button
+                                                type="button"
+                                                className="form-control bg-dark text-light border border-1 border-primary d-flex justify-content-center align-items-center"
+                                                onClick={addProductLine}
+                                            >
+                                                <i className="fas fa-plus fs-5 text-primary"></i>
+                                            </button>
+
+                                        </div>
                                     </div>
                                 )}
                             </div>

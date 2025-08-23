@@ -1,6 +1,6 @@
 import React from "react";
 
-function HomeNutritionFooter() {
+function Footer() {
   return (
     <>
       <footer className="main-footer">
@@ -27,12 +27,12 @@ function HomeNutritionFooter() {
 
         <div className="footer-main">
           <div className="container">
-            <div className="row align-items-end">
+            <div className="row align-items-center">
               <div className="col-lg-4">
                 <div className="about-footer">
                   <div className="about-footer-content">
                     <div className="footer-logo ">
-                      <img src="assets/images/logo192.png" alt="" className="w-25"/>
+                      <img src="assets/images/logo192.png" alt="" className="w-25" />
                     </div>
                     <div className="footer-contact-details">
                       <div className="footer-contact-item">
@@ -40,8 +40,7 @@ function HomeNutritionFooter() {
                           <img src="assets/images/icon-mail-accent.svg" alt="" />
                         </div>
                         <div className="footer-contact-item-content">
-                          <p>infodomainame@gmail.com</p>
-                          <p>domainame@gmail.com</p>
+                          <p>gomzinutrition@gmail.com</p>
                         </div>
                       </div>
                       <div className="footer-contact-item">
@@ -49,7 +48,7 @@ function HomeNutritionFooter() {
                           <img src="assets/images/icon-location-accent.svg" alt="" />
                         </div>
                         <div className="footer-contact-item-content">
-                          <p>123 Creative Lane London, SW1A 1AA United Kingdom</p>
+                          <p>547,548, FIRST FLOOR, RJD TEXTILES PARK, Hazira Rd, Ichchhapor, PAL, Surat, Gujarat 394510</p>
                         </div>
                       </div>
                     </div>
@@ -59,8 +58,8 @@ function HomeNutritionFooter() {
                       <img src="assets/images/icon-phone-accent.svg" alt="" />
                     </div>
                     <div className="footer-contact-content">
-                      <p>Need help!</p>
-                      <h3><a href="tel:+123456789">+123 456 7890</a></h3>
+                      <p>Gautam Jani</p>
+                      <h3><a href="tel:+123456789">+91 63540 51487</a></h3>
                     </div>
                   </div>
                 </div>
@@ -73,53 +72,23 @@ function HomeNutritionFooter() {
                       <h3>Quick link</h3>
                       <ul>
                         <li><a href="index.html">home</a></li>
+                        <li><a href="/booking-page">Book Sample</a></li>
+                        <li><a href="/booking-page">Profile</a></li>
+                      </ul>
+                    </div>
+
+                    <div className="footer-links">
+                      <h3>Partner With Us</h3>
+                      <ul>
+                        <li>Become a distributor</li>
+                        <li>Become an affiliate</li>
                       </ul>
                     </div>
                     <div className="footer-links services-links">
-                      <h3>Product</h3>
-                      <ul>
-                        <li><a href="service-single.html">Whey protein</a></li>
-                        <li><a href="service-single.html">Mass Gainer</a></li>
-                        <li><a href="service-single.html">Peanut Butter</a></li>
-                        <li><a href="service-single.html">Energy Drink</a></li>
-                        <li><a href="service-single.html">Creatine</a></li>
-                        <li><a href="service-single.html">Egnite</a></li>
-                      </ul>
-                    </div>
-                    <div className="footer-links">
-                      <h3>support</h3>
-                      <ul>
-                        <li><a href="#">help</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                        <li><a href="#">Term's & condition</a></li>
-                        <li><a href="">contact</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="footer-newsletter-form">
-                    <h3>Subscribe our newsletter:</h3>
-                    <form id="newslettersForm" action="#" method="POST">
-                      <div className="form-group">
-                        <input type="email" name="mail" className="form-control" id="mail" placeholder="Enter Email" required />
-                        <button type="submit" className="btn-highlighted">subscribe</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-12">
-                <div className="footer-copyright">
-                  <div className="row align-items-center">
-                    <div className="col-md-6">
-                      <div className="footer-copyright-text">
-                        <p>Copyright © 2025 All Rights Reserved.</p>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
+                      <h3>Follow Us</h3>
                       <div className="footer-social-links">
-                        <ul>
-                          <li><a href="#"><i className="fa-brands fa-pinterest-p"></i></a></li>
+                        <ul className="d-flex justify-content-around">
+                          <li><a href="#"><i className="fa-brands fa-youtube"></i></a></li>
                           <li><a href="#"><i className="fa-brands fa-x-twitter"></i></a></li>
                           <li><a href="#"><i className="fa-brands fa-facebook-f"></i></a></li>
                           <li><a href="#"><i className="fa-brands fa-instagram"></i></a></li>
@@ -127,6 +96,12 @@ function HomeNutritionFooter() {
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <div className="col-lg-12">
+                <div className="footer-copyright">
+                  
                 </div>
               </div>
             </div>
@@ -137,4 +112,4 @@ function HomeNutritionFooter() {
   );
 }
 
-export default HomeNutritionFooter;
+export default Footer;

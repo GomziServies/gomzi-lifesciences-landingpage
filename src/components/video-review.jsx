@@ -22,6 +22,14 @@ const VideoReview = () => {
     return (
         <>
             <div className="container mt-5 mb-5">
+                <div className="row section-row">
+                    <div className="col-lg-12">
+                        <div className="section-title">
+                            {/* <h3 className="wow fadeInUp">Video Review</h3> */}
+                            <h2 className="text-anime-style-2" data-cursor="-opaque">Our most recent<span> production</span></h2>
+                        </div>
+                    </div>
+                </div>
                 <div className="col-12 mt-5">
                     <div className="row" id="explore">
                         <div className="col-lg-4 mt-lg-4 p-3">

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
+import Footer from '../../components/partials/Footer/footer';
 import LoginModal from "../../components/popup/login";
-import WhatsappBtn from "../../components/whatsapp-btn";
+import { isUserLoggedIn } from '../../utils/auth';
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { isUserLoggedIn } from "../../utils/auth";
 
-export default function WheyProtein() {
+export default function WheyBlend() {
     const [showLoginModal, setShowLoginModal] = useState(false);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
@@ -26,21 +26,8 @@ export default function WheyProtein() {
                         <div className="col-lg-12">
                             <div className="page-header-box">
                                 <h1 className="text-anime-style-2" data-cursor="-opaque">
-                                    Whey Protein
+                                    Whey Blend
                                 </h1>
-                                {/* <nav className="wow fadeInUp">
-                                    <ol className="breadcrumb">
-                                        <li className="breadcrumb-item">
-                                            <a href="./">home</a>
-                                        </li>
-                                        <li className="breadcrumb-item">
-                                            <a href="services.html">product</a>
-                                        </li>
-                                        <li className="breadcrumb-item active" aria-current="page">
-                                            whey protein
-                                        </li>
-                                    </ol>
-                                </nav> */}
                             </div>
                         </div>
                     </div>
@@ -151,7 +138,6 @@ export default function WheyProtein() {
                             Ignite
                         </span>
                     </div>
-
                 </div>
             </div>
 
@@ -163,26 +149,24 @@ export default function WheyProtein() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/whey-protein.webp")}
-                                            alt="whey-protein"
+                                            src={getAssetPath("/assets/images/product-images/whey-blend.webp")}
+                                            alt="whey-blend"
                                         />
                                     </figure>
                                 </div>
 
                                 <div className="section-title m-4 mx-0 ">
-
                                     <h2 className="text-anime-style-2 m-0 fs-2 text-bold" data-cursor="-opaque">
-                                        Whey <span>Protein</span>
+                                        Whey <span>Blend</span>
                                     </h2>
 
-                                    <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 1170</h4>
+                                    <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 1300</h4>
 
                                     <div className="about-list-box mt-4">
-
                                         <div className="about-list wow fadeInUp" data-wow-delay="0.4s">
                                             <ul>
                                                 <li>Manufacturer - <span>Gomzi Lifescience LLP</span></li>
-                                                <li>Packaging Size - <span>Customized (500 Gm, 1 Kg, 2 Kg)</span></li>
+                                                <li>Packaging Size - <span>500g, 1kg, 2kg</span></li>
                                                 <li>Packaging Type - <span>Jar</span></li>
                                                 <li>Composition - <span>As Per Requirement</span></li>
                                                 <li>Form - <span>Powder</span></li>
@@ -191,7 +175,6 @@ export default function WheyProtein() {
                                                 <li>Design & Packaging - <span>Included</span></li>
                                             </ul>
                                         </div>
-
                                     </div>
 
                                     <div className="hero-content-body wow fadeInUp" data-wow-delay="0.4s">
@@ -204,22 +187,13 @@ export default function WheyProtein() {
                                                 }
                                             }} className="btn-default">Add to cart</button>
                                         </div>
-
                                     </div>
                                 </div>
 
                                 <div className="service-entry">
-                                    <h2 className="text-anime-style-2  fs-2" data-cursor="-opaque">
-                                        Ingredients
-                                    </h2>
                                     <p className="wow fadeInUp">
-                                        Whey protein blend (Whey protein concentrate,
-                                        Whey protein isolate, Whey powder), Mango Pulp
-                                        Powder, Mango Flavour, Soy Lecithin-INS 322 01,
-                                        xanthangum-INS 415, Sucralose-INS 955, Sunset
-                                        yellow Food colour -INS 110.
+                                        Whey Blend with 50% - 60% protein content, providing a balanced mix of protein sources for optimal muscle recovery and growth.
                                     </p>
-
                                     <p className="wow fadeInUp" data-wow-delay="0.2s">
                                         With a focus on data-driven insights, we build customized
                                         strategies that drive traffic, boost engagement, and
@@ -234,26 +208,16 @@ export default function WheyProtein() {
 
                         <div className="col-lg-5">
                             <div className="service-sidebar">
-
                                 <div className="service-catagery-list wow fadeInUp">
                                     <h3>Nutrients per 30g</h3>
                                     <ul>
-                                        <li>Energy (kcal) <span>113.47</span></li>
-                                        <li>Total Protein (g) <span>22.02</span></li>
-                                        <li>Carbohydrates (g) <span>4.02</span></li>
+                                        <li>Energy (kcal) <span>115</span></li>
+                                        <li>Total Protein (g) <span>24</span></li>
+                                        <li>Carbohydrates (g) <span>3.5</span></li>
                                         <li>Added Sugar (g) <span>0</span></li>
-                                        <li>Dietary Fibre (g) <span>1.78</span></li>
-                                        <li>Total Fat (g) <span>0.98</span></li>
-                                        <li>Saturated fatty acid (mg) <span>0.66</span></li>
-                                        <li>Polyunsaturated fatty acid (g) <span>0.32</span></li>
-                                        <li>Monounsaturated fatty acid (mg) <span>1.54</span></li>
-                                        <li>Trans Fatty Acid (g) <span>0</span></li>
-                                        <li>Cholesterol (g) <span>0.02</span></li>
-                                        <li>Potassium (mg) <span>158.0</span></li>
-                                        <li>Sodium (mg) <span>135.5</span></li>
+                                        <li>Total Fat (g) <span>1.2</span></li>
                                     </ul>
                                 </div>
-
 
                                 <div
                                     className="sidebar-cta-box wow fadeInUp"
@@ -283,8 +247,6 @@ export default function WheyProtein() {
                     </div>
                 </div>
             </div>
-
-            {/* <HomeNutritionFooter /> */}
         </>
     );
 }

@@ -121,7 +121,7 @@ function NutritionHeader() {
                 )}
               </div>
 
-              <div className="navbar-toggle"></div>
+              {/* <div className="navbar-toggle"></div> */}
             </div>
           </nav>
           <div className="responsive-menu"></div>
