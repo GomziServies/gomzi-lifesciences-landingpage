@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function PreWorkout() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -164,7 +165,7 @@ export default function PreWorkout() {
 
                                 <div className="section-title m-4 mx-0 ">
                                     <h2 className="text-anime-style-2 m-0 fs-2 text-bold" data-cursor="-opaque">
-                                        Pre-Workout <span>Formula</span>
+                                        Pre-Workout
                                     </h2>
 
                                     <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 440</h4>
@@ -199,9 +200,24 @@ export default function PreWorkout() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Advanced pre-workout formula designed to enhance energy, focus, and performance during workouts.
+                                        This Advanced Pre-Workout Formula from Gomzi Lifescience LLP is scientifically crafted to deliver an explosive boost of energy, focus, and performance for athletes and fitness enthusiasts. Designed with a powerful blend of amino acids, natural extracts, and stimulants, it helps you push harder, train longer, and achieve peak results during every workout.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Each 5 g serving delivers a synergistic mix of performance-enhancing ingredients: L-Citrulline (2.26 g) to promote nitric oxide production and muscle pumps, YourBrand L-Arginine (0.45 g) to improve blood flow and endurance, and L-Taurine (0.36 g) to aid hydration and reduce fatigue. The inclusion of B-Alanine (0.36 g) helps buffer lactic acid, allowing you to power through intense sessions without early muscle burn.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        For energy and alertness, this formula features Caffeine Anhydrous (0.18 g) along with natural Green Tea Extract (0.10 g) and Green Coffee Extract (0.10 g), delivering clean, sustained stimulation without excessive jitters or crashes. Together, these ingredients create a balanced pre-workout that enhances strength, focus, and stamina.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Available in 250 g jars with multiple delicious flavour options, this pre-workout powder mixes easily and tastes great. With a 24-month shelf life and premium design and packaging, it ensures both freshness and convenience.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        Whether you're lifting heavy, sprinting fast, or training for endurance, this Advanced Pre-Workout provides the fuel your body and mind need to break limits and perform at your best.
+                                    </p>
                                 </div>
 
 
@@ -258,6 +274,7 @@ export default function PreWorkout() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

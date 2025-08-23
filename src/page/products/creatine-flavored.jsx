@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function CreatineFlavored() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -188,7 +189,7 @@ export default function CreatineFlavored() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page?product=creatine-flavored';
+                                                    window.location.href = '/booking-page?product=creatine-flavoured';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -199,9 +200,24 @@ export default function CreatineFlavored() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Delicious flavored creatine monohydrate supplement for enhanced strength and power output.
+                                        This Flavoured Creatine Monohydrate Supplement from Gomzi Lifescience LLP is specially formulated to boost strength, endurance, and overall athletic performance. Designed for athletes, bodybuilders, and fitness enthusiasts, it delivers micronized creatine monohydrate in a delicious, easy-to-mix format, making it both effective and enjoyable to consume.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Each 4.5 g serving provides a pure 4.5 g dose of creatine monohydrate, the most researched and proven form of creatine, known for enhancing muscle strength, explosive power, and workout performance. Micronization ensures faster absorption and improved solubility, allowing your muscles to replenish energy (ATP) quickly during high-intensity exercise. This helps extend training capacity, reduce fatigue, and support faster recovery between sets.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Available in a variety of flavours, this supplement eliminates the bland taste commonly associated with regular creatine powders, making it easier to include in your daily fitness routine. With zero fillers and precise formulation, it ensures maximum purity and effectiveness.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Packaged in 250 g and 500 g jars, this product is designed to suit both beginners and advanced athletes. Its 24-month shelf life ensures long-lasting freshness, while professional design and packaging enhance both quality and convenience.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        Whether your goal is to lift heavier, sprint faster, or maximize your workout performance, this Delicious Flavoured Creatine Monohydrate provides the edge you need for strength, power, and endurance.
+                                    </p>
                                 </div>
 
 
@@ -253,6 +269,7 @@ export default function CreatineFlavored() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

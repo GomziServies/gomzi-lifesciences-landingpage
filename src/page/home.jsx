@@ -31,7 +31,7 @@ const productsData = [
     { name: "Omega 3 (60tbs)", price: 225, image: "/assets/images/product-images/omega-3.webp", link: '/omega-3' },
     { name: "Ashwagandha (60tbs)", price: 50, image: "/assets/images/product-images/ashwagandha.webp", link: '/ashwagandha' },
     { name: "Moringa Tablets (40tbs)", price: 25, image: "/assets/images/product-images/moringa.webp", link: '/moringa' },
-    { name: "Shilajit (35tbs)", price: 35, image: "/assets/images/product-images/shilajit.webp", link: '/shilajit' },
+    { name: "Shilajit (60tbs)", price: 35, image: "/assets/images/product-images/shilajit.webp", link: '/shilajit' },
 ];
 
 const testimonialsData = [
@@ -127,7 +127,7 @@ export default function Home() {
 
                                 <div className="hero-img-2">
                                     <figure className="image-anime">
-                                        <img src={getAssetPath('/assets/images/gautam-jani.webp')} alt="Second hero section visual" />
+                                        <img src={getAssetPath('/assets/images/chirag-pandey.webp')} alt="Second hero section visual" />
                                     </figure>
                                 </div>
 
@@ -300,7 +300,7 @@ export default function Home() {
 
             <VideoReview />
 
-            <div className="our-faqs">
+            {/* <div className="our-faqs">
                 <div className="container">
                     <div className="row section-row">
                         <div className="col-lg-12">
@@ -425,7 +425,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
 
             <Footer />

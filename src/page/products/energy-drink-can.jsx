@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function EnergyDrinkCan() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -199,9 +200,24 @@ export default function EnergyDrinkCan() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Premium energy drink in a sleek can format, delivering instant energy and focus.
+                                        The Premium Energy Drink by Gomzi Lifescience LLP is crafted to deliver an instant surge of energy, focus, and alertness in a sleek, easy-to-carry 250 ml can. Designed for athletes, fitness lovers, professionals, and individuals with active lifestyles, this beverage is the perfect way to stay refreshed and energized on the go.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Each serving provides 48 kcal of clean energy along with 80 mg of caffeine anhydrous, which helps boost focus, enhance endurance, and fight fatigue. With 0 g protein, 0 g carbohydrate, 0 g sugar, and 0 g fat, it is a zero-calorie guilt-free refreshment that fuels your performance without unnecessary additives. The inclusion of 45 mg sodium supports hydration and maintains electrolyte balance, making it an excellent pre-workout option or a reliable pick-me-up during long, demanding days.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Unlike traditional sugary drinks, this premium energy drink offers a crisp, smooth taste in multiple refreshing flavours, providing both enjoyment and performance benefits. Its sleek can packaging not only ensures convenience and portability but also makes it a stylish choice for modern lifestyles.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        With a shelf life of 18 months and high-quality formulation, the Gomzi Lifescience Premium Energy Drink stands as a reliable companion for those who demand energy, clarity, and endurance at any time of the day.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        Whether you're powering through workouts, tackling late-night projects, or simply needing a quick boost, this energy drink is built to elevate your energy and sharpen your focus instantly.
+                                    </p>
                                 </div>
 
 
@@ -210,7 +226,7 @@ export default function EnergyDrinkCan() {
 
                         <div className="col-lg-5">
                             <div className="service-sidebar">
-                                 <div className="service-catagery-list wow fadeInUp">
+                                <div className="service-catagery-list wow fadeInUp">
                                     <h3>Nutrients per 100ml</h3>
                                     <ul>
                                         <li>Energy <span>48.0 kcal</span></li>
@@ -258,6 +274,7 @@ export default function EnergyDrinkCan() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

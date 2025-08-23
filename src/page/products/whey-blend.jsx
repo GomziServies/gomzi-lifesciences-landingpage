@@ -23,7 +23,7 @@ export default function WheyBlend() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -199,9 +199,17 @@ export default function WheyBlend() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Whey Blend with 50% - 60% protein content, providing a balanced mix of protein sources for optimal muscle recovery and growth.
+                                        This high-quality Whey Blend Protein Powder from Gomzi Lifescience LLP is specially formulated to deliver superior nutrition for muscle growth, recovery, and overall wellness. Each 35 g serving provides around 113.17 kcal of energy, making it a lean and effective source of protein without unnecessary calories. With a rich 22.22 g of protein per serving, this blend ensures faster muscle repair, increased strength, and improved performance for athletes and fitness enthusiasts.
                                     </p>
-
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        The formulation offers a perfect balance of macronutrients, with just 6.55 g of carbohydrates and 0 g added sugar, making it suitable for those following strict fitness or weight management goals. Enriched with 3.88 g of dietary fibre, it supports digestion and gut health. The 2.01 g fat content is carefully balanced between saturated, polyunsaturated, and monounsaturated fatty acids, while cholesterol and trans fats remain extremely low, ensuring a heart-healthy composition. Added minerals like Potassium (155.8 mg) and Sodium (139.5 mg) help maintain electrolyte balance, hydration, and overall endurance.
+                                    </p>
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        What makes this product unique is its Whey Blend with 50%–60% protein content, combining multiple protein sources for optimal amino acid delivery. This ensures sustained energy release and long-lasting muscle recovery.
+                                    </p>
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Available in 500 g, 1 kg, and 2 kg jars, with different flavour options, this protein powder is designed for both taste and functionality. With a shelf life of 18 months and attractive packaging, it is a reliable choice for anyone looking to enhance their nutrition and fitness journey.
+                                    </p>
                                 </div>
 
 

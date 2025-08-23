@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function Moringa() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -164,7 +165,7 @@ export default function Moringa() {
 
                                 <div className="section-title m-4 mx-0 ">
                                     <h2 className="text-anime-style-2 m-0 fs-2 text-bold" data-cursor="-opaque">
-                                        Moringa <span>Tablets</span>
+                                        Moringa <span>Tablets</span> (40 Tablets)
                                     </h2>
 
                                     <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 25</h4>
@@ -197,10 +198,25 @@ export default function Moringa() {
                                 </div>
 
                                 <div className="service-entry">
-                                    <p className="wow fadeInUp">
-                                        Natural superfood supplement packed with nutrients, antioxidants, and anti-inflammatory compounds.
+                                    <p className="wow fadeInUp" data-wow-delay="0s">
+                                        The Moringa Capsules by Gomzi Lifescience LLP deliver the natural goodness of one of the world's most powerful superfoods – Moringa Oleifera. Each serving of 3 capsules provides 600 mg of organic moringa leaf extract, a nutrient-dense herbal supplement widely recognized for its exceptional health benefits.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Moringa, often called the "Miracle Tree", is naturally rich in vitamins, minerals, amino acids, and powerful antioxidants. This unique nutritional profile makes it a valuable addition to daily wellness routines, helping to support immunity, boost energy levels, and enhance overall vitality. Its anti-inflammatory properties also contribute to joint health, digestion, and metabolic balance, making it suitable for individuals with active lifestyles or those seeking better overall well-being.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        In addition to its nutritional value, moringa is known to help detoxify the body, promote healthy skin, and maintain hormonal balance. With regular use, it can aid in reducing fatigue, improving focus, and supporting long-term wellness goals.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Each bottle contains 40 tablets, carefully manufactured under stringent quality standards to ensure purity and effectiveness. With a shelf life of 24 months, these capsules retain their potency and freshness, while the secure bottle packaging makes them convenient for daily use and travel.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        The Moringa Capsules by Gomzi Lifescience LLP are a natural, plant-based superfood supplement designed for anyone looking to harness the benefits of moringa for improved immunity, energy, and overall health.
+                                    </p>
                                 </div>
 
 
@@ -251,6 +267,7 @@ export default function Moringa() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

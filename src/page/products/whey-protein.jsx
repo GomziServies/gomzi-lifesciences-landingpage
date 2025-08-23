@@ -9,6 +9,7 @@ import { useRef } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Footer from "../../components/partials/Footer/footer";
 
 export default function WheyProtein() {
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -24,7 +25,7 @@ export default function WheyProtein() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -218,15 +219,18 @@ export default function WheyProtein() {
                                 </div>
 
                                 <div className="service-entry">
-                                    
+
                                     <p className="wow fadeInUp">
-                                        
+                                        This premium health supplement from Gomzi Lifescience LLP is a scientifically formulated protein-rich powder designed to support fitness, muscle growth, and overall well-being. Each 35 g serving provides approximately 139.97 kcal of energy, making it an ideal option for individuals looking for balanced nutrition without excess calories. With a powerful 18 g of protein per serving, it helps in faster muscle recovery, improved strength, and lean muscle development.
+                                    </p>
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        The supplement is crafted with 11.3 g of carbohydrates and absolutely 0 g added sugar, ensuring sustained energy release while being safe for those monitoring sugar intake. Enriched with 2.8 g of dietary fibre, it also promotes better digestion and gut health. The fat profile is kept minimal at 2.53 g, with a healthy balance of saturated, polyunsaturated, and monounsaturated fatty acids. Cholesterol and trans fats are negligible, making it a heart-friendly choice. Additionally, essential electrolytes like Potassium (158.8 mg) and Sodium (138 mg) help maintain hydration and support active lifestyles.
                                     </p>
 
-
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Available in customized packaging sizes (500 g, 1 kg, and 2 kg) with attractive jar packaging, this powder comes in a variety of delicious flavours to suit different preferences. With a shelf life of 18 months, it ensures both freshness and convenience. Designed with flexible composition as per requirement, it is a versatile health product suitable for fitness enthusiasts, athletes, and individuals aiming for a healthier lifestyle.
+                                    </p>
                                 </div>
-
-
                             </div>
                         </div>
 
@@ -290,7 +294,7 @@ export default function WheyProtein() {
                 </div>
             </div>
 
-            {/* <HomeNutritionFooter /> */}
+            <Footer />
         </>
     );
 }

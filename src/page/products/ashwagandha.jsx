@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function Ashwagandha() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -164,7 +165,7 @@ export default function Ashwagandha() {
 
                                 <div className="section-title m-4 mx-0 ">
                                     <h2 className="text-anime-style-2 m-0 fs-2 text-bold" data-cursor="-opaque">
-                                        Ashwagandha <span>Extract</span>
+                                        Ashwagandha (60 Tablets)
                                     </h2>
 
                                     <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 50</h4>
@@ -198,9 +199,24 @@ export default function Ashwagandha() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Traditional Ayurvedic herb known for its adaptogenic properties, supporting stress management and overall wellness.
+                                        The Ashwagandha Capsules by Gomzi Lifescience LLP bring the power of one of Ayurveda's most respected herbs in a convenient daily supplement. Each serving of 2 capsules provides 600 mg of pure organic Ashwagandha extract, standardized to deliver 30 mg of active Withanolides (5%), ensuring consistent potency and effectiveness.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Renowned as a natural adaptogen, Ashwagandha helps the body adapt to physical, emotional, and mental stress while promoting a sense of calm and balance. Regular supplementation supports stress management, improved energy levels, and enhanced resilience against daily challenges. In addition, Ashwagandha has been studied for its ability to boost immunity, improve sleep quality, support hormonal balance, and promote overall vitality.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        This supplement is especially beneficial for those leading busy or high-pressure lifestyles, athletes seeking faster recovery, and individuals looking to improve mental clarity, focus, and endurance. The vegetarian-friendly tablets are easy to consume, and with no added sugars, fillers, or artificial ingredients, they provide a clean and natural wellness solution.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Manufactured with strict quality standards, each bottle contains 60 tablets with a 24-month shelf life, ensuring long-lasting freshness and reliability. Packaged securely in a convenient bottle format, it is designed for easy storage and daily use.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        The Ashwagandha Capsules by Gomzi Lifescience LLP offer a safe and effective way to incorporate the ancient wisdom of Ayurveda into modern lifestyles — helping you achieve stress relief, balanced energy, and overall wellness naturally.
+                                    </p>
                                 </div>
 
 
@@ -252,6 +268,7 @@ export default function Ashwagandha() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

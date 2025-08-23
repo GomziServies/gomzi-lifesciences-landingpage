@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from '../../utils/auth';
+import Footer from "../../components/partials/Footer/footer";
 
 // Import Swiper styles
 import "swiper/css";
@@ -23,7 +24,7 @@ export default function Multivitamin() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -164,7 +165,7 @@ export default function Multivitamin() {
 
                                 <div className="section-title m-4 mx-0 ">
                                     <h2 className="text-anime-style-2 m-0 fs-2 text-bold" data-cursor="-opaque">
-                                        Multivitamin <span>Tablets</span>
+                                        Multivitamin <span>Tablets</span> (60 Tablets)
                                     </h2>
 
                                     <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 170</h4>
@@ -199,9 +200,20 @@ export default function Multivitamin() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Comprehensive multivitamin supplement providing essential nutrients for overall health and wellness.
+                                        The Herbal Multivitamin Tablets by Gomzi Lifescience LLP are thoughtfully formulated to provide a powerful blend of essential nutrients and herbal extracts that support complete health and wellness. Each tablet combines the goodness of traditional Ayurvedic herbs with modern nutritional science, offering a natural approach to maintaining vitality, strength, and overall well-being.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Enriched with Ashwagandha (400 mg), the formula helps manage stress, improve energy, and promote hormonal balance. Gokhru (Tribulus Terrestris) supports stamina and physical performance, while Harar (Terminalia Chebula) and Amla (Emblica Officinalis) contribute to better digestion, immunity, and antioxidant protection. The presence of Chamomile Extract helps in relaxation and stress relief, whereas Ginseng boosts energy, mental focus, and endurance. Additionally, Satavari and Safed Musli are included for their adaptogenic and rejuvenating properties, aiding in strength and overall vitality. Saunf Extract further enhances digestion and metabolic health.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Each serving provides only 0.88 kcal with minimal carbs and sodium, making it a clean and effective daily supplement. Designed in a convenient 60-tablet bottle, this formulation ensures easy daily use with a recommended serving of one tablet per day.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        With 24 months shelf life and premium-quality manufacturing, the Herbal Multivitamin Tablets are ideal for anyone seeking a comprehensive natural supplement to support energy, immunity, stress management, and long-term health.
+                                    </p>
                                 </div>
 
 
@@ -266,6 +278,7 @@ export default function Multivitamin() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

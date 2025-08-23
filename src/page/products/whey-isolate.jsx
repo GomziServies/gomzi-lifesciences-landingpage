@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function WheyIsolate() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -200,9 +201,17 @@ export default function WheyIsolate() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Premium 90% protein Whey Isolate, the purest form of whey protein with minimal fat and lactose content.
+                                        This Premium Whey Isolate Protein Powder from Gomzi Lifescience LLP represents the purest form of whey, delivering exceptional quality nutrition for athletes and fitness enthusiasts aiming for maximum performance and results. With an impressive 90% protein content, this whey isolate provides high bioavailability and rapid absorption, ensuring muscles get the fuel they need immediately after training.
                                     </p>
-
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Each 35 g serving delivers approximately 136.53 kcal of energy and a powerful 27.33 g of protein, making it one of the leanest and most effective protein sources available. With just 4.17 g of carbohydrates and 0 g added sugar, it is perfectly suited for individuals following strict calorie-controlled, low-carb, or keto diets. The 1.17 g fat content is exceptionally low, with balanced healthy fatty acids, while cholesterol and trans fat are almost negligible. Added minerals like Potassium (149 mg) and Sodium (120 mg) help maintain electrolyte balance, hydration, and endurance during intense workouts.
+                                    </p>
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Formulated for those seeking a high-protein, low-fat, and low-lactose solution, this whey isolate is ideal for building lean muscle, accelerating recovery, and supporting fat loss goals. Its clean profile makes it gentle on digestion and suitable even for those with lactose sensitivities.
+                                    </p>
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Available in 1 kg, 2 kg, and 5 kg jars, this protein powder comes in a variety of delicious flavours to suit different preferences. With a shelf life of 18 months and premium jar packaging, it offers both convenience and long-lasting freshness. This product is the ultimate choice for serious athletes striving for purity, performance, and results.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -263,6 +272,7 @@ export default function WheyIsolate() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

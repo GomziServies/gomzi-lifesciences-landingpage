@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function PeanutButter() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -198,9 +199,24 @@ export default function PeanutButter() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Natural peanut butter made from high-quality peanuts, rich in protein and healthy fats.
+                                        This Natural Peanut Butter from Gomzi Lifescience LLP is a wholesome and nutritious spread made from carefully selected high-quality peanuts. Rich in protein and healthy fats, it is designed to fuel active lifestyles and provide long-lasting energy while supporting overall health.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Each 32 g serving delivers approximately 166.4 kcal of energy, making it a nutrient-dense option for breakfast, snacks, or pre/post-workout meals. With 6.46 g of protein, it contributes to muscle repair and growth, while 13.18 g of healthy fats (including 3.23 g polyunsaturated and 4.77 g monounsaturated fatty acids) promote heart health and sustained energy release. The spread also contains 2.56 g of dietary fibre, supporting digestive health, and minimal 1.28 g of saturated fats with zero trans fats and cholesterol, making it a clean and safe choice.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        With 6.56 g of carbohydrates and 3.2 g of total sugar (of which just 2.24 g is added sugar), this peanut butter provides a balanced macronutrient profile for both fitness enthusiasts and everyday consumers. Its low sodium content (4 mg) ensures it remains suitable for individuals monitoring their salt intake.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Available in both creamy and crunchy textures, and packed in hygienic 500 g and 1 kg jars, this product offers convenience, freshness, and versatility. With a 12-month shelf life, it can be enjoyed over time without compromising quality.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        Whether spread on toast, blended into smoothies, or eaten straight from the jar, this Natural Peanut Butter is a delicious, protein-rich superfood for a healthy and active lifestyle.
+                                    </p>
                                 </div>
 
 
@@ -263,6 +279,7 @@ export default function PeanutButter() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

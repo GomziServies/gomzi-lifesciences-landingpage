@@ -1,6 +1,25 @@
 import React from "react";
 
 function Footer() {
+
+  function nutritionSendWhatsappMsg(text, option) {
+    if (!text) {
+      text = `Hi, I have come across ${window.location.href}. Can you provide more information about this?`;
+    }
+
+    if (option) {
+      if (option.pageRef) {
+        text += `\n\nI found your contact details from ${window.location.origin + window.location.pathname
+          }`;
+      }
+    }
+
+    let url = `https://api.whatsapp.com/send?phone=+918866842520&text=${encodeURIComponent(
+      text
+    )}`;
+    window.open(url, "_blank");
+  }
+
   return (
     <>
       <footer className="main-footer">
@@ -13,12 +32,12 @@ function Footer() {
                     <h3>Let's Collaborate</h3>
                     <h2>Let's Work Together</h2>
                   </div>
-                  <div className="work-together-btn">
+                  {/* <div className="work-together-btn">
                     <a href="">
                       <img src="assets/images/arrow-dark.svg" alt="" />
                       <span>Get in Touch</span>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -59,7 +78,7 @@ function Footer() {
                     </div>
                     <div className="footer-contact-content">
                       <p>Gautam Jani</p>
-                      <h3><a href="tel:+123456789">+91 63540 51487</a></h3>
+                      <h3>+91 63540 51487</h3>
                     </div>
                   </div>
                 </div>
@@ -80,18 +99,30 @@ function Footer() {
                     <div className="footer-links">
                       <h3>Partner With Us</h3>
                       <ul>
-                        <li>Become a distributor</li>
-                        <li>Become an affiliate</li>
+                        <li><a href="/"
+                          onClick={() =>
+                            nutritionSendWhatsappMsg(
+                              "Hello, I'm interested in becoming a distributor of Gomzi Nutrition.",
+                              { pageRef: true }
+                            )
+                          }> Become a distributor</a></li>
+                        <li><a href="/"
+                          onClick={() =>
+                            nutritionSendWhatsappMsg(
+                              "Hello, I'm interested in becoming an affiliate of Gomzi Nutrition.",
+                              { pageRef: true }
+                            )
+                          }> Become an affiliate</a></li>
                       </ul>
                     </div>
                     <div className="footer-links services-links">
                       <h3>Follow Us</h3>
                       <div className="footer-social-links">
                         <ul className="d-flex justify-content-around">
-                          <li><a href="#"><i className="fa-brands fa-youtube"></i></a></li>
-                          <li><a href="#"><i className="fa-brands fa-x-twitter"></i></a></li>
-                          <li><a href="#"><i className="fa-brands fa-facebook-f"></i></a></li>
-                          <li><a href="#"><i className="fa-brands fa-instagram"></i></a></li>
+                          <li><a href="https://www.youtube.com/channel/UCLyvtq55YZORdV-SN8OQSzQ"><i className="fa-brands fa-youtube"></i></a></li>
+                          <li><a href="https://www.instagram.com/gomzi_nutrition?igsh=NTc4MTIwNjQ2YQ=="><i className="fa-brands fa-instagram"></i></a></li>
+                          <li><a href="https://www.facebook.com/gajani2/"><i className="fa-brands fa-facebook-f"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/dt-gautam-jani-561a50161/"><i className="fa-brands fa-linkedin"></i></a></li>
                         </ul>
                       </div>
                     </div>
@@ -101,7 +132,7 @@ function Footer() {
 
               <div className="col-lg-12">
                 <div className="footer-copyright">
-                  
+
                 </div>
               </div>
             </div>

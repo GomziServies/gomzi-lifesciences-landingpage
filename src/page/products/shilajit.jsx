@@ -24,7 +24,7 @@ export default function Shilajit() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -165,7 +165,7 @@ export default function Shilajit() {
 
                                 <div className="section-title m-4 mx-0 ">
                                     <h2 className="text-anime-style-2 m-0 fs-2 text-bold" data-cursor="-opaque">
-                                        Shilajit <span>Extract</span>
+                                        Shilajit (60 Tablets)
                                     </h2>
 
                                     <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 35</h4>
@@ -199,10 +199,25 @@ export default function Shilajit() {
                                 </div>
 
                                 <div className="service-entry">
-                                    <p className="wow fadeInUp">
-                                        Ancient Ayurvedic mineral supplement known for its energy-boosting and revitalizing properties.
+                                    <p className="wow fadeInUp" data-wow-delay="0s">
+                                        The Shilajit Capsules by Gomzi Lifescience LLP bring you the power of one of Ayurveda's most revered natural minerals – Vilajit (Shilajit) with 20% Fulvic Acid. Each serving of 2 capsules provides 1000 mg of pure shilajit extract, carefully formulated to deliver maximum potency and effectiveness.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Shilajit, often referred to as the "Conqueror of Mountains and Destroyer of Weakness", is a mineral-rich resin formed naturally in the Himalayan rocks. It is traditionally valued for its ability to enhance energy, vitality, and overall strength. Rich in fulvic acid and trace minerals, Shilajit supports cellular function, nutrient absorption, and stamina, making it a powerful daily supplement for active individuals, athletes, and those seeking holistic wellness.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Regular consumption of Shilajit is known to reduce fatigue, support testosterone levels, improve endurance, and enhance recovery. Its adaptogenic properties also help in stress management, brain health, and immunity support, making it a complete rejuvenating tonic for modern lifestyles.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Each bottle contains 35 tablets, hygienically packed in a secure bottle packaging to maintain purity and freshness for up to 24 months of shelf life. With just 1 tablet daily, this supplement provides a convenient and natural way to boost energy and overall well-being.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        The Shilajit Capsules by Gomzi Lifescience LLP are a premium Ayurvedic formulation, crafted to revitalize body and mind, empowering you to stay energetic, focused, and resilient every day.
+                                    </p>
                                 </div>
 
 
@@ -253,6 +268,7 @@ export default function Shilajit() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

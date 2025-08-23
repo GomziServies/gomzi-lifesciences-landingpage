@@ -45,7 +45,7 @@ const VideoReview = () => {
                                         />
                                         <div className="video-btn play-btn">
                                             <button
-                                                onClick={() => openVideoModal("wuNtHkWxUXY")}
+                                                onClick={() => openVideoModal("AzacZyvN8zQ")}
                                                 className="custom clickof video-button-bg cursor-pointer"
                                             >
                                                 <span className="newthing">
@@ -70,7 +70,7 @@ const VideoReview = () => {
                                         />
                                         <div className="video-btn play-btn">
                                             <button
-                                                onClick={() => openVideoModal("K04q5L7E4S0")}
+                                                onClick={() => openVideoModal("pSHwVX2hwdw")}
                                                 className="custom clickof  cursor-pointer"
                                             >
                                                 <span className="newthing">
@@ -95,7 +95,7 @@ const VideoReview = () => {
                                         />
                                         <div className="video-btn play-btn">
                                             <button
-                                                onClick={() => openVideoModal("-UhKGOkjDKQ")}
+                                                onClick={() => openVideoModal("jkvgx_C1wpg")}
                                                 className="custom clickof video-button-bg"
                                             >
                                                 <span className="newthing">

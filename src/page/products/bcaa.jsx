@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function Bcaa() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -164,7 +165,7 @@ export default function Bcaa() {
 
                                 <div className="section-title m-4 mx-0 ">
                                     <h2 className="text-anime-style-2 m-0 fs-2 text-bold" data-cursor="-opaque">
-                                        BCAA <span>2:1:1</span>
+                                        BCAA
                                     </h2>
 
                                     <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 490</h4>
@@ -199,9 +200,24 @@ export default function Bcaa() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Premium BCAA supplement with optimal 2:1:1 ratio of Leucine, Isoleucine, and Valine for muscle support and recovery.
+                                        This Premium BCAA Supplement by Gomzi Lifescience LLP is formulated with the scientifically proven 2:1:1 ratio of the three most important branched-chain amino acids — L-Leucine, L-Isoleucine, and L-Valine. Designed for athletes, bodybuilders, and fitness enthusiasts, it supports muscle recovery, growth, and endurance, making it an essential addition to your workout regimen.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Each 5 g serving delivers just 6.12 kcal, with 0 g added sugar, 0 g fat, and minimal carbohydrates (0.20 g), ensuring a clean and efficient supplement to fuel your performance. The blend provides 3.25 mg of Leucine, 1.65 mg of Isoleucine, and 1.65 mg of Valine, the ideal ratio to stimulate muscle protein synthesis, reduce fatigue, and minimize muscle breakdown during intense training sessions.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Whether used intra-workout to sustain energy and hydration or post-workout to accelerate recovery, this BCAA powder is a versatile choice for fitness goals ranging from muscle building to fat loss. With its refreshing flavours, it not only fuels performance but also enhances hydration and workout enjoyment.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Available in 250 g and 500 g jars, with multiple flavour options, this supplement offers flexibility to meet every athlete's need. The product comes with a 24-month shelf life and is packaged with premium design & packaging, ensuring freshness and quality.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        For those who want a clean, effective, and scientifically backed supplement, this 2:1:1 BCAA formula is the perfect solution to stay strong, recover faster, and train harder.
+                                    </p>
                                 </div>
 
 
@@ -261,6 +277,7 @@ export default function Bcaa() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

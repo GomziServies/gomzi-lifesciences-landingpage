@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function WheyConcentrate() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -199,9 +200,17 @@ export default function WheyConcentrate() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        80% protein content Whey Concentrate, offering a high-quality protein source for serious athletes and fitness enthusiasts.
+                                        This premium Whey Concentrate Protein Powder from Gomzi Lifescience LLP is crafted for serious athletes, bodybuilders, and fitness enthusiasts who demand high-quality nutrition for performance and recovery. Each 35 g serving delivers approximately 139.48 kcal of energy and a remarkable 25.05 g of protein, making it a superior choice for building lean muscle mass, enhancing strength, and supporting faster recovery post-workout.
                                     </p>
-
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        With just 5.50 g of carbohydrates and absolutely 0 g added sugar, it is perfectly suited for those on low-carb or calorie-conscious diets. The formula contains 1.65 g of dietary fibre, supporting digestion and overall gut health. Fat content is minimal at 1.92 g, with a clean balance of saturated, polyunsaturated, and monounsaturated fatty acids, while cholesterol and trans fat remain negligible. Electrolytes such as Potassium (158.8 mg) and Sodium (135.5 mg) provide hydration support and help maintain endurance during intense training sessions.
+                                    </p>
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        The highlight of this supplement is its 80% protein content Whey Concentrate, ensuring a rich supply of essential amino acids that fuel muscle growth and long-lasting recovery. This makes it an ideal choice for athletes who need maximum protein intake without compromising on taste or digestibility.
+                                    </p>
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Available in 1 kg, 2 kg, and 5 kg jars, the product comes in multiple delicious flavours to suit varied preferences. With an extended 18-month shelf life and attractive, durable packaging, it offers both convenience and quality. This protein powder is the perfect partner for anyone looking to take their fitness and performance to the next level.
+                                    </p>
                                 </div>
 
 
@@ -265,6 +274,7 @@ export default function WheyConcentrate() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

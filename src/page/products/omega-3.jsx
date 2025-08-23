@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function Omega3() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -164,7 +165,7 @@ export default function Omega3() {
 
                                 <div className="section-title m-4 mx-0 ">
                                     <h2 className="text-anime-style-2 m-0 fs-2 text-bold" data-cursor="-opaque">
-                                        Omega <span>3</span>
+                                        Omega <span>3</span> (60 Tablets)
                                     </h2>
 
                                     <h4 className="m-3 mx-0 mb-4" data-cursor="-opaque">Price : ₹ 225</h4>
@@ -198,9 +199,20 @@ export default function Omega3() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        High-quality Omega-3 supplement rich in EPA and DHA for heart, brain, and joint health.
+                                        The Omega-3 Softgel Capsules by Gomzi Lifescience LLP are a premium dietary supplement designed to deliver essential fatty acids that support overall health and vitality. Each capsule is enriched with 850 mg of high-quality fish oil, providing a concentrated source of EPA (90 mg) and DHA (60 mg) — two of the most important Omega-3 fatty acids crucial for heart, brain, eye, and joint health.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Omega-3 fatty acids are well-known for their cardiovascular benefits, including maintaining healthy cholesterol levels, supporting blood circulation, and promoting heart function. EPA plays a key role in reducing inflammation, while DHA is vital for brain function, memory, and focus. Together, they also contribute to maintaining joint flexibility, bone strength, and eye health.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Each serving provides only 9 kcal and 1 g of fat, making it a clean and effective supplement that easily fits into daily nutrition plans without added sugars, carbs, or unnecessary fillers. The softgel form ensures easy swallowing and better absorption of nutrients for maximum effectiveness.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Packed in a 60-capsule bottle, this product is convenient for daily use and comes with a 24-month shelf life, ensuring long-lasting freshness and quality. With scientifically backed formulation and premium-grade manufacturing, Gomzi Lifescience LLP's Omega-3 Softgels are the perfect addition to a balanced lifestyle for individuals looking to support heart health, cognitive performance, and overall wellness.
+                                    </p>
                                 </div>
 
 
@@ -258,6 +270,7 @@ export default function Omega3() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

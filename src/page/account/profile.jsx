@@ -7,6 +7,7 @@ import { axiosInstance } from "../../assets/js/config/api";
 import toast from "react-hot-toast";
 import Swal from 'sweetalert2';
 import { isUserLoggedIn } from '../../utils/auth';
+import Footer from "../../components/partials/Footer/footer";
 
 function UserProfile() {
     const navigate = useNavigate();
@@ -346,6 +347,7 @@ function UserProfile() {
                     </div>
                 </form>
             </Container>
+            <Footer />
         </>
     );
 }

@@ -104,9 +104,7 @@ export const createOrder = async (orderData) => {
             }).then(() => {
 
                 localStorage.removeItem("tmp_ProductPurchasePayload");
-
-                // Redirect to Order Page
-                // window.location.href = "/thank-you";
+                localStorage.removeItem("ATC_Product")
             });
 
             return { showLoginModal: false, success: true };
@@ -122,6 +120,7 @@ export const createOrder = async (orderData) => {
                     text: "Your payment is successful. The quotation will be downloaded automatically.",
                     icon: "success",
                 }).then(() => {
+                    localStorage.removeItem("ATC_Product")
                     window.location.href = "/thank-you";
                 });
             };
@@ -144,6 +143,7 @@ export const createOrder = async (orderData) => {
                     text: "Your payment is successful. The quotation will be downloaded automatically.",
                     icon: "success",
                 }).then(() => {
+                    localStorage.removeItem("ATC_Product")
                     window.location.href = "/thank-you";
                 });
             };

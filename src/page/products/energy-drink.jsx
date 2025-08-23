@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function EnergyDrink() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -188,7 +189,7 @@ export default function EnergyDrink() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page?product=energy-drink';
+                                                    window.location.href = '/booking-page?product=energy-drink-bottle';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -199,9 +200,24 @@ export default function EnergyDrink() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Refreshing energy drink in a convenient bottle format, perfect for an instant energy boost.
+                                        The Energy Drink by Gomzi Lifescience LLP is a refreshing and revitalizing beverage designed to give you an instant energy boost whenever you need it most. Packed in a convenient 250 ml bottle, it is perfect for athletes, fitness enthusiasts, professionals, or anyone looking to stay active and alert throughout the day.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Each serving delivers 48 kcal of clean energy, powered by 80 mg of caffeine anhydrous for enhanced focus, endurance, and reduced fatigue. With 0 g sugar, 0 g protein, and 0 g fat, this energy drink provides a light, zero-guilt refreshment while ensuring you stay energized without unnecessary calories. The addition of 45 mg sodium supports hydration and electrolyte balance, making it an excellent choice before workouts, during long workdays, or while traveling.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Formulated with high-quality ingredients, this energy drink is designed to improve performance, sharpen mental clarity, and sustain energy levels naturally. Unlike heavy sugary beverages, it offers a crisp, clean taste that refreshes instantly.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Available in different exciting flavours, it caters to diverse preferences while delivering consistent quality. With a shelf life of 18 months and secure bottle packaging, it remains fresh, safe, and easy to carry wherever life takes you.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        Whether you're hitting the gym, preparing for an intense work session, or just need a mid-day pick-me-up, the Gomzi Lifescience Energy Drink is the perfect partner for your active lifestyle.
+                                    </p>
                                 </div>
 
 
@@ -258,6 +274,7 @@ export default function EnergyDrink() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

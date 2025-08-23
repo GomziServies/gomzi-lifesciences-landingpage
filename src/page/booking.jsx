@@ -8,11 +8,11 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import '../assets/css/style.css';
 import { isUserLoggedIn } from '../utils/auth';
+import Footer from '../components/partials/Footer/footer';
 
 const Booking = () => {
     const navigate = useNavigate();
 
-    // ✅ Products list
     const productsData = useMemo(() => [
         { name: "Whey Protein", price: 1170, moq: "100 kg" },
         { name: "Whey Blend", price: 1300, moq: "100 kg" },
@@ -28,21 +28,20 @@ const Booking = () => {
         { name: "Protein Bar", price: 55, moq: "5000 pcs" },
         { name: "Energy Drink - Bottle", price: 30, moq: "1000 pcs" },
         { name: "Energy Drink - Can", price: 45, moq: "24,000 pcs" },
-        { name: "Multivitamin Tablets", price: 340, moq: "60 tabs" },
+        { name: "Multivitamin Tablets", price: 170, moq: "60 tabs" },
         { name: "Omega 3", price: 225, moq: "60 tabs" },
-        { name: "Ashwagandha", price: 100, moq: "60 tabs" },
-        { name: "Moringa Tablets", price: 75, moq: "40 tabs" },
-        { name: "Shilajit", price: 70, moq: "60 tabs" },
+        { name: "Ashwagandha", price: 50, moq: "60 tabs" },
+        { name: "Moringa Tablets", price: 25, moq: "40 tabs" },
+        { name: "Shilajit", price: 35, moq: "60 tabs" },
     ], []);
 
- 
+
     const params = new URLSearchParams(window.location.search);
     const ATCProduct = params.get('product') || "";
 
-    const normalize = (str) =>
-        str?.toLowerCase().replace(/[-_\s]/g, "").trim();
+    const normalize = (str) => str?.toLowerCase().replace(/[-_\s]/g, "").trim();
 
-    // ✅ Form states
+
     const today = new Date().toISOString().split("T")[0];
     const [formData, setFormData] = useState({
         date: today,
@@ -57,50 +56,12 @@ const Booking = () => {
         country: "",
     });
 
-    const [productLines, setProductLines] = useState([
+    const [productLines, setProductLines] = useState(ATCProduct ? [] : [
         { id: Date.now(), product: "", quantity: "", price: 0, total: 0 }
     ]);
 
-    // ✅ Auto add ATC product from query string
-    useEffect(() => {
-        if (ATCProduct) {
-            const foundProduct = productsData.find(
-                (p) => normalize(p.name) === normalize(ATCProduct)
-            );
-            console.log("Found ATC Product:", foundProduct);
-            
-            if (foundProduct) {
-                setProductLines((prev) => {
-                    const exists = prev.some(
-                        (line) => line.product === foundProduct.name
-                    );
-                    if (exists) return prev;
 
-                    return [
-                        ...prev,
-                        {
-                            id: Date.now(),
-                            product: foundProduct.name,
-                            quantity: "1",
-                            price: foundProduct.price,
-                            total: foundProduct.price,
-                        },
-                    ];
-                });
-            }
-        }
-    }, [ATCProduct, productsData]);
 
-    // ✅ If user not logged in → redirect
-    useEffect(() => {
-        if (!isUserLoggedIn()) {
-            navigate('/', { replace: true });
-            toast.dismiss();
-            toast.error('Please login to access this page');
-        }
-    }, [navigate]);
-
-    // ✅ Handle product/quantity change
     const handleProductChange = (index, field, value) => {
         const newProductLines = [...productLines];
 
@@ -125,7 +86,6 @@ const Booking = () => {
         setProductLines(newProductLines);
     };
 
-    // ✅ Add row
     const addProductLine = () => {
         if (productLines.length >= 9) {
             toast.error('Maximum 9 products can be added');
@@ -137,7 +97,7 @@ const Booking = () => {
         ]);
     };
 
-    // ✅ Delete row
+
     const removeProductLine = (index) => {
         if (productLines.length > 1) {
             Swal.fire({
@@ -164,10 +124,13 @@ const Booking = () => {
                 }
             });
         } else {
+
+            setProductLines([{ id: Date.now(), product: "", quantity: "", price: 0, total: 0 }]);
+            localStorage.removeItem("ATC_Product");
             Swal.fire({
-                title: 'Cannot Remove',
-                text: 'At least one product is required',
-                icon: 'error',
+                title: 'Cleared',
+                text: 'Product data has been cleared.',
+                icon: 'success',
                 timer: 1500,
                 showConfirmButton: false
             });
@@ -318,32 +281,90 @@ const Booking = () => {
         }
     };
 
+
+    useEffect(() => {
+
+        if (ATCProduct) {
+            const foundProduct = productsData.find(
+                (p) => normalize(p.name) === normalize(ATCProduct)
+            );
+
+            if (foundProduct) {
+                const existing = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+
+                const alreadyExists = existing.some(
+                    (item) => normalize(item.product) === normalize(foundProduct.name)
+                );
+
+                if (!alreadyExists) {
+                    const newItem = {
+                        id: Date.now(),
+                        product: foundProduct.name,
+                        quantity: "1",
+                        price: foundProduct.price,
+                        total: foundProduct.price,
+                    };
+
+                    const updated = [...existing, newItem];
+
+                    if (updated && updated.length <= 9) {
+                        localStorage.setItem("ATC_Product", JSON.stringify(updated));
+                    } else {
+                        toast.error("Maximum 9 products allowed", { id: "maxProducts" });
+                    }
+                }
+            }
+        }
+
+        const stored = localStorage.getItem("ATC_Product");
+        if (stored) {
+            const parsed = JSON.parse(stored);
+            setProductLines(parsed);
+
+        } else {
+            setProductLines([
+                { id: Date.now(), product: "", quantity: "", price: 0, total: 0 },
+            ]);
+        }
+    }, [ATCProduct]);
+
+    useEffect(() => {
+        if (productLines && productLines.length > 0) {
+
+            const hasData = productLines.some(
+                (line) => line.product !== "" || line.quantity !== "" || line.price > 0
+            );
+
+            if (hasData) {
+                localStorage.setItem("ATC_Product", JSON.stringify(productLines));
+            }
+        }
+    }, [productLines]);
+
+
+    useEffect(() => {
+        if (!isUserLoggedIn()) {
+            navigate('/', { replace: true });
+            toast.dismiss();
+            toast.error('Please login to access this page');
+        }
+    }, [navigate]);
+
     return (
         <>
             <NutritionHeader />
             <div className="container-fluid h-105"></div>
 
-            <div className='contact-us-form modal-form  mx-auto m-5' >
+            <div className='contact-us-form modal-form mx-auto my-3 px-2 px-md-5' >
 
-                <h2 className="text-center m-5" style={{ color: '#fff' }}>Book Your Sample Now</h2>
+                <h2 className="text-center my-4" style={{ color: '#fff' }}>Book Your Sample Now</h2>
 
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="row overflow-hidden">
-                        {/* <div className="form-group col-md-6 mb-4">
-                                <input
-                                    type="date"
-                                    name="date"
-                                    className="form-control bg-dark text-light"
-                                    placeholder="Date"
-                                    value={formData.date}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div> */}
+                    <div className="row overflow-hidden p-1">
 
-                        <h5 className='m-4 mb-5 ms-3 p-0'>Create Quotation :</h5>
+                        <h5 className='mb-4 ms-2'>Create Quotation :</h5>
 
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-12 col-md-4 mb-3">
                             <input
                                 type="text"
                                 name="name"
@@ -355,7 +376,7 @@ const Booking = () => {
                             />
                         </div>
 
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-6 col-md-4 mb-3">
                             <input
                                 type="tel"
                                 name="mobile"
@@ -367,7 +388,7 @@ const Booking = () => {
                             />
                         </div>
 
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-6 col-md-4 mb-3">
                             <input
                                 type="email"
                                 name="email"
@@ -379,7 +400,7 @@ const Booking = () => {
                             />
                         </div>
 
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-6 col-md-4 mb-3">
                             <input
                                 type="text"
                                 name="address_line_1"
@@ -390,7 +411,7 @@ const Booking = () => {
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-6 col-md-4 mb-3">
                             <input
                                 type="text"
                                 name="address_line_2"
@@ -401,7 +422,7 @@ const Booking = () => {
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-6 col-sm-3 col-md-4 mb-3">
                             <input
                                 type="number"
                                 name="pin_code"
@@ -412,7 +433,7 @@ const Booking = () => {
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-6 col-sm-3 col-md-4 mb-3">
                             <input
                                 type="text"
                                 name="city"
@@ -423,7 +444,7 @@ const Booking = () => {
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-6 col-sm-3 col-md-4 mb-3">
                             <input
                                 type="text"
                                 name="state"
@@ -434,7 +455,7 @@ const Booking = () => {
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-4 mb-4">
+                        <div className="form-group col-6 col-sm-3 col-md-4 mb-3">
                             <input
                                 type="text"
                                 name="country"
@@ -446,12 +467,12 @@ const Booking = () => {
                             />
                         </div>
 
-                        <h5 className='m-4 mt-2 mb-5 ms-3 p-0'>Supplements (only quotation purpose) :</h5>
+                        <h5 className='mb-1  mt-3'>Supplements (only quotation purpose) :</h5>
 
                         {productLines.map((line, index) => (
-                            <div key={line.id} className="row mx-0">
+                            <div key={line.id} className="row mx-0 g-3">
                                 {/* Product select */}
-                                <div className="form-group col-md-3 mb-4">
+                                <div className="form-group col-12 col-sm-6 col-md-3">
                                     <select
                                         className="form-control bg-dark text-light"
                                         value={line.product}
@@ -460,11 +481,9 @@ const Booking = () => {
                                     >
                                         <option value="">Select Product</option>
                                         {productsData.map((p) => {
-
                                             const isSelected = productLines.some(
                                                 (productLine, i) => i !== index && productLine.product === p.name
                                             );
-
                                             return !isSelected && (
                                                 <option key={p.name} value={p.name}>{p.name}</option>
                                             );
@@ -473,7 +492,7 @@ const Booking = () => {
                                 </div>
 
                                 {/* Quantity */}
-                                <div className="form-group col-md-2 mb-4">
+                                <div className="form-group col-6 col-sm-6 col-md-2">
                                     <input
                                         type="number"
                                         className="form-control bg-dark text-light"
@@ -486,7 +505,7 @@ const Booking = () => {
                                 </div>
 
                                 {/* MOQ */}
-                                <div className="form-group col-md-2 mb-4">
+                                <div className="form-group col-6 col-sm-6 col-md-2">
                                     <input
                                         type="text"
                                         placeholder='Moq'
@@ -499,7 +518,7 @@ const Booking = () => {
                                 </div>
 
                                 {/* Price */}
-                                <div className="form-group col-md-2 mb-4">
+                                <div className="form-group col-6 col-sm-6 col-md-2">
                                     <input
                                         type="text"
                                         className="form-control bg-dark text-light"
@@ -509,10 +528,8 @@ const Booking = () => {
                                     />
                                 </div>
 
-                                {/* Total Price => col-3 if single OR old lines, else col-2 for last line */}
-                                <div
-                                    className={`form-group col-md-2 mb-4`}
-                                >
+                                {/* Total Price */}
+                                <div className="form-group col-6 col-sm-6 col-md-2">
                                     <input
                                         type="text"
                                         className="form-control bg-dark text-light"
@@ -522,9 +539,9 @@ const Booking = () => {
                                     />
                                 </div>
 
-                                {/* Delete button => hide if only 1 line, else show for all */}
+                                {/* Delete button */}
                                 {productLines.length >= 1 && (
-                                    <div className="form-group col-md-1 mb-4">
+                                    <div className="form-group col-6 col-sm-3 col-md-1">
                                         <button
                                             type="button"
                                             className="form-control bg-dark text-light border border-1 border-danger d-flex justify-content-center align-items-center"
@@ -532,38 +549,30 @@ const Booking = () => {
                                         >
                                             <i className="fas fa-trash-alt fs-5 text-danger"></i>
                                         </button>
-
                                     </div>
                                 )}
 
                                 {/* Add button => only last line */}
                                 {index === productLines.length - 1 && (
-
-                                    <div className="row justify-content-end p-0 m-auto">
-                                        <div className="form-group col-md-1 mb-4">
-                                            <button
-                                                type="button"
-                                                className="form-control bg-dark text-light border border-1 border-primary d-flex justify-content-center align-items-center"
-                                                onClick={addProductLine}
-                                            >
-                                                <i className="fas fa-plus fs-5 text-primary"></i>
-                                            </button>
-
-                                        </div>
+                                    <div className="form-group col-6 col-sm-3 col-md-1 ms-auto">
+                                        <button
+                                            type="button"
+                                            className="form-control bg-dark text-light border border-1 border-primary d-flex justify-content-center align-items-center"
+                                            onClick={addProductLine}
+                                        >
+                                            <i className="fas fa-plus fs-5 text-primary"></i>
+                                        </button>
                                     </div>
                                 )}
                             </div>
                         ))}
 
-
-                        <div className="col-lg-12 text-center mt-4">
+                        <div className="col-12 text-center mt-4">
                             <div className="contact-form-btn">
                                 <button
                                     type="button"
-                                    className="btn-highlighted w-50"
-                                    onClick={() => handleBookSample()
-                                    }
-
+                                    className="btn-highlighted w-100 w-md-50"
+                                    onClick={() => handleBookSample()}
                                 >
                                     Get a Quotation & Book My Sample Now
                                 </button>
@@ -828,6 +837,7 @@ const Booking = () => {
                 }}
             />
 
+            <Footer />
         </>
 
     )

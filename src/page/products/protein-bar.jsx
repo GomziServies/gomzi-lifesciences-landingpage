@@ -4,6 +4,7 @@ import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
 import { useRef } from "react";
+import Footer from "../../components/partials/Footer/footer";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,7 +24,7 @@ export default function ProteinBar() {
             <NutritionHeader />
             <WhatsappBtn
                 ref={whatsappBtnRef}
-                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                message={`Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you. , ${window.location.href}`}
                 options={{ pageRef: true }}
                 style={{ display: "none" }}
             />
@@ -199,9 +200,24 @@ export default function ProteinBar() {
 
                                 <div className="service-entry">
                                     <p className="wow fadeInUp">
-                                        Delicious and nutritious protein bar with 12g of high-quality protein per serving.
+                                        The Protein Bar by Gomzi Lifescience LLP is a delicious and nutritious on-the-go snack, carefully crafted to deliver 12 g of high-quality protein per serving. Designed for fitness enthusiasts, athletes, and health-conscious individuals, it provides the perfect balance of protein, carbohydrates, fiber, and healthy fats to keep you energized and satisfied throughout the day.
                                     </p>
 
+                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
+                                        Each 35 g bar offers 131.4 kcal of energy, with 11.3 g protein, 14.9 g carbohydrates, and 4.3 g dietary fiber, making it a wholesome choice for pre- or post-workout fuel, mid-day snacking, or even as a quick meal replacement. The bar contains 0 g added sugar, ensuring guilt-free indulgence while still delivering 4 g of natural sugars for sustained energy release. With only 3.9 g total fat (1.6 g saturated), it provides a light yet filling boost without unnecessary calories.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.4s">
+                                        Packed with 82.2 mg sodium and 1 mg cholesterol, this protein bar also supports hydration balance and overall health. The inclusion of dietary fiber makes it not just a protein boost but also a digestive-friendly snack that keeps you fuller for longer.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.6s">
+                                        Available in different flavours, the bar is packaged in a wrapper format, making it portable and convenient for your busy lifestyle. With a shelf life of 18 months, it ensures lasting freshness and consistent quality.
+                                    </p>
+
+                                    <p className="wow fadeInUp" data-wow-delay="0.8s">
+                                        Whether you're working out, traveling, or simply need a nutritious snack between meals, the Gomzi Lifescience Protein Bar is a smart, tasty, and reliable choice to support your fitness and wellness journey.
+                                    </p>
                                 </div>
 
 
@@ -262,6 +278,7 @@ export default function ProteinBar() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }
