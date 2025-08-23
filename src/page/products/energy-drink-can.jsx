@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
-
+import WhatsappBtn from "../../components/whatsapp-btn";
+import { useRef } from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,6 +11,7 @@ import "swiper/css/pagination";
 
 export default function EnergyDrinkCan() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -19,6 +21,12 @@ export default function EnergyDrinkCan() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -148,7 +156,7 @@ export default function EnergyDrinkCan() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/energy-drink-can.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/energy-drink-can-inner-page.webp")}
                                             alt="energy-drink-can"
                                         />
                                     </figure>
@@ -180,7 +188,7 @@ export default function EnergyDrinkCan() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=energy-drink-can';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -193,12 +201,7 @@ export default function EnergyDrinkCan() {
                                     <p className="wow fadeInUp">
                                         Premium energy drink in a sleek can format, delivering instant energy and focus.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -207,14 +210,16 @@ export default function EnergyDrinkCan() {
 
                         <div className="col-lg-5">
                             <div className="service-sidebar">
-                                <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Nutritional Information</h3>
+                                 <div className="service-catagery-list wow fadeInUp">
+                                    <h3>Nutrients per 100ml</h3>
                                     <ul>
-                                        <li>Serving Size <span>250ml</span></li>
-                                        <li>Caffeine <span>80mg</span></li>
-                                        <li>B-Vitamins <span>100% DV</span></li>
-                                        <li>Sugar <span>0g</span></li>
-                                        <li>Calories <span>10</span></li>
+                                        <li>Energy <span>48.0 kcal</span></li>
+                                        <li>Protein <span>0.0 g</span></li>
+                                        <li>Carbohydrate <span>0.0 g</span></li>
+                                        <li>Caffeine Anhydrous <span>80 mg</span></li>
+                                        <li>Total Sugars <span>0.0 g</span></li>
+                                        <li>Total Fat <span>0.0 g</span></li>
+                                        <li>Sodium <span>45.0 mg</span></li>
                                     </ul>
                                 </div>
 
@@ -234,9 +239,16 @@ export default function EnergyDrinkCan() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>

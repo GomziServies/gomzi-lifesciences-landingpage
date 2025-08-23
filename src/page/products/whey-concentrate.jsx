@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
-
+import WhatsappBtn from "../../components/whatsapp-btn";
+import { useRef } from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,6 +11,7 @@ import "swiper/css/pagination";
 
 export default function WheyConcentrate() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -19,6 +21,12 @@ export default function WheyConcentrate() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -148,7 +156,7 @@ export default function WheyConcentrate() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/whey-concentrate.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/whey-concentrate-inner-page.webp")}
                                             alt="whey-concentrate"
                                         />
                                     </figure>
@@ -180,7 +188,7 @@ export default function WheyConcentrate() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=whey-concentrate';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -193,12 +201,7 @@ export default function WheyConcentrate() {
                                     <p className="wow fadeInUp">
                                         80% protein content Whey Concentrate, offering a high-quality protein source for serious athletes and fitness enthusiasts.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -208,30 +211,22 @@ export default function WheyConcentrate() {
                         <div className="col-lg-5">
                             <div className="service-sidebar">
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Nutrients per 30g</h3>
+                                    <h3>Nutrients per 35g</h3>
                                     <ul>
-                                        <li>Energy (kcal) <span>154.12</span></li>
-                                        <li>Total Protein (g) <span>24.01</span></li>
-                                        <li>Carbohydrates (g) <span>2.5</span></li>
+                                        <li>Energy (kcal) <span>139.48</span></li>
+                                        <li>Total Protein (g) <span>25.05</span></li>
+                                        <li>Carbohydrates (g) <span>5.50</span></li>
                                         <li>Added Sugar (g) <span>0</span></li>
-                                        <li>Dietary Fibre (g) <span>1.45</span></li>
-                                        <li>Total Fat (g) <span>1.12</span></li>
-                                        <li>Saturated fatty acid (mg) <span>0.54</span></li>
-                                        <li>Polyunsaturated fatty acid (g) <span>0.28</span></li>
-                                        <li>Monounsaturated fatty acid (mg) <span>1.85</span></li>
-                                        <li>Trans Fatty Acid (g) <span>0.05</span></li>
-                                        <li>Cholesterol (g) <span>0.01</span></li>
-                                        <li>Potassium (mg) <span>161.01</span></li>
-                                        <li>Sodium (mg) <span>126.02</span></li>
+                                        <li>Dietary Fibre (g) <span>1.65</span></li>
+                                        <li>Total Fat (g) <span>1.92</span></li>
+                                        <li>Saturated fatty acid (mg) <span>0.66</span></li>
+                                        <li>Polyunsaturated fatty acid (g) <span>0.52</span></li>
+                                        <li>Monounsaturated fatty acid (mg) <span>1.54</span></li>
+                                        <li>Trans Fatty Acid (g) <span>0.04</span></li>
+                                        <li>Cholesterol (g) <span>0.02</span></li>
+                                        <li>Potassium (mg) <span>158.8</span></li>
+                                        <li>Sodium (mg) <span>135.5</span></li>
                                     </ul>
-
-                                    {/* <h3>Typical Amino Acid Profile</h3>
-                                    <ul>
-                                        <li>Essential Amino Acids (EAAs) (g) <span>9.89</span></li>
-                                        <li>Branched Chain Amino Acids (BCAAs) (g) <span>5.90</span></li>
-                                        <li>Semi-Essential Amino Acids (SEAAs) (g) <span>2.98</span></li>
-                                        <li>Non-Essential Amino Acids (NEAAs) (g) <span>8.12</span></li>
-                                    </ul> */}
                                 </div>
 
 
@@ -251,9 +246,16 @@ export default function WheyConcentrate() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>

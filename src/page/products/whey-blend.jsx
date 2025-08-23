@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
-import Footer from '../../components/partials/Footer/footer';
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from '../../utils/auth';
 
@@ -8,9 +7,11 @@ import { isUserLoggedIn } from '../../utils/auth';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import WhatsappBtn from "../../components/whatsapp-btn";
 
 export default function WheyBlend() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -20,6 +21,12 @@ export default function WheyBlend() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -149,7 +156,7 @@ export default function WheyBlend() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/whey-blend.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/whey-blend-inner-page.webp")}
                                             alt="whey-blend"
                                         />
                                     </figure>
@@ -181,7 +188,7 @@ export default function WheyBlend() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=whey-blend';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -194,12 +201,7 @@ export default function WheyBlend() {
                                     <p className="wow fadeInUp">
                                         Whey Blend with 50% - 60% protein content, providing a balanced mix of protein sources for optimal muscle recovery and growth.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -209,13 +211,21 @@ export default function WheyBlend() {
                         <div className="col-lg-5">
                             <div className="service-sidebar">
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Nutrients per 30g</h3>
+                                    <h3>Nutrients per 35g</h3>
                                     <ul>
-                                        <li>Energy (kcal) <span>115</span></li>
-                                        <li>Total Protein (g) <span>24</span></li>
-                                        <li>Carbohydrates (g) <span>3.5</span></li>
+                                        <li>Energy (kcal) <span>113.17</span></li>
+                                        <li>Total Protein (g) <span>22.22</span></li>
+                                        <li>Carbohydrates (g) <span>6.55</span></li>
                                         <li>Added Sugar (g) <span>0</span></li>
-                                        <li>Total Fat (g) <span>1.2</span></li>
+                                        <li>Dietary Fibre (g) <span>3.88</span></li>
+                                        <li>Total Fat (g) <span>2.01</span></li>
+                                        <li>Saturated fatty acid (mg) <span>1.03</span></li>
+                                        <li>Polyunsaturated fatty acid (g) <span>0.98</span></li>
+                                        <li>Monounsaturated fatty acid (mg) <span>1.54</span></li>
+                                        <li>Trans Fatty Acid (g) <span>0.04</span></li>
+                                        <li>Cholesterol (g) <span>0.04</span></li>
+                                        <li>Potassium (mg) <span>155.8</span></li>
+                                        <li>Sodium (mg) <span>139.5</span></li>
                                     </ul>
                                 </div>
 
@@ -235,9 +245,16 @@ export default function WheyBlend() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>

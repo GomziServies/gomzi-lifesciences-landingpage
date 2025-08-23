@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import Footer from '../../components/partials/Footer/footer';
 import LoginModal from "../../components/popup/login";
@@ -8,9 +8,11 @@ import { isUserLoggedIn } from '../../utils/auth';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import WhatsappBtn from "../../components/whatsapp-btn";
 
 export default function Shilajit() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -20,6 +22,12 @@ export default function Shilajit() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -149,7 +157,7 @@ export default function Shilajit() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/shilajit.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/shilajit-inner-page.webp")}
                                             alt="shilajit"
                                         />
                                     </figure>
@@ -181,7 +189,7 @@ export default function Shilajit() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=shilajit';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -194,12 +202,7 @@ export default function Shilajit() {
                                     <p className="wow fadeInUp">
                                         Ancient Ayurvedic mineral supplement known for its energy-boosting and revitalizing properties.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -209,14 +212,9 @@ export default function Shilajit() {
                         <div className="col-lg-5">
                             <div className="service-sidebar">
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Product Details</h3>
+                                    <h3>Nutrients per 2 capsules</h3>
                                     <ul>
-                                        <li>Serving Size <span>1 tablet</span></li>
-                                        <li>Servings per container <span>35</span></li>
-                                        <li>Pure Shilajit Extract <span>500mg</span></li>
-                                        <li>Fulvic Acid <span>2%</span></li>
-                                        <li>Humic Acid <span>15%</span></li>
-                                        <li>Minerals <span>Various trace minerals</span></li>
+                                        <li>vilajit (Ashfaltum) (20% Fulvic Acid) <span>1000mg</span></li>
                                     </ul>
                                 </div>
 
@@ -236,9 +234,16 @@ export default function Shilajit() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
-
+import WhatsappBtn from "../../components/whatsapp-btn";
+import { useRef } from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,6 +11,7 @@ import "swiper/css/pagination";
 
 export default function Bcaa() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -19,6 +21,12 @@ export default function Bcaa() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -148,7 +156,7 @@ export default function Bcaa() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/bcaa.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/bcaa-inner-page.webp")}
                                             alt="bcaa"
                                         />
                                     </figure>
@@ -180,7 +188,7 @@ export default function Bcaa() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=bcaa';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -193,12 +201,7 @@ export default function Bcaa() {
                                     <p className="wow fadeInUp">
                                         Premium BCAA supplement with optimal 2:1:1 ratio of Leucine, Isoleucine, and Valine for muscle support and recovery.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -208,15 +211,20 @@ export default function Bcaa() {
                         <div className="col-lg-5">
                             <div className="service-sidebar">
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Product Details</h3>
+                                    <h3>Nutrients per 5g</h3>
                                     <ul>
-                                        <li>Serving Size <span>7g</span></li>
-                                        <li>L-Leucine <span>3.5g</span></li>
-                                        <li>L-Isoleucine <span>1.75g</span></li>
-                                        <li>L-Valine <span>1.75g</span></li>
-                                        <li>Calories <span>0</span></li>
+                                        <li>Calories <span>6.12 kcal</span></li>
+                                        <li>Total Carbohydrate <span>0.20 g</span></li>
+                                        <li>Total Sugar <span>0.00 g</span></li>
+                                        <li>Added Sugar <span>0.00 g</span></li>
+                                        <li>Protein <span>0.09 g</span></li>
+                                        <li>Total Fat <span>0.00 g</span></li>
+                                        <li>L-Leucine <span>3.25 mg</span></li>
+                                        <li>L-Isoleucine <span>1.65 mg</span></li>
+                                        <li>L-Valine <span>1.65 mg</span></li>
                                     </ul>
                                 </div>
+
 
                                 <div
                                     className="sidebar-cta-box wow fadeInUp"
@@ -234,9 +242,16 @@ export default function Bcaa() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>

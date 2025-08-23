@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
-
+import WhatsappBtn from "../../components/whatsapp-btn";
+import { useRef } from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,6 +11,7 @@ import "swiper/css/pagination";
 
 export default function PeanutButter() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -19,6 +21,12 @@ export default function PeanutButter() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -148,7 +156,7 @@ export default function PeanutButter() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/peanut-butter.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/peanut-butter-inner-page.webp")}
                                             alt="peanut-butter"
                                         />
                                     </figure>
@@ -179,7 +187,7 @@ export default function PeanutButter() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=peanut-butter';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -192,12 +200,7 @@ export default function PeanutButter() {
                                     <p className="wow fadeInUp">
                                         Natural peanut butter made from high-quality peanuts, rich in protein and healthy fats.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -207,13 +210,21 @@ export default function PeanutButter() {
                         <div className="col-lg-5">
                             <div className="service-sidebar">
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Nutrients per 30g</h3>
+                                    <h3>Nutrients per 32g</h3>
                                     <ul>
-                                        <li>Energy (kcal) <span>180</span></li>
-                                        <li>Total Protein (g) <span>8</span></li>
-                                        <li>Carbohydrates (g) <span>6</span></li>
-                                        <li>Added Sugar (g) <span>0</span></li>
-                                        <li>Total Fat (g) <span>16</span></li>
+                                        <li>Energy (kcal) <span>166.4</span></li>
+                                        <li>Total Protein (g) <span>6.46</span></li>
+                                        <li>Carbohydrates (g) <span>6.56</span></li>
+                                        <li>Dietary Fiber (g) <span>2.56</span></li>
+                                        <li>Total Sugar (g) <span>3.2</span></li>
+                                        <li>Added Sugar (g) <span>2.24</span></li>
+                                        <li>Total Fats (g) <span>13.18</span></li>
+                                        <li>Saturated Fats (g) <span>1.28</span></li>
+                                        <li>Poly Unsaturated Fats (g) <span>3.23</span></li>
+                                        <li>Mono Unsaturated Fats (g) <span>4.77</span></li>
+                                        <li>Trans Fats (g) <span>0.0</span></li>
+                                        <li>Cholesterol (mg) <span>0.0</span></li>
+                                        <li>Sodium (mg) <span>4</span></li>
                                     </ul>
                                 </div>
 
@@ -233,9 +244,16 @@ export default function PeanutButter() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>

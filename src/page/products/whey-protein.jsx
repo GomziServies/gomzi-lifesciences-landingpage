@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
+import { isUserLoggedIn } from "../../utils/auth";
 import WhatsappBtn from "../../components/whatsapp-btn";
+import { useRef } from "react";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { isUserLoggedIn } from "../../utils/auth";
 
 export default function WheyProtein() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -20,6 +22,13 @@ export default function WheyProtein() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
+
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -163,7 +172,7 @@ export default function WheyProtein() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/whey-protein.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/whey-protein-inner-page.webp")}
                                             alt="whey-protein"
                                         />
                                     </figure>
@@ -198,7 +207,7 @@ export default function WheyProtein() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=whey-protein';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -209,23 +218,12 @@ export default function WheyProtein() {
                                 </div>
 
                                 <div className="service-entry">
-                                    <h2 className="text-anime-style-2  fs-2" data-cursor="-opaque">
-                                        Ingredients
-                                    </h2>
+                                    
                                     <p className="wow fadeInUp">
-                                        Whey protein blend (Whey protein concentrate,
-                                        Whey protein isolate, Whey powder), Mango Pulp
-                                        Powder, Mango Flavour, Soy Lecithin-INS 322 01,
-                                        xanthangum-INS 415, Sucralose-INS 955, Sunset
-                                        yellow Food colour -INS 110.
+                                        
                                     </p>
 
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -236,21 +234,21 @@ export default function WheyProtein() {
                             <div className="service-sidebar">
 
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Nutrients per 30g</h3>
+                                    <h3>Nutrients per 35g</h3>
                                     <ul>
-                                        <li>Energy (kcal) <span>113.47</span></li>
-                                        <li>Total Protein (g) <span>22.02</span></li>
-                                        <li>Carbohydrates (g) <span>4.02</span></li>
+                                        <li>Energy (kcal) <span>139.97</span></li>
+                                        <li>Total Protein (g) <span>18</span></li>
+                                        <li>Carbohydrates (g) <span>11.3</span></li>
                                         <li>Added Sugar (g) <span>0</span></li>
-                                        <li>Dietary Fibre (g) <span>1.78</span></li>
-                                        <li>Total Fat (g) <span>0.98</span></li>
-                                        <li>Saturated fatty acid (mg) <span>0.66</span></li>
-                                        <li>Polyunsaturated fatty acid (g) <span>0.32</span></li>
-                                        <li>Monounsaturated fatty acid (mg) <span>1.54</span></li>
-                                        <li>Trans Fatty Acid (g) <span>0</span></li>
-                                        <li>Cholesterol (g) <span>0.02</span></li>
-                                        <li>Potassium (mg) <span>158.0</span></li>
-                                        <li>Sodium (mg) <span>135.5</span></li>
+                                        <li>Dietary Fibre (g) <span>2.8</span></li>
+                                        <li>Total Fat (g) <span>2.53</span></li>
+                                        <li>Saturated fatty acid (mg) <span>1.7</span></li>
+                                        <li>Polyunsaturated fatty acid (g) <span>0.83</span></li>
+                                        <li>Monounsaturated fatty acid (mg) <span>1.66</span></li>
+                                        <li>Trans Fatty Acid (g) <span>0.04</span></li>
+                                        <li>Cholesterol (g) <span>0.03</span></li>
+                                        <li>Potassium (mg) <span>158.8</span></li>
+                                        <li>Sodium (mg) <span>138.0</span></li>
                                     </ul>
                                 </div>
 
@@ -271,12 +269,20 @@ export default function WheyProtein() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

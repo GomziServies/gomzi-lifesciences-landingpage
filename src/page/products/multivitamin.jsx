@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from '../../utils/auth';
@@ -7,9 +7,11 @@ import { isUserLoggedIn } from '../../utils/auth';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import WhatsappBtn from "../../components/whatsapp-btn";
 
 export default function Multivitamin() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -19,6 +21,12 @@ export default function Multivitamin() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -148,7 +156,7 @@ export default function Multivitamin() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/multivitamin.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/multivitamin-inner-page.webp")}
                                             alt="multivitamin"
                                         />
                                     </figure>
@@ -180,7 +188,7 @@ export default function Multivitamin() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=multivitamin-tablets';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -193,12 +201,7 @@ export default function Multivitamin() {
                                     <p className="wow fadeInUp">
                                         Comprehensive multivitamin supplement providing essential nutrients for overall health and wellness.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -208,17 +211,25 @@ export default function Multivitamin() {
                         <div className="col-lg-5">
                             <div className="service-sidebar">
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Product Details</h3>
+                                    <h3>Nutrients per 1 tablet</h3>
                                     <ul>
-                                        <li>Serving Size <span>1 tablet</span></li>
-                                        <li>Servings per container <span>60</span></li>
-                                        <li>Vitamin A <span>100% DV</span></li>
-                                        <li>Vitamin C <span>100% DV</span></li>
-                                        <li>Vitamin D <span>100% DV</span></li>
-                                        <li>Vitamin E <span>100% DV</span></li>
-                                        <li>B-Complex <span>100% DV</span></li>
+                                        <li>Energy <span>0.88 Kcal</span></li>
+                                        <li>Protein <span>0 g</span></li>
+                                        <li>Carbohydrate <span>0.22 g</span></li>
+                                        <li>Fat <span>0 g</span></li>
+                                        <li>Sodium <span>4 mg</span></li>
+                                        <li>Ashwagandha Ext. (Withania Somnifera) <span>400 mg</span></li>
+                                        <li>Gokhru Ext. (Tribulus Terrestris) <span>200 mg</span></li>
+                                        <li>Harar Ext. (Terminalia Chebula) <span>100 mg</span></li>
+                                        <li>Chamomile Ext. (Matricaria Chamomilla) <span>200 mg</span></li>
+                                        <li>Amla Ext. (Emblica Officinalis) <span>150 mg</span></li>
+                                        <li>Ginseng (Panax Ginseng) <span>150 mg</span></li>
+                                        <li>Satavari Ext. (Asparagus Racemosus) <span>100 mg</span></li>
+                                        <li>Safed Musli Ext. (Chlorophytum Borivilian) <span>100 mg</span></li>
+                                        <li>Saunf Ext. (Foeniculum Vulgare) <span>100 mg</span></li>
                                     </ul>
                                 </div>
+
 
                                 <div
                                     className="sidebar-cta-box wow fadeInUp"
@@ -236,9 +247,16 @@ export default function Multivitamin() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>

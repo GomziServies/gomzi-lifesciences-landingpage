@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
-
+import WhatsappBtn from "../../components/whatsapp-btn";
+import { useRef } from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,6 +11,7 @@ import "swiper/css/pagination";
 
 export default function Moringa() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -19,6 +21,12 @@ export default function Moringa() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -148,7 +156,7 @@ export default function Moringa() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/moringa.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/moringa-inner-page.webp")}
                                             alt="moringa"
                                         />
                                     </figure>
@@ -179,7 +187,7 @@ export default function Moringa() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=moringa-tablets';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -192,12 +200,7 @@ export default function Moringa() {
                                     <p className="wow fadeInUp">
                                         Natural superfood supplement packed with nutrients, antioxidants, and anti-inflammatory compounds.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -207,15 +210,9 @@ export default function Moringa() {
                         <div className="col-lg-5">
                             <div className="service-sidebar">
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Product Details</h3>
+                                    <h3>Nutrients per 3 capsules</h3>
                                     <ul>
-                                        <li>Serving Size <span>2 tablets</span></li>
-                                        <li>Servings per container <span>20</span></li>
-                                        <li>Moringa Extract <span>500mg</span></li>
-                                        <li>Protein <span>3g</span></li>
-                                        <li>Vitamin A <span>25% DV</span></li>
-                                        <li>Vitamin C <span>12% DV</span></li>
-                                        <li>Iron <span>15% DV</span></li>
+                                        <li>organic horseradish tree (moringa oleifera) <span>600mg</span></li>
                                     </ul>
                                 </div>
 
@@ -235,9 +232,16 @@ export default function Moringa() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>

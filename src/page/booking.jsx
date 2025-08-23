@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import NutritionHeader from '../components/partials/Header/nutritionsheader'
 import { Toaster, toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -12,15 +12,8 @@ import { isUserLoggedIn } from '../utils/auth';
 const Booking = () => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!isUserLoggedIn()) {
-            navigate('/', { replace: true });
-            toast.dismiss();
-            toast.error('Please login to access this page');
-        }
-    }, [navigate]);
-
-    const productsData = React.useMemo(() => [
+    // ✅ Products list
+    const productsData = useMemo(() => [
         { name: "Whey Protein", price: 1170, moq: "100 kg" },
         { name: "Whey Blend", price: 1300, moq: "100 kg" },
         { name: "Whey Concentrate", price: 1630, moq: "100 kg" },
@@ -35,13 +28,21 @@ const Booking = () => {
         { name: "Protein Bar", price: 55, moq: "5000 pcs" },
         { name: "Energy Drink - Bottle", price: 30, moq: "1000 pcs" },
         { name: "Energy Drink - Can", price: 45, moq: "24,000 pcs" },
-        { name: "Multivitamin Tablets", price: 340, moq: "120 tabs" },
+        { name: "Multivitamin Tablets", price: 340, moq: "60 tabs" },
         { name: "Omega 3", price: 225, moq: "60 tabs" },
-        { name: "Ashwagandha", price: 100, moq: "120 tabs" },
-        { name: "Moringa Tablets", price: 75, moq: "120 tabs" },
-        { name: "Shilajit", price: 70, moq: "120 tabs" },
+        { name: "Ashwagandha", price: 100, moq: "60 tabs" },
+        { name: "Moringa Tablets", price: 75, moq: "40 tabs" },
+        { name: "Shilajit", price: 70, moq: "60 tabs" },
     ], []);
 
+ 
+    const params = new URLSearchParams(window.location.search);
+    const ATCProduct = params.get('product') || "";
+
+    const normalize = (str) =>
+        str?.toLowerCase().replace(/[-_\s]/g, "").trim();
+
+    // ✅ Form states
     const today = new Date().toISOString().split("T")[0];
     const [formData, setFormData] = useState({
         date: today,
@@ -57,26 +58,61 @@ const Booking = () => {
     });
 
     const [productLines, setProductLines] = useState([
-        { id: 1, product: "", quantity: "", price: 0, total: 0 }
+        { id: Date.now(), product: "", quantity: "", price: 0, total: 0 }
     ]);
 
+    // ✅ Auto add ATC product from query string
+    useEffect(() => {
+        if (ATCProduct) {
+            const foundProduct = productsData.find(
+                (p) => normalize(p.name) === normalize(ATCProduct)
+            );
+            console.log("Found ATC Product:", foundProduct);
+            
+            if (foundProduct) {
+                setProductLines((prev) => {
+                    const exists = prev.some(
+                        (line) => line.product === foundProduct.name
+                    );
+                    if (exists) return prev;
+
+                    return [
+                        ...prev,
+                        {
+                            id: Date.now(),
+                            product: foundProduct.name,
+                            quantity: "1",
+                            price: foundProduct.price,
+                            total: foundProduct.price,
+                        },
+                    ];
+                });
+            }
+        }
+    }, [ATCProduct, productsData]);
+
+    // ✅ If user not logged in → redirect
+    useEffect(() => {
+        if (!isUserLoggedIn()) {
+            navigate('/', { replace: true });
+            toast.dismiss();
+            toast.error('Please login to access this page');
+        }
+    }, [navigate]);
+
+    // ✅ Handle product/quantity change
     const handleProductChange = (index, field, value) => {
         const newProductLines = [...productLines];
 
         if (field === 'product') {
-
-            // Set default quantity to 1 when product is selected
+            const selected = productsData.find(p => p.name === value);
             newProductLines[index] = {
                 ...newProductLines[index],
                 product: value,
-                quantity: "1"
+                quantity: "1",
+                price: selected?.price || 0,
+                total: selected?.price || 0,
             };
-
-            const selected = productsData.find(p => p.name === value);
-            if (selected) {
-                newProductLines[index].price = selected.price;
-                newProductLines[index].total = selected.price * 1;
-            }
         } else if (field === 'quantity') {
             newProductLines[index][field] = value;
             const selected = productsData.find(p => p.name === newProductLines[index].product);
@@ -89,6 +125,7 @@ const Booking = () => {
         setProductLines(newProductLines);
     };
 
+    // ✅ Add row
     const addProductLine = () => {
         if (productLines.length >= 9) {
             toast.error('Maximum 9 products can be added');
@@ -96,10 +133,11 @@ const Booking = () => {
         }
         setProductLines([
             ...productLines,
-            { product: "", quantity: "", price: 0, total: 0 }
+            { id: Date.now(), product: "", quantity: "", price: 0, total: 0 }
         ]);
     };
 
+    // ✅ Delete row
     const removeProductLine = (index) => {
         if (productLines.length > 1) {
             Swal.fire({
@@ -120,8 +158,6 @@ const Booking = () => {
                         title: 'Deleted!',
                         text: 'Product has been removed.',
                         icon: 'success',
-                        background: '#fff',
-                        color: ' #1a1a1a',
                         timer: 1500,
                         showConfirmButton: false
                     });
@@ -132,14 +168,11 @@ const Booking = () => {
                 title: 'Cannot Remove',
                 text: 'At least one product is required',
                 icon: 'error',
-                background: '#1a1a1a',
-                color: '#fff',
                 timer: 1500,
                 showConfirmButton: false
             });
         }
     };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";
-
+import WhatsappBtn from "../../components/whatsapp-btn";
+import { useRef } from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,6 +11,7 @@ import "swiper/css/pagination";
 
 export default function Ashwagandha() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const whatsappBtnRef = useRef(null);
 
     const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
@@ -19,6 +21,12 @@ export default function Ashwagandha() {
                 <LoginModal onClose={() => setShowLoginModal(false)} />
             )}
             <NutritionHeader />
+            <WhatsappBtn
+                ref={whatsappBtnRef}
+                message={"Hello, I would like to know more information about your white labeling service. Could you please share the details regarding how it works, pricing, and customization options? Thank you."}
+                options={{ pageRef: true }}
+                style={{ display: "none" }}
+            />
             <div className="page-header parallaxie">
                 <div className="container">
                     <div className="row align-items-center">
@@ -148,7 +156,7 @@ export default function Ashwagandha() {
                                 <div className="service-feature-image">
                                     <figure className="image-anime reveal">
                                         <img
-                                            src={getAssetPath("/assets/images/product-images/ashwagandha.webp")}
+                                            src={getAssetPath("/assets/images/product-images/inner-page-img/ashwagandha-inner-page.webp")}
                                             alt="ashwagandha"
                                         />
                                     </figure>
@@ -179,7 +187,7 @@ export default function Ashwagandha() {
                                         <div className="hero-btn">
                                             <button onClick={() => {
                                                 if (isUserLoggedIn()) {
-                                                    window.location.href = '/booking-page';
+                                                    window.location.href = '/booking-page?product=ashwagandha';
                                                 } else {
                                                     setShowLoginModal(true);
                                                 }
@@ -192,12 +200,7 @@ export default function Ashwagandha() {
                                     <p className="wow fadeInUp">
                                         Traditional Ayurvedic herb known for its adaptogenic properties, supporting stress management and overall wellness.
                                     </p>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                        With a focus on data-driven insights, we build customized
-                                        strategies that drive traffic, boost engagement, and
-                                        maximize ROI. Let us help you reach your business goals with
-                                        impactful digital marketing
-                                    </p>
+
                                 </div>
 
 
@@ -207,13 +210,10 @@ export default function Ashwagandha() {
                         <div className="col-lg-5">
                             <div className="service-sidebar">
                                 <div className="service-catagery-list wow fadeInUp">
-                                    <h3>Product Details</h3>
+                                    <h3>Nutrients per 2 capsules</h3>
                                     <ul>
-                                        <li>Serving Size <span>1 tablet</span></li>
-                                        <li>Servings per container <span>60</span></li>
-                                        <li>Ashwagandha Extract <span>600mg</span></li>
-                                        <li>Withaferin-A <span>5%</span></li>
-                                        <li>Withanolides <span>2.5%</span></li>
+                                        <li>Organic Ashwagandha <span>600mg</span></li>
+                                        <li>Withanolides (5%) <span>30mg</span></li>
                                     </ul>
                                 </div>
 
@@ -233,9 +233,16 @@ export default function Ashwagandha() {
                                         </p>
                                     </div>
 
-                                    <div className="cta-contact-btn">
+                                    <div
+                                        className="cta-contact-btn"
+                                        onClick={() => {
+                                            if (whatsappBtnRef.current) {
+                                                whatsappBtnRef.current.click();
+                                            }
+                                        }}
+                                    >
                                         <a href="tel:123456789">
-                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />{" "}
+                                            <img src={getAssetPath('/assets/images/icon-sidebar-cta-phone.svg')} alt="" />
                                             +91 83200 77993
                                         </a>
                                     </div>
