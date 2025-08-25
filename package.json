@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@popperjs/core": "^2.11.8",
     "@testing-library/dom": "^10.4.1",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",
+    "emailjs-com": "^3.2.0",
     "html2canvas": "^1.4.1",
     "jquery": "^3.7.1",
     "jspdf": "^3.0.1",
@@ -19,6 +21,7 @@
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.1",
     "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.5",
     "react-hot-toast": "^2.6.0",
     "react-lazy-load-image-component": "^1.6.3",
     "react-modal-video": "^2.0.2",

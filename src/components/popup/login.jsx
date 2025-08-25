@@ -131,10 +131,6 @@ const LoginModal = ({ onClose }) => {
     }
   };
 
-  const handleSignUpInternational = () => {
-    setShowModal(false);
-    setShowSignUpModal(true);
-  };
 
   const handleOtpPopupOpen = () => {
     setOtpDialogOpen(true);

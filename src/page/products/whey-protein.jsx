@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import LoginModal from "../../components/popup/login";
 import { isUserLoggedIn } from "../../utils/auth";

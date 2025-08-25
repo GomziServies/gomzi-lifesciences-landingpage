@@ -960,92 +960,6 @@ body:has(.offcanvas) {
   object-fit: cover;
 }
 
-.hero.bg-image {
-  background: url("/public/assets/images/hero-bg.jpg") no-repeat;
-  background-position: center center;
-  background-size: cover;
-  padding: 250px 0 135px;
-}
-
-.hero.hero-slider-layout {
-  background: none;
-  padding: 0;
-}
-
-.hero.hero-slider-layout .hero-slide {
-  position: relative;
-  background: url("/public/assets/images/hero-bg.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  padding: 310px 0 200px;
-}
-
-/* Commenting out unused hero slider classes */
-/* .hero.hero-slider-layout .hero-slide.slide-2 {
-  background: url("/public/assets/images/hero-bg-2.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-} */
-
-.hero.hero-slider-layout .hero-slide::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(
-      179.5deg,
-      rgba(0, 0, 0, 0) 0.44%,
-      var(--dark-color) 119.12%
-    ),
-    linear-gradient(0.62deg, rgba(0, 0, 0, 0) 81.46%, var(--dark-color) 99.49%);
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.hero.hero-slider-layout .hero-slide .hero-slider-image {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
-
-.hero.hero-slider-layout .hero-slide .hero-slider-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero.hero-slider-layout .hero-pagination {
-  position: absolute;
-  bottom: 30px;
-  text-align: center;
-  z-index: 2;
-}
-
-.hero.hero-slider-layout .hero-pagination .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background: var(--primary-color);
-  opacity: 1;
-  transition: all 0.3s ease-in-out;
-  margin: 0 5px;
-}
-
-.hero.hero-slider-layout .hero-pagination .swiper-pagination-bullet-active {
-  background-color: var(--accent-color);
-}
-
-.hero.hero-slider-layout .hero-content {
-  text-align: center;
-}
-
 .hero-content {
   position: relative;
   z-index: 2;
@@ -1060,10 +974,6 @@ body:has(.offcanvas) {
   flex-wrap: wrap;
   align-items: center;
   gap: 40px;
-}
-
-.hero.hero-slider-layout .hero-content .hero-content-body {
-  justify-content: center;
 }
 
 .hero-review-box ul {
@@ -1704,172 +1614,6 @@ body:has(.offcanvas) {
 .award-item-btn a:hover img {
   filter: brightness(0) invert(1);
   transform: rotate(45deg);
-}
-
-/************************************/
-/***     09. Why Choose Us css    ***/
-/************************************/
-
-.why-choose-us {
-  position: relative;
-  padding: 80px 0;
-}
-
-.why-choose-us::before {
-  content: "";
-  display: block;
-  position: absolute;
-  right: -20px;
-  bottom: 80px;
-  background: url("/public/assets/images/section-bg-shape-3.png") no-repeat;
-  background-position: right bottom;
-  background-size: contain;
-  width: 210px;
-  height: 200px;
-  animation: circlerotate 10s infinite linear;
-  animation-direction: alternate;
-  z-index: -1;
-}
-
-.why-choose-box {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-.why-choose-content {
-  width: calc(55% - 15px);
-}
-
-.why-choose-body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-.why-choose-content-box {
-  width: calc(55% - 15px);
-}
-
-.why-choose-item {
-  border-bottom: 1px solid var(--divider-color);
-  margin-bottom: 40px;
-  padding-bottom: 40px;
-}
-
-.why-choose-item .icon-box {
-  margin-bottom: 20px;
-}
-
-.why-choose-item .icon-box img {
-  width: 100%;
-  max-width: 40px;
-}
-
-.why-choose-item-content h3 {
-  font-size: 22px;
-  text-transform: capitalize;
-}
-
-.why-choose-list ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.why-choose-list ul li {
-  position: relative;
-  line-height: normal;
-  margin-bottom: 30px;
-  padding-left: 30px;
-}
-
-.why-choose-list ul li:before {
-  content: "\f192";
-  font-family: "Font Awesome 6 Free";
-  position: absolute;
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--accent-color);
-  top: 2px;
-  left: 0;
-}
-
-.why-choose-list ul li:last-child {
-  margin-bottom: 0;
-}
-
-.why-choose-btn {
-  margin-top: 60px;
-}
-
-.why-choose-body-img {
-  width: calc(45% - 15px);
-}
-
-.why-choose-body-img figure {
-  display: block;
-  border-radius: 30px;
-  overflow: hidden;
-}
-
-.why-choose-body-img img {
-  width: 100%;
-  aspect-ratio: 1 / 1.38;
-  object-fit: cover;
-  border-radius: 30px;
-}
-
-.why-choose-image {
-  width: calc(45% - 15px);
-  position: relative;
-  padding: 0 50px 50px 0;
-}
-
-.why-choose-img figure {
-  display: block;
-  border-radius: 30px;
-}
-
-.why-choose-img img {
-  width: 100%;
-  aspect-ratio: 1 / 1.333;
-  object-fit: cover;
-  border-radius: 30px;
-}
-
-.company-experience-box {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 140px;
-  height: 140px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  align-content: center;
-  justify-content: center;
-  background: var(--accent-color);
-  border-radius: 50%;
-  padding: 25px;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
-}
-
-.company-experience-box:hover {
-  background: var(--primary-color);
-}
-
-.company-experience-box h3 {
-  color: var(--dark-color);
-  font-size: 30px;
-}
-
-.company-experience-box p {
-  color: var(--dark-color);
-  line-height: 1.2em;
-  text-transform: capitalize;
-  margin: 0;
 }
 
 /************************************/
@@ -5608,34 +5352,44 @@ body:has(.offcanvas) {
 .h-105 {
   height: 105px !important;
 }
-.contact-us-form {
+.contact-us-form,
+.contact-us-form-profile {
   width: 100% !important;
   margin: 0 auto;
 }
 
 @media (min-width: 576px) {
-  .contact-us-form {
+  .contact-us-form,
+  .contact-us-form-profile {
     max-width: 540px;
   }
 }
 @media (min-width: 768px) {
-  .contact-us-form {
+  .contact-us-form,
+  .contact-us-form-profile {
     max-width: 720px;
   }
 }
 @media (min-width: 992px) {
-  .contact-us-form {
+  .contact-us-form,
+  .contact-us-form-profile {
     max-width: 960px;
   }
 }
 @media (min-width: 1200px) {
   .contact-us-form {
-    max-width: 1140px;
+    max-width: 65%;
+  }
+  .contact-us-form-profile {
+    max-width: 100%;
   }
 }
 @media (min-width: 1400px) {
   .contact-us-form {
-    max-width: 1320px;
+    max-width: 65%;
+  }
+  .contact-us-form-profile {
+    max-width: 100%;
   }
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -5984,10 +5738,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .hero.bg-image {
-    padding: 215px 0 120px;
-  }
-
-  .hero.hero-slider-layout .hero-slide {
     padding: 215px 0 120px;
   }
 

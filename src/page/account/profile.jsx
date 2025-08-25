@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from 'react-router-dom';
 import NutritionHeader from "../../components/partials/Header/nutritionsheader";
 import { axiosInstance } from "../../assets/js/config/api";
@@ -199,7 +199,7 @@ function UserProfile() {
             <Container className="margintop-nutrition my-5 mx-auto">
                 <form
                     onSubmit={handleSubmit}
-                    className="contact-us-form modal-form mx-auto  rounded"
+                    className="contact-us-form contact-us-form-profile modal-form mx-auto  rounded"
                 >
                     <h2 className="text-center m-4 my-5" style={{ color: "#fff" }}>
                         Update Your Profile

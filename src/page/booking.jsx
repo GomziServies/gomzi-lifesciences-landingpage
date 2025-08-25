@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import NutritionHeader from '../components/partials/Header/nutritionsheader'
 import { Toaster, toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+
 import { createOrder } from '../assets/js/config/api';
 import Swal from 'sweetalert2';
 import jsPDF from "jspdf";
@@ -11,8 +11,6 @@ import { isUserLoggedIn } from '../utils/auth';
 import Footer from '../components/partials/Footer/footer';
 
 const Booking = () => {
-    const navigate = useNavigate();
-
     const productsData = useMemo(() => [
         { name: "Whey Protein", price: 1170, moq: "100 kg" },
         { name: "Whey Blend", price: 1300, moq: "100 kg" },
@@ -250,35 +248,32 @@ const Booking = () => {
     };
 
 
-    const downloadQuotationPDF = async () => {
-
+    const downloadQuotationPDF = async (formData) => {
         const quotationContent = document.getElementById("quotationContent");
-        if (quotationContent) {
-
-
-            const doc = new jsPDF({
-                orientation: 'portrait',
-                unit: 'mm',
-                format: 'a4',
-            })
-
-            // Add margins
-            const margin = 10
-            const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin
-            const contentHeight = doc.internal.pageSize.getHeight() - 2 * margin
-
-            html2canvas(quotationContent, { scale: 2, useCORS: true }).then((canvas) => {
-                const imgData = canvas.toDataURL('image/jpeg', 1)
-
-                doc.addImage(imgData, 'jpeg', margin, margin, contentWidth, contentHeight)
-
-                const pdfName = `Quotation_${formData?.name || "Customer"}.pdf`
-                doc.save(pdfName)
-
-            })
-        } else {
-            console.error('Quotation content not found.')
+        if (!quotationContent) {
+            console.error("Quotation content not found.");
+            return null;
         }
+
+        const doc = new jsPDF({
+            orientation: "portrait",
+            unit: "mm",
+            format: "a4",
+        });
+
+        const margin = 10;
+        const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin;
+        const contentHeight = doc.internal.pageSize.getHeight() - 2 * margin;
+
+        // wait for canvas
+        const canvas = await html2canvas(quotationContent, { scale: 2, useCORS: true });
+        const imgData = canvas.toDataURL("image/jpeg", 1);
+
+        doc.addImage(imgData, "JPEG", margin, margin, contentWidth, contentHeight);
+
+        const pdfBlob = doc.output("blob");
+
+        return pdfBlob;
     };
 
 
@@ -308,6 +303,7 @@ const Booking = () => {
                     const updated = [...existing, newItem];
 
                     if (updated && updated.length <= 9) {
+
                         localStorage.setItem("ATC_Product", JSON.stringify(updated));
                     } else {
                         toast.error("Maximum 9 products allowed", { id: "maxProducts" });
@@ -326,17 +322,20 @@ const Booking = () => {
                 { id: Date.now(), product: "", quantity: "", price: 0, total: 0 },
             ]);
         }
-    }, [ATCProduct]);
+    }, [ATCProduct, productsData]);
 
     useEffect(() => {
         if (productLines && productLines.length > 0) {
-
-            const hasData = productLines.some(
-                (line) => line.product !== "" || line.quantity !== "" || line.price > 0
+            // Filter out empty product lines
+            const nonEmptyLines = productLines.filter(
+                (line) => line.product !== "" && line.quantity !== "" && line.price > 0
             );
 
-            if (hasData) {
-                localStorage.setItem("ATC_Product", JSON.stringify(productLines));
+            if (nonEmptyLines.length > 0) {
+                localStorage.setItem("ATC_Product", JSON.stringify(nonEmptyLines));
+            } else if (productLines.every(line => line.product === "" && line.quantity === "" && line.price === 0)) {
+                // If all lines are empty, remove from localStorage
+                localStorage.removeItem("ATC_Product");
             }
         }
     }, [productLines]);
@@ -344,11 +343,23 @@ const Booking = () => {
 
     useEffect(() => {
         if (!isUserLoggedIn()) {
-            navigate('/', { replace: true });
+            window.location.href = '/';
             toast.dismiss();
             toast.error('Please login to access this page');
+        } else {
+
+            const userInfo = JSON.parse(localStorage.getItem('user_info'));
+
+            if (userInfo) {
+                setFormData(prevData => ({
+                    ...prevData,
+                    name: userInfo.user.first_name + " " + userInfo.user.last_name || '',
+                    email: userInfo.user.email || '',
+                    mobile: userInfo.user.mobile || '',
+                }));
+            }
         }
-    }, [navigate]);
+    }, []);
 
     return (
         <>
@@ -472,7 +483,7 @@ const Booking = () => {
                         {productLines.map((line, index) => (
                             <div key={line.id} className="row mx-0 g-3">
                                 {/* Product select */}
-                                <div className="form-group col-12 col-sm-6 col-md-3">
+                                <div className="form-group col-12 col-sm-6 col-md-4">
                                     <select
                                         className="form-control bg-dark text-light"
                                         value={line.product}
@@ -492,11 +503,11 @@ const Booking = () => {
                                 </div>
 
                                 {/* Quantity */}
-                                <div className="form-group col-6 col-sm-6 col-md-2">
+                                <div className="form-group col-6 col-sm-6 col-md-4">
                                     <input
                                         type="number"
                                         className="form-control bg-dark text-light"
-                                        placeholder="Quantity"
+                                        placeholder="Enter Quantity"
                                         value={line.quantity}
                                         onChange={(e) => handleProductChange(index, 'quantity', e.target.value)}
                                         min="1"
@@ -505,7 +516,7 @@ const Booking = () => {
                                 </div>
 
                                 {/* MOQ */}
-                                <div className="form-group col-6 col-sm-6 col-md-2">
+                                {/* <div className="form-group col-6 col-sm-6 col-md-2">
                                     <input
                                         type="text"
                                         placeholder='Moq'
@@ -515,10 +526,10 @@ const Booking = () => {
                                         }
                                         readOnly
                                     />
-                                </div>
+                                </div> */}
 
                                 {/* Price */}
-                                <div className="form-group col-6 col-sm-6 col-md-2">
+                                {/* <div className="form-group col-6 col-sm-6 col-md-2">
                                     <input
                                         type="text"
                                         className="form-control bg-dark text-light"
@@ -526,10 +537,10 @@ const Booking = () => {
                                         placeholder="Rate"
                                         readOnly
                                     />
-                                </div>
+                                </div> */}
 
                                 {/* Total Price */}
-                                <div className="form-group col-6 col-sm-6 col-md-2">
+                                <div className={`form-group col-6 col-sm-6 ${productLines.length - 1 === index ? 'col-md-2' : 'col-md-3'}`}>
                                     <input
                                         type="text"
                                         className="form-control bg-dark text-light"
@@ -824,7 +835,6 @@ const Booking = () => {
                     </div>
                 </div>
             </div>
-
 
             <Toaster
                 position="top-right"

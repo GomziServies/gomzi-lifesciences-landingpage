@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import WhatsappBtn from "../../components/whatsapp-btn";
+import Footer from "../../components/partials/Footer/footer";
 
 export default function WheyBlend() {
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -272,6 +273,8 @@ export default function WheyBlend() {
                     </div>
                 </div>
             </div>
+
+            <Footer />
         </>
     );
 }

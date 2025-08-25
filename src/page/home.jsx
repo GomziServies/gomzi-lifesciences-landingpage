@@ -121,13 +121,15 @@ export default function Home() {
                             <div className="hero-images">
                                 <div className="hero-img-1">
                                     <figure className="image-anime">
-                                        <img src={getAssetPath('/assets/images/hero-img-1.jpg')} alt="First hero section visual" />
+                                        {/* <img src={getAssetPath('/assets/images/hero-img-1.jpg')} alt="First hero section visual" /> */}
+                                        <img src={getAssetPath('/assets/images/product-images/mass-gainer.webp')} alt="First hero section visual" />
                                     </figure>
                                 </div>
 
                                 <div className="hero-img-2">
                                     <figure className="image-anime">
-                                        <img src={getAssetPath('/assets/images/chirag-pandey.webp')} alt="Second hero section visual" />
+                                        {/* <img src={getAssetPath('/assets/images/chirag-pandey.webp')} alt="Second hero section visual" /> */}
+                                        <img src={getAssetPath('/assets/images/product-images/whey-isolate.webp')} alt="Second hero section visual" />
                                     </figure>
                                 </div>
 

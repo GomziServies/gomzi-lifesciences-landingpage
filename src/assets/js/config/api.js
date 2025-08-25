@@ -46,16 +46,16 @@ publicAxiosInstance.interceptors.request.use(
 // Create order and handle payment
 export const createOrder = async (orderData) => {
     try {
-        const { products, address_line_1, address_line_2, city, pin_code, state, country,
+        const { address_line_1, address_line_2, city, pin_code, state, country,
             payment_mode, name, email, mobile } = orderData;
 
+        const ATC_Product = JSON.parse(localStorage.getItem("ATC_Product")) || [];
 
         const SampleProducts = [{
-            product_id: "68a2c8e006800a0384e9cc6a",
+            product_id: ATC_Product.length <= 3 ? "68a2c8e006800a0384e9cc6a" : "68ac019606800a0384e9f883",
             quantity: 1,
             landing_page: true
         }];
-
 
         const payload = {
             products: SampleProducts,
@@ -129,7 +129,9 @@ export const createOrder = async (orderData) => {
                 contact: false,
                 email: false,
             };
+
             new window.Razorpay(result.data.data).open();
+
             return { showLoginModal: false, success: true };
         } else if (result && result.status === 200) {
             result.data.data.handler = () => {
@@ -152,7 +154,9 @@ export const createOrder = async (orderData) => {
                 contact: false,
                 email: false,
             };
+
             new window.Razorpay(result.data.data).open();
+
             return { showLoginModal: false, success: true };
         }
 
