@@ -67,7 +67,7 @@ function Footer() {
                           <img src="assets/images/icon-location-accent.svg" alt="" />
                         </div>
                         <div className="footer-contact-item-content">
-                          <p>547,548, FIRST FLOOR, RJD TEXTILES PARK, Hazira Rd, Ichchhapor, PAL, Surat, Gujarat 394510</p>
+                          <p>547,548, First Floor, RJD Textiles Park, Hazira Rd, Ichchhapor, Pal, Surat, Gujarat 394510</p>
                         </div>
                       </div>
                     </div>
@@ -78,7 +78,7 @@ function Footer() {
                     </div>
                     <div className="footer-contact-content">
                       <p>Gautam Jani</p>
-                      <h3>+91 63540 51487</h3>
+                      <h3>+91 83200 77993</h3>
                     </div>
                   </div>
                 </div>

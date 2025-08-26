@@ -541,13 +541,13 @@ const Booking = () => {
 
                                 {/* Total Price */}
                                 <div className={`form-group col-6 col-sm-6 ${productLines.length - 1 === index ? 'col-md-2' : 'col-md-3'}`}>
-                                    <input
+                                    {/* <input
                                         type="text"
                                         className="form-control bg-dark text-light"
                                         value={line.total ? `₹${line.total}` : ""}
                                         placeholder="Total Price"
                                         readOnly
-                                    />
+                                    /> */}
                                 </div>
 
                                 {/* Delete button */}

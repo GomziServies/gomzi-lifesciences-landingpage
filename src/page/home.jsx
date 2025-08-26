@@ -11,15 +11,16 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import VideoReview from "../components/video-review";
+import WhyChooseUs from "../components/whyChooseUs";
 
 const productsData = [
-    { name: "Whey Protein (35% - 40% Protein)", price: 1170, image: "/assets/images/product-images/whey-protein.webp", link: '/whey-protein' },
-    { name: "Whey Blend (50% - 60% Protein)", price: 1300, image: "/assets/images/product-images/whey-blend.webp", link: '/whey-blend' },
-    { name: "Whey Concentrate (80% Protein)", price: 1630, image: "/assets/images/product-images/whey-concentrate.webp", link: '/whey-concentrate' },
-    { name: "Whey Isolate (90% Protein)", price: 3000, image: "/assets/images/product-images/whey-isolate.webp", link: '/whey-isolate' },
-    { name: "Mass Gainer", price: 420, image: "/assets/images/product-images/mass-gainer.webp", link: '/mass-gainer' },
+    { name: "Whey Protein-1kg (35% - 40% Protein)", price: 1170, image: "/assets/images/product-images/whey-protein.webp", link: '/whey-protein' },
+    { name: "Whey Blend-1kg (50% - 60% Protein)", price: 1300, image: "/assets/images/product-images/whey-blend.webp", link: '/whey-blend' },
+    { name: "Whey Concentrate-1kg (80% Protein)", price: 1630, image: "/assets/images/product-images/whey-concentrate.webp", link: '/whey-concentrate' },
+    { name: "Whey Isolate-1kg (90% Protein)", price: 3000, image: "/assets/images/product-images/whey-isolate.webp", link: '/whey-isolate' },
+    { name: "Mass Gainer-1kg", price: 420, image: "/assets/images/product-images/mass-gainer.webp", link: '/mass-gainer' },
     { name: "Peanut Butter (500gm)", price: 150, image: "/assets/images/product-images/peanut-butter.webp", link: '/peanut-butter' },
-    { name: "Creatine - flavoured (250gm)", price: 300, image: "/assets/images/product-images/creatine-flavored.webp", link: '/creatine-flavored' },
+    { name: "Creatine - Flavoured (250gm)", price: 300, image: "/assets/images/product-images/creatine-flavored.webp", link: '/creatine-flavored' },
     { name: "Creatine - Unflavoured (250gm)", price: 270, image: "/assets/images/product-images/creatine.webp", link: '/creatine-unflavored' },
     { name: "Pre-Workout (250gm)", price: 440, image: "/assets/images/product-images/pre-workout.webp", link: '/pre-workout' },
     { name: "EAA (250gm)", price: 490, image: "/assets/images/product-images/eaa.webp", link: '/eaa' },
@@ -90,7 +91,7 @@ export default function Home() {
             <div className="hero">
                 <div className="hero-bg-video">
 
-                    {/* <video autoPlay muted loop id="myVideo"><source src="assets/media/artistic-it-company-video.mp4" type="video/mp4" /></video> */}
+                    <video autoPlay muted loop id="myVideo"><source src="assets/media/artistic-it-company-video.mp4" type="video/mp4" /></video>
                 </div>
                 <div className="container">
                     <div className="row align-items-center">
@@ -230,6 +231,7 @@ export default function Home() {
                 </div>
 
             </div>
+            <WhyChooseUs />
 
             <div className="our-testimonials">
                 <div className="container">
