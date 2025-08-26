@@ -5,6 +5,7 @@ import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 import { isUserLoggedIn } from '../utils/auth';
 import LoginModal from "../components/popup/login";
+import BookingModal from "../components/popup/BookingModal";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -12,27 +13,25 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import VideoReview from "../components/video-review";
 import WhyChooseUs from "../components/whyChooseUs";
+import toast from "react-hot-toast";
 
 const productsData = [
-    { name: "Whey Protein-1kg (35% - 40% Protein)", price: 1170, image: "/assets/images/product-images/whey-protein.webp", link: '/whey-protein' },
-    { name: "Whey Blend-1kg (50% - 60% Protein)", price: 1300, image: "/assets/images/product-images/whey-blend.webp", link: '/whey-blend' },
-    { name: "Whey Concentrate-1kg (80% Protein)", price: 1630, image: "/assets/images/product-images/whey-concentrate.webp", link: '/whey-concentrate' },
-    { name: "Whey Isolate-1kg (90% Protein)", price: 3000, image: "/assets/images/product-images/whey-isolate.webp", link: '/whey-isolate' },
-    { name: "Mass Gainer-1kg", price: 420, image: "/assets/images/product-images/mass-gainer.webp", link: '/mass-gainer' },
-    { name: "Peanut Butter (500gm)", price: 150, image: "/assets/images/product-images/peanut-butter.webp", link: '/peanut-butter' },
-    { name: "Creatine - Flavoured (250gm)", price: 300, image: "/assets/images/product-images/creatine-flavored.webp", link: '/creatine-flavored' },
-    { name: "Creatine - Unflavoured (250gm)", price: 270, image: "/assets/images/product-images/creatine.webp", link: '/creatine-unflavored' },
-    { name: "Pre-Workout (250gm)", price: 440, image: "/assets/images/product-images/pre-workout.webp", link: '/pre-workout' },
-    { name: "EAA (250gm)", price: 490, image: "/assets/images/product-images/eaa.webp", link: '/eaa' },
-    { name: "BCAA (250gm)", price: 490, image: "/assets/images/product-images/bcaa.webp", link: '/bcaa' },
-    { name: "Protein Bar (12gm protein)", price: 55, image: "/assets/images/product-images/protein-bar.webp", link: '/protein-bar' },
-    { name: "Energy Drink - Bottle (250ml)", price: 30, image: "/assets/images/product-images/energy-drink.webp", link: '/energy-drink' },
-    { name: "Energy Drink - Can (250ml)", price: 45, image: "/assets/images/product-images/energy-drink-can.webp", link: '/energy-drink-can' },
-    { name: "Multivitamin Tablets (60tbs)", price: 170, image: "/assets/images/product-images/multivitamin.webp", link: '/multivitamin' },
-    { name: "Omega 3 (60tbs)", price: 225, image: "/assets/images/product-images/omega-3.webp", link: '/omega-3' },
-    { name: "Ashwagandha (60tbs)", price: 50, image: "/assets/images/product-images/ashwagandha.webp", link: '/ashwagandha' },
-    { name: "Moringa Tablets (40tbs)", price: 25, image: "/assets/images/product-images/moringa.webp", link: '/moringa' },
-    { name: "Shilajit (60tbs)", price: 35, image: "/assets/images/product-images/shilajit.webp", link: '/shilajit' },
+    { product_id: '68ac019606800a0384e9f883', name: "Whey Protein-1kg (35% - 40% Protein)", price: 1170, image: "/assets/images/product-images/whey-protein.webp", link: '/whey-protein', moq: "100 kg" },
+    { product_id: '68a2c8e006800a0384e9cc6a', name: "Whey Blend-1kg (50% - 60% Protein)", price: 1300, image: "/assets/images/product-images/whey-blend.webp", link: '/whey-blend', moq: "100 kg" },
+    { product_id: '68ad732d06800a0384ea019a', name: "Whey Concentrate-1kg (80% Protein)", price: 1630, image: "/assets/images/product-images/whey-concentrate.webp", link: '/whey-concentrate', moq: "100 kg" },
+    { product_id: '68ad735906800a0384ea019e', name: "Whey Isolate-1kg (90% Protein)", price: 3000, image: "/assets/images/product-images/whey-isolate.webp", link: '/whey-isolate', moq: "100 kg" },
+    { product_id: '68ad739506800a0384ea01a2', name: "Peanut Butter (500gm)", price: 150, image: "/assets/images/product-images/peanut-butter.webp", link: '/peanut-butter', moq: "100 kg (500gm)" },
+    { product_id: '68ad737d06800a0384ea01a0', name: "Mass Gainer-1kg", price: 420, image: "/assets/images/product-images/mass-gainer.webp", link: '/mass-gainer', moq: "100 kg" },
+    { product_id: '68ad73e006800a0384ea01ab', name: "Creatine - Flavoured (250gm)", price: 300, image: "/assets/images/product-images/creatine-flavored.webp", link: '/creatine-flavored', moq: "50 kg (250gm)" },
+    { product_id: '68ad742506800a0384ea01b2', name: "Creatine - Unflavoured (250gm)", price: 270, image: "/assets/images/product-images/creatine.webp", link: '/creatine-unflavored', moq: "50 kg (250gm)" },
+    { product_id: '68ad744106800a0384ea01b4', name: "Pre-Workout (250gm)", price: 440, image: "/assets/images/product-images/pre-workout.webp", link: '/pre-workout', moq: "50 kg (250gm)" },
+    { product_id: '68ad746a06800a0384ea01b8', name: "EAA (250gm)", price: 490, image: "/assets/images/product-images/eaa.webp", link: '/eaa', moq: "50 kg (250gm)" },
+    { product_id: '68ad748306800a0384ea01be', name: "BCAA (250gm)", price: 490, image: "/assets/images/product-images/bcaa.webp", link: '/bcaa', moq: "50 kg (250gm)" },
+    { product_id: '68ad749906800a0384ea01c6', name: "Protein Bar (12gm protein)", price: 55, image: "/assets/images/product-images/protein-bar.webp", link: '/protein-bar', moq: "5000 pcs" },
+    { product_id: '68ad74cc06800a0384ea01c8', name: "Energy Drink - Bottle (250ml)", price: 30, image: "/assets/images/product-images/energy-drink.webp", link: '/energy-drink', moq: "1000 pcs" },
+    { product_id: '68ad74f006800a0384ea01cc', name: "Energy Drink - Can (250ml)", price: 45, image: "/assets/images/product-images/energy-drink-can.webp", link: '/energy-drink-can', moq: "24,000 pcs" },
+    { product_id: '68ad750b06800a0384ea01dd', name: "Multivitamin Tablets (60tbs)", price: 170, image: "/assets/images/product-images/multivitamin.webp", link: '/multivitamin', moq: "60 tabs" },
+    { product_id: '68ad752d06800a0384ea01e8', name: "Omega 3 (60tbs)", price: 225, image: "/assets/images/product-images/omega-3.webp", link: '/omega-3', moq: "60 tabs" }
 ];
 
 const testimonialsData = [
@@ -59,11 +58,37 @@ const testimonialsData = [
     }
 ];
 
-// Helper function to get public asset URL
 const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 
 export default function Home() {
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showBookingModal, setShowBookingModal] = useState(false);
+
+
+    const handleBookSample = (product) => {
+        if (isUserLoggedIn()) {
+            const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+
+            setShowBookingModal(true);
+            if (existingProducts.length >= 9) {
+                toast.error('Maximum 9 products can be added');
+                return;
+            }
+
+            // Check if product already exists
+            if (!existingProducts.some(p => p.product_id === product.product_id)) {
+                const productToStore = {
+                    product_id: product.product_id,
+                    quantity: 1
+                };
+
+                localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, productToStore]));
+            }
+
+        } else {
+            setShowLoginModal(true);
+        }
+    };
 
     useEffect(() => {
 
@@ -83,15 +108,21 @@ export default function Home() {
         });
     }, []);
 
+    useEffect(() => {
+        const atcProducts = JSON.parse(localStorage.getItem('ATC_Product')) || [];
+        console.log('atcProducts:', atcProducts);
+    }, [showLoginModal]);
+
     return (
         <>
             {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
+            {showBookingModal && <BookingModal onClose={() => setShowBookingModal(false)} />}
             <NutritionHeader />
 
             <div className="hero">
                 <div className="hero-bg-video">
 
-                    <video autoPlay muted loop id="myVideo"><source src="assets/media/artistic-it-company-video.mp4" type="video/mp4" /></video>
+                    {/* <video autoPlay muted loop id="myVideo"><source src="assets/media/artistic-it-company-video.mp4" type="video/mp4" /></video> */}
                 </div>
                 <div className="container">
                     <div className="row align-items-center">
@@ -107,7 +138,7 @@ export default function Home() {
                                     <div className="hero-btn">
                                         <button onClick={() => {
                                             if (isUserLoggedIn()) {
-                                                window.location.href = '/booking-page';
+                                                setShowBookingModal(true);
                                             } else {
                                                 setShowLoginModal(true);
                                             }
@@ -193,7 +224,7 @@ export default function Home() {
                     <div className="row justify-content-center">
                         {productsData.map((product, index) => (
                             <div className="col-lg-4 col-md-6" key={index} >
-                                <div className="service-item wow fadeInUp" data-wow-delay={`${index * 0.01}s`} onClick={() => window.location.href = product.link}>
+                                <div className="service-item wow fadeInUp" data-wow-delay={`${index * 0.01}s`}>
                                     <div className="service-image">
                                         <div className="image-wrapper img-fluid object-fit-cover">
                                             <figure className="image-anime">
@@ -204,14 +235,19 @@ export default function Home() {
                                     </div>
                                     <div className="service-body">
                                         <div className="service-content-box">
-                                            {/* <div className="icon-box">
-                                                <img src={getAssetPath(product.icon)} alt="" />
-                                            </div> */}
                                             <div className="service-box-content ps-3">
                                                 <h5 className="mb-2 mt-2">{product.name}</h5>
                                                 <p>₹ {product.price}</p>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className="pricing-btn m-3">
+                                        <button
+                                            onClick={() => handleBookSample(product)}
+                                            className="btn-highlighted m-0 border-0"
+                                        >
+                                            Book Sample
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +259,7 @@ export default function Home() {
                 <div className="hero-btn">
                     <button onClick={() => {
                         if (isUserLoggedIn()) {
-                            window.location.href = '/booking-page';
+                            setShowBookingModal(true);
                         } else {
                             setShowLoginModal(true);
                         }
@@ -430,7 +466,6 @@ export default function Home() {
                     </div>
                 </div>
             </div> */}
-
 
             <Footer />
 

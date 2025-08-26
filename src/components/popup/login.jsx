@@ -156,7 +156,7 @@ const LoginModal = ({ onClose }) => {
   return (
     <>
       {/* Login Popup  */}
-      <Modal show={showModal} onHide={handleClose} centered>
+      <Modal show={showModal} onHide={handleClose} centered className="login-modal">
         <Modal.Header closeButton className="border-0 bg-dark text-white" closeVariant="white">
           <Modal.Title>
             <div className="text-center">
@@ -212,7 +212,7 @@ const LoginModal = ({ onClose }) => {
       </Modal>
 
       {/* Otp Popup  */}
-      <Modal Modal show={otpDialogOpen} onHide={handleCloseOtpModal} centered >
+      <Modal show={otpDialogOpen} onHide={handleCloseOtpModal} centered className="login-modal">
         <Modal.Header closeButton className="border-0 bg-dark text-white" closeVariant="white">
           <Modal.Title>
             <div className="text-center">
@@ -269,7 +269,7 @@ const LoginModal = ({ onClose }) => {
         </Modal.Body>
       </Modal>
       {/* Signup Popup  */}
-      <Modal Modal show={showSignUpModal} onHide={handleCloseSignUpModal} centered >
+      <Modal show={showSignUpModal} onHide={handleCloseSignUpModal} centered className="login-modal">
         <Modal.Header closeButton className="border-0 bg-dark text-white" closeVariant="white">
           <Modal.Title>
             <div className="text-center">
@@ -324,10 +324,11 @@ const LoginModal = ({ onClose }) => {
         </Modal.Body>
       </Modal>
       {/* Email OTP Popup  */}
-      <Modal Modal
+      <Modal
         show={emailOtpDialogOpen}
         onHide={handleCloseEmailOtpModal}
         centered
+        className="login-modal"
       >
         <Modal.Header closeButton className="border-0 bg-dark text-white" closeVariant="white">
           <Modal.Title>

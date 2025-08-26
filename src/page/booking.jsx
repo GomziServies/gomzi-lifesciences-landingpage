@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import NutritionHeader from '../components/partials/Header/nutritionsheader'
+import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
 import { createOrder } from '../assets/js/config/api';
@@ -8,36 +7,26 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import '../assets/css/style.css';
 import { isUserLoggedIn } from '../utils/auth';
-import Footer from '../components/partials/Footer/footer';
 
 const Booking = () => {
-    const productsData = useMemo(() => [
-        { name: "Whey Protein", price: 1170, moq: "100 kg" },
-        { name: "Whey Blend", price: 1300, moq: "100 kg" },
-        { name: "Whey Concentrate", price: 1630, moq: "100 kg" },
-        { name: "Whey Isolate", price: 3000, moq: "100 kg" },
-        { name: "Peanut Butter", price: 150, moq: "100 kg (500gm)" },
-        { name: "Mass Gainer", price: 420, moq: "100 kg" },
-        { name: "Creatine - flavoured", price: 350, moq: "50 kg (250gm)" },
-        { name: "Creatine - Unflavoured", price: 320, moq: "50 kg (250gm)" },
-        { name: "Pre-Workout", price: 440, moq: "50 kg (250gm)" },
-        { name: "EAA", price: 490, moq: "50 kg (250gm)" },
-        { name: "BCAA", price: 490, moq: "50 kg (250gm)" },
-        { name: "Protein Bar", price: 55, moq: "5000 pcs" },
-        { name: "Energy Drink - Bottle", price: 30, moq: "1000 pcs" },
-        { name: "Energy Drink - Can", price: 45, moq: "24,000 pcs" },
-        { name: "Multivitamin Tablets", price: 170, moq: "60 tabs" },
-        { name: "Omega 3", price: 225, moq: "60 tabs" },
-        { name: "Ashwagandha", price: 50, moq: "60 tabs" },
-        { name: "Moringa Tablets", price: 25, moq: "40 tabs" },
-        { name: "Shilajit", price: 35, moq: "60 tabs" },
-    ], []);
-
-
-    const params = new URLSearchParams(window.location.search);
-    const ATCProduct = params.get('product') || "";
-
-    const normalize = (str) => str?.toLowerCase().replace(/[-_\s]/g, "").trim();
+    const productsData = [
+        { product_id: '68ac019606800a0384e9f883', name: "Whey Protein", price: 189, quotation_price: 1170, moq: "100 kg" },
+        { product_id: '68a2c8e006800a0384e9cc6a', name: "Whey Blend", price: 193, quotation_price: 1300, moq: "100 kg" },
+        { product_id: '68ad732d06800a0384ea019a', name: "Whey Concentrate", price: 204, quotation_price: 1630, moq: "100 kg" },
+        { product_id: '68ad735906800a0384ea019e', name: "Whey Isolate", price: 249, quotation_price: 3000, moq: "100 kg" },
+        { product_id: '68ad739506800a0384ea01a2', name: "Peanut Butter", price: 180, quotation_price: 150, moq: "100 kg (500gm)" },
+        { product_id: '68ad737d06800a0384ea01a0', name: "Mass Gainer", price: 164, quotation_price: 420, moq: "100 kg" },
+        { product_id: '68ad73e006800a0384ea01ab', name: "Creatine - flavoured", price: 156, quotation_price: 300, moq: "50 kg (250gm)" },
+        { product_id: '68ad742506800a0384ea01b2', name: "Creatine - Unflavoured", price: 156, quotation_price: 270, moq: "50 kg (250gm)" },
+        { product_id: '68ad744106800a0384ea01b4', name: "Pre-Workout", price: 159, quotation_price: 440, moq: "50 kg (250gm)" },
+        { product_id: '68ad746a06800a0384ea01b8', name: "EAA", price: 160, quotation_price: 490, moq: "50 kg (250gm)" },
+        { product_id: '68ad748306800a0384ea01be', name: "BCAA", price: 160, quotation_price: 490, moq: "50 kg (250gm)" },
+        { product_id: '68ad749906800a0384ea01c6', name: "Protein Bar", price: 180, quotation_price: 55, moq: "5000  nos" },
+        { product_id: '68ad74cc06800a0384ea01c8', name: "Energy Drink - Bottle", price: 180, quotation_price: 30, moq: "1000 nos" },
+        { product_id: '68ad74f006800a0384ea01cc', name: "Energy Drink - Can", price: 195, quotation_price: 45, moq: "24,000 nos" },
+        { product_id: '68ad750b06800a0384ea01dd', name: "Multivitamin Tablets", price: 320, quotation_price: 170, moq: "30000 nos" },
+        { product_id: '68ad752d06800a0384ea01e8', name: "Omega 3", price: 375, quotation_price: 225, moq: "30,000 nos" }
+    ];
 
 
     const today = new Date().toISOString().split("T")[0];
@@ -54,9 +43,27 @@ const Booking = () => {
         country: "",
     });
 
-    const [productLines, setProductLines] = useState(ATCProduct ? [] : [
-        { id: Date.now(), product: "", quantity: "", price: 0, total: 0 }
-    ]);
+    const [productLines, setProductLines] = useState(() => {
+        const savedProducts = localStorage.getItem("ATC_Product");
+        if (savedProducts) {
+            try {
+                const parsedProducts = JSON.parse(savedProducts);
+                return parsedProducts.map(savedProduct => {
+                    const productData = productsData.find(p => p.product_id === savedProduct.product_id);
+                    return {
+                        product_id: savedProduct.product_id,
+                        product: productData?.name || "",
+                        quantity: savedProduct.quantity,
+                        price: productData?.price || 0,
+                        total: (productData?.price || 0) * (savedProduct.quantity || 0)
+                    };
+                });
+            } catch (e) {
+                return [{ product_id: productsData[0]?.product_id, product: "", quantity: 1, price: 0, total: 0 }];
+            }
+        }
+        return [{ product_id: productsData[0]?.product_id, product: "", quantity: 1, price: 0, total: 0 }];
+    });
 
 
 
@@ -67,21 +74,35 @@ const Booking = () => {
             const selected = productsData.find(p => p.name === value);
             newProductLines[index] = {
                 ...newProductLines[index],
+                product_id: selected?.product_id,
                 product: value,
-                quantity: "1",
+                quantity: 1,
                 price: selected?.price || 0,
                 total: selected?.price || 0,
             };
         } else if (field === 'quantity') {
-            newProductLines[index][field] = value;
+            const numValue = parseInt(value) || 0;
+            newProductLines[index].quantity = numValue;
             const selected = productsData.find(p => p.name === newProductLines[index].product);
             if (selected) {
                 newProductLines[index].price = selected.price;
-                newProductLines[index].total = selected.price * (value || 1);
+                newProductLines[index].total = selected.price * numValue;
             }
         }
 
         setProductLines(newProductLines);
+
+        // Store only product IDs in localStorage
+        const validProducts = newProductLines.filter(line => line.product && line.quantity);
+        if (validProducts.length > 0) {
+            const productIdsToStore = validProducts.map(line => ({
+                product_id: line.product_id,
+                quantity: parseInt(line.quantity) || 0
+            }));
+            localStorage.setItem("ATC_Product", JSON.stringify(productIdsToStore));
+        } else {
+            localStorage.removeItem("ATC_Product");
+        }
     };
 
     const addProductLine = () => {
@@ -91,7 +112,7 @@ const Booking = () => {
         }
         setProductLines([
             ...productLines,
-            { id: Date.now(), product: "", quantity: "", price: 0, total: 0 }
+            { product_id: productsData[0]?.product_id, product: "", quantity: 1, price: 0, total: 0 }
         ]);
     };
 
@@ -112,6 +133,18 @@ const Booking = () => {
                 if (result.isConfirmed) {
                     const newProductLines = productLines.filter((_, i) => i !== index);
                     setProductLines(newProductLines);
+
+                    const validProducts = newProductLines.filter(line => line.product && line.quantity);
+                    if (validProducts.length > 0) {
+                        const productIdsToStore = validProducts.map(line => ({
+                            product_id: line.product_id,
+                            quantity: parseInt(line.quantity) || 1
+                        }));
+                        localStorage.setItem("ATC_Product", JSON.stringify(productIdsToStore));
+                    } else {
+                        localStorage.removeItem("ATC_Product");
+                    }
+
                     Swal.fire({
                         title: 'Deleted!',
                         text: 'Product has been removed.',
@@ -122,8 +155,7 @@ const Booking = () => {
                 }
             });
         } else {
-
-            setProductLines([{ id: Date.now(), product: "", quantity: "", price: 0, total: 0 }]);
+            setProductLines([{ product_id: productsData[0]?.product_id || '', product: "", quantity: "", price: 0, total: 0 }]);
             localStorage.removeItem("ATC_Product");
             Swal.fire({
                 title: 'Cleared',
@@ -208,6 +240,7 @@ const Booking = () => {
 
             const orderData = {
                 products: productLines.map(line => ({
+                    id: line.product_id,
                     name: line.product,
                     price: line.price,
                     quantity: parseInt(line.quantity),
@@ -252,7 +285,7 @@ const Booking = () => {
         const quotationContent = document.getElementById("quotationContent");
         if (!quotationContent) {
             console.error("Quotation content not found.");
-            return null;
+            return;
         }
 
         const doc = new jsPDF({
@@ -265,81 +298,22 @@ const Booking = () => {
         const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin;
         const contentHeight = doc.internal.pageSize.getHeight() - 2 * margin;
 
-        // wait for canvas
         const canvas = await html2canvas(quotationContent, { scale: 2, useCORS: true });
         const imgData = canvas.toDataURL("image/jpeg", 1);
 
         doc.addImage(imgData, "JPEG", margin, margin, contentWidth, contentHeight);
 
+        // Create Blob and trigger download
         const pdfBlob = doc.output("blob");
-
-        return pdfBlob;
+        const url = window.URL.createObjectURL(pdfBlob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "quotation.pdf");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
     };
-
-
-    useEffect(() => {
-
-        if (ATCProduct) {
-            const foundProduct = productsData.find(
-                (p) => normalize(p.name) === normalize(ATCProduct)
-            );
-
-            if (foundProduct) {
-                const existing = JSON.parse(localStorage.getItem("ATC_Product")) || [];
-
-                const alreadyExists = existing.some(
-                    (item) => normalize(item.product) === normalize(foundProduct.name)
-                );
-
-                if (!alreadyExists) {
-                    const newItem = {
-                        id: Date.now(),
-                        product: foundProduct.name,
-                        quantity: "1",
-                        price: foundProduct.price,
-                        total: foundProduct.price,
-                    };
-
-                    const updated = [...existing, newItem];
-
-                    if (updated && updated.length <= 9) {
-
-                        localStorage.setItem("ATC_Product", JSON.stringify(updated));
-                    } else {
-                        toast.error("Maximum 9 products allowed", { id: "maxProducts" });
-                    }
-                }
-            }
-        }
-
-        const stored = localStorage.getItem("ATC_Product");
-        if (stored) {
-            const parsed = JSON.parse(stored);
-            setProductLines(parsed);
-
-        } else {
-            setProductLines([
-                { id: Date.now(), product: "", quantity: "", price: 0, total: 0 },
-            ]);
-        }
-    }, [ATCProduct, productsData]);
-
-    useEffect(() => {
-        if (productLines && productLines.length > 0) {
-            // Filter out empty product lines
-            const nonEmptyLines = productLines.filter(
-                (line) => line.product !== "" && line.quantity !== "" && line.price > 0
-            );
-
-            if (nonEmptyLines.length > 0) {
-                localStorage.setItem("ATC_Product", JSON.stringify(nonEmptyLines));
-            } else if (productLines.every(line => line.product === "" && line.quantity === "" && line.price === 0)) {
-                // If all lines are empty, remove from localStorage
-                localStorage.removeItem("ATC_Product");
-            }
-        }
-    }, [productLines]);
-
 
     useEffect(() => {
         if (!isUserLoggedIn()) {
@@ -363,17 +337,14 @@ const Booking = () => {
 
     return (
         <>
-            <NutritionHeader />
-            <div className="container-fluid h-105"></div>
-
-            <div className='contact-us-form modal-form mx-auto my-3 px-2 px-md-5' >
+            <div className='contact-us-form modal-form mx-auto my-3 px-2 ' >
 
                 <h2 className="text-center my-4" style={{ color: '#fff' }}>Book Your Sample Now</h2>
 
                 <form onSubmit={(e) => e.preventDefault()}>
                     <div className="row overflow-hidden p-1">
 
-                        <h5 className='mb-4 ms-2'>Create Quotation :</h5>
+                        <h5 className='mb-4 ms-2'>Personal Details :</h5>
 
                         <div className="form-group col-12 col-md-4 mb-3">
                             <input
@@ -478,10 +449,10 @@ const Booking = () => {
                             />
                         </div>
 
-                        <h5 className='mb-1  mt-3'>Supplements (only quotation purpose) :</h5>
+                        <h5 className='mb-1  mt-3'>Supplements :</h5>
 
                         {productLines.map((line, index) => (
-                            <div key={line.id} className="row mx-0 g-3">
+                            <div key={line.product_id || index} className="row mx-0 g-3">
                                 {/* Product select */}
                                 <div className="form-group col-12 col-sm-6 col-md-4">
                                     <select
@@ -540,14 +511,14 @@ const Booking = () => {
                                 </div> */}
 
                                 {/* Total Price */}
-                                <div className={`form-group col-6 col-sm-6 ${productLines.length - 1 === index ? 'col-md-2' : 'col-md-3'}`}>
-                                    {/* <input
+                                <div className='form-group col-6 col-sm-6  col-md-3'>
+                                    <input
                                         type="text"
                                         className="form-control bg-dark text-light"
                                         value={line.total ? `₹${line.total}` : ""}
                                         placeholder="Total Price"
                                         readOnly
-                                    /> */}
+                                    />
                                 </div>
 
                                 {/* Delete button */}
@@ -565,13 +536,13 @@ const Booking = () => {
 
                                 {/* Add button => only last line */}
                                 {index === productLines.length - 1 && (
-                                    <div className="form-group col-6 col-sm-3 col-md-1 ms-auto">
+                                    <div className="form-group col-6 col-sm-3 col-md-3 mt-4 ms-auto  d-flex justify-content-end align-items-center">
                                         <button
                                             type="button"
-                                            className="form-control bg-dark text-light border border-1 border-primary d-flex justify-content-center align-items-center"
+                                            className=" bg-primary btn btn-primary p-2 px-3 d-flex justify-content-center align-items-center gap-2"
                                             onClick={addProductLine}
                                         >
-                                            <i className="fas fa-plus fs-5 text-primary"></i>
+                                            <i className="fas fa-plus"></i>  Add
                                         </button>
                                     </div>
                                 )}
@@ -582,11 +553,13 @@ const Booking = () => {
                             <div className="contact-form-btn">
                                 <button
                                     type="button"
-                                    className="btn-highlighted w-100 w-md-50"
+                                    className="btn-highlighted w-100 w-md-50 responsive-btn"
                                     onClick={() => handleBookSample()}
                                 >
-                                    Get a Quotation & Book My Sample Now
+                                    <span className="btn-text-desktop">Get a Quotation &amp; Book My Sample Now</span>
+                                    <span className="btn-text-mobile">Book My Sample Now</span>
                                 </button>
+
                             </div>
                         </div>
                     </div>
@@ -707,7 +680,8 @@ const Booking = () => {
                                                 <tr>
                                                     <th className="border border-black">Product</th>
                                                     <th className="border border-black">Rate</th>
-                                                    <th className="border border-black">Quantity</th>
+                                                    <th className="border border-black">Minimum Order Quantity</th>
+                                                    {/* <th className="border border-black">Quantity</th> */}
                                                     <th className="border border-black">Total</th>
                                                 </tr>
                                             </thead>
@@ -718,16 +692,29 @@ const Booking = () => {
                                                         <td className="border border-black">-</td>
                                                         <td className="border border-black">-</td>
                                                         <td className="border border-black">-</td>
+                                                        <td className="border border-black">-</td>
                                                     </tr>
                                                 ) : (
-                                                    productLines?.map((item, index) => (
-                                                        <tr key={index}>
-                                                            <td>{item.product}</td>
-                                                            <td>{item.price || "-"}</td>
-                                                            <td>{item.quantity || "-"}</td>
-                                                            <td>{item.total ? item.total : "-"}</td>
-                                                        </tr>
-                                                    ))
+                                                    productLines?.map((item, index) => {
+                                                        const product = productsData.find(p => p.name === item.product);
+                                                        const quotationPrice = product?.quotation_price || 0;
+
+                                                        // Extract numeric value from MOQ string
+                                                        const moqStr = product?.moq || "";
+                                                        const moqNumber = parseInt(moqStr.match(/\d+/)?.[0] || 0);
+
+                                                        const total = quotationPrice * moqNumber;
+
+                                                        return (
+                                                            <tr key={index}>
+                                                                <td>{item.product}</td>
+                                                                <td>{product?.quotation_price || "-"}</td>
+                                                                <td>{product?.moq || "-"}</td>
+                                                                {/* <td>{item.quantity || "-"}</td> */}
+                                                                <td>{total || "-"}</td>
+                                                            </tr>
+                                                        );
+                                                    })
                                                 )}
                                             </tbody>
                                         </table>
@@ -743,10 +730,13 @@ const Booking = () => {
                                                 <p>
                                                     <strong>Total Amount :-</strong>
                                                     <span className="inv-total">
-                                                        {productLines?.reduce(
-                                                            (sum, line) => sum + (line.total || 0),
-                                                            0
-                                                        ) || "-"}
+                                                        {productLines?.reduce((sum, line) => {
+                                                            const product = productsData.find(p => p.name === line.product);
+                                                            const quotationPrice = product?.quotation_price || 0;
+                                                            const moqStr = product?.moq || "";
+                                                            const moqNumber = parseInt(moqStr.match(/\d+/)?.[0] || 0);
+                                                            return sum + (quotationPrice * moqNumber);
+                                                        }, 0) || "-"}
                                                     </span>
                                                 </p>
                                             </div>
@@ -841,13 +831,11 @@ const Booking = () => {
                 toastOptions={{
                     duration: 3000,
                     style: {
-                        background: '#333',
-                        color: '#fff',
+                        background: '#fff',
+                        color: '#333',
                     },
                 }}
             />
-
-            <Footer />
         </>
 
     )

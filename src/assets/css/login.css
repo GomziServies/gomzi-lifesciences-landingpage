@@ -14,3 +14,18 @@
 .modal-title {
   width: 100%;
 }
+
+/* Login Modal specific styles */
+.login-modal .modal-content {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0% !important;
+  border-radius: 5px !important;
+}
+
+@media (max-width: 768px) {
+  .login-modal .modal-content {
+    max-width: 90% !important;
+  }
+}

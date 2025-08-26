@@ -51,14 +51,19 @@ export const createOrder = async (orderData) => {
 
         const ATC_Product = JSON.parse(localStorage.getItem("ATC_Product")) || [];
 
-        const SampleProducts = [{
-            product_id: ATC_Product.length <= 3 ? "68a2c8e006800a0384e9cc6a" : "68ac019606800a0384e9f883",
-            quantity: 1,
+        // const SampleProducts = [{
+        //     product_id: ATC_Product.length <= 3 ? "68a2c8e006800a0384e9cc6a" : "68ac019606800a0384e9f883",
+        //     quantity: 1,
+        //     landing_page: true
+        // }];
+
+        const updatedProducts = ATC_Product.map(product => ({
+            ...product,
             landing_page: true
-        }];
+        }));
 
         const payload = {
-            products: SampleProducts,
+            products: updatedProducts,
             payment_mode,
             address_line_1,
             address_line_2,
@@ -88,31 +93,28 @@ export const createOrder = async (orderData) => {
         const result = await axiosInstance.post('meals/create-order', payload);
 
         if (
-            (result &&
-                result.data &&
-                result.data.status === 200 &&
-                result.data.message === "COD Order Created Successfully") ||
-            (result &&
-                result.status === 200 &&
-                result.response === "OK" &&
-                result.message === "COD Order Created Successfully")
+            (result?.data?.status === 200 && result.data.message === "COD Order Created Successfully") ||
+            (result?.status === 200 && result.response === "OK" && result.message === "COD Order Created Successfully")
         ) {
+
             Swal.fire({
                 title: "Success",
                 text: "Please check your email for the invoice.",
                 icon: "success",
             }).then(() => {
-
                 localStorage.removeItem("tmp_ProductPurchasePayload");
-                localStorage.removeItem("ATC_Product")
+                localStorage.removeItem("ATC_Product");
             });
 
             return { showLoginModal: false, success: true };
-        } else if (result && result.data) {
-            result.data.data.handler = () => {
+        } else if (result?.data?.data) {
+
+            const paymentData = result.data.data;
+
+            paymentData.handler = async () => {
                 localStorage.removeItem("tmp_ProductPurchasePayload");
-                // Download quotation after successful payment
-                if (typeof orderData.downloadQuotationPDF === 'function') {
+
+                if (typeof orderData.downloadQuotationPDF === "function") {
                     orderData.downloadQuotationPDF();
                 }
                 Swal.fire({
@@ -120,45 +122,18 @@ export const createOrder = async (orderData) => {
                     text: "Your payment is successful. The quotation will be downloaded automatically.",
                     icon: "success",
                 }).then(() => {
-                    localStorage.removeItem("ATC_Product")
+                    localStorage.removeItem("ATC_Product");
                     window.location.href = "/thank-you";
                 });
             };
 
-            result.data.data.hidden = {
-                contact: false,
-                email: false,
-            };
+            paymentData.hidden = { contact: false, email: false };
 
-            new window.Razorpay(result.data.data).open();
-
-            return { showLoginModal: false, success: true };
-        } else if (result && result.status === 200) {
-            result.data.data.handler = () => {
-                localStorage.removeItem("tmp_ProductPurchasePayload");
-                // Download quotation after successful payment
-                if (typeof orderData.downloadQuotationPDF === 'function') {
-                    orderData.downloadQuotationPDF();
-                }
-                Swal.fire({
-                    title: "Success",
-                    text: "Your payment is successful. The quotation will be downloaded automatically.",
-                    icon: "success",
-                }).then(() => {
-                    localStorage.removeItem("ATC_Product")
-                    window.location.href = "/thank-you";
-                });
-            };
-
-            result.data.data.hidden = {
-                contact: false,
-                email: false,
-            };
-
-            new window.Razorpay(result.data.data).open();
+            new window.Razorpay(paymentData).open();
 
             return { showLoginModal: false, success: true };
         }
+
 
     } catch (error) {
         return {
