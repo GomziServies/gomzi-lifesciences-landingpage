@@ -26,10 +26,25 @@ function NutritionHeader() {
   };
 
   useEffect(() => {
-    const user_info = localStorage.getItem('user_info');
-    if (user_info) {
-      setUserInfo(JSON.parse(user_info));
-    }
+    const loadUserInfo = () => {
+      const user_info = localStorage.getItem('user_info');
+      if (user_info) {
+        setUserInfo(JSON.parse(user_info));
+      }
+    };
+
+    loadUserInfo();
+
+    // Listen for userInfoUpdated event
+    const handleUserInfoUpdate = (event) => {
+      setUserInfo(event.detail.userInfo);
+    };
+
+    window.addEventListener('userInfoUpdated', handleUserInfoUpdate);
+
+    return () => {
+      window.removeEventListener('userInfoUpdated', handleUserInfoUpdate);
+    };
   }, []);
 
   useEffect(() => {
@@ -142,13 +157,13 @@ function NutritionHeader() {
                         className="text-white position-relative bg-transparent border-0"
                         style={{ cursor: 'pointer' }}
                       >
-                        <i className="fas fa-shopping-cart" style={{ fontSize: '20px' }}></i>
+                        <i className="fas fa-shopping-cart" style={{ fontSize: '20px', color: `${cartItemsCount > 0 ? '#88c349' : 'white'}` }}></i>
                         {cartItemsCount > 0 && (
                           <span
                             className="position-absolute bg-danger rounded-circle d-flex align-items-center justify-content-center text-white"
                             style={{
-                              top: '-8px',
-                              right: '-8px',
+                              top: '-12px',
+                              right: '-6px',
                               width: '20px',
                               height: '20px',
                               fontSize: '12px'

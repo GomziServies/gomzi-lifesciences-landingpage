@@ -221,8 +221,11 @@ body {
   opacity: 20%;
   width: 100%;
   height: 100%;
+  transition: 0.3s ease-in-out;
 }
-
+.btn-default:hover::after {
+  background-color: #88c349 !important;
+}
 .btn-default::before {
   content: "";
   position: absolute;
@@ -1382,6 +1385,7 @@ body:has(.offcanvas) {
 
 .service-item {
   position: relative;
+  width: fit-content !important;
   height: fit-content !important;
   border: 1px solid var(--divider-color);
   backdrop-filter: blur(100px);
@@ -2829,6 +2833,7 @@ body:has(.offcanvas) {
   font-size: 22px;
   text-transform: capitalize;
   margin-bottom: 40px;
+  color: #88c349;
 }
 
 .footer-links ul {
@@ -2938,8 +2943,8 @@ body:has(.offcanvas) {
 }
 
 .footer-social-links ul li a {
-  border: 1px solid var(--accent-color);
-  color: var(--accent-color);
+  border: 1px solid white;
+  color: var(--white-color);
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -2950,8 +2955,8 @@ body:has(.offcanvas) {
 }
 
 .footer-social-links ul li a:hover {
-  border-color: var(--white-color);
-  color: var(--white-color);
+  border-color: #88c349;
+  color: var(--accent-color);
 }
 
 .footer-social-links ul li a i {

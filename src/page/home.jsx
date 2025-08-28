@@ -13,26 +13,258 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import VideoReview from "../components/video-review";
 import WhyChooseUs from "../components/whyChooseUs";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const productsData = [
-    { product_id: '68ac019606800a0384e9f883', name: "Whey Protein-1kg (35% - 40% Protein)", price: 1170, image: "/assets/images/product-images/whey-protein.webp", link: '/whey-protein', moq: "100 kg" },
-    { product_id: '68a2c8e006800a0384e9cc6a', name: "Whey Blend-1kg (50% - 60% Protein)", price: 1300, image: "/assets/images/product-images/whey-blend.webp", link: '/whey-blend', moq: "100 kg" },
-    { product_id: '68ad732d06800a0384ea019a', name: "Whey Concentrate-1kg (80% Protein)", price: 1630, image: "/assets/images/product-images/whey-concentrate.webp", link: '/whey-concentrate', moq: "100 kg" },
-    { product_id: '68ad735906800a0384ea019e', name: "Whey Isolate-1kg (90% Protein)", price: 3000, image: "/assets/images/product-images/whey-isolate.webp", link: '/whey-isolate', moq: "100 kg" },
-    { product_id: '68ad739506800a0384ea01a2', name: "Peanut Butter (500gm)", price: 150, image: "/assets/images/product-images/peanut-butter.webp", link: '/peanut-butter', moq: "100 kg (500gm)" },
-    { product_id: '68ad737d06800a0384ea01a0', name: "Mass Gainer-1kg", price: 420, image: "/assets/images/product-images/mass-gainer.webp", link: '/mass-gainer', moq: "100 kg" },
-    { product_id: '68ad73e006800a0384ea01ab', name: "Creatine - Flavoured (250gm)", price: 300, image: "/assets/images/product-images/creatine-flavored.webp", link: '/creatine-flavored', moq: "50 kg (250gm)" },
-    { product_id: '68ad742506800a0384ea01b2', name: "Creatine - Unflavoured (250gm)", price: 270, image: "/assets/images/product-images/creatine.webp", link: '/creatine-unflavored', moq: "50 kg (250gm)" },
-    { product_id: '68ad744106800a0384ea01b4', name: "Pre-Workout (250gm)", price: 440, image: "/assets/images/product-images/pre-workout.webp", link: '/pre-workout', moq: "50 kg (250gm)" },
-    { product_id: '68ad746a06800a0384ea01b8', name: "EAA (250gm)", price: 490, image: "/assets/images/product-images/eaa.webp", link: '/eaa', moq: "50 kg (250gm)" },
-    { product_id: '68ad748306800a0384ea01be', name: "BCAA (250gm)", price: 490, image: "/assets/images/product-images/bcaa.webp", link: '/bcaa', moq: "50 kg (250gm)" },
-    { product_id: '68ad749906800a0384ea01c6', name: "Protein Bar (12gm protein)", price: 55, image: "/assets/images/product-images/protein-bar.webp", link: '/protein-bar', moq: "5000 pcs" },
-    { product_id: '68ad74cc06800a0384ea01c8', name: "Energy Drink - Bottle (250ml)", price: 30, image: "/assets/images/product-images/energy-drink.webp", link: '/energy-drink', moq: "1000 pcs" },
-    { product_id: '68ad74f006800a0384ea01cc', name: "Energy Drink - Can (250ml)", price: 45, image: "/assets/images/product-images/energy-drink-can.webp", link: '/energy-drink-can', moq: "24,000 pcs" },
-    { product_id: '68ad750b06800a0384ea01dd', name: "Multivitamin Tablets (60tbs)", price: 170, image: "/assets/images/product-images/multivitamin.webp", link: '/multivitamin', moq: "60 tabs" },
-    { product_id: '68ad752d06800a0384ea01e8', name: "Omega 3 (60tbs)", price: 225, image: "/assets/images/product-images/omega-3.webp", link: '/omega-3', moq: "60 tabs" }
+
+    {
+        product_id: "68a2c8e006800a0384e9cc6a",
+        name: "Whey Blend-1kg",
+        flavoured: ["Mawa Kulfi", "Chocolate", "Mango", "Mocha Coffee"],
+        protein: ["35%", "40%", "50%", "60%"],
+        priceMatrix: {
+            "35%": { "Mawa Kulfi": 930, "Chocolate": 1100, "Mocha Coffee": 1210, "Mango": 930 },
+            "40%": { "Mawa Kulfi": 1170, "Chocolate": 1250, "Mocha Coffee": 1360, "Mango": 1170 },
+            "50%": { "Mawa Kulfi": 1665, "Chocolate": 1745, "Mocha Coffee": 1855, "Mango": 1665 },
+            "60%": { "Mawa Kulfi": 2115, "Chocolate": 2195, "Mocha Coffee": 2305, "Mango": 2115 },
+        },
+        price: 1300,
+        image: "/assets/images/product-images/whey-blend.webp",
+        link: "/whey-blend",
+        moq: "100 kg"
+    },
+    {
+        product_id: "68ad732d06800a0384ea019a",
+        name: "Whey Concentrate-1kg",
+        flavoured: ["Mawa Kulfi", "Chocolate", "Mocha Coffee", "Mango"],
+        protein: ["35%", "50%", "60%", "70%", "80%"],
+        priceMatrix: {
+            "35%": { "Mawa Kulfi": 1295, "Chocolate": 1360, "Mocha Coffee": 1465, "Mango": 1295 },
+            "50%": { "Mawa Kulfi": 1565, "Chocolate": 1625, "Mocha Coffee": 1730, "Mango": 1565 },
+            "60%": { "Mawa Kulfi": 1742, "Chocolate": 1805, "Mocha Coffee": 1911, "Mango": 1742 },
+            "70%": { "Mawa Kulfi": 1920, "Chocolate": 1985, "Mocha Coffee": 2090, "Mango": 1920 },
+            "80%": { "Mawa Kulfi": 2100, "Chocolate": 2165, "Mocha Coffee": 2270, "Mango": 2100 }
+        },
+        price: 1295,
+        image: "/assets/images/product-images/whey-concentrate.webp",
+        link: "/whey-concentrate",
+        moq: "100 kg"
+    },
+    {
+        product_id: "68ad735906800a0384ea019e",
+        name: "Whey Isolate-1kg",
+        flavoured: ["Mawa Kulfi", "Chocolate", "Mocha Coffee", "Mango"],
+        protein: ["35%", "40%", "50%", "60%", "70%", "80%"],
+        priceMatrix: {
+            "35%": { "Mawa Kulfi": 1900, "Chocolate": 1963, "Mocha Coffee": 2068, "Mango": 1900 },
+            "40%": { "Mawa Kulfi": 2076, "Chocolate": 2140, "Mocha Coffee": 2245, "Mango": 2076 },
+            "50%": { "Mawa Kulfi": 2429, "Chocolate": 2492, "Mocha Coffee": 2598, "Mango": 2429 },
+            "60%": { "Mawa Kulfi": 2782, "Chocolate": 2845, "Mocha Coffee": 2950, "Mango": 2782 },
+            "70%": { "Mawa Kulfi": 3135, "Chocolate": 3198, "Mocha Coffee": 3303, "Mango": 3135 },
+            "80%": { "Mawa Kulfi": 3487, "Chocolate": 3551, "Mocha Coffee": 3656, "Mango": 3487 }
+        },
+        price: 1900,
+        image: "/assets/images/product-images/whey-isolate.webp",
+        link: "/whey-isolate",
+        moq: "100 kg"
+    },
+    {
+        product_id: "68ac019606800a0384e9f883",
+        name: "Whey Protein-1kg (35% - 40% Protein)",
+        price: 1170,
+        image: "/assets/images/product-images/whey-protein.webp",
+        link: "/whey-protein",
+        moq: "100 kg"
+    },
+    {
+        product_id: "68ad737d06800a0384ea01a0",
+        name: "Mass Gainer-1kg",
+        price: 420,
+        image: "/assets/images/product-images/mass-gainer.webp",
+        link: "/mass-gainer",
+        moq: "100 kg"
+    },
+    {
+        product_id: "68ad739506800a0384ea01a2",
+        name: "Peanut Butter (500gm)",
+        price: 150,
+        image: "/assets/images/product-images/peanut-butter.webp",
+        link: "/peanut-butter",
+        moq: "100 kg (500gm)"
+    },
+    {
+        product_id: "68ad73e006800a0384ea01ab",
+        name: "Creatine - Flavoured (250gm)",
+        price: 300,
+        image: "/assets/images/product-images/creatine-flavored.webp",
+        link: "/creatine-flavored",
+        moq: "50 kg (250gm)"
+    },
+    {
+        product_id: "68ad742506800a0384ea01b2",
+        name: "Creatine - Unflavoured (250gm)",
+        price: 270,
+        image: "/assets/images/product-images/creatine.webp",
+        link: "/creatine-unflavored",
+        moq: "50 kg (250gm)"
+    },
+    {
+        product_id: "68ad744106800a0384ea01b4",
+        name: "Pre-Workout (250gm)",
+        price: 440,
+        image: "/assets/images/product-images/pre-workout.webp",
+        link: "/pre-workout",
+        moq: "50 kg (250gm)"
+    },
+    {
+        product_id: "68ad746a06800a0384ea01b8",
+        name: "EAA (250gm)",
+        price: 490,
+        image: "/assets/images/product-images/eaa.webp",
+        link: "/eaa",
+        moq: "50 kg (250gm)"
+    },
+    {
+        product_id: "68ad748306800a0384ea01be",
+        name: "BCAA (250gm)",
+        price: 490,
+        image: "/assets/images/product-images/bcaa.webp",
+        link: "/bcaa",
+        moq: "50 kg (250gm)"
+    },
+    {
+        product_id: "68ad749906800a0384ea01c6",
+        name: "Protein Bar (12gm protein)",
+        price: 55,
+        image: "/assets/images/product-images/protein-bar.webp",
+        link: "/protein-bar",
+        moq: "5000 pcs"
+    },
+    {
+        product_id: "68ad74cc06800a0384ea01c8",
+        name: "Energy Drink - Bottle (250ml)",
+        price: 30,
+        image: "/assets/images/product-images/energy-drink.webp",
+        link: "/energy-drink",
+        moq: "1000 pcs"
+    },
+    {
+        product_id: "68ad74f006800a0384ea01cc",
+        name: "Energy Drink - Can (250ml)",
+        price: 45,
+        image: "/assets/images/product-images/energy-drink-can.webp",
+        link: "/energy-drink-can",
+        moq: "24000 pcs"
+    },
+    {
+        product_id: "68ad750b06800a0384ea01dd",
+        name: "Multivitamin Tablets (60tbs)",
+        price: 170,
+        image: "/assets/images/product-images/multivitamin.webp",
+        link: "/multivitamin",
+        moq: "30000 nos"
+    },
+    {
+        product_id: "68ad752d06800a0384ea01e8",
+        name: "Omega 3 (60tbs)",
+        price: 225,
+        image: "/assets/images/product-images/omega-3.webp",
+        link: "/omega-3",
+        moq: "30000 nos"
+    }
 ];
+const Whey_Concentrate = {
+    "Chocolate": [
+        { percent: "35%", product_id: "68aef32e06800a0384ea3faf" },
+        { percent: "50%", product_id: "68aef3a806800a0384ea4080" },
+        { percent: "60%", product_id: "68aef4a706800a0384ea4095" },
+        { percent: "70%", product_id: "68aef5b806800a0384ea40a9" },
+        { percent: "80%", product_id: "68aef66406800a0384ea40cd" }
+    ],
+    "Mawa Kulfi": [
+        { percent: "35%", product_id: "68aef29506800a0384ea3e42" },
+        { percent: "50%", product_id: "68aef36c06800a0384ea4075" },
+        { percent: "60%", product_id: "68aef47006800a0384ea4090" },
+        { percent: "70%", product_id: "68aef58c06800a0384ea40a5" },
+        { percent: "80%", product_id: "68aef63606800a0384ea40c9" }
+    ],
+    "Mocha Coffee": [
+        { percent: "35%", product_id: "68aef30106800a0384ea3f35" },
+        { percent: "50%", product_id: "68aef39406800a0384ea407e" },
+        { percent: "60%", product_id: "68aef48906800a0384ea4092" },
+        { percent: "70%", product_id: "68aef5a906800a0384ea40a7" },
+        { percent: "80%", product_id: "68aef65006800a0384ea40cb" }
+    ],
+    "Mango": [
+        { percent: "35%", product_id: "68b029fe06800a0384ea45e4" },
+        { percent: "50%", product_id: "68b02a2606800a0384ea45ea" },
+        { percent: "60%", product_id: "68b02a5806800a0384ea45f6" },
+        { percent: "70%", product_id: "68b02a6806800a0384ea45f8" },
+        { percent: "80%", product_id: "68b02a7c06800a0384ea45fa" }
+    ]
+};
+const Whey_Isolate = {
+    "Chocolate": [
+        { percent: "35%", product_id: "68aef71b06800a0384ea40e5" },
+        { percent: "40%", product_id: "68aef76906800a0384ea40eb" },
+        { percent: "50%", product_id: "68aef80406800a0384ea4112" },
+        { percent: "60%", product_id: "68aef88306800a0384ea4124" },
+        { percent: "70%", product_id: "68aef8d606800a0384ea412a" },
+        { percent: "80%", product_id: "68aef96e06800a0384ea4153" }
+    ],
+    "Mawa Kulfi": [
+        { percent: "35%", product_id: "68aef70c06800a0384ea40e3" },
+        { percent: "40%", product_id: "68aef75306800a0384ea40e9" },
+        { percent: "50%", product_id: "68aef7ea06800a0384ea4110" },
+        { percent: "60%", product_id: "68aef86c06800a0384ea4122" },
+        { percent: "70%", product_id: "68aef8c206800a0384ea4128" },
+        { percent: "80%", product_id: "68aef95306800a0384ea4151" }
+    ],
+    "Mocha Coffee": [
+        { percent: "35%", product_id: "68aef72d06800a0384ea40e7" },
+        { percent: "40%", product_id: "68aef77b06800a0384ea40ed" },
+        { percent: "50%", product_id: "68aef81106800a0384ea4114" },
+        { percent: "60%", product_id: "68aef89b06800a0384ea4126" },
+        { percent: "70%", product_id: "68aef8e806800a0384ea412c" },
+        { percent: "80%", product_id: "68aef98106800a0384ea4155" }
+    ],
+    "Mango": [
+        { percent: "35%", product_id: "68b02a9d06800a0384ea4605" },
+        { percent: "40%", product_id: "68b02ab106800a0384ea460b" },
+        { percent: "50%", product_id: "68b02ad606800a0384ea460f" },
+        { percent: "60%", product_id: "68b02b4006800a0384ea4602" },
+        { percent: "70%", product_id: "68b02aee06800a0384ea4613" },
+        { percent: "80%", product_id: "68b02b1e06800a0384ea4619" }
+    ]
+};
+
+const Whey_Blend = {
+    "Chocolate": [
+        { percent: "35%", product_id: "68b03cd406800a0384ea478c" },
+        { percent: "40%", product_id: "68b03cf206800a0384ea478e" },
+        { percent: "50%", product_id: "68b03d2606800a0384ea479b" },
+        { percent: "60%", product_id: "68b03d4206800a0384ea479d" },
+    ],
+    "Mawa Kulfi": [
+        { percent: "35%", product_id: "68b03b9406800a0384ea476f" },
+        { percent: "40%", product_id: "68b03baf06800a0384ea4771" },
+        { percent: "50%", product_id: "68b03bbd06800a0384ea4773" },
+        { percent: "60%", product_id: "68b03bcd06800a0384ea4775" },
+    ],
+    "Mocha Coffee": [
+        { percent: "35%", product_id: "68b03ddd06800a0384ea47e5" },
+        { percent: "40%", product_id: "68b03deb06800a0384ea47e7" },
+        { percent: "50%", product_id: "68b03df506800a0384ea47e9" },
+        { percent: "60%", product_id: "68b03e0206800a0384ea47eb" },
+    ],
+    "Mango": [
+        { percent: "35%", product_id: "68b03a6306800a0384ea4750" },
+        { percent: "40%", product_id: "68b03ab206800a0384ea4752" },
+        { percent: "50%", product_id: "68b03b0706800a0384ea4754" },
+        { percent: "60%", product_id: "68b03b1306800a0384ea4756" },
+    ]
+};
+
 
 const testimonialsData = [
     {
@@ -63,28 +295,75 @@ const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 export default function Home() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showBookingModal, setShowBookingModal] = useState(false);
+    const [productSelections, setProductSelections] = useState({});
+
+    const updateProductSelection = (productId, type, value) => {
+        setProductSelections(prev => ({
+            ...prev,
+            [productId]: {
+                ...prev[productId],
+                [type]: value
+            }
+        }));
+    };
 
 
     const handleBookSample = (product) => {
         if (isUserLoggedIn()) {
             const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
 
-            setShowBookingModal(true);
             if (existingProducts.length >= 9) {
                 toast.error('Maximum 9 products can be added');
                 return;
             }
 
-            // Check if product already exists
-            if (!existingProducts.some(p => p.product_id === product.product_id)) {
+            const selections = productSelections[product.product_id] || {};
+            let finalProductId = product.product_id;
+            let canAdd = true;
+
+            // If it's a Whey product that requires selections
+            if ((product.name.includes("Whey Concentrate") || product.name.includes("Whey Isolate") || product.name.includes("Whey Blend"))) {
+                if (!selections.protein || !selections.flavor) {
+                    toast.error('Please select both protein percentage and flavor');
+                    canAdd = false;
+                } else {
+                    let productType;
+                    if (product.name.includes("Whey Concentrate")) {
+                        productType = Whey_Concentrate;
+                    } else if (product.name.includes("Whey Isolate")) {
+                        productType = Whey_Isolate;
+                    } else if (product.name.includes("Whey Blend")) {
+                        productType = Whey_Blend;
+                    }
+                    const variantList = productType[selections.flavor];
+                    const variant = variantList.find(v => v.percent === selections.protein);
+                    if (variant) {
+                        finalProductId = variant.product_id;
+                    }
+                }
+            }
+
+            // Check if this specific variant already exists
+            if (existingProducts.some(p => p.product_id === finalProductId)) {
+                toast.error('This product variant is already in your cart');
+                canAdd = false;
+            }
+
+            if (canAdd) {
                 const productToStore = {
-                    product_id: product.product_id,
-                    quantity: 1
+                    product_id: finalProductId,
+                    quantity: 1,
                 };
 
                 localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, productToStore]));
-            }
+                toast.success('Product added successfully!');
 
+                // Trigger event to update cart count and button text
+                window.dispatchEvent(new Event('cartUpdated'));
+
+                // Only show booking modal after successful addition
+                setShowBookingModal(true);
+            }
         } else {
             setShowLoginModal(true);
         }
@@ -237,7 +516,53 @@ export default function Home() {
                                         <div className="service-content-box">
                                             <div className="service-box-content ps-3">
                                                 <h5 className="mb-2 mt-2">{product.name}</h5>
-                                                <p>₹ {product.price}</p>
+                                                <p>
+                                                    ₹ {product.priceMatrix?.[
+                                                        productSelections[product.product_id]?.protein ?? ""
+                                                    ]?.[
+                                                        productSelections[product.product_id]?.flavor ?? ""
+                                                    ] ?? product.price}
+                                                </p>
+                                                <div className="row mt-3 w-100">
+                                                    <div className="col-6">
+                                                        {product.protein && (
+                                                            <select
+                                                                className="form-select text-white border-0"
+                                                                style={{
+                                                                    backgroundColor: '#3C3C3C',
+                                                                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
+                                                                    cursor: 'pointer'
+                                                                }}
+                                                                onChange={(e) => updateProductSelection(product.product_id, 'protein', e.target.value)}
+                                                                value={productSelections[product.product_id]?.protein || ""}
+                                                            >
+                                                                <option value="" disabled style={{ backgroundColor: '#3C3C3C' }}>Select Protein</option>
+                                                                {product.protein.map((protein) => (
+                                                                    <option key={protein} value={protein} style={{ backgroundColor: '#3C3C3C' }}>{protein}</option>
+                                                                ))}
+                                                            </select>
+                                                        )}
+                                                    </div>
+                                                    <div className="col-6 pr-0">
+                                                        {product.flavoured && (
+                                                            <select
+                                                                className="form-select text-white border-0"
+                                                                style={{
+                                                                    backgroundColor: '#3C3C3C',
+                                                                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
+                                                                    cursor: 'pointer'
+                                                                }}
+                                                                onChange={(e) => updateProductSelection(product.product_id, 'flavor', e.target.value)}
+                                                                value={productSelections[product.product_id]?.flavor || ""}
+                                                            >
+                                                                <option value="" disabled style={{ backgroundColor: '#3C3C3C' }}>Select Flavor</option>
+                                                                {product.flavoured.map((flavor) => (
+                                                                    <option key={flavor} value={flavor} style={{ backgroundColor: '#3C3C3C' }}>{flavor}</option>
+                                                                ))}
+                                                            </select>
+                                                        )}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -245,8 +570,50 @@ export default function Home() {
                                         <button
                                             onClick={() => handleBookSample(product)}
                                             className="btn-highlighted m-0 border-0"
-                                        >
-                                            Book Sample
+                                        >{(() => {
+                                            const cartProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+
+                                            // Check if it's a regular product
+                                            if (cartProducts.some(p => p.product_id === product.product_id)) {
+                                                return "Item Added";
+                                            }
+
+                                            // If it's a Whey Concentrate, Isolate, or Blend check all variants
+                                            if (product.name.includes("Whey Concentrate")) {
+                                                // Check if any variant of this concentrate is in cart
+                                                for (const flavor in Whey_Concentrate) {
+                                                    if (Whey_Concentrate[flavor].some(variant =>
+                                                        cartProducts.some(p => p.product_id === variant.product_id)
+                                                    )) {
+                                                        return "Item Added";
+                                                    }
+                                                }
+                                            }
+
+                                            if (product.name.includes("Whey Isolate")) {
+                                                // Check if any variant of this isolate is in cart
+                                                for (const flavor in Whey_Isolate) {
+                                                    if (Whey_Isolate[flavor].some(variant =>
+                                                        cartProducts.some(p => p.product_id === variant.product_id)
+                                                    )) {
+                                                        return "Item Added";
+                                                    }
+                                                }
+                                            }
+
+                                            if (product.name.includes("Whey Blend")) {
+                                                // Check if any variant of this blend is in cart
+                                                for (const flavor in Whey_Blend) {
+                                                    if (Whey_Blend[flavor].some(variant =>
+                                                        cartProducts.some(p => p.product_id === variant.product_id)
+                                                    )) {
+                                                        return "Item Added";
+                                                    }
+                                                }
+                                            }
+
+                                            return "Book Sample";
+                                        })()}
                                         </button>
                                     </div>
                                 </div>
@@ -468,7 +835,16 @@ export default function Home() {
             </div> */}
 
             <Footer />
-
+            <Toaster
+                position="top-right"
+                toastOptions={{
+                    duration: 3000,
+                    style: {
+                        background: '#fff',
+                        color: '#333',
+                    },
+                }}
+            />
         </>
     );
 }
