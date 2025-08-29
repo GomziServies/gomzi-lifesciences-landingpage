@@ -9,6 +9,7 @@ function WhyChooseUs() {
                 <img
                     className="col-md-7"
                     src="/assets/images/why-choose-us2.jpg"
+                    alt="Why Choose Us?"
                 />
                 <div className="col"></div>
             </div>
