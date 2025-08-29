@@ -173,7 +173,7 @@ const productsData = [
         moq: "30000 nos"
     }
 ];
-const Whey_Concentrate = {
+window.Whey_Concentrate = {
     "Chocolate": [
         { percent: "35%", product_id: "68aef32e06800a0384ea3faf" },
         { percent: "50%", product_id: "68aef3a806800a0384ea4080" },
@@ -203,7 +203,7 @@ const Whey_Concentrate = {
         { percent: "80%", product_id: "68b02a7c06800a0384ea45fa" }
     ]
 };
-const Whey_Isolate = {
+window.Whey_Isolate = {
     "Chocolate": [
         { percent: "35%", product_id: "68aef71b06800a0384ea40e5" },
         { percent: "40%", product_id: "68aef76906800a0384ea40eb" },
@@ -238,7 +238,7 @@ const Whey_Isolate = {
     ]
 };
 
-const Whey_Blend = {
+window.Whey_Blend = {
     "Chocolate": [
         { percent: "35%", product_id: "68b03cd406800a0384ea478c" },
         { percent: "40%", product_id: "68b03cf206800a0384ea478e" },
@@ -296,6 +296,7 @@ export default function Home() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showBookingModal, setShowBookingModal] = useState(false);
     const [productSelections, setProductSelections] = useState({});
+    const [pendingProduct, setPendingProduct] = useState(null);
 
     const updateProductSelection = (productId, type, value) => {
         setProductSelections(prev => ({
@@ -329,11 +330,11 @@ export default function Home() {
                 } else {
                     let productType;
                     if (product.name.includes("Whey Concentrate")) {
-                        productType = Whey_Concentrate;
+                        productType = window.Whey_Concentrate;
                     } else if (product.name.includes("Whey Isolate")) {
-                        productType = Whey_Isolate;
+                        productType = window.Whey_Isolate;
                     } else if (product.name.includes("Whey Blend")) {
-                        productType = Whey_Blend;
+                        productType = window.Whey_Blend;
                     }
                     const variantList = productType[selections.flavor];
                     const variant = variantList.find(v => v.percent === selections.protein);
@@ -363,6 +364,7 @@ export default function Home() {
                 setShowBookingModal(true);
             }
         } else {
+            setPendingProduct({ ...product, selections: productSelections[product.product_id] });
             setShowLoginModal(true);
         }
     };
@@ -392,6 +394,7 @@ export default function Home() {
 
     // Set default values for protein and flavor on component mount
     useEffect(() => {
+        // Set default values for protein and flavor
         productsData.forEach(product => {
             if (product.protein && product.flavoured) {
                 setProductSelections(prev => ({
@@ -403,11 +406,23 @@ export default function Home() {
                 }));
             }
         });
+
+        // Check if there are products in localStorage and user is logged in
+        const atcProducts = JSON.parse(localStorage.getItem("ATC_Product"));
+        if (atcProducts && atcProducts.length > 0 && isUserLoggedIn()) {
+            setShowBookingModal(true);
+        }
     }, []);
 
     return (
         <>
-            {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
+            {showLoginModal && <LoginModal
+                onClose={() => {
+                    setShowLoginModal(false);
+                    setPendingProduct(null);
+                }}
+                pendingProduct={pendingProduct}
+            />}
             {showBookingModal && <BookingModal onClose={() => setShowBookingModal(false)} />}
             <NutritionHeader />
 
@@ -594,8 +609,8 @@ export default function Home() {
                                             // If it's a Whey Concentrate, Isolate, or Blend check all variants
                                             if (product.name.includes("Whey Concentrate")) {
                                                 // Check if any variant of this concentrate is in cart
-                                                for (const flavor in Whey_Concentrate) {
-                                                    if (Whey_Concentrate[flavor].some(variant =>
+                                                for (const flavor in window.Whey_Concentrate) {
+                                                    if (window.Whey_Concentrate[flavor].some(variant =>
                                                         cartProducts.some(p => p.product_id === variant.product_id)
                                                     )) {
                                                         return "Item Added";
@@ -605,8 +620,8 @@ export default function Home() {
 
                                             if (product.name.includes("Whey Isolate")) {
                                                 // Check if any variant of this isolate is in cart
-                                                for (const flavor in Whey_Isolate) {
-                                                    if (Whey_Isolate[flavor].some(variant =>
+                                                for (const flavor in window.Whey_Isolate) {
+                                                    if (window.Whey_Isolate[flavor].some(variant =>
                                                         cartProducts.some(p => p.product_id === variant.product_id)
                                                     )) {
                                                         return "Item Added";
@@ -616,8 +631,8 @@ export default function Home() {
 
                                             if (product.name.includes("Whey Blend")) {
                                                 // Check if any variant of this blend is in cart
-                                                for (const flavor in Whey_Blend) {
-                                                    if (Whey_Blend[flavor].some(variant =>
+                                                for (const flavor in window.Whey_Blend) {
+                                                    if (window.Whey_Blend[flavor].some(variant =>
                                                         cartProducts.some(p => p.product_id === variant.product_id)
                                                     )) {
                                                         return "Item Added";

@@ -91,7 +91,6 @@ function Footer() {
                       <h3>Quick link</h3>
                       <ul>
                         <li><a href="index.html">home</a></li>
-                        <li><a href="/booking-page">Book Sample</a></li>
                         <li><a href="/profile">Profile</a></li>
                       </ul>
                     </div>

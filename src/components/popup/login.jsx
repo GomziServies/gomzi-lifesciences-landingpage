@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import '../../assets/css/login.css';
 
-const LoginModal = ({ onClose }) => {
+const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
   const [showModal, setShowModal] = useState(true);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [otpDialogOpen, setOtpDialogOpen] = useState(false);
@@ -69,7 +69,46 @@ const LoginModal = ({ onClose }) => {
           response.data.data.authorization
         );
         toast.success("Successfully Login!");
-        handleClose();
+        if (pendingProduct) {
+          const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+          let finalProductId = pendingProduct.product_id;
+
+          // Handle product variants (Whey products)
+          if (pendingProduct.name.includes("Whey")) {
+            const selections = pendingProduct.selections || {};
+            if (selections.protein && selections.flavor) {
+              let productType;
+              if (pendingProduct.name.includes("Whey Concentrate")) {
+                productType = window.Whey_Concentrate;
+              } else if (pendingProduct.name.includes("Whey Isolate")) {
+                productType = window.Whey_Isolate;
+              } else if (pendingProduct.name.includes("Whey Blend")) {
+                productType = window.Whey_Blend;
+              }
+
+              if (productType) {
+                const variantList = productType[selections.flavor];
+                const variant = variantList.find(v => v.percent === selections.protein);
+                if (variant) {
+                  finalProductId = variant.product_id;
+                }
+              }
+            }
+          }
+
+          localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, {
+            product_id: finalProductId,
+            quantity: 1
+          }]));
+
+          window.dispatchEvent(new Event('cartUpdated'));
+          handleClose();
+          BookingModalOpen(true);
+          window.location.href = '/';
+        } else {
+          handleClose();
+          window.location.reload();
+        }
       } else {
         setShowSignUpModal(false);
         setEmailOtpDialogOpen(true);
@@ -95,7 +134,43 @@ const LoginModal = ({ onClose }) => {
         await getUserData();
         setEmailOtpDialogOpen(false);
         toast.success("Successfully Login!");
-        window.location.reload();
+        if (pendingProduct) {
+          const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+          let finalProductId = pendingProduct.product_id;
+
+          // Handle product variants (Whey products)
+          if (pendingProduct.name.includes("Whey")) {
+            const selections = pendingProduct.selections || {};
+            if (selections.protein && selections.flavor) {
+              let productType;
+              if (pendingProduct.name.includes("Whey Concentrate")) {
+                productType = window.Whey_Concentrate;
+              } else if (pendingProduct.name.includes("Whey Isolate")) {
+                productType = window.Whey_Isolate;
+              } else if (pendingProduct.name.includes("Whey Blend")) {
+                productType = window.Whey_Blend;
+              }
+
+              if (productType) {
+                const variantList = productType[selections.flavor];
+                const variant = variantList.find(v => v.percent === selections.protein);
+                if (variant) {
+                  finalProductId = variant.product_id;
+                }
+              }
+            }
+          }
+
+          localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, {
+            product_id: finalProductId,
+            quantity: 1
+          }]));
+
+          window.dispatchEvent(new Event('cartUpdated'));
+          window.location.href = '/booking-page';
+        } else {
+          window.location.reload();
+        }
       } else {
         toast.error("Failed to verify OTP. Please try again.");
       }
@@ -122,7 +197,43 @@ const LoginModal = ({ onClose }) => {
         await getUserData();
         setOtpDialogOpen(false);
         toast.success("Successfully Login!");
-        window.location.reload();
+        if (pendingProduct) {
+          const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+          let finalProductId = pendingProduct.product_id;
+
+          // Handle product variants (Whey products)
+          if (pendingProduct.name.includes("Whey")) {
+            const selections = pendingProduct.selections || {};
+            if (selections.protein && selections.flavor) {
+              let productType;
+              if (pendingProduct.name.includes("Whey Concentrate")) {
+                productType = window.Whey_Concentrate;
+              } else if (pendingProduct.name.includes("Whey Isolate")) {
+                productType = window.Whey_Isolate;
+              } else if (pendingProduct.name.includes("Whey Blend")) {
+                productType = window.Whey_Blend;
+              }
+
+              if (productType) {
+                const variantList = productType[selections.flavor];
+                const variant = variantList.find(v => v.percent === selections.protein);
+                if (variant) {
+                  finalProductId = variant.product_id;
+                }
+              }
+            }
+          }
+
+          localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, {
+            product_id: finalProductId,
+            quantity: 1
+          }]));
+
+          window.dispatchEvent(new Event('cartUpdated'));
+          window.location.href = '/';
+        } else {
+          window.location.reload();
+        }
       } else {
         toast.error("Failed to verify OTP. Please try again.");
       }
