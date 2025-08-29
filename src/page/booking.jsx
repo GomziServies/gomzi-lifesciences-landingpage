@@ -380,7 +380,7 @@ const Booking = () => {
                     payload = { [name]: value };
                 }
 
-                const response = await axiosInstance.post(
+                await axiosInstance.post(
                     "/account/update-profile",
                     payload
                 );
