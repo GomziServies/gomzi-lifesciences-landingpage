@@ -68,14 +68,14 @@ const productsData = [
         link: "/whey-isolate",
         moq: "100 kg"
     },
-    {
-        product_id: "68ac019606800a0384e9f883",
-        name: "Whey Protein-1kg (35% - 40% Protein)",
-        price: 1170,
-        image: "/assets/images/product-images/whey-protein.webp",
-        link: "/whey-protein",
-        moq: "100 kg"
-    },
+    // {
+    //     product_id: "68ac019606800a0384e9f883",
+    //     name: "Whey Protein-1kg (35% - 40% Protein)",
+    //     price: 1170,
+    //     image: "/assets/images/product-images/whey-protein.webp",
+    //     link: "/whey-protein",
+    //     moq: "100 kg"
+    // },
     {
         product_id: "68ad737d06800a0384ea01a0",
         name: "Mass Gainer-1kg",
@@ -356,12 +356,10 @@ export default function Home() {
                 };
 
                 localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, productToStore]));
-                toast.success('Product added successfully!');
 
                 // Trigger event to update cart count and button text
                 window.dispatchEvent(new Event('cartUpdated'));
 
-                // Only show booking modal after successful addition
                 setShowBookingModal(true);
             }
         } else {
@@ -391,6 +389,21 @@ export default function Home() {
         const atcProducts = JSON.parse(localStorage.getItem('ATC_Product')) || [];
         console.log('atcProducts:', atcProducts);
     }, [showLoginModal]);
+
+    // Set default values for protein and flavor on component mount
+    useEffect(() => {
+        productsData.forEach(product => {
+            if (product.protein && product.flavoured) {
+                setProductSelections(prev => ({
+                    ...prev,
+                    [product.product_id]: {
+                        protein: "35%",
+                        flavor: "Mawa Kulfi"
+                    }
+                }));
+            }
+        });
+    }, []);
 
     return (
         <>
@@ -523,20 +536,21 @@ export default function Home() {
                                                         productSelections[product.product_id]?.flavor ?? ""
                                                     ] ?? product.price}
                                                 </p>
-                                                <div className="row mt-3 w-100">
+                                                <div className="row mt-3 w-100 ">
                                                     <div className="col-6">
                                                         {product.protein && (
                                                             <select
-                                                                className="form-select text-white border-0"
+                                                                className="form-select text-white border-0 "
                                                                 style={{
                                                                     backgroundColor: '#3C3C3C',
                                                                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
-                                                                    cursor: 'pointer'
+                                                                    cursor: 'pointer',
+                                                                    width: '100%'
                                                                 }}
                                                                 onChange={(e) => updateProductSelection(product.product_id, 'protein', e.target.value)}
                                                                 value={productSelections[product.product_id]?.protein || ""}
                                                             >
-                                                                <option value="" disabled style={{ backgroundColor: '#3C3C3C' }}>Select Protein</option>
+                                                                <option value="">Select Protein</option>
                                                                 {product.protein.map((protein) => (
                                                                     <option key={protein} value={protein} style={{ backgroundColor: '#3C3C3C' }}>{protein}</option>
                                                                 ))}
@@ -546,16 +560,17 @@ export default function Home() {
                                                     <div className="col-6 pr-0">
                                                         {product.flavoured && (
                                                             <select
-                                                                className="form-select text-white border-0"
+                                                                className="form-select text-white border-0 "
                                                                 style={{
                                                                     backgroundColor: '#3C3C3C',
                                                                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
-                                                                    cursor: 'pointer'
+                                                                    cursor: 'pointer',
+                                                                    width: '100%'
                                                                 }}
                                                                 onChange={(e) => updateProductSelection(product.product_id, 'flavor', e.target.value)}
                                                                 value={productSelections[product.product_id]?.flavor || ""}
                                                             >
-                                                                <option value="" disabled style={{ backgroundColor: '#3C3C3C' }}>Select Flavor</option>
+                                                                <option value="" >Select Flavor</option>
                                                                 {product.flavoured.map((flavor) => (
                                                                     <option key={flavor} value={flavor} style={{ backgroundColor: '#3C3C3C' }}>{flavor}</option>
                                                                 ))}

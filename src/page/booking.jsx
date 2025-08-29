@@ -573,6 +573,158 @@ const Booking = () => {
                 <form onSubmit={(e) => e.preventDefault()}>
                     <div className="row overflow-hidden p-1">
 
+                        <h5 className='mb-1  mt-3'>Supplements :</h5>
+
+                        {productLines.map((line, index) => (
+                            <div key={line.product_id || index} className="row mx-0 g-3 mb-3">
+                                {/* Product select */}
+                                <div className="form-group col-12 col-sm-6 col-md-4 px-2">
+                                    <select
+                                        className="form-control bg-dark text-light"
+                                        value={line.product}
+                                        onChange={(e) => handleProductChange(index, 'product', e.target.value)}
+                                        required
+                                    >
+                                        <option value="">Select Product</option>
+                                        {/* Regular products */}
+                                        {productsData.map((p) => {
+                                            const isSelected = productLines.some(
+                                                (productLine, i) => i !== index && productLine.product === p.name
+                                            );
+                                            return !isSelected && (
+                                                <option key={p.product_id} value={p.name}>{p.name}</option>
+                                            );
+                                        })}
+
+                                        {/* Whey Concentrate variants */}
+                                        <optgroup label="Whey Concentrate">
+                                            {Object.entries(Whey_Concentrate).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* Whey Isolate variants */}
+                                        <optgroup label="Whey Isolate">
+                                            {Object.entries(Whey_Isolate).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* Whey Blend variants */}
+                                        <optgroup label="Whey Blend">
+                                            {Object.entries(Whey_Blend).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+                                    </select>
+                                </div>
+
+                                {/* Quantity */}
+                                <div className="form-group col-5 col-sm-4 col-md-4 px-2">
+                                    <input
+                                        type="number"
+                                        className="form-control bg-dark text-light"
+                                        placeholder="Enter Quantity"
+                                        value={line.quantity}
+                                        onChange={(e) => handleProductChange(index, 'quantity', e.target.value)}
+                                        min="1"
+                                        required
+                                    />
+                                </div>
+
+                                {/* MOQ */}
+                                {/* <div className="form-group col-6 col-sm-6 col-md-2">
+                                    <input
+                                        type="text"
+                                        placeholder='Moq'
+                                        className="form-control bg-dark text-light"
+                                        value={
+                                            productsData.find((p) => p.name === line.product)?.moq || ""
+                                        }
+                                        readOnly
+                                    />
+                                </div> */}
+
+                                {/* Price */}
+                                {/* <div className="form-group col-6 col-sm-6 col-md-2">
+                                    <input
+                                        type="text"
+                                        className="form-control bg-dark text-light"
+                                        value={line.price ? `₹${line.price}` : ""}
+                                        placeholder="Rate"
+                                        readOnly
+                                    />
+                                </div> */}
+
+                                {/* Total Price */}
+                                <div className='form-group col-5 col-sm-6  col-md-3 px-2'>
+                                    <input
+                                        type="text"
+                                        className="form-control bg-dark text-light"
+                                        value={line.total ? `₹${line.total}` : ""}
+                                        placeholder="Total Price"
+                                        readOnly
+                                    />
+                                </div>
+
+                                {/* Delete button */}
+                                {productLines.length >= 1 && (
+                                    <div className="form-group col-2 col-sm-1 col-md-1 px-1">
+                                        <button
+                                            type="button"
+                                            className="form-control bg-dark text-light border border-1 border-danger d-flex justify-content-center align-items-center"
+                                            onClick={() => removeProductLine(index)}
+                                        >
+                                            <i className="fas fa-trash-alt fs-5 text-danger"></i>
+                                        </button>
+                                    </div>
+                                )}
+
+                                {/* Add button => only last line */}
+                                {index === productLines.length - 1 && (
+                                    <div className="form-group col-6 col-sm-3 col-md-3 mt-3 ms-auto pe-0 d-flex justify-content-end align-items-center">
+                                        <button
+                                            type="button"
+                                            className=" bg-primary btn btn-primary p-2 px-3 d-flex justify-content-center align-items-center gap-2"
+                                            onClick={addProductLine}
+                                        >
+                                            <i className="fas fa-plus"></i>  Add
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+
                         <h5 className='mb-4 ms-2'>Personal Details :</h5>
 
                         <div className="form-group col-12 col-md-4 mb-3">
@@ -678,157 +830,7 @@ const Booking = () => {
                             />
                         </div>
 
-                        <h5 className='mb-1  mt-3'>Supplements :</h5>
 
-                        {productLines.map((line, index) => (
-                            <div key={line.product_id || index} className="row mx-0 g-3">
-                                {/* Product select */}
-                                <div className="form-group col-12 col-sm-6 col-md-4">
-                                    <select
-                                        className="form-control bg-dark text-light"
-                                        value={line.product}
-                                        onChange={(e) => handleProductChange(index, 'product', e.target.value)}
-                                        required
-                                    >
-                                        <option value="">Select Product</option>
-                                        {/* Regular products */}
-                                        {productsData.map((p) => {
-                                            const isSelected = productLines.some(
-                                                (productLine, i) => i !== index && productLine.product === p.name
-                                            );
-                                            return !isSelected && (
-                                                <option key={p.product_id} value={p.name}>{p.name}</option>
-                                            );
-                                        })}
-
-                                        {/* Whey Concentrate variants */}
-                                        <optgroup label="Whey Concentrate">
-                                            {Object.entries(Whey_Concentrate).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Whey Isolate variants */}
-                                        <optgroup label="Whey Isolate">
-                                            {Object.entries(Whey_Isolate).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Whey Blend variants */}
-                                        <optgroup label="Whey Blend">
-                                            {Object.entries(Whey_Blend).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-                                    </select>
-                                </div>
-
-                                {/* Quantity */}
-                                <div className="form-group col-6 col-sm-6 col-md-4">
-                                    <input
-                                        type="number"
-                                        className="form-control bg-dark text-light"
-                                        placeholder="Enter Quantity"
-                                        value={line.quantity}
-                                        onChange={(e) => handleProductChange(index, 'quantity', e.target.value)}
-                                        min="1"
-                                        required
-                                    />
-                                </div>
-
-                                {/* MOQ */}
-                                {/* <div className="form-group col-6 col-sm-6 col-md-2">
-                                    <input
-                                        type="text"
-                                        placeholder='Moq'
-                                        className="form-control bg-dark text-light"
-                                        value={
-                                            productsData.find((p) => p.name === line.product)?.moq || ""
-                                        }
-                                        readOnly
-                                    />
-                                </div> */}
-
-                                {/* Price */}
-                                {/* <div className="form-group col-6 col-sm-6 col-md-2">
-                                    <input
-                                        type="text"
-                                        className="form-control bg-dark text-light"
-                                        value={line.price ? `₹${line.price}` : ""}
-                                        placeholder="Rate"
-                                        readOnly
-                                    />
-                                </div> */}
-
-                                {/* Total Price */}
-                                <div className='form-group col-6 col-sm-6  col-md-3'>
-                                    <input
-                                        type="text"
-                                        className="form-control bg-dark text-light"
-                                        value={line.total ? `₹${line.total}` : ""}
-                                        placeholder="Total Price"
-                                        readOnly
-                                    />
-                                </div>
-
-                                {/* Delete button */}
-                                {productLines.length >= 1 && (
-                                    <div className="form-group col-6 col-sm-3 col-md-1">
-                                        <button
-                                            type="button"
-                                            className="form-control bg-dark text-light border border-1 border-danger d-flex justify-content-center align-items-center"
-                                            onClick={() => removeProductLine(index)}
-                                        >
-                                            <i className="fas fa-trash-alt fs-5 text-danger"></i>
-                                        </button>
-                                    </div>
-                                )}
-
-                                {/* Add button => only last line */}
-                                {index === productLines.length - 1 && (
-                                    <div className="form-group col-6 col-sm-3 col-md-3 mt-4 ms-auto  d-flex justify-content-end align-items-center">
-                                        <button
-                                            type="button"
-                                            className=" bg-primary btn btn-primary p-2 px-3 d-flex justify-content-center align-items-center gap-2"
-                                            onClick={addProductLine}
-                                        >
-                                            <i className="fas fa-plus"></i>  Add
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
 
                         <div className="col-12 text-center mt-4">
                             <div className="contact-form-btn">
