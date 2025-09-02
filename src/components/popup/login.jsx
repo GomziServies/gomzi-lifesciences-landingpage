@@ -38,12 +38,12 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
         mobile: mobileNumber,
       });
 
-      if (response.data && response.data.data && response.data.data.OTP) {
+      if (response.data?.data?.OTP) {
         setOtpCode(response.data.data.OTP);
         setShowModal(false);
         handleOtpPopupOpen();
         toast.success("OTP Sent on your mobile number.");
-      } else if (response.data && response.data.data) {
+      } else if (response.data?.data) {
         setShowModal(false);
         handleOtpPopupOpen();
         toast.success("OTP Sent on your mobile number.");
@@ -68,9 +68,14 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
           "fg_group_user_authorization",
           response.data.data.authorization
         );
+
+        // ✅ Set login flag
+        localStorage.setItem("is_login", "true");
+
         toast.success("Successfully Login!");
         if (pendingProduct) {
-          const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+          const existingProducts =
+            JSON.parse(localStorage.getItem("ATC_Product")) || [];
           let finalProductId = pendingProduct.product_id;
 
           // Handle product variants (Whey products)
@@ -88,7 +93,9 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
 
               if (productType) {
                 const variantList = productType[selections.flavor];
-                const variant = variantList.find(v => v.percent === selections.protein);
+                const variant = variantList.find(
+                  (v) => v.percent === selections.protein
+                );
                 if (variant) {
                   finalProductId = variant.product_id;
                 }
@@ -96,15 +103,21 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
             }
           }
 
-          localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, {
-            product_id: finalProductId,
-            quantity: 1
-          }]));
+          localStorage.setItem(
+            "ATC_Product",
+            JSON.stringify([
+              ...existingProducts,
+              {
+                product_id: finalProductId,
+                quantity: 1,
+              },
+            ])
+          );
 
-          window.dispatchEvent(new Event('cartUpdated'));
+          window.dispatchEvent(new Event("cartUpdated"));
           handleClose();
           BookingModalOpen(true);
-          window.location.href = '/';
+          window.location.href = "/";
         } else {
           handleClose();
           window.location.reload();
@@ -126,16 +139,23 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
         email: email,
         otp: emailOtp,
       });
+
       if (response.status === 200) {
         localStorage.setItem(
           "fg_group_user_authorization",
           response.data.data.authorization
         );
+
+        // ✅ Set login flag
+        localStorage.setItem("is_login", "true");
+
         await getUserData();
         setEmailOtpDialogOpen(false);
         toast.success("Successfully Login!");
+
         if (pendingProduct) {
-          const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+          const existingProducts =
+            JSON.parse(localStorage.getItem("ATC_Product")) || [];
           let finalProductId = pendingProduct.product_id;
 
           // Handle product variants (Whey products)
@@ -153,7 +173,9 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
 
               if (productType) {
                 const variantList = productType[selections.flavor];
-                const variant = variantList.find(v => v.percent === selections.protein);
+                const variant = variantList.find(
+                  (v) => v.percent === selections.protein
+                );
                 if (variant) {
                   finalProductId = variant.product_id;
                 }
@@ -161,13 +183,19 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
             }
           }
 
-          localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, {
-            product_id: finalProductId,
-            quantity: 1
-          }]));
+          localStorage.setItem(
+            "ATC_Product",
+            JSON.stringify([
+              ...existingProducts,
+              {
+                product_id: finalProductId,
+                quantity: 1,
+              },
+            ])
+          );
 
-          window.dispatchEvent(new Event('cartUpdated'));
-          window.location.href = '/booking-page';
+          window.dispatchEvent(new Event("cartUpdated"));
+          window.location.href = "/booking-page";
         } else {
           window.location.reload();
         }
@@ -194,11 +222,17 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
           "fg_group_user_authorization",
           response.data.data.authorization
         );
+
+        // ✅ Set login flag
+        localStorage.setItem("is_login", "true");
+
         await getUserData();
         setOtpDialogOpen(false);
         toast.success("Successfully Login!");
+
         if (pendingProduct) {
-          const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+          const existingProducts =
+            JSON.parse(localStorage.getItem("ATC_Product")) || [];
           let finalProductId = pendingProduct.product_id;
 
           // Handle product variants (Whey products)
@@ -216,7 +250,9 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
 
               if (productType) {
                 const variantList = productType[selections.flavor];
-                const variant = variantList.find(v => v.percent === selections.protein);
+                const variant = variantList.find(
+                  (v) => v.percent === selections.protein
+                );
                 if (variant) {
                   finalProductId = variant.product_id;
                 }
@@ -224,13 +260,19 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
             }
           }
 
-          localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, {
-            product_id: finalProductId,
-            quantity: 1
-          }]));
+          localStorage.setItem(
+            "ATC_Product",
+            JSON.stringify([
+              ...existingProducts,
+              {
+                product_id: finalProductId,
+                quantity: 1,
+              },
+            ])
+          );
 
-          window.dispatchEvent(new Event('cartUpdated'));
-          window.location.href = '/';
+          window.dispatchEvent(new Event("cartUpdated"));
+          window.location.href = "/";
         } else {
           window.location.reload();
         }
@@ -241,7 +283,6 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
       console.error("Error in handleOtpSubmit:", error);
     }
   };
-
 
   const handleOtpPopupOpen = () => {
     setOtpDialogOpen(true);
@@ -263,6 +304,7 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
   useEffect(() => {
     getUserData();
   }, []);
+
 
   return (
     <>

@@ -1,37 +1,56 @@
 import React, { useEffect, useState } from "react";
 import NutritionHeader from "../components/partials/Header/nutritionsheader";
-import Footer from '../components/partials/Footer/footer';
-import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
-import { isUserLoggedIn } from '../utils/auth';
+import Footer from "../components/partials/Footer/footer";
+import Swiper from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
+import { isUserLoggedIn } from "../utils/auth";
 import LoginModal from "../components/popup/login";
 import BookingModal from "../components/popup/BookingModal";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import VideoReview from "../components/video-review";
 import WhyChooseUs from "../components/whyChooseUs";
 import toast, { Toaster } from "react-hot-toast";
 
 const productsData = [
-
     {
         product_id: "68a2c8e006800a0384e9cc6a",
         name: "Whey Blend-1kg",
         flavoured: ["Mawa Kulfi", "Chocolate", "Mango", "Mocha Coffee"],
         protein: ["35%", "40%", "50%", "60%"],
         priceMatrix: {
-            "35%": { "Mawa Kulfi": 930, "Chocolate": 1100, "Mocha Coffee": 1210, "Mango": 930 },
-            "40%": { "Mawa Kulfi": 1170, "Chocolate": 1250, "Mocha Coffee": 1360, "Mango": 1170 },
-            "50%": { "Mawa Kulfi": 1665, "Chocolate": 1745, "Mocha Coffee": 1855, "Mango": 1665 },
-            "60%": { "Mawa Kulfi": 2115, "Chocolate": 2195, "Mocha Coffee": 2305, "Mango": 2115 },
+            "35%": {
+                "Mawa Kulfi": 930,
+                Chocolate: 1100,
+                "Mocha Coffee": 1210,
+                Mango: 930,
+            },
+            "40%": {
+                "Mawa Kulfi": 1170,
+                Chocolate: 1250,
+                "Mocha Coffee": 1360,
+                Mango: 1170,
+            },
+            "50%": {
+                "Mawa Kulfi": 1665,
+                Chocolate: 1745,
+                "Mocha Coffee": 1855,
+                Mango: 1665,
+            },
+            "60%": {
+                "Mawa Kulfi": 2115,
+                Chocolate: 2195,
+                "Mocha Coffee": 2305,
+                Mango: 2115,
+            },
         },
         price: 1300,
         image: "/assets/images/product-images/whey-blend.webp",
         link: "/whey-blend",
-        moq: "100 kg"
+        moq: "100 kg",
     },
     {
         product_id: "68ad732d06800a0384ea019a",
@@ -39,16 +58,41 @@ const productsData = [
         flavoured: ["Mawa Kulfi", "Chocolate", "Mocha Coffee", "Mango"],
         protein: ["35%", "50%", "60%", "70%", "80%"],
         priceMatrix: {
-            "35%": { "Mawa Kulfi": 1295, "Chocolate": 1360, "Mocha Coffee": 1465, "Mango": 1295 },
-            "50%": { "Mawa Kulfi": 1565, "Chocolate": 1625, "Mocha Coffee": 1730, "Mango": 1565 },
-            "60%": { "Mawa Kulfi": 1742, "Chocolate": 1805, "Mocha Coffee": 1911, "Mango": 1742 },
-            "70%": { "Mawa Kulfi": 1920, "Chocolate": 1985, "Mocha Coffee": 2090, "Mango": 1920 },
-            "80%": { "Mawa Kulfi": 2100, "Chocolate": 2165, "Mocha Coffee": 2270, "Mango": 2100 }
+            "35%": {
+                "Mawa Kulfi": 1295,
+                Chocolate: 1360,
+                "Mocha Coffee": 1465,
+                Mango: 1295,
+            },
+            "50%": {
+                "Mawa Kulfi": 1565,
+                Chocolate: 1625,
+                "Mocha Coffee": 1730,
+                Mango: 1565,
+            },
+            "60%": {
+                "Mawa Kulfi": 1742,
+                Chocolate: 1805,
+                "Mocha Coffee": 1911,
+                Mango: 1742,
+            },
+            "70%": {
+                "Mawa Kulfi": 1920,
+                Chocolate: 1985,
+                "Mocha Coffee": 2090,
+                Mango: 1920,
+            },
+            "80%": {
+                "Mawa Kulfi": 2100,
+                Chocolate: 2165,
+                "Mocha Coffee": 2270,
+                Mango: 2100,
+            },
         },
         price: 1295,
         image: "/assets/images/product-images/whey-concentrate.webp",
         link: "/whey-concentrate",
-        moq: "100 kg"
+        moq: "100 kg",
     },
     {
         product_id: "68ad735906800a0384ea019e",
@@ -56,17 +100,47 @@ const productsData = [
         flavoured: ["Mawa Kulfi", "Chocolate", "Mocha Coffee", "Mango"],
         protein: ["35%", "40%", "50%", "60%", "70%", "80%"],
         priceMatrix: {
-            "35%": { "Mawa Kulfi": 1900, "Chocolate": 1963, "Mocha Coffee": 2068, "Mango": 1900 },
-            "40%": { "Mawa Kulfi": 2076, "Chocolate": 2140, "Mocha Coffee": 2245, "Mango": 2076 },
-            "50%": { "Mawa Kulfi": 2429, "Chocolate": 2492, "Mocha Coffee": 2598, "Mango": 2429 },
-            "60%": { "Mawa Kulfi": 2782, "Chocolate": 2845, "Mocha Coffee": 2950, "Mango": 2782 },
-            "70%": { "Mawa Kulfi": 3135, "Chocolate": 3198, "Mocha Coffee": 3303, "Mango": 3135 },
-            "80%": { "Mawa Kulfi": 3487, "Chocolate": 3551, "Mocha Coffee": 3656, "Mango": 3487 }
+            "35%": {
+                "Mawa Kulfi": 1900,
+                Chocolate: 1963,
+                "Mocha Coffee": 2068,
+                Mango: 1900,
+            },
+            "40%": {
+                "Mawa Kulfi": 2076,
+                Chocolate: 2140,
+                "Mocha Coffee": 2245,
+                Mango: 2076,
+            },
+            "50%": {
+                "Mawa Kulfi": 2429,
+                Chocolate: 2492,
+                "Mocha Coffee": 2598,
+                Mango: 2429,
+            },
+            "60%": {
+                "Mawa Kulfi": 2782,
+                Chocolate: 2845,
+                "Mocha Coffee": 2950,
+                Mango: 2782,
+            },
+            "70%": {
+                "Mawa Kulfi": 3135,
+                Chocolate: 3198,
+                "Mocha Coffee": 3303,
+                Mango: 3135,
+            },
+            "80%": {
+                "Mawa Kulfi": 3487,
+                Chocolate: 3551,
+                "Mocha Coffee": 3656,
+                Mango: 3487,
+            },
         },
         price: 1900,
         image: "/assets/images/product-images/whey-isolate.webp",
         link: "/whey-isolate",
-        moq: "100 kg"
+        moq: "100 kg",
     },
     // {
     //     product_id: "68ac019606800a0384e9f883",
@@ -82,7 +156,7 @@ const productsData = [
         price: 420,
         image: "/assets/images/product-images/mass-gainer.webp",
         link: "/mass-gainer",
-        moq: "100 kg"
+        moq: "100 kg",
     },
     {
         product_id: "68ad739506800a0384ea01a2",
@@ -90,7 +164,7 @@ const productsData = [
         price: 150,
         image: "/assets/images/product-images/peanut-butter.webp",
         link: "/peanut-butter",
-        moq: "100 kg (500gm)"
+        moq: "100 kg (500gm)",
     },
     {
         product_id: "68ad73e006800a0384ea01ab",
@@ -98,7 +172,7 @@ const productsData = [
         price: 300,
         image: "/assets/images/product-images/creatine-flavored.webp",
         link: "/creatine-flavored",
-        moq: "50 kg (250gm)"
+        moq: "50 kg (250gm)",
     },
     {
         product_id: "68ad742506800a0384ea01b2",
@@ -106,7 +180,7 @@ const productsData = [
         price: 270,
         image: "/assets/images/product-images/creatine.webp",
         link: "/creatine-unflavored",
-        moq: "50 kg (250gm)"
+        moq: "50 kg (250gm)",
     },
     {
         product_id: "68ad744106800a0384ea01b4",
@@ -114,7 +188,7 @@ const productsData = [
         price: 440,
         image: "/assets/images/product-images/pre-workout.webp",
         link: "/pre-workout",
-        moq: "50 kg (250gm)"
+        moq: "50 kg (250gm)",
     },
     {
         product_id: "68ad746a06800a0384ea01b8",
@@ -122,7 +196,7 @@ const productsData = [
         price: 490,
         image: "/assets/images/product-images/eaa.webp",
         link: "/eaa",
-        moq: "50 kg (250gm)"
+        moq: "50 kg (250gm)",
     },
     {
         product_id: "68ad748306800a0384ea01be",
@@ -130,7 +204,7 @@ const productsData = [
         price: 490,
         image: "/assets/images/product-images/bcaa.webp",
         link: "/bcaa",
-        moq: "50 kg (250gm)"
+        moq: "50 kg (250gm)",
     },
     {
         product_id: "68ad749906800a0384ea01c6",
@@ -138,7 +212,7 @@ const productsData = [
         price: 55,
         image: "/assets/images/product-images/protein-bar.webp",
         link: "/protein-bar",
-        moq: "5000 pcs"
+        moq: "5000 pcs",
     },
     {
         product_id: "68ad74cc06800a0384ea01c8",
@@ -146,7 +220,7 @@ const productsData = [
         price: 30,
         image: "/assets/images/product-images/energy-drink.webp",
         link: "/energy-drink",
-        moq: "1000 pcs"
+        moq: "1000 pcs",
     },
     {
         product_id: "68ad74f006800a0384ea01cc",
@@ -154,7 +228,7 @@ const productsData = [
         price: 45,
         image: "/assets/images/product-images/energy-drink-can.webp",
         link: "/energy-drink-can",
-        moq: "24000 pcs"
+        moq: "24000 pcs",
     },
     {
         product_id: "68ad750b06800a0384ea01dd",
@@ -162,7 +236,7 @@ const productsData = [
         price: 170,
         image: "/assets/images/product-images/multivitamin.webp",
         link: "/multivitamin",
-        moq: "30000 nos"
+        moq: "30000 nos",
     },
     {
         product_id: "68ad752d06800a0384ea01e8",
@@ -170,47 +244,47 @@ const productsData = [
         price: 225,
         image: "/assets/images/product-images/omega-3.webp",
         link: "/omega-3",
-        moq: "30000 nos"
-    }
+        moq: "30000 nos",
+    },
 ];
 window.Whey_Concentrate = {
-    "Chocolate": [
+    Chocolate: [
         { percent: "35%", product_id: "68aef32e06800a0384ea3faf" },
         { percent: "50%", product_id: "68aef3a806800a0384ea4080" },
         { percent: "60%", product_id: "68aef4a706800a0384ea4095" },
         { percent: "70%", product_id: "68aef5b806800a0384ea40a9" },
-        { percent: "80%", product_id: "68aef66406800a0384ea40cd" }
+        { percent: "80%", product_id: "68aef66406800a0384ea40cd" },
     ],
     "Mawa Kulfi": [
         { percent: "35%", product_id: "68aef29506800a0384ea3e42" },
         { percent: "50%", product_id: "68aef36c06800a0384ea4075" },
         { percent: "60%", product_id: "68aef47006800a0384ea4090" },
         { percent: "70%", product_id: "68aef58c06800a0384ea40a5" },
-        { percent: "80%", product_id: "68aef63606800a0384ea40c9" }
+        { percent: "80%", product_id: "68aef63606800a0384ea40c9" },
     ],
     "Mocha Coffee": [
         { percent: "35%", product_id: "68aef30106800a0384ea3f35" },
         { percent: "50%", product_id: "68aef39406800a0384ea407e" },
         { percent: "60%", product_id: "68aef48906800a0384ea4092" },
         { percent: "70%", product_id: "68aef5a906800a0384ea40a7" },
-        { percent: "80%", product_id: "68aef65006800a0384ea40cb" }
+        { percent: "80%", product_id: "68aef65006800a0384ea40cb" },
     ],
-    "Mango": [
+    Mango: [
         { percent: "35%", product_id: "68b029fe06800a0384ea45e4" },
         { percent: "50%", product_id: "68b02a2606800a0384ea45ea" },
         { percent: "60%", product_id: "68b02a5806800a0384ea45f6" },
         { percent: "70%", product_id: "68b02a6806800a0384ea45f8" },
-        { percent: "80%", product_id: "68b02a7c06800a0384ea45fa" }
-    ]
+        { percent: "80%", product_id: "68b02a7c06800a0384ea45fa" },
+    ],
 };
 window.Whey_Isolate = {
-    "Chocolate": [
+    Chocolate: [
         { percent: "35%", product_id: "68aef71b06800a0384ea40e5" },
         { percent: "40%", product_id: "68aef76906800a0384ea40eb" },
         { percent: "50%", product_id: "68aef80406800a0384ea4112" },
         { percent: "60%", product_id: "68aef88306800a0384ea4124" },
         { percent: "70%", product_id: "68aef8d606800a0384ea412a" },
-        { percent: "80%", product_id: "68aef96e06800a0384ea4153" }
+        { percent: "80%", product_id: "68aef96e06800a0384ea4153" },
     ],
     "Mawa Kulfi": [
         { percent: "35%", product_id: "68aef70c06800a0384ea40e3" },
@@ -218,7 +292,7 @@ window.Whey_Isolate = {
         { percent: "50%", product_id: "68aef7ea06800a0384ea4110" },
         { percent: "60%", product_id: "68aef86c06800a0384ea4122" },
         { percent: "70%", product_id: "68aef8c206800a0384ea4128" },
-        { percent: "80%", product_id: "68aef95306800a0384ea4151" }
+        { percent: "80%", product_id: "68aef95306800a0384ea4151" },
     ],
     "Mocha Coffee": [
         { percent: "35%", product_id: "68aef72d06800a0384ea40e7" },
@@ -226,20 +300,20 @@ window.Whey_Isolate = {
         { percent: "50%", product_id: "68aef81106800a0384ea4114" },
         { percent: "60%", product_id: "68aef89b06800a0384ea4126" },
         { percent: "70%", product_id: "68aef8e806800a0384ea412c" },
-        { percent: "80%", product_id: "68aef98106800a0384ea4155" }
+        { percent: "80%", product_id: "68aef98106800a0384ea4155" },
     ],
-    "Mango": [
+    Mango: [
         { percent: "35%", product_id: "68b02a9d06800a0384ea4605" },
         { percent: "40%", product_id: "68b02ab106800a0384ea460b" },
         { percent: "50%", product_id: "68b02ad606800a0384ea460f" },
         { percent: "60%", product_id: "68b02b4006800a0384ea4602" },
         { percent: "70%", product_id: "68b02aee06800a0384ea4613" },
-        { percent: "80%", product_id: "68b02b1e06800a0384ea4619" }
-    ]
+        { percent: "80%", product_id: "68b02b1e06800a0384ea4619" },
+    ],
 };
 
 window.Whey_Blend = {
-    "Chocolate": [
+    Chocolate: [
         { percent: "35%", product_id: "68b03cd406800a0384ea478c" },
         { percent: "40%", product_id: "68b03cf206800a0384ea478e" },
         { percent: "50%", product_id: "68b03d2606800a0384ea479b" },
@@ -257,14 +331,13 @@ window.Whey_Blend = {
         { percent: "50%", product_id: "68b03df506800a0384ea47e9" },
         { percent: "60%", product_id: "68b03e0206800a0384ea47eb" },
     ],
-    "Mango": [
+    Mango: [
         { percent: "35%", product_id: "68b03a6306800a0384ea4750" },
         { percent: "40%", product_id: "68b03ab206800a0384ea4752" },
         { percent: "50%", product_id: "68b03b0706800a0384ea4754" },
         { percent: "60%", product_id: "68b03b1306800a0384ea4756" },
-    ]
+    ],
 };
-
 
 const testimonialsData = [
     {
@@ -272,22 +345,22 @@ const testimonialsData = [
         name: "Ashish",
         authorImage: "/assets/images/testimonials-images/aashis.webp",
         content:
-            "Refuel Whey Protein Blend, with 33 servings per container, is a nutritional powerhouse. It's a game-changer in the world of fitness supplements, offering a perfect balance of quality protein and essential nutrients."
+            "Refuel Whey Protein Blend, with 33 servings per container, is a nutritional powerhouse. It's a game-changer in the world of fitness supplements, offering a perfect balance of quality protein and essential nutrients.",
     },
     {
         rating: 5,
         name: "Chirag Chandlekar",
         authorImage: "/assets/images/testimonials-images/chirag.webp",
         content:
-            "I've been using Gomzi Nutrition Whey Protein for the past six months, and I couldn't be happier with the results. It has truly boosted my energy and helped me achieve my fitness goals faster."
+            "I've been using Gomzi Nutrition Whey Protein for the past six months, and I couldn't be happier with the results. It has truly boosted my energy and helped me achieve my fitness goals faster.",
     },
     {
         rating: 5,
         name: "Pragnesh Maisuria",
         authorImage: "/assets/images/testimonials-images/pragnesh.webp",
         content:
-            "Whey Protein Isolate is praised for its high protein purity and minimal lactose and fat content, making it an ideal choice for lean muscle building and post-workout recovery among users."
-    }
+            "Whey Protein Isolate is praised for its high protein purity and minimal lactose and fat content, making it an ideal choice for lean muscle building and post-workout recovery among users.",
+    },
 ];
 
 const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
@@ -299,22 +372,22 @@ export default function Home() {
     const [pendingProduct, setPendingProduct] = useState(null);
 
     const updateProductSelection = (productId, type, value) => {
-        setProductSelections(prev => ({
+        setProductSelections((prev) => ({
             ...prev,
             [productId]: {
                 ...prev[productId],
-                [type]: value
-            }
+                [type]: value,
+            },
         }));
     };
 
-
     const handleBookSample = (product) => {
         if (isUserLoggedIn()) {
-            const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+            const existingProducts =
+                JSON.parse(localStorage.getItem("ATC_Product")) || [];
 
             if (existingProducts.length >= 9) {
-                toast.error('Maximum 9 products can be added');
+                toast.error("Maximum 9 products can be added");
                 return;
             }
 
@@ -323,9 +396,15 @@ export default function Home() {
             let canAdd = true;
 
             // If it's a Whey product that requires selections
-            if ((product.name.includes("Whey Concentrate") || product.name.includes("Whey Isolate") || product.name.includes("Whey Blend"))) {
+            if (
+                product.name.includes("Whey Concentrate") ||
+                product.name.includes("Whey Isolate") ||
+                product.name.includes("Whey Blend")
+            ) {
                 if (!selections.protein || !selections.flavor) {
-                    toast.error('Please select both protein percentage and flavor');
+                    toast.error(
+                        "Please select both protein percentage and flavor"
+                    );
                     canAdd = false;
                 } else {
                     let productType;
@@ -337,7 +416,9 @@ export default function Home() {
                         productType = window.Whey_Blend;
                     }
                     const variantList = productType[selections.flavor];
-                    const variant = variantList.find(v => v.percent === selections.protein);
+                    const variant = variantList.find(
+                        (v) => v.percent === selections.protein
+                    );
                     if (variant) {
                         finalProductId = variant.product_id;
                     }
@@ -345,8 +426,8 @@ export default function Home() {
             }
 
             // Check if this specific variant already exists
-            if (existingProducts.some(p => p.product_id === finalProductId)) {
-                toast.error('This product variant is already in your cart');
+            if (existingProducts.some((p) => p.product_id === finalProductId)) {
+                toast.error("This product variant is already in your cart");
                 canAdd = false;
             }
 
@@ -356,79 +437,96 @@ export default function Home() {
                     quantity: 1,
                 };
 
-                localStorage.setItem("ATC_Product", JSON.stringify([...existingProducts, productToStore]));
+                localStorage.setItem(
+                    "ATC_Product",
+                    JSON.stringify([...existingProducts, productToStore])
+                );
 
                 // Trigger event to update cart count and button text
-                window.dispatchEvent(new Event('cartUpdated'));
+                window.dispatchEvent(new Event("cartUpdated"));
 
                 setShowBookingModal(true);
             }
         } else {
-            setPendingProduct({ ...product, selections: productSelections[product.product_id] });
+            setPendingProduct({
+                ...product,
+                selections: productSelections[product.product_id],
+            });
             setShowLoginModal(true);
         }
     };
 
     useEffect(() => {
-
-        new Swiper('.testimonial-slider .swiper', {
+        new Swiper(".testimonial-slider .swiper", {
             modules: [Navigation, Pagination],
             slidesPerView: 1,
             spaceBetween: 30,
             loop: true,
             navigation: {
-                nextEl: '.testimonial-button-next',
-                prevEl: '.testimonial-button-prev',
+                nextEl: ".testimonial-button-next",
+                prevEl: ".testimonial-button-prev",
             },
             pagination: {
-                el: '.swiper-pagination',
+                el: ".swiper-pagination",
                 clickable: true,
             },
         });
     }, []);
 
     useEffect(() => {
-        const atcProducts = JSON.parse(localStorage.getItem('ATC_Product')) || [];
-        console.log('atcProducts:', atcProducts);
+        const atcProducts =
+            JSON.parse(localStorage.getItem("ATC_Product")) || [];
+        console.log("atcProducts:", atcProducts);
     }, [showLoginModal]);
 
     // Set default values for protein and flavor on component mount
     useEffect(() => {
-        // Set default values for protein and flavor
-        productsData.forEach(product => {
+        // 1. Default values set karo
+        productsData.forEach((product) => {
             if (product.protein && product.flavoured) {
-                setProductSelections(prev => ({
+                setProductSelections((prev) => ({
                     ...prev,
                     [product.product_id]: {
                         protein: "35%",
-                        flavor: "Mawa Kulfi"
-                    }
+                        flavor: "Mawa Kulfi",
+                    },
                 }));
             }
         });
 
-        // Check if there are products in localStorage and user is logged in
+        // 2. Booking modal ek j vaar open thay
         const atcProducts = JSON.parse(localStorage.getItem("ATC_Product"));
-        if (atcProducts && atcProducts.length > 0 && isUserLoggedIn()) {
+        const alreadyOpened = localStorage.getItem("BookingModalOpened");
+
+        if (
+            atcProducts &&
+            atcProducts.length > 0 &&
+            isUserLoggedIn() &&
+            !alreadyOpened
+        ) {
             setShowBookingModal(true);
+            localStorage.setItem("BookingModalOpened", "true"); // flag set kariye
         }
     }, []);
 
     return (
         <>
-            {showLoginModal && <LoginModal
-                onClose={() => {
-                    setShowLoginModal(false);
-                    setPendingProduct(null);
-                }}
-                pendingProduct={pendingProduct}
-            />}
-            {showBookingModal && <BookingModal onClose={() => setShowBookingModal(false)} />}
+            {showLoginModal && (
+                <LoginModal
+                    onClose={() => {
+                        setShowLoginModal(false);
+                        setPendingProduct(null);
+                    }}
+                    pendingProduct={pendingProduct}
+                />
+            )}
+            {showBookingModal && (
+                <BookingModal onClose={() => setShowBookingModal(false)} />
+            )}
             <NutritionHeader />
 
             <div className="hero">
                 <div className="hero-bg-video">
-
                     {/* <video autoPlay muted loop id="myVideo"><source src="assets/media/artistic-it-company-video.mp4" type="video/mp4" /></video> */}
                 </div>
                 <div className="container">
@@ -436,22 +534,46 @@ export default function Home() {
                         <div className="col-lg-6">
                             <div className="hero-content">
                                 <div className="section-title">
-                                    <h3 className="wow fadeInUp">welcome to our Gomzi Nutrition website</h3>
-                                    <h2 className="text-anime-style-2" data-cursor="-opaque">Your Nutrition Brand,<span> Our Premium Products</span> – Launch Today !</h2>
-                                    <p className="wow fadeInUp" data-wow-delay="0.2s"> Peanut Butter, Protein Bars, Whey Protein & Energy Drinks – Fully White-Labeled for Your Brand .</p>
+                                    <h3 className="wow fadeInUp">
+                                        welcome to our Gomzi Nutrition website
+                                    </h3>
+                                    <h2
+                                        className="text-anime-style-2"
+                                        data-cursor="-opaque"
+                                    >
+                                        Your Nutrition Brand,
+                                        <span> Our Premium Products</span> –
+                                        Launch Today !
+                                    </h2>
+                                    <p
+                                        className="wow fadeInUp"
+                                        data-wow-delay="0.2s"
+                                    >
+                                        {" "}
+                                        Peanut Butter, Protein Bars, Whey
+                                        Protein & Energy Drinks – Fully
+                                        White-Labeled for Your Brand .
+                                    </p>
                                 </div>
 
-                                <div className="hero-content-body wow fadeInUp" data-wow-delay="0.4s">
+                                <div
+                                    className="hero-content-body wow fadeInUp"
+                                    data-wow-delay="0.4s"
+                                >
                                     <div className="hero-btn">
-                                        <button onClick={() => {
-                                            if (isUserLoggedIn()) {
-                                                setShowBookingModal(true);
-                                            } else {
-                                                setShowLoginModal(true);
-                                            }
-                                        }} className="btn-default">Start Your Brand Now</button>
+                                        <button
+                                            onClick={() => {
+                                                if (isUserLoggedIn()) {
+                                                    setShowBookingModal(true);
+                                                } else {
+                                                    setShowLoginModal(true);
+                                                }
+                                            }}
+                                            className="btn-default"
+                                        >
+                                            Start Your Brand Now
+                                        </button>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -460,25 +582,37 @@ export default function Home() {
                             <div className="hero-images">
                                 <div className="hero-img-1">
                                     <figure className="image-anime">
-                                        <img src={getAssetPath('/assets/images/product-images/mass-gainer.webp')} alt="First hero section visual" />
+                                        <img
+                                            src={getAssetPath(
+                                                "/assets/images/product-images/mass-gainer.webp"
+                                            )}
+                                            alt="First hero section visual"
+                                        />
                                     </figure>
                                 </div>
 
                                 <div className="hero-img-2">
                                     <figure className="image-anime">
-                                        <img src={getAssetPath('/assets/images/product-images/whey-isolate.webp')} alt="Second hero section visual" />
+                                        <img
+                                            src={getAssetPath(
+                                                "/assets/images/product-images/whey-isolate.webp"
+                                            )}
+                                            alt="Second hero section visual"
+                                        />
                                     </figure>
                                 </div>
 
-
-
                                 <div className="hero-image-circle">
                                     <button className="btn p-0 border-0">
-                                        <img src={getAssetPath('/assets/images/our-agency-circle.png')} alt="" />
+                                        <img
+                                            src={getAssetPath(
+                                                "/assets/images/our-agency-circle.png"
+                                            )}
+                                            alt=""
+                                        />
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -486,28 +620,171 @@ export default function Home() {
             <div className="our-scrolling-ticker">
                 <div className="scrolling-ticker-box">
                     <div className="scrolling-content">
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Peanut Butter</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Energy Drink</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Protein Bar</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Whey Protein</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Whey Isolate</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Whey Blend</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Mass Gainer</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Creatine</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Ignite</span>
-
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Peanut Butter
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Energy Drink
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Protein Bar
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Whey Protein
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Whey Isolate
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Whey Blend
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Mass Gainer
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Creatine
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Ignite
+                        </span>
                     </div>
 
                     <div className="scrolling-content">
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Peanut Butter</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Energy Drink</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Protein Bar</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Whey Protein</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Whey Isolate</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Whey Blend</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Mass Gainer</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Creatine</span>
-                        <span><img src={getAssetPath('/assets/images/asterisk-icon.svg')} alt="" />Ignite</span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Peanut Butter
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Energy Drink
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Protein Bar
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Whey Protein
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Whey Isolate
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Whey Blend
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Mass Gainer
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Creatine
+                        </span>
+                        <span>
+                            <img
+                                src={getAssetPath(
+                                    "/assets/images/asterisk-icon.svg"
+                                )}
+                                alt=""
+                            />
+                            Ignite
+                        </span>
                     </div>
                 </div>
             </div>
@@ -518,35 +795,53 @@ export default function Home() {
                         <div className="col-lg-12">
                             <div className="section-title">
                                 <h3 className="wow fadeInUp">Our Products</h3>
-                                <h2 className="text-anime-style-2" data-cursor="-opaque">
-                                    Discover <span>Premium Products</span> Crafted for You
+                                <h2
+                                    className="text-anime-style-2"
+                                    data-cursor="-opaque"
+                                >
+                                    Discover <span>Premium Products</span>{" "}
+                                    Crafted for You
                                 </h2>
                             </div>
-
                         </div>
                     </div>
 
                     <div className="row justify-content-center">
                         {productsData.map((product, index) => (
-                            <div className="col-lg-4 col-md-6" key={index} >
-                                <div className="service-item wow fadeInUp" data-wow-delay={`${index * 0.01}s`}>
+                            <div className="col-lg-4 col-md-6" key={index}>
+                                <div
+                                    className="service-item wow fadeInUp"
+                                    data-wow-delay={`${index * 0.01}s`}
+                                >
                                     <div className="service-image">
                                         <div className="image-wrapper img-fluid object-fit-cover">
                                             <figure className="image-anime">
-                                                <img src={getAssetPath(product.image)}
-                                                    alt={product.name} className="img-fluid object-fit-cover" />
+                                                <img
+                                                    src={getAssetPath(
+                                                        product.image
+                                                    )}
+                                                    alt={product.name}
+                                                    className="img-fluid object-fit-cover"
+                                                />
                                             </figure>
                                         </div>
                                     </div>
                                     <div className="service-body">
                                         <div className="service-content-box">
                                             <div className="service-box-content ps-3">
-                                                <h5 className="mb-2 mt-2">{product.name}</h5>
+                                                <h5 className="mb-2 mt-2">
+                                                    {product.name}
+                                                </h5>
                                                 <p>
-                                                    ₹ {product.priceMatrix?.[
-                                                        productSelections[product.product_id]?.protein ?? ""
+                                                    ₹{" "}
+                                                    {product.priceMatrix?.[
+                                                        productSelections[
+                                                            product.product_id
+                                                        ]?.protein ?? ""
                                                     ]?.[
-                                                        productSelections[product.product_id]?.flavor ?? ""
+                                                        productSelections[
+                                                            product.product_id
+                                                        ]?.flavor ?? ""
                                                     ] ?? product.price}
                                                 </p>
                                                 <div className="row mt-3 w-100 ">
@@ -555,18 +850,55 @@ export default function Home() {
                                                             <select
                                                                 className="form-select text-white border-0 "
                                                                 style={{
-                                                                    backgroundColor: '#3C3C3C',
+                                                                    backgroundColor:
+                                                                        "#3C3C3C",
                                                                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
-                                                                    cursor: 'pointer',
-                                                                    width: '100%'
+                                                                    cursor: "pointer",
+                                                                    width: "100%",
                                                                 }}
-                                                                onChange={(e) => updateProductSelection(product.product_id, 'protein', e.target.value)}
-                                                                value={productSelections[product.product_id]?.protein || ""}
+                                                                onChange={(e) =>
+                                                                    updateProductSelection(
+                                                                        product.product_id,
+                                                                        "protein",
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                }
+                                                                value={
+                                                                    productSelections[
+                                                                        product
+                                                                            .product_id
+                                                                    ]
+                                                                        ?.protein ||
+                                                                    ""
+                                                                }
                                                             >
-                                                                <option value="">Select Protein</option>
-                                                                {product.protein.map((protein) => (
-                                                                    <option key={protein} value={protein} style={{ backgroundColor: '#3C3C3C' }}>{protein}</option>
-                                                                ))}
+                                                                <option value="">
+                                                                    Select
+                                                                    Protein
+                                                                </option>
+                                                                {product.protein.map(
+                                                                    (
+                                                                        protein
+                                                                    ) => (
+                                                                        <option
+                                                                            key={
+                                                                                protein
+                                                                            }
+                                                                            value={
+                                                                                protein
+                                                                            }
+                                                                            style={{
+                                                                                backgroundColor:
+                                                                                    "#3C3C3C",
+                                                                            }}
+                                                                        >
+                                                                            {
+                                                                                protein
+                                                                            }
+                                                                        </option>
+                                                                    )
+                                                                )}
                                                             </select>
                                                         )}
                                                     </div>
@@ -575,18 +907,54 @@ export default function Home() {
                                                             <select
                                                                 className="form-select text-white border-0 "
                                                                 style={{
-                                                                    backgroundColor: '#3C3C3C',
+                                                                    backgroundColor:
+                                                                        "#3C3C3C",
                                                                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
-                                                                    cursor: 'pointer',
-                                                                    width: '100%'
+                                                                    cursor: "pointer",
+                                                                    width: "100%",
                                                                 }}
-                                                                onChange={(e) => updateProductSelection(product.product_id, 'flavor', e.target.value)}
-                                                                value={productSelections[product.product_id]?.flavor || ""}
+                                                                onChange={(e) =>
+                                                                    updateProductSelection(
+                                                                        product.product_id,
+                                                                        "flavor",
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                }
+                                                                value={
+                                                                    productSelections[
+                                                                        product
+                                                                            .product_id
+                                                                    ]?.flavor ||
+                                                                    ""
+                                                                }
                                                             >
-                                                                <option value="" >Select Flavor</option>
-                                                                {product.flavoured.map((flavor) => (
-                                                                    <option key={flavor} value={flavor} style={{ backgroundColor: '#3C3C3C' }}>{flavor}</option>
-                                                                ))}
+                                                                <option value="">
+                                                                    Select
+                                                                    Flavor
+                                                                </option>
+                                                                {product.flavoured.map(
+                                                                    (
+                                                                        flavor
+                                                                    ) => (
+                                                                        <option
+                                                                            key={
+                                                                                flavor
+                                                                            }
+                                                                            value={
+                                                                                flavor
+                                                                            }
+                                                                            style={{
+                                                                                backgroundColor:
+                                                                                    "#3C3C3C",
+                                                                            }}
+                                                                        >
+                                                                            {
+                                                                                flavor
+                                                                            }
+                                                                        </option>
+                                                                    )
+                                                                )}
                                                             </select>
                                                         )}
                                                     </div>
@@ -596,52 +964,102 @@ export default function Home() {
                                     </div>
                                     <div className="pricing-btn m-3">
                                         <button
-                                            onClick={() => handleBookSample(product)}
+                                            onClick={() =>
+                                                handleBookSample(product)
+                                            }
                                             className="btn-highlighted m-0 border-0"
-                                        >{(() => {
-                                            const cartProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+                                        >
+                                            {(() => {
+                                                const cartProducts =
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "ATC_Product"
+                                                        )
+                                                    ) || [];
 
-                                            // Check if it's a regular product
-                                            if (cartProducts.some(p => p.product_id === product.product_id)) {
-                                                return "Item Added";
-                                            }
+                                                // Check if it's a regular product
+                                                if (
+                                                    cartProducts.some(
+                                                        (p) =>
+                                                            p.product_id ===
+                                                            product.product_id
+                                                    )
+                                                ) {
+                                                    return "Item Added";
+                                                }
 
-                                            // If it's a Whey Concentrate, Isolate, or Blend check all variants
-                                            if (product.name.includes("Whey Concentrate")) {
-                                                // Check if any variant of this concentrate is in cart
-                                                for (const flavor in window.Whey_Concentrate) {
-                                                    if (window.Whey_Concentrate[flavor].some(variant =>
-                                                        cartProducts.some(p => p.product_id === variant.product_id)
-                                                    )) {
-                                                        return "Item Added";
+                                                // If it's a Whey Concentrate, Isolate, or Blend check all variants
+                                                if (
+                                                    product.name.includes(
+                                                        "Whey Concentrate"
+                                                    )
+                                                ) {
+                                                    // Check if any variant of this concentrate is in cart
+                                                    for (const flavor in window.Whey_Concentrate) {
+                                                        if (
+                                                            window.Whey_Concentrate[
+                                                                flavor
+                                                            ].some((variant) =>
+                                                                cartProducts.some(
+                                                                    (p) =>
+                                                                        p.product_id ===
+                                                                        variant.product_id
+                                                                )
+                                                            )
+                                                        ) {
+                                                            return "Item Added";
+                                                        }
                                                     }
                                                 }
-                                            }
 
-                                            if (product.name.includes("Whey Isolate")) {
-                                                // Check if any variant of this isolate is in cart
-                                                for (const flavor in window.Whey_Isolate) {
-                                                    if (window.Whey_Isolate[flavor].some(variant =>
-                                                        cartProducts.some(p => p.product_id === variant.product_id)
-                                                    )) {
-                                                        return "Item Added";
+                                                if (
+                                                    product.name.includes(
+                                                        "Whey Isolate"
+                                                    )
+                                                ) {
+                                                    // Check if any variant of this isolate is in cart
+                                                    for (const flavor in window.Whey_Isolate) {
+                                                        if (
+                                                            window.Whey_Isolate[
+                                                                flavor
+                                                            ].some((variant) =>
+                                                                cartProducts.some(
+                                                                    (p) =>
+                                                                        p.product_id ===
+                                                                        variant.product_id
+                                                                )
+                                                            )
+                                                        ) {
+                                                            return "Item Added";
+                                                        }
                                                     }
                                                 }
-                                            }
 
-                                            if (product.name.includes("Whey Blend")) {
-                                                // Check if any variant of this blend is in cart
-                                                for (const flavor in window.Whey_Blend) {
-                                                    if (window.Whey_Blend[flavor].some(variant =>
-                                                        cartProducts.some(p => p.product_id === variant.product_id)
-                                                    )) {
-                                                        return "Item Added";
+                                                if (
+                                                    product.name.includes(
+                                                        "Whey Blend"
+                                                    )
+                                                ) {
+                                                    // Check if any variant of this blend is in cart
+                                                    for (const flavor in window.Whey_Blend) {
+                                                        if (
+                                                            window.Whey_Blend[
+                                                                flavor
+                                                            ].some((variant) =>
+                                                                cartProducts.some(
+                                                                    (p) =>
+                                                                        p.product_id ===
+                                                                        variant.product_id
+                                                                )
+                                                            )
+                                                        ) {
+                                                            return "Item Added";
+                                                        }
                                                     }
                                                 }
-                                            }
 
-                                            return "Book Sample";
-                                        })()}
+                                                return "Book Sample";
+                                            })()}
                                         </button>
                                     </div>
                                 </div>
@@ -650,17 +1068,24 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className="hero-content-body d-flex justify-content-center wow fadeInUp" data-wow-delay="0.1s">
+            <div
+                className="hero-content-body d-flex justify-content-center wow fadeInUp"
+                data-wow-delay="0.1s"
+            >
                 <div className="hero-btn">
-                    <button onClick={() => {
-                        if (isUserLoggedIn()) {
-                            setShowBookingModal(true);
-                        } else {
-                            setShowLoginModal(true);
-                        }
-                    }} className="btn-default">Book Your Sample Now</button>
+                    <button
+                        onClick={() => {
+                            if (isUserLoggedIn()) {
+                                setShowBookingModal(true);
+                            } else {
+                                setShowLoginModal(true);
+                            }
+                        }}
+                        className="btn-default"
+                    >
+                        Book Your Sample Now
+                    </button>
                 </div>
-
             </div>
             <WhyChooseUs />
 
@@ -670,14 +1095,21 @@ export default function Home() {
                         <div className="col-lg-6">
                             <div className="section-title">
                                 <h3 className="wow fadeInUp">testimonials</h3>
-                                <h2 className="text-anime-style-2" data-cursor="-opaque">What our <span>client</span> says</h2>
+                                <h2
+                                    className="text-anime-style-2"
+                                    data-cursor="-opaque"
+                                >
+                                    What our <span>client</span> says
+                                </h2>
                             </div>
                         </div>
 
                         <div className="col-lg-6">
                             <div className="satisfy-client-box testimonial-client-box">
                                 <div className="satisfy-client-content">
-                                    <h3><span className="counter">1200</span>+</h3>
+                                    <h3>
+                                        <span className="counter">1200</span>+
+                                    </h3>
                                     <p>reviews</p>
                                 </div>
                             </div>
@@ -689,35 +1121,63 @@ export default function Home() {
                             <div className="testimonial-slider">
                                 <div className="swiper">
                                     <div className="swiper-wrapper">
-                                        {testimonialsData.map((testimonial, index) => (
-                                            <div className="swiper-slide" key={index} >
-                                                <div className="testimonial-item">
-                                                    <div className="testimonial-header">
-                                                        <div className="testimonial-rating">
-                                                            {Array.from({ length: testimonial.rating }).map((_, i) => (
-                                                                <i className="fa-solid fa-star" key={i}></i>
-                                                            ))}
+                                        {testimonialsData.map(
+                                            (testimonial, index) => (
+                                                <div
+                                                    className="swiper-slide"
+                                                    key={index}
+                                                >
+                                                    <div className="testimonial-item">
+                                                        <div className="testimonial-header">
+                                                            <div className="testimonial-rating">
+                                                                {Array.from({
+                                                                    length: testimonial.rating,
+                                                                }).map(
+                                                                    (_, i) => (
+                                                                        <i
+                                                                            className="fa-solid fa-star"
+                                                                            key={
+                                                                                i
+                                                                            }
+                                                                        ></i>
+                                                                    )
+                                                                )}
+                                                            </div>
+                                                            <div className="testimonial-content">
+                                                                <p>
+                                                                    “
+                                                                    {
+                                                                        testimonial.content
+                                                                    }
+                                                                    ”
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                        <div className="testimonial-content">
-                                                            <p>“{testimonial.content}”</p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="testimonial-body">
-                                                        <div className="author-image">
-                                                            <figure className="image-anime">
-                                                                <img
-                                                                    src={getAssetPath(testimonial.authorImage)}
-                                                                    alt={testimonial.name}
-                                                                />
-                                                            </figure>
-                                                        </div>
-                                                        <div className="author-content">
-                                                            <h3>{testimonial.name}</h3>
+                                                        <div className="testimonial-body">
+                                                            <div className="author-image">
+                                                                <figure className="image-anime">
+                                                                    <img
+                                                                        src={getAssetPath(
+                                                                            testimonial.authorImage
+                                                                        )}
+                                                                        alt={
+                                                                            testimonial.name
+                                                                        }
+                                                                    />
+                                                                </figure>
+                                                            </div>
+                                                            <div className="author-content">
+                                                                <h3>
+                                                                    {
+                                                                        testimonial.name
+                                                                    }
+                                                                </h3>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            )
+                                        )}
                                     </div>
 
                                     {/* Navigation Buttons */}
@@ -729,7 +1189,6 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -868,8 +1327,8 @@ export default function Home() {
                 toastOptions={{
                     duration: 3000,
                     style: {
-                        background: '#fff',
-                        color: '#333',
+                        background: "#fff",
+                        color: "#333",
                     },
                 }}
             />
