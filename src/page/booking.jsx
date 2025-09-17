@@ -188,8 +188,8 @@ const Booking = () => {
                         product_id: savedProduct.product_id,
                         product: productData?.name || "",
                         quantity: savedProduct.quantity,
-                        price: productData?.quotation_price || 0,
-                        total: (productData?.quotation_price || 0) * (savedProduct.quantity || 0)
+                        price: productData?.price || 0,
+                        total: (productData?.price || 0) * (savedProduct.quantity || 0)
                     };
                 });
             } catch (e) {
@@ -207,8 +207,8 @@ const Booking = () => {
         if (field === 'product') {
             // First check in productsData
             let selected = productsData.find(p => p.name === value);
-            // Use quotation_price for all products
-            let price = selected ? selected.quotation_price : 0;
+            // Use price for all products
+            let price = selected ? selected.price : 0;
 
             // If not found in productsData, check in Whey_Concentrate
             if (!selected) {
@@ -218,7 +218,7 @@ const Booking = () => {
                     );
                     if (concentrateProduct) {
                         selected = concentrateProduct;
-                        price = concentrateProduct.quotation_price;
+                        price = concentrateProduct.price;
                         break;
                     }
                 }
@@ -232,7 +232,7 @@ const Booking = () => {
                     );
                     if (blendProduct) {
                         selected = blendProduct;
-                        price = blendProduct.quotation_price;
+                        price = blendProduct.price;
                         break;
                     }
                 }
