@@ -1,0 +1,206 @@
+.whey-products-section {
+  padding: 60px 0;
+}
+
+/* Card Container */
+.whey-product-container {
+  margin-bottom: 50px;
+}
+
+.whey-product-card {
+  display: flex;
+  flex-wrap: wrap;
+  background: #0b0b0b;
+  border: 1px solid #1a1a1a;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.7);
+  transition: 0.3s ease-in-out;
+  overflow: hidden;
+  padding: 30px;
+  gap: 20px;
+}
+
+/* Image */
+.product-image-col {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111111;
+  border-radius: 12px;
+}
+
+.product-image-wrapper {
+  width: 100%;
+  max-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 100%;
+  transition: 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+
+/* Details */
+.product-details-col {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.flavor-buttons,
+.protein-buttons {
+    margin-bottom: 20px;
+}
+
+.flavor-buttons .btn-group,
+.protein-buttons .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.flavor-selection {
+    margin-top: 8px;
+}
+
+/* Labels */
+.protein-label,
+.flavor-label {
+  font-weight: 600;
+  color: #aaaaaa;
+  margin-bottom: 8px;
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.protein-btn,
+.flavor-btn {
+  padding: 10px 20px;
+  border: 2px solid #88c349;
+  border-radius: 8px;
+  background: transparent;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.protein-btn:hover,
+.protein-btn.active,
+.flavor-btn:hover,
+.flavor-btn.active {
+  background: #88c349;
+  color: #0b0b0b !important;
+  border: 2px solid #88c349 !important;
+}
+
+.flavor-btn {
+  min-width: 120px;
+}
+
+.protein-btn:focus,
+.flavor-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Flavor */
+.flavor-select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #1a1a1a;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #0b0b0b;
+  color: #ffffff;
+  transition: 0.3s;
+  appearance: none;
+}
+
+.flavor-select:focus {
+  border-color: #88c349;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Price Box */
+.price-info {
+  background: #111111;
+  border-radius: 12px;
+  padding: 18px;
+  margin: 10px 0;
+}
+
+.price-range,
+.selected-price {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.selected-price .label {
+  color: #bbbbbb;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.selected-price .value {
+    font-weight: 600;
+    color: #88c349;
+    font-size: 22px;
+}
+
+/* CTA */
+.book-sample-btn {
+  width: 100%;
+  padding: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  background: #333333;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.book-sample-btn:hover {
+  background: #88c349;
+  color: #0b0b0b;
+}
+
+.book-sample-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .whey-product-card {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .product-details-col {
+    padding: 0;
+  }
+
+}
+

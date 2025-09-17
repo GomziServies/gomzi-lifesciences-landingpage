@@ -3,6 +3,7 @@ import NutritionHeader from "../components/partials/Header/nutritionsheader";
 import Footer from "../components/partials/Footer/footer";
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
+import "../assets/css/whey-products.css";
 import { isUserLoggedIn } from "../utils/auth";
 import LoginModal from "../components/popup/login";
 import BookingModal from "../components/popup/BookingModal";
@@ -18,126 +19,129 @@ import toast, { Toaster } from "react-hot-toast";
 const productsData = [
     {
         product_id: "68a2c8e006800a0384e9cc6a",
-        name: "Whey Blend-1kg",
+        name: "Whey Blend Sample(35gm)",
         flavoured: ["Mawa Kulfi", "Chocolate", "Mango", "Mocha Coffee"],
         protein: ["35%", "40%", "50%", "60%"],
+        pricerRange:"930-2305",
         priceMatrix: {
             "35%": {
-                "Mawa Kulfi": 930,
-                Chocolate: 1100,
-                "Mocha Coffee": 1210,
-                Mango: 930,
+                "Mawa Kulfi": 190,
+                Chocolate: 190,
+                "Mocha Coffee": 190,
+                Mango: 190,
             },
             "40%": {
-                "Mawa Kulfi": 1170,
-                Chocolate: 1250,
-                "Mocha Coffee": 1360,
-                Mango: 1170,
+                "Mawa Kulfi": 190,
+                Chocolate: 190,
+                "Mocha Coffee": 190,
+                Mango: 190,
             },
             "50%": {
-                "Mawa Kulfi": 1665,
-                Chocolate: 1745,
-                "Mocha Coffee": 1855,
-                Mango: 1665,
+                "Mawa Kulfi": 190,
+                Chocolate: 190,
+                "Mocha Coffee": 190,
+                Mango: 190,
             },
             "60%": {
-                "Mawa Kulfi": 2115,
-                Chocolate: 2195,
-                "Mocha Coffee": 2305,
-                Mango: 2115,
+                "Mawa Kulfi": 190,
+                Chocolate: 190,
+                "Mocha Coffee": 190,
+                Mango: 190,
             },
         },
-        price: 1300,
+        price: 190,
         image: "/assets/images/product-images/whey-blend.webp",
         link: "/whey-blend",
         moq: "100 kg",
     },
     {
         product_id: "68ad732d06800a0384ea019a",
-        name: "Whey Concentrate-1kg",
+        name: "Whey Concentrate Sample(35gm)",
         flavoured: ["Mawa Kulfi", "Chocolate", "Mocha Coffee", "Mango"],
         protein: ["35%", "50%", "60%", "70%", "80%"],
+        pricerRange:"1295-2270",
         priceMatrix: {
             "35%": {
-                "Mawa Kulfi": 1295,
-                Chocolate: 1360,
-                "Mocha Coffee": 1465,
-                Mango: 1295,
+                "Mawa Kulfi": 195,
+                Chocolate: 195,
+                "Mocha Coffee": 195,
+                Mango: 195,
             },
             "50%": {
-                "Mawa Kulfi": 1565,
-                Chocolate: 1625,
-                "Mocha Coffee": 1730,
-                Mango: 1565,
+                "Mawa Kulfi": 195,
+                Chocolate: 195,
+                "Mocha Coffee": 195,
+                Mango: 195,
             },
             "60%": {
-                "Mawa Kulfi": 1742,
-                Chocolate: 1805,
-                "Mocha Coffee": 1911,
-                Mango: 1742,
+                "Mawa Kulfi": 195,
+                Chocolate: 195,
+                "Mocha Coffee": 195,
+                Mango: 195,
             },
             "70%": {
-                "Mawa Kulfi": 1920,
-                Chocolate: 1985,
-                "Mocha Coffee": 2090,
-                Mango: 1920,
+                "Mawa Kulfi": 195,
+                Chocolate: 195,
+                "Mocha Coffee": 195,
+                Mango: 195,
             },
             "80%": {
-                "Mawa Kulfi": 2100,
-                Chocolate: 2165,
-                "Mocha Coffee": 2270,
-                Mango: 2100,
+                "Mawa Kulfi": 195,
+                Chocolate: 195,
+                "Mocha Coffee": 195,
+                Mango: 195,
             },
         },
-        price: 1295,
+        price: 195,
         image: "/assets/images/product-images/whey-concentrate.webp",
         link: "/whey-concentrate",
         moq: "100 kg",
     },
     {
         product_id: "68ad735906800a0384ea019e",
-        name: "Whey Isolate-1kg",
+        name: "Whey Isolate Sample(35gm)",
         flavoured: ["Mawa Kulfi", "Chocolate", "Mocha Coffee", "Mango"],
         protein: ["35%", "40%", "50%", "60%", "70%", "80%"],
+        pricerRange:"1900-3656",
         priceMatrix: {
             "35%": {
-                "Mawa Kulfi": 1900,
-                Chocolate: 1963,
-                "Mocha Coffee": 2068,
-                Mango: 1900,
+                "Mawa Kulfi": 200,
+                Chocolate: 200,
+                "Mocha Coffee": 200,
+                Mango: 200,
             },
             "40%": {
-                "Mawa Kulfi": 2076,
-                Chocolate: 2140,
-                "Mocha Coffee": 2245,
-                Mango: 2076,
+                "Mawa Kulfi": 200,
+                Chocolate: 200,
+                "Mocha Coffee": 200,
+                Mango: 200,
             },
             "50%": {
-                "Mawa Kulfi": 2429,
-                Chocolate: 2492,
-                "Mocha Coffee": 2598,
-                Mango: 2429,
+                "Mawa Kulfi": 200,
+                Chocolate: 200,
+                "Mocha Coffee": 200,
+                Mango: 200,
             },
             "60%": {
-                "Mawa Kulfi": 2782,
-                Chocolate: 2845,
-                "Mocha Coffee": 2950,
-                Mango: 2782,
+                "Mawa Kulfi": 200,
+                Chocolate: 200,
+                "Mocha Coffee": 200,
+                Mango: 200,
             },
             "70%": {
-                "Mawa Kulfi": 3135,
-                Chocolate: 3198,
-                "Mocha Coffee": 3303,
-                Mango: 3135,
+                "Mawa Kulfi": 200,
+                Chocolate: 200,
+                "Mocha Coffee": 200,
+                Mango: 200,
             },
             "80%": {
-                "Mawa Kulfi": 3487,
-                Chocolate: 3551,
-                "Mocha Coffee": 3656,
-                Mango: 3487,
+                "Mawa Kulfi": 200,
+                Chocolate: 200,
+                "Mocha Coffee": 200,
+                Mango: 200,
             },
         },
-        price: 1900,
+        price: 200,
         image: "/assets/images/product-images/whey-isolate.webp",
         link: "/whey-isolate",
         moq: "100 kg",
@@ -152,99 +156,75 @@ const productsData = [
     // },
     {
         product_id: "68ad737d06800a0384ea01a0",
-        name: "Mass Gainer-1kg",
-        price: 420,
+        name: "Mass Gainer Sample(35gm)",
+        price: 100,
         image: "/assets/images/product-images/mass-gainer.webp",
         link: "/mass-gainer",
         moq: "100 kg",
     },
     {
         product_id: "68ad739506800a0384ea01a2",
-        name: "Peanut Butter (500gm)",
-        price: 150,
+        name: "Peanut Butter Sample(100gm)",
+        price: 120,
         image: "/assets/images/product-images/peanut-butter.webp",
         link: "/peanut-butter",
-        moq: "100 kg (500gm)",
+        moq: "100 kg",
     },
     {
         product_id: "68ad73e006800a0384ea01ab",
-        name: "Creatine - Flavoured (250gm)",
-        price: 300,
+        name: "Creatine - Flavoured Sample(20gm)",
+        price: 120,
         image: "/assets/images/product-images/creatine-flavored.webp",
         link: "/creatine-flavored",
         moq: "50 kg (250gm)",
     },
     {
         product_id: "68ad742506800a0384ea01b2",
-        name: "Creatine - Unflavoured (250gm)",
-        price: 270,
+        name: "Creatine - Unflavoured Sample(20gm)",
+        price: 120,
         image: "/assets/images/product-images/creatine.webp",
         link: "/creatine-unflavored",
         moq: "50 kg (250gm)",
     },
     {
         product_id: "68ad744106800a0384ea01b4",
-        name: "Pre-Workout (250gm)",
+        name: "Pre-Workout Sample(20gm)",
         price: 440,
         image: "/assets/images/product-images/pre-workout.webp",
         link: "/pre-workout",
-        moq: "50 kg (250gm)",
+        moq: "50 kg",
     },
     {
         product_id: "68ad746a06800a0384ea01b8",
-        name: "EAA (250gm)",
-        price: 490,
+        name: "EAA Sample(20gm)",
+        price: 120,
         image: "/assets/images/product-images/eaa.webp",
         link: "/eaa",
         moq: "50 kg (250gm)",
     },
     {
         product_id: "68ad748306800a0384ea01be",
-        name: "BCAA (250gm)",
-        price: 490,
+        name: "BCAA Sample(20gm)",
+        price: 120,
         image: "/assets/images/product-images/bcaa.webp",
         link: "/bcaa",
         moq: "50 kg (250gm)",
     },
     {
-        product_id: "68ad749906800a0384ea01c6",
-        name: "Protein Bar (12gm protein)",
-        price: 55,
-        image: "/assets/images/product-images/protein-bar.webp",
-        link: "/protein-bar",
-        moq: "5000 pcs",
-    },
-    {
         product_id: "68ad74cc06800a0384ea01c8",
-        name: "Energy Drink - Bottle (250ml)",
-        price: 30,
+        name: "Energy Drink - Bottle Sample(220gm)",
+        price: 100,
         image: "/assets/images/product-images/energy-drink.webp",
         link: "/energy-drink",
         moq: "1000 pcs",
     },
     {
         product_id: "68ad74f006800a0384ea01cc",
-        name: "Energy Drink - Can (250ml)",
-        price: 45,
+        name: "Energy Drink - Can Sample(220gm)",
+        price: 100,
         image: "/assets/images/product-images/energy-drink-can.webp",
         link: "/energy-drink-can",
         moq: "24000 pcs",
-    },
-    {
-        product_id: "68ad750b06800a0384ea01dd",
-        name: "Multivitamin Tablets (60tbs)",
-        price: 170,
-        image: "/assets/images/product-images/multivitamin.webp",
-        link: "/multivitamin",
-        moq: "30000 nos",
-    },
-    {
-        product_id: "68ad752d06800a0384ea01e8",
-        name: "Omega 3 (60tbs)",
-        price: 225,
-        image: "/assets/images/product-images/omega-3.webp",
-        link: "/omega-3",
-        moq: "30000 nos",
     },
 ];
 window.Whey_Concentrate = {
@@ -368,8 +348,20 @@ const getAssetPath = (path) => `${process.env.PUBLIC_URL}${path}`;
 export default function Home() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showBookingModal, setShowBookingModal] = useState(false);
-    const [productSelections, setProductSelections] = useState({});
     const [pendingProduct, setPendingProduct] = useState(null);
+
+    // Initialize product selections with Mawa Kulfi as default flavor for all whey products
+    const [productSelections, setProductSelections] = useState(() => {
+        const initialSelections = {};
+        productsData.forEach((product) => {
+            if (product.name.includes("Whey")) {
+                initialSelections[product.product_id] = {
+                    flavor: "Mawa Kulfi",
+                };
+            }
+        });
+        return initialSelections;
+    });
 
     const updateProductSelection = (productId, type, value) => {
         setProductSelections((prev) => ({
@@ -806,265 +798,380 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="row justify-content-center">
-                        {productsData.map((product, index) => (
-                            <div className="col-lg-4 col-md-6" key={index}>
+                    {/* Whey Products Section */}
+                    <div className="whey-products-section">
+                        {productsData
+                            .filter((product) =>
+                                [
+                                    "Whey Blend Sample(35gm)",
+                                    "Whey Concentrate Sample(35gm)",
+                                    "Whey Isolate Sample(35gm)",
+                                ].includes(product.name)
+                            )
+                            .map((product, index) => (
                                 <div
-                                    className="service-item wow fadeInUp"
-                                    data-wow-delay={`${index * 0.01}s`}
+                                    className="whey-product-container"
+                                    key={index}
                                 >
-                                    <div className="service-image">
-                                        <div className="image-wrapper img-fluid object-fit-cover">
-                                            <figure className="image-anime">
+                                    <div
+                                        className="whey-product-card"
+                                        data-wow-delay={`${index * 0.1}s`}
+                                    >
+                                        {/* Image */}
+                                        <div className="product-image-col">
+                                            <div className="product-image-wrapper">
                                                 <img
                                                     src={getAssetPath(
                                                         product.image
                                                     )}
                                                     alt={product.name}
-                                                    className="img-fluid object-fit-cover"
+                                                    className="product-image"
                                                 />
-                                            </figure>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="service-body">
-                                        <div className="service-content-box">
-                                            <div className="service-box-content ps-3">
-                                                <h5 className="mb-2 mt-2">
-                                                    {product.name}
-                                                </h5>
-                                                <p>
-                                                    ₹{" "}
-                                                    {product.priceMatrix?.[
-                                                        productSelections[
-                                                            product.product_id
-                                                        ]?.protein ?? ""
-                                                    ]?.[
-                                                        productSelections[
-                                                            product.product_id
-                                                        ]?.flavor ?? ""
-                                                    ] ?? product.price}
-                                                </p>
-                                                <div className="row mt-3 w-100 ">
-                                                    <div className="col-6">
-                                                        {product.protein && (
-                                                            <select
-                                                                className="form-select text-white border-0 "
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        "#3C3C3C",
-                                                                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
-                                                                    cursor: "pointer",
-                                                                    width: "100%",
-                                                                }}
-                                                                onChange={(e) =>
-                                                                    updateProductSelection(
-                                                                        product.product_id,
-                                                                        "protein",
-                                                                        e.target
-                                                                            .value
-                                                                    )
-                                                                }
-                                                                value={
+
+                                        {/* Details */}
+                                        <div className="product-details-col">
+                                            <div className="product-details">
+                                                <h3 className="product-name">
+                                                    {product.name.replace(
+                                                        "-1kg",
+                                                        ""
+                                                    )}
+                                                </h3>
+
+                                                <div className="price-range">
+                                                    <span className="label">
+                                                        Price Range :{" "}
+                                                        <span className="value">
+                                                            ₹{product.pricerRange}
+                                                            
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                {/* Flavor Buttons */}
+                                                <div className="flavor-buttons mt-3">
+                                                    <p className="flavor-label">
+                                                        Select Flavor:
+                                                    </p>
+                                                    <div className="btn-group">
+                                                        {product.flavoured.map(
+                                                            (flavor) => (
+                                                                <button
+                                                                    key={flavor}
+                                                                    className={`btn flavor-btn ${
+                                                                        productSelections[
+                                                                            product.product_id
+                                                                        ]?.flavor === flavor
+                                                                            ? "active"
+                                                                            : ""
+                                                                    }`}
+                                                                    onClick={() =>
+                                                                        updateProductSelection(
+                                                                            product.product_id,
+                                                                            "flavor",
+                                                                            flavor
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    {flavor}
+                                                                </button>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                {/* Protein Buttons */}
+                                                <div className="protein-buttons mt-3">
+                                                    <p className="protein-label">
+                                                        Select Protein Percentage:
+                                                    </p>
+                                                    <div className="btn-group">
+                                                        {product.protein.map(
+                                                            (protein) => (
+                                                                <button
+                                                                    key={protein}
+                                                                    className={`btn protein-btn ${
+                                                                        productSelections[
+                                                                            product.product_id
+                                                                        ]?.protein === protein
+                                                                            ? "active"
+                                                                            : ""
+                                                                    }`}
+                                                                    onClick={() =>
+                                                                        updateProductSelection(
+                                                                            product.product_id,
+                                                                            "protein",
+                                                                            protein
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    {protein}
+                                                                </button>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                {/* <div className="flavor-selection">
+                                                    <p className="flavor-label">
+                                                        Choose Flavor:
+                                                    </p>
+                                                    <select
+                                                        className="form-select flavor-select"
+                                                        style={{
+                                                            backgroundColor:
+                                                                "#3C3C3C",
+                                                            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
+                                                            cursor: "pointer",
+                                                            width: "100%",
+                                                            backgroundRepeat:
+                                                                "no-repeat",
+                                                            backgroundPosition:
+                                                                "right 10px center",
+                                                            backgroundSize:
+                                                                "16px 16px",
+                                                        }}
+                                                        onChange={(e) =>
+                                                            updateProductSelection(
+                                                                product.product_id,
+                                                                "flavor",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        value={
+                                                            productSelections[
+                                                                product
+                                                                    .product_id
+                                                            ]?.flavor || ""
+                                                        }
+                                                    >
+                                                        <option value="">
+                                                            Select Flavor
+                                                        </option>
+                                                        {product.flavoured.map(
+                                                            (flavor) => (
+                                                                <option
+                                                                    key={flavor}
+                                                                    value={
+                                                                        flavor
+                                                                    }
+                                                                >
+                                                                    {flavor}
+                                                                </option>
+                                                            )
+                                                        )}
+                                                    </select>
+                                                </div> */}
+
+                                                {/* Price */}
+                                                <div className="price-info">
+                                                    <div className="selected-price">
+                                                        <span className="label">
+                                                            Sample Price: {"  "}
+                                                            <span className="value">
+                                                                ₹{" "}
+                                                                {product
+                                                                    .priceMatrix?.[
                                                                     productSelections[
                                                                         product
                                                                             .product_id
                                                                     ]
-                                                                        ?.protein ||
-                                                                    ""
-                                                                }
-                                                            >
-                                                                <option value="">
-                                                                    Select
-                                                                    Protein
-                                                                </option>
-                                                                {product.protein.map(
-                                                                    (
-                                                                        protein
-                                                                    ) => (
-                                                                        <option
-                                                                            key={
-                                                                                protein
-                                                                            }
-                                                                            value={
-                                                                                protein
-                                                                            }
-                                                                            style={{
-                                                                                backgroundColor:
-                                                                                    "#3C3C3C",
-                                                                            }}
-                                                                        >
-                                                                            {
-                                                                                protein
-                                                                            }
-                                                                        </option>
-                                                                    )
-                                                                )}
-                                                            </select>
-                                                        )}
+                                                                        ?.protein ??
+                                                                        ""
+                                                                ]?.[
+                                                                    "Mawa Kulfi"
+                                                                ] ??
+                                                                    "Select protein percentage"}
+                                                            </span>
+                                                        </span>
                                                     </div>
-                                                    <div className="col-6 pr-0">
-                                                        {product.flavoured && (
-                                                            <select
-                                                                className="form-select text-white border-0 "
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        "#3C3C3C",
-                                                                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
-                                                                    cursor: "pointer",
-                                                                    width: "100%",
-                                                                }}
-                                                                onChange={(e) =>
-                                                                    updateProductSelection(
-                                                                        product.product_id,
-                                                                        "flavor",
-                                                                        e.target
-                                                                            .value
-                                                                    )
-                                                                }
-                                                                value={
-                                                                    productSelections[
-                                                                        product
-                                                                            .product_id
-                                                                    ]?.flavor ||
-                                                                    ""
-                                                                }
-                                                            >
-                                                                <option value="">
-                                                                    Select
-                                                                    Flavor
-                                                                </option>
-                                                                {product.flavoured.map(
-                                                                    (
-                                                                        flavor
-                                                                    ) => (
-                                                                        <option
-                                                                            key={
-                                                                                flavor
-                                                                            }
-                                                                            value={
-                                                                                flavor
-                                                                            }
-                                                                            style={{
-                                                                                backgroundColor:
-                                                                                    "#3C3C3C",
-                                                                            }}
-                                                                        >
-                                                                            {
-                                                                                flavor
-                                                                            }
-                                                                        </option>
-                                                                    )
-                                                                )}
-                                                            </select>
-                                                        )}
-                                                    </div>
+                                                </div>
+
+                                                {/* Action */}
+                                                <div className="action-area">
+                                                    <button
+                                                        onClick={() =>
+                                                            handleBookSample(
+                                                                product
+                                                            )
+                                                        }
+                                                        className="btn-highlighted book-sample-btn"
+                                                    >
+                                                        Book Sample
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="pricing-btn m-3">
-                                        <button
-                                            onClick={() =>
-                                                handleBookSample(product)
-                                            }
-                                            className="btn-highlighted m-0 border-0"
-                                        >
-                                            {(() => {
-                                                const cartProducts =
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "ATC_Product"
+                                </div>
+                            ))}
+                    </div>
+
+                    {/* Other Products Section */}
+                    <div className="row justify-content-center">
+                        {productsData
+                            .filter(
+                                (product) =>
+                                    ![
+                                        "Whey Blend Sample(35gm)",
+                                        "Whey Concentrate Sample(35gm)",
+                                        "Whey Isolate Sample(35gm)",
+                                    ].includes(product.name)
+                            )
+                            .map((product, index) => (
+                                <div className="col-lg-4 col-md-6" key={index}>
+                                    <div
+                                        className="service-item wow fadeInUp"
+                                        data-wow-delay={`${index * 0.01}s`}
+                                    >
+                                        <div className="service-image">
+                                            <div className="image-wrapper img-fluid object-fit-cover">
+                                                <figure className="image-anime">
+                                                    <img
+                                                        src={getAssetPath(
+                                                            product.image
+                                                        )}
+                                                        alt={product.name}
+                                                        className="img-fluid object-fit-cover"
+                                                    />
+                                                </figure>
+                                            </div>
+                                        </div>
+                                        <div className="service-body">
+                                            <div className="service-content-box">
+                                                <div className="service-box-content ps-3">
+                                                    <h5 className="mb-2 mt-2">
+                                                        {product.name}
+                                                    </h5>
+                                                    <p>
+                                                        ₹{" "}
+                                                        {product.priceMatrix?.[
+                                                            productSelections[
+                                                                product
+                                                                    .product_id
+                                                            ]?.protein ?? ""
+                                                        ]?.[
+                                                            productSelections[
+                                                                product
+                                                                    .product_id
+                                                            ]?.flavor ?? ""
+                                                        ] ?? product.price}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="pricing-btn m-3">
+                                            <button
+                                                onClick={() =>
+                                                    handleBookSample(product)
+                                                }
+                                                className="btn-highlighted m-0 border-0"
+                                            >
+                                                {(() => {
+                                                    const cartProducts =
+                                                        JSON.parse(
+                                                            localStorage.getItem(
+                                                                "ATC_Product"
+                                                            )
+                                                        ) || [];
+
+                                                    // Check if it's a regular product
+                                                    if (
+                                                        cartProducts.some(
+                                                            (p) =>
+                                                                p.product_id ===
+                                                                product.product_id
                                                         )
-                                                    ) || [];
+                                                    ) {
+                                                        return "Item Added";
+                                                    }
 
-                                                // Check if it's a regular product
-                                                if (
-                                                    cartProducts.some(
-                                                        (p) =>
-                                                            p.product_id ===
-                                                            product.product_id
-                                                    )
-                                                ) {
-                                                    return "Item Added";
-                                                }
-
-                                                // If it's a Whey Concentrate, Isolate, or Blend check all variants
-                                                if (
-                                                    product.name.includes(
-                                                        "Whey Concentrate"
-                                                    )
-                                                ) {
-                                                    // Check if any variant of this concentrate is in cart
-                                                    for (const flavor in window.Whey_Concentrate) {
-                                                        if (
-                                                            window.Whey_Concentrate[
-                                                                flavor
-                                                            ].some((variant) =>
-                                                                cartProducts.some(
-                                                                    (p) =>
-                                                                        p.product_id ===
-                                                                        variant.product_id
+                                                    // If it's a Whey Concentrate, Isolate, or Blend check all variants
+                                                    if (
+                                                        product.name.includes(
+                                                            "Whey Concentrate"
+                                                        )
+                                                    ) {
+                                                        // Check if any variant of this concentrate is in cart
+                                                        for (const flavor in window.Whey_Concentrate) {
+                                                            if (
+                                                                window.Whey_Concentrate[
+                                                                    flavor
+                                                                ].some(
+                                                                    (variant) =>
+                                                                        cartProducts.some(
+                                                                            (
+                                                                                p
+                                                                            ) =>
+                                                                                p.product_id ===
+                                                                                variant.product_id
+                                                                        )
                                                                 )
-                                                            )
-                                                        ) {
-                                                            return "Item Added";
+                                                            ) {
+                                                                return "Item Added";
+                                                            }
                                                         }
                                                     }
-                                                }
 
-                                                if (
-                                                    product.name.includes(
-                                                        "Whey Isolate"
-                                                    )
-                                                ) {
-                                                    // Check if any variant of this isolate is in cart
-                                                    for (const flavor in window.Whey_Isolate) {
-                                                        if (
-                                                            window.Whey_Isolate[
-                                                                flavor
-                                                            ].some((variant) =>
-                                                                cartProducts.some(
-                                                                    (p) =>
-                                                                        p.product_id ===
-                                                                        variant.product_id
+                                                    if (
+                                                        product.name.includes(
+                                                            "Whey Isolate"
+                                                        )
+                                                    ) {
+                                                        // Check if any variant of this isolate is in cart
+                                                        for (const flavor in window.Whey_Isolate) {
+                                                            if (
+                                                                window.Whey_Isolate[
+                                                                    flavor
+                                                                ].some(
+                                                                    (variant) =>
+                                                                        cartProducts.some(
+                                                                            (
+                                                                                p
+                                                                            ) =>
+                                                                                p.product_id ===
+                                                                                variant.product_id
+                                                                        )
                                                                 )
-                                                            )
-                                                        ) {
-                                                            return "Item Added";
+                                                            ) {
+                                                                return "Item Added";
+                                                            }
                                                         }
                                                     }
-                                                }
 
-                                                if (
-                                                    product.name.includes(
-                                                        "Whey Blend"
-                                                    )
-                                                ) {
-                                                    // Check if any variant of this blend is in cart
-                                                    for (const flavor in window.Whey_Blend) {
-                                                        if (
-                                                            window.Whey_Blend[
-                                                                flavor
-                                                            ].some((variant) =>
-                                                                cartProducts.some(
-                                                                    (p) =>
-                                                                        p.product_id ===
-                                                                        variant.product_id
+                                                    if (
+                                                        product.name.includes(
+                                                            "Whey Blend"
+                                                        )
+                                                    ) {
+                                                        // Check if any variant of this blend is in cart
+                                                        for (const flavor in window.Whey_Blend) {
+                                                            if (
+                                                                window.Whey_Blend[
+                                                                    flavor
+                                                                ].some(
+                                                                    (variant) =>
+                                                                        cartProducts.some(
+                                                                            (
+                                                                                p
+                                                                            ) =>
+                                                                                p.product_id ===
+                                                                                variant.product_id
+                                                                        )
                                                                 )
-                                                            )
-                                                        ) {
-                                                            return "Item Added";
+                                                            ) {
+                                                                return "Item Added";
+                                                            }
                                                         }
                                                     }
-                                                }
 
-                                                return "Book Sample";
-                                            })()}
-                                        </button>
+                                                    return "Book Sample";
+                                                })()}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 </div>
             </div>

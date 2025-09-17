@@ -11,113 +11,106 @@ import { isUserLoggedIn } from '../utils/auth';
 const Booking = () => {
     const [isLoading, setIsLoading] = useState(false);
     const productsData = [
-        { product_id: '68ac019606800a0384e9f883', name: "Whey Protein", price: 189, quotation_price: 1170, moq: "25 kg" },
-        { product_id: '68a2c8e006800a0384e9cc6a', name: "Whey Blend", price: 193, quotation_price: 1300, moq: "25 kg" },
-        { product_id: '68ad732d06800a0384ea019a', name: "Whey Concentrate", price: 204, quotation_price: 1630, moq: "25 kg" },
-        { product_id: '68ad735906800a0384ea019e', name: "Whey Isolate", price: 249, quotation_price: 3000, moq: "25 kg" },
-        { product_id: '68ad739506800a0384ea01a2', name: "Peanut Butter", price: 180, quotation_price: 150, moq: "25 kg (500gm)" },
-        { product_id: '68ad737d06800a0384ea01a0', name: "Mass Gainer", price: 164, quotation_price: 420, moq: "25 kg" },
-        { product_id: '68ad73e006800a0384ea01ab', name: "Creatine - flavoured", price: 156, quotation_price: 300, moq: "50 kg (250gm)" },
-        { product_id: '68ad742506800a0384ea01b2', name: "Creatine - Unflavoured", price: 156, quotation_price: 270, moq: "50 kg (250gm)" },
-        { product_id: '68ad744106800a0384ea01b4', name: "Pre-Workout", price: 159, quotation_price: 440, moq: "50 kg (250gm)" },
-        { product_id: '68ad746a06800a0384ea01b8', name: "EAA", price: 160, quotation_price: 490, moq: "50 kg (250gm)" },
-        { product_id: '68ad748306800a0384ea01be', name: "BCAA", price: 160, quotation_price: 490, moq: "50 kg (250gm)" },
-        { product_id: '68ad749906800a0384ea01c6', name: "Protein Bar", price: 180, quotation_price: 55, moq: "5000  nos" },
-        { product_id: '68ad74cc06800a0384ea01c8', name: "Energy Drink - Bottle", price: 180, quotation_price: 30, moq: "1000 nos" },
-        { product_id: '68ad74f006800a0384ea01cc', name: "Energy Drink - Can", price: 195, quotation_price: 45, moq: "24,000 nos" },
-        { product_id: '68ad750b06800a0384ea01dd', name: "Multivitamin Tablets", price: 320, quotation_price: 170, moq: "30000 nos" },
-        { product_id: '68ad752d06800a0384ea01e8', name: "Omega 3", price: 375, quotation_price: 225, moq: "30,000 nos" }
+        { product_id: '68ad739506800a0384ea01a2', name: "Peanut Butter", price: 120, quotation_price: 150, moq: "25 kg (500gm)" },
+        { product_id: '68ad737d06800a0384ea01a0', name: "Mass Gainer", price: 100, quotation_price: 420, moq: "25 kg" },
+        { product_id: '68ad73e006800a0384ea01ab', name: "Creatine - flavoured", price: 120, quotation_price: 300, moq: "50 kg (250gm)" },
+        { product_id: '68ad742506800a0384ea01b2', name: "Creatine - Unflavoured", price: 120, quotation_price: 270, moq: "50 kg (250gm)" },
+        { product_id: '68ad744106800a0384ea01b4', name: "Pre-Workout", price: 120, quotation_price: 440, moq: "50 kg (250gm)" },
+        { product_id: '68ad746a06800a0384ea01b8', name: "EAA", price: 120, quotation_price: 490, moq: "50 kg (250gm)" },
+        { product_id: '68ad748306800a0384ea01be', name: "BCAA", price: 120, quotation_price: 490, moq: "50 kg (250gm)" },
+        { product_id: '68ad74cc06800a0384ea01c8', name: "Energy Drink - Bottle", price: 100, quotation_price: 30, moq: "1000 nos" },
+        { product_id: '68ad74f006800a0384ea01cc', name: "Energy Drink - Can", price: 100, quotation_price: 45, moq: "24,000 nos" },
     ];
     const Whey_Concentrate = {
         "Chocolate": [
-            { percent: "35%", name: "Whey Concentrate", price: 198, quotation_price: 1360, product_id: "68aef32e06800a0384ea3faf", moq: "25 kg" },
-            { percent: "50%", name: "Whey Concentrate", price: 207, quotation_price: 1625, product_id: "68aef3a806800a0384ea4080", moq: "25 kg" },
-            { percent: "60%", name: "Whey Concentrate", price: 213, quotation_price: 1805, product_id: "68aef4a706800a0384ea4095", moq: "25 kg" },
-            { percent: "70%", name: "Whey Concentrate", price: 220, quotation_price: 1985, product_id: "68aef5b806800a0384ea40a9", moq: "25 kg" },
-            { percent: "80%", name: "Whey Concentrate", price: 226, quotation_price: 2165, product_id: "68aef66406800a0384ea40cd", moq: "25 kg" }
+            { percent: "35%", name: "Whey Concentrate", price: 195, quotation_price: 1360, product_id: "68aef32e06800a0384ea3faf", moq: "25 kg" },
+            { percent: "50%", name: "Whey Concentrate", price: 195, quotation_price: 1625, product_id: "68aef3a806800a0384ea4080", moq: "25 kg" },
+            { percent: "60%", name: "Whey Concentrate", price: 195, quotation_price: 1805, product_id: "68aef4a706800a0384ea4095", moq: "25 kg" },
+            { percent: "70%", name: "Whey Concentrate", price: 195, quotation_price: 1985, product_id: "68aef5b806800a0384ea40a9", moq: "25 kg" },
+            { percent: "80%", name: "Whey Concentrate", price: 195, quotation_price: 2165, product_id: "68aef66406800a0384ea40cd", moq: "25 kg" }
         ],
         "Mawa Kulfi": [
-            { percent: "35%", name: "Whey Concentrate", price: 196, quotation_price: 1295, product_id: "68aef29506800a0384ea3e42", moq: "25 kg" },
-            { percent: "50%", name: "Whey Concentrate", price: 205, quotation_price: 1565, product_id: "68aef36c06800a0384ea4075", moq: "25 kg" },
-            { percent: "60%", name: "Whey Concentrate", price: 211, quotation_price: 1742, product_id: "68aef47006800a0384ea4090", moq: "25 kg" },
-            { percent: "70%", name: "Whey Concentrate", price: 217, quotation_price: 1920, product_id: "68aef58c06800a0384ea40a5", moq: "25 kg" },
-            { percent: "80%", name: "Whey Concentrate", price: 224, quotation_price: 2100, product_id: "68aef63606800a0384ea40c9", moq: "25 kg" }
+            { percent: "35%", name: "Whey Concentrate", price: 195, quotation_price: 1295, product_id: "68aef29506800a0384ea3e42", moq: "25 kg" },
+            { percent: "50%", name: "Whey Concentrate", price: 195, quotation_price: 1565, product_id: "68aef36c06800a0384ea4075", moq: "25 kg" },
+            { percent: "60%", name: "Whey Concentrate", price: 195, quotation_price: 1742, product_id: "68aef47006800a0384ea4090", moq: "25 kg" },
+            { percent: "70%", name: "Whey Concentrate", price: 195, quotation_price: 1920, product_id: "68aef58c06800a0384ea40a5", moq: "25 kg" },
+            { percent: "80%", name: "Whey Concentrate", price: 195, quotation_price: 2100, product_id: "68aef63606800a0384ea40c9", moq: "25 kg" }
         ],
         "Mocha Coffee": [
-            { percent: "35%", name: "Whey Concentrate", price: 202, quotation_price: 1465, product_id: "68aef30106800a0384ea3f35", moq: "25 kg" },
-            { percent: "50%", name: "Whey Concentrate", price: 211, quotation_price: 1730, product_id: "68aef39406800a0384ea407e", moq: "25 kg" },
-            { percent: "60%", name: "Whey Concentrate", price: 217, quotation_price: 1911, product_id: "68aef48906800a0384ea4092", moq: "25 kg" },
-            { percent: "70%", name: "Whey Concentrate", price: 226, quotation_price: 2090, product_id: "68aef5a906800a0384ea40a7", moq: "25 kg" },
-            { percent: "80%", name: "Whey Concentrate", price: 230, quotation_price: 2270, product_id: "68aef65006800a0384ea40cb", moq: "25 kg" }
+            { percent: "35%", name: "Whey Concentrate", price: 195, quotation_price: 1465, product_id: "68aef30106800a0384ea3f35", moq: "25 kg" },
+            { percent: "50%", name: "Whey Concentrate", price: 195, quotation_price: 1730, product_id: "68aef39406800a0384ea407e", moq: "25 kg" },
+            { percent: "60%", name: "Whey Concentrate", price: 195, quotation_price: 1911, product_id: "68aef48906800a0384ea4092", moq: "25 kg" },
+            { percent: "70%", name: "Whey Concentrate", price: 195, quotation_price: 2090, product_id: "68aef5a906800a0384ea40a7", moq: "25 kg" },
+            { percent: "80%", name: "Whey Concentrate", price: 195, quotation_price: 2270, product_id: "68aef65006800a0384ea40cb", moq: "25 kg" }
         ],
         "Mango": [
-            { percent: "35%", name: "Whey Concentrate", price: 196, quotation_price: 1295, product_id: "68b029fe06800a0384ea45e4", moq: "25 kg" },
-            { percent: "50%", name: "Whey Concentrate", price: 205, quotation_price: 1565, product_id: "68b02a2606800a0384ea45ea", moq: "25 kg" },
-            { percent: "60%", name: "Whey Concentrate", price: 211, quotation_price: 1742, product_id: "68b02a5806800a0384ea45f6", moq: "25 kg" },
-            { percent: "70%", name: "Whey Concentrate", price: 217, quotation_price: 1920, product_id: "68b02a6806800a0384ea45f8", moq: "25 kg" },
-            { percent: "80%", name: "Whey Concentrate", price: 224, quotation_price: 2100, product_id: "68b02a7c06800a0384ea45fa", moq: "25 kg" }
+            { percent: "35%", name: "Whey Concentrate", price: 195, quotation_price: 1295, product_id: "68b029fe06800a0384ea45e4", moq: "25 kg" },
+            { percent: "50%", name: "Whey Concentrate", price: 195, quotation_price: 1565, product_id: "68b02a2606800a0384ea45ea", moq: "25 kg" },
+            { percent: "60%", name: "Whey Concentrate", price: 195, quotation_price: 1742, product_id: "68b02a5806800a0384ea45f6", moq: "25 kg" },
+            { percent: "70%", name: "Whey Concentrate", price: 195, quotation_price: 1920, product_id: "68b02a6806800a0384ea45f8", moq: "25 kg" },
+            { percent: "80%", name: "Whey Concentrate", price: 195, quotation_price: 2100, product_id: "68b02a7c06800a0384ea45fa", moq: "25 kg" }
         ]
     };
 
     const Whey_Blend = {
         "Chocolate": [
-            { percent: "35%", name: "Whey Blend", price: 189, quotation_price: 1100, product_id: "68b03cd406800a0384ea478c", moq: "25 kg" },
-            { percent: "40%", name: "Whey Blend", price: 194, quotation_price: 1250, product_id: "68b03cf206800a0384ea478e", moq: "25 kg" },
-            { percent: "50%", name: "Whey Blend", price: 211, quotation_price: 1745, product_id: "68b03d2606800a0384ea479b", moq: "25 kg" },
-            { percent: "60%", name: "Whey Blend", price: 227, quotation_price: 2195, product_id: "68b03d4206800a0384ea479d", moq: "25 kg" }
+            { percent: "35%", name: "Whey Blend", price: 190, quotation_price: 1100, product_id: "68b03cd406800a0384ea478c", moq: "25 kg" },
+            { percent: "40%", name: "Whey Blend", price: 190, quotation_price: 1250, product_id: "68b03cf206800a0384ea478e", moq: "25 kg" },
+            { percent: "50%", name: "Whey Blend", price: 190, quotation_price: 1745, product_id: "68b03d2606800a0384ea479b", moq: "25 kg" },
+            { percent: "60%", name: "Whey Blend", price: 190, quotation_price: 2195, product_id: "68b03d4206800a0384ea479d", moq: "25 kg" }
         ],
         "Mawa Kulfi": [
-            { percent: "35%", name: "Whey Blend", price: 183, quotation_price: 930, product_id: "68b03b9406800a0384ea476f", moq: "25 kg" },
-            { percent: "40%", name: "Whey Blend", price: 191, quotation_price: 1170, product_id: "68b03baf06800a0384ea4771", moq: "25 kg" },
-            { percent: "50%", name: "Whey Blend", price: 208, quotation_price: 1665, product_id: "68b03bbd06800a0384ea4773", moq: "25 kg" },
-            { percent: "60%", name: "Whey Blend", price: 224, quotation_price: 2115, product_id: "68b03bcd06800a0384ea4775", moq: "25 kg" }
+            { percent: "35%", name: "Whey Blend", price: 190, quotation_price: 930, product_id: "68b03b9406800a0384ea476f", moq: "25 kg" },
+            { percent: "40%", name: "Whey Blend", price: 190, quotation_price: 1170, product_id: "68b03baf06800a0384ea4771", moq: "25 kg" },
+            { percent: "50%", name: "Whey Blend", price: 190, quotation_price: 1665, product_id: "68b03bbd06800a0384ea4773", moq: "25 kg" },
+            { percent: "60%", name: "Whey Blend", price: 190, quotation_price: 2115, product_id: "68b03bcd06800a0384ea4775", moq: "25 kg" }
         ],
         "Mocha Coffee": [
-            { percent: "35%", name: "Whey Blend", price: 192, quotation_price: 1210, product_id: "68b03ddd06800a0384ea47e5", moq: "25 kg" },
-            { percent: "40%", name: "Whey Blend", price: 198, quotation_price: 1360, product_id: "68b03deb06800a0384ea47e7", moq: "25 kg" },
-            { percent: "50%", name: "Whey Blend", price: 215, quotation_price: 1855, product_id: "68b03df506800a0384ea47e9", moq: "25 kg" },
-            { percent: "60%", name: "Whey Blend", price: 231, quotation_price: 2305, product_id: "68b03e0206800a0384ea47eb", moq: "25 kg" }
+            { percent: "35%", name: "Whey Blend", price: 190, quotation_price: 1210, product_id: "68b03ddd06800a0384ea47e5", moq: "25 kg" },
+            { percent: "40%", name: "Whey Blend", price: 190, quotation_price: 1360, product_id: "68b03deb06800a0384ea47e7", moq: "25 kg" },
+            { percent: "50%", name: "Whey Blend", price: 190, quotation_price: 1855, product_id: "68b03df506800a0384ea47e9", moq: "25 kg" },
+            { percent: "60%", name: "Whey Blend", price: 190, quotation_price: 2305, product_id: "68b03e0206800a0384ea47eb", moq: "25 kg" }
         ],
         "Mango": [
-            { percent: "35%", name: "Whey Blend", price: 183, quotation_price: 930, product_id: "68b03a6306800a0384ea4750", moq: "25 kg" },
-            { percent: "40%", name: "Whey Blend", price: 191, quotation_price: 1170, product_id: "68b03ab206800a0384ea4752", moq: "25 kg" },
-            { percent: "50%", name: "Whey Blend", price: 208, quotation_price: 1665, product_id: "68b03b0706800a0384ea4754", moq: "25 kg" },
-            { percent: "60%", name: "Whey Blend", price: 224, quotation_price: 2115, product_id: "68b03b1306800a0384ea4756", moq: "25 kg" }
+            { percent: "35%", name: "Whey Blend", price: 190, quotation_price: 930, product_id: "68b03a6306800a0384ea4750", moq: "25 kg" },
+            { percent: "40%", name: "Whey Blend", price: 190, quotation_price: 1170, product_id: "68b03ab206800a0384ea4752", moq: "25 kg" },
+            { percent: "50%", name: "Whey Blend", price: 190, quotation_price: 1665, product_id: "68b03b0706800a0384ea4754", moq: "25 kg" },
+            { percent: "60%", name: "Whey Blend", price: 190, quotation_price: 2115, product_id: "68b03b1306800a0384ea4756", moq: "25 kg" }
         ]
     };
 
     const Whey_Isolate = {
         "Chocolate": [
-            { percent: "35%", name: "Whey Isolate", price: 219, quotation_price: 1963, product_id: "68aef71b06800a0384ea40e5", moq: "25 kg" },
-            { percent: "40%", name: "Whey Isolate", price: 225, quotation_price: 2140, product_id: "68aef76906800a0384ea40eb", moq: "25 kg" },
-            { percent: "50%", name: "Whey Isolate", price: 237, quotation_price: 2492, product_id: "68aef80406800a0384ea4112", moq: "25 kg" },
-            { percent: "60%", name: "Whey Isolate", price: 250, quotation_price: 2845, product_id: "68aef88306800a0384ea4124", moq: "25 kg" },
-            { percent: "70%", name: "Whey Isolate", price: 262, quotation_price: 3198, product_id: "68aef8d606800a0384ea412a", moq: "25 kg" },
-            { percent: "80%", name: "Whey Isolate", price: 274, quotation_price: 3551, product_id: "68aef96e06800a0384ea4153", moq: "25 kg" }
+            { percent: "35%", name: "Whey Isolate", price: 200, quotation_price: 1963, product_id: "68aef71b06800a0384ea40e5", moq: "25 kg" },
+            { percent: "40%", name: "Whey Isolate", price: 200, quotation_price: 2140, product_id: "68aef76906800a0384ea40eb", moq: "25 kg" },
+            { percent: "50%", name: "Whey Isolate", price: 200, quotation_price: 2492, product_id: "68aef80406800a0384ea4112", moq: "25 kg" },
+            { percent: "60%", name: "Whey Isolate", price: 200, quotation_price: 2845, product_id: "68aef88306800a0384ea4124", moq: "25 kg" },
+            { percent: "70%", name: "Whey Isolate", price: 200, quotation_price: 3198, product_id: "68aef8d606800a0384ea412a", moq: "25 kg" },
+            { percent: "80%", name: "Whey Isolate", price: 200, quotation_price: 3551, product_id: "68aef96e06800a0384ea4153", moq: "25 kg" }
         ],
         "Mawa Kulfi": [
-            { percent: "35%", name: "Whey Isolate", price: 217, quotation_price: 1900, product_id: "68aef70c06800a0384ea40e3", moq: "25 kg" },
-            { percent: "40%", name: "Whey Isolate", price: 223, quotation_price: 2076, product_id: "68aef75306800a0384ea40e9", moq: "25 kg" },
-            { percent: "50%", name: "Whey Isolate", price: 235, quotation_price: 2429, product_id: "68aef7ea06800a0384ea4110", moq: "25 kg" },
-            { percent: "60%", name: "Whey Isolate", price: 247, quotation_price: 2782, product_id: "68aef86c06800a0384ea4122", moq: "25 kg" },
-            { percent: "70%", name: "Whey Isolate", price: 260, quotation_price: 3135, product_id: "68aef8c206800a0384ea4128", moq: "25 kg" },
-            { percent: "80%", name: "Whey Isolate", price: 272, quotation_price: 3487, product_id: "68aef95306800a0384ea4151", moq: "25 kg" }
+            { percent: "35%", name: "Whey Isolate", price: 200, quotation_price: 1900, product_id: "68aef70c06800a0384ea40e3", moq: "25 kg" },
+            { percent: "40%", name: "Whey Isolate", price: 200, quotation_price: 2076, product_id: "68aef75306800a0384ea40e9", moq: "25 kg" },
+            { percent: "50%", name: "Whey Isolate", price: 200, quotation_price: 2429, product_id: "68aef7ea06800a0384ea4110", moq: "25 kg" },
+            { percent: "60%", name: "Whey Isolate", price: 200, quotation_price: 2782, product_id: "68aef86c06800a0384ea4122", moq: "25 kg" },
+            { percent: "70%", name: "Whey Isolate", price: 200, quotation_price: 3135, product_id: "68aef8c206800a0384ea4128", moq: "25 kg" },
+            { percent: "80%", name: "Whey Isolate", price: 200, quotation_price: 3487, product_id: "68aef95306800a0384ea4151", moq: "25 kg" }
         ],
         "Mocha Coffee": [
-            { percent: "35%", name: "Whey Isolate", price: 222, quotation_price: 2068, product_id: "68aef72d06800a0384ea40e7", moq: "25 kg" },
-            { percent: "40%", name: "Whey Isolate", price: 229, quotation_price: 2245, product_id: "68aef77b06800a0384ea40ed", moq: "25 kg" },
-            { percent: "50%", name: "Whey Isolate", price: 241, quotation_price: 2598, product_id: "68aef81106800a0384ea4114", moq: "25 kg" },
-            { percent: "60%", name: "Whey Isolate", price: 253, quotation_price: 2950, product_id: "68aef89b06800a0384ea4126", moq: "25 kg" },
-            { percent: "70%", name: "Whey Isolate", price: 266, quotation_price: 3303, product_id: "68aef8e806800a0384ea412c", moq: "25 kg" },
-            { percent: "80%", name: "Whey Isolate", price: 278, quotation_price: 3656, product_id: "68aef98106800a0384ea4155", moq: "25 kg" }
+            { percent: "35%", name: "Whey Isolate", price: 200, quotation_price: 2068, product_id: "68aef72d06800a0384ea40e7", moq: "25 kg" },
+            { percent: "40%", name: "Whey Isolate", price: 200, quotation_price: 2245, product_id: "68aef77b06800a0384ea40ed", moq: "25 kg" },
+            { percent: "50%", name: "Whey Isolate", price: 200, quotation_price: 2598, product_id: "68aef81106800a0384ea4114", moq: "25 kg" },
+            { percent: "60%", name: "Whey Isolate", price: 200, quotation_price: 2950, product_id: "68aef89b06800a0384ea4126", moq: "25 kg" },
+            { percent: "70%", name: "Whey Isolate", price: 200, quotation_price: 3303, product_id: "68aef8e806800a0384ea412c", moq: "25 kg" },
+            { percent: "80%", name: "Whey Isolate", price: 200, quotation_price: 3656, product_id: "68aef98106800a0384ea4155", moq: "25 kg" }
         ],
         "Mango": [
-            { percent: "35%", name: "Whey Isolate", price: 220, quotation_price: 1900, product_id: "68b02a9d06800a0384ea4605", moq: "25 kg" },
-            { percent: "40%", name: "Whey Isolate", price: 226, quotation_price: 2076, product_id: "68b02ab106800a0384ea460b", moq: "25 kg" },
-            { percent: "50%", name: "Whey Isolate", price: 238, quotation_price: 2429, product_id: "68b02ad606800a0384ea460f", moq: "25 kg" },
-            { percent: "60%", name: "Whey Isolate", price: 250, quotation_price: 2782, product_id: "68b02b4006800a0384ea4602", moq: "25 kg" },
-            { percent: "70%", name: "Whey Isolate", price: 262, quotation_price: 3135, product_id: "68b02aee06800a0384ea4613", moq: "25 kg" },
-            { percent: "80%", name: "Whey Isolate", price: 274, quotation_price: 3487, product_id: "68b02b1e06800a0384ea4619", moq: "25 kg" }
+            { percent: "35%", name: "Whey Isolate", price: 200, quotation_price: 1900, product_id: "68b02a9d06800a0384ea4605", moq: "25 kg" },
+            { percent: "40%", name: "Whey Isolate", price: 200, quotation_price: 2076, product_id: "68b02ab106800a0384ea460b", moq: "25 kg" },
+            { percent: "50%", name: "Whey Isolate", price: 200, quotation_price: 2429, product_id: "68b02ad606800a0384ea460f", moq: "25 kg" },
+            { percent: "60%", name: "Whey Isolate", price: 200, quotation_price: 2782, product_id: "68b02b4006800a0384ea4602", moq: "25 kg" },
+            { percent: "70%", name: "Whey Isolate", price: 200, quotation_price: 3135, product_id: "68b02aee06800a0384ea4613", moq: "25 kg" },
+            { percent: "80%", name: "Whey Isolate", price: 200, quotation_price: 3487, product_id: "68b02b1e06800a0384ea4619", moq: "25 kg" }
         ]
     };
 
@@ -225,7 +218,7 @@ const Booking = () => {
                     );
                     if (concentrateProduct) {
                         selected = concentrateProduct;
-                        price = concentrateProduct.price;
+                        price = concentrateProduct.quotation_price;
                         break;
                     }
                 }
@@ -239,7 +232,7 @@ const Booking = () => {
                     );
                     if (blendProduct) {
                         selected = blendProduct;
-                        price = blendProduct.price;
+                        price = blendProduct.quotation_price;
                         break;
                     }
                 }
@@ -253,7 +246,7 @@ const Booking = () => {
                     );
                     if (isolateProduct) {
                         selected = isolateProduct;
-                        price = isolateProduct.price;
+                        price = isolateProduct.quotation_price;
                         break;
                     }
                 }
