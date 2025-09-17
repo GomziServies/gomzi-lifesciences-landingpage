@@ -189,7 +189,7 @@ const productsData = [
     {
         product_id: "68ad744106800a0384ea01b4",
         name: "Pre-Workout Sample(20gm)",
-        price: 440,
+        price: 120,
         image: "/assets/images/product-images/pre-workout.webp",
         link: "/pre-workout",
         moq: "50 kg",
