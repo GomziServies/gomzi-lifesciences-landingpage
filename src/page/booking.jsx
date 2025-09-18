@@ -10,17 +10,63 @@ import { isUserLoggedIn } from '../utils/auth';
 
 const Booking = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const productsData = [
-        { product_id: '68ad739506800a0384ea01a2', name: "Peanut Butter", price: 120, quotation_price: 150, moq: "25 kg (500gm)" },
-        { product_id: '68ad737d06800a0384ea01a0', name: "Mass Gainer", price: 100, quotation_price: 420, moq: "25 kg" },
-        { product_id: '68ad73e006800a0384ea01ab', name: "Creatine - flavoured", price: 120, quotation_price: 300, moq: "50 kg (250gm)" },
-        { product_id: '68ad742506800a0384ea01b2', name: "Creatine - Unflavoured", price: 120, quotation_price: 270, moq: "50 kg (250gm)" },
-        { product_id: '68ad744106800a0384ea01b4', name: "Pre-Workout", price: 120, quotation_price: 440, moq: "50 kg (250gm)" },
-        { product_id: '68ad746a06800a0384ea01b8', name: "EAA", price: 120, quotation_price: 490, moq: "50 kg (250gm)" },
-        { product_id: '68ad748306800a0384ea01be', name: "BCAA", price: 120, quotation_price: 490, moq: "50 kg (250gm)" },
-        { product_id: '68ad74cc06800a0384ea01c8', name: "Energy Drink - Bottle", price: 100, quotation_price: 30, moq: "1000 nos" },
-        { product_id: '68ad74f006800a0384ea01cc', name: "Energy Drink - Can", price: 100, quotation_price: 45, moq: "24,000 nos" },
-    ];
+    const Creatine = {
+        "lemon": [
+            { name: "Creatine", price: 120, quotation_price: 300, product_id: "68cbd3e1f1aff9d6c5624808", moq: "50 kg (250gm)" }
+        ],
+        "unflavoured": [
+            { name: "Creatine", price: 120, quotation_price: 270, product_id: "68cbd403f1aff9d6c562480a", moq: "50 kg (250gm)" }
+        ]
+    }
+
+    const  pre_Workout = {
+        "Fruit Punch": [
+            { name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cbd3ccf1aff9d6c5624804", moq: "50 kg (250gm)" }
+        ],
+        "Cola": [
+            { name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cbd3d5f1aff9d6c5624806", moq: "50 kg (250gm)" }
+        ]
+    }
+
+    const Mass_Gainer = {
+        "Chocolate": [
+            { name: "Mass Gainer", price: 100, quotation_price: 420, product_id: "68cbd44ff1aff9d6c5624812", moq: "25 kg" }
+        ]
+    }
+
+    const Peanut_Butter = {
+        "Natural": [
+            { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cbd41df1aff9d6c562480c", moq: "100 kg" },
+        ],
+        "Chocolate": [
+            { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cbd42cf1aff9d6c562480e", moq: "100 kg" },
+        ],
+        "Mango": [
+            { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cbd43cf1aff9d6c5624810", moq: "100 kg" },
+        ]
+    };
+
+    const Energy_Drink = {
+        "Cola":[ { name: "Energy Drink - Bottle", price: 100, quotation_price: 30, product_id: "68cbd36ff1aff9d6c56247fc", moq: "1000 nos" }],
+        "Guava":[ { name: "Energy Drink - Bottle", price: 100, quotation_price: 30, product_id: "68cbd37ef1aff9d6c56247fe", moq: "1000 nos" }],
+        "Green Apple":[ { name: "Energy Drink - Bottle", price: 100, quotation_price: 30, product_id: "68cbd38cf1aff9d6c5624800", moq: "1000 nos" }],
+    }
+
+    const Eaa = {
+        "Watermelon": [
+            { name: "EAA", price: 120, quotation_price: 440, product_id: "68cbd331f1aff9d6c56247f6", moq: "50 kg (250gm)" }
+        ],
+    };
+
+    const Bcaa = {
+        "Cranberry": [
+            { name: "BCAA", price: 120, quotation_price: 440, product_id: "68cbd361f1aff9d6c56247fa", moq: "50 kg (250gm)" }
+        ],
+        "Orange": [
+            { name: "BCAA", price: 120, quotation_price: 440, product_id: "68cbd355f1aff9d6c56247f8", moq: "50 kg (250gm)" }
+        ]
+    };
+
     const Whey_Concentrate = {
         "Chocolate": [
             { percent: "35%", name: "Whey Concentrate", price: 195, quotation_price: 1360, product_id: "68aef32e06800a0384ea3faf", moq: "25 kg" },
@@ -134,19 +180,16 @@ const Booking = () => {
             try {
                 const parsedProducts = JSON.parse(savedProducts);
                 return parsedProducts.map(savedProduct => {
-                    // First check in productsData
-                    let productData = productsData.find(p => p.product_id === savedProduct.product_id);
-
-                    // Keep quotation_price as is for all products
-
-                    // If not found, check in Whey_Concentrate
+                    let productData = null;
+                    
+                    // Check in all product collections
+                    // Check Whey Concentrate
                     if (!productData) {
                         for (const flavor in Whey_Concentrate) {
                             const found = Whey_Concentrate[flavor].find(p => p.product_id === savedProduct.product_id);
                             if (found) {
                                 productData = {
                                     ...found,
-                                    quotation_price: found.price,
                                     name: `${found.name} ${found.percent} (${flavor})`
                                 };
                                 break;
@@ -161,7 +204,6 @@ const Booking = () => {
                             if (found) {
                                 productData = {
                                     ...found,
-                                    quotation_price: found.price,
                                     name: `${found.name} ${found.percent} (${flavor})`
                                 };
                                 break;
@@ -176,10 +218,87 @@ const Booking = () => {
                             if (found) {
                                 productData = {
                                     ...found,
-                                    quotation_price: found.price,
                                     name: `${found.name} ${found.percent} (${flavor})`
                                 };
                                 break;
+                            }
+                        }
+                    }
+
+                    // Check other products if still not found
+                    if (!productData) {
+                        // Check Mass Gainer
+                        for (const flavor in Mass_Gainer) {
+                            const found = Mass_Gainer[flavor].find(p => p.product_id === savedProduct.product_id);
+                            if (found) {
+                                productData = { ...found, name: `${found.name} (${flavor})` };
+                                break;
+                            }
+                        }
+
+                        // Check Peanut Butter
+                        if (!productData) {
+                            for (const flavor in Peanut_Butter) {
+                                const found = Peanut_Butter[flavor].find(p => p.product_id === savedProduct.product_id);
+                                if (found) {
+                                    productData = { ...found, name: `${found.name} (${flavor})` };
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Check Creatine
+                        if (!productData) {
+                            for (const flavor in Creatine) {
+                                const found = Creatine[flavor].find(p => p.product_id === savedProduct.product_id);
+                                if (found) {
+                                    productData = { ...found, name: `${found.name} (${flavor})` };
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Check Pre-Workout
+                        if (!productData) {
+                            for (const flavor in pre_Workout) {
+                                const found = pre_Workout[flavor].find(p => p.product_id === savedProduct.product_id);
+                                if (found) {
+                                    productData = { ...found, name: `${found.name} (${flavor})` };
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Check Energy Drink
+                        if (!productData) {
+                            for (const flavor in Energy_Drink) {
+                                const found = Energy_Drink[flavor].find(p => p.product_id === savedProduct.product_id);
+                                if (found) {
+                                    productData = { ...found, name: `${found.name} (${flavor})` };
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Check EAA
+                        if (!productData) {
+                            for (const flavor in Eaa) {
+                                const found = Eaa[flavor].find(p => p.product_id === savedProduct.product_id);
+                                if (found) {
+                                    productData = { ...found, name: `${found.name} (${flavor})` };
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Check BCAA
+                        if (!productData) {
+                            for (const flavor in Bcaa) {
+                                const found = Bcaa[flavor].find(p => p.product_id === savedProduct.product_id);
+                                if (found) {
+                                    productData = { ...found, name: `${found.name} (${flavor})` };
+                                    break;
+                                }
                             }
                         }
                     }
@@ -189,14 +308,40 @@ const Booking = () => {
                         product: productData?.name || "",
                         quantity: savedProduct.quantity,
                         price: productData?.price || 0,
-                        total: (productData?.price || 0) * (savedProduct.quantity || 0)
+                        quotation_price: productData?.quotation_price || 0,
+                        moq: productData?.moq || "",
+                        total: (productData?.quotation_price || 0) * (savedProduct.quantity || 0)
                     };
                 });
             } catch (e) {
-                return [{ product_id: productsData[0]?.product_id, product: "", quantity: "", price: 0, total: 0 }];
+                // Initialize with empty values
+                return [{
+                    product_id: "",
+                    product: "",
+                    name: "",
+                    flavor: "",
+                    percent: "",
+                    quantity: 1,
+                    price: 0,
+                    quotation_price: 0,
+                    moq: "",
+                    total: 0
+                }];
             }
         }
-        return [{ product_id: productsData[0]?.product_id, product: "", quantity: "", price: 0, total: 0 }];
+        // Initialize with empty values when no products are saved
+        return [{
+            product_id: "",
+            product: "",
+            name: "",
+            flavor: "",
+            percent: "",
+            quantity: 1,
+            price: 0,
+            quotation_price: 0,
+            moq: "",
+            total: 0
+        }];
     });
 
 
@@ -205,61 +350,74 @@ const Booking = () => {
         const newProductLines = [...productLines];
 
         if (field === 'product') {
-            // First check in productsData
-            let selected = productsData.find(p => p.name === value);
-            // Use price for all products
-            let price = selected ? selected.price : 0;
+            let selected = null;
+            let productData = null;
 
-            // If not found in productsData, check in Whey_Concentrate
-            if (!selected) {
-                for (const flavor in Whey_Concentrate) {
-                    const concentrateProduct = Whey_Concentrate[flavor].find(p =>
-                        `${p.name} ${p.percent} (${flavor})` === value
-                    );
-                    if (concentrateProduct) {
-                        selected = concentrateProduct;
-                        price = concentrateProduct.price;
-                        break;
-                    }
-                }
+            // If empty value, reset the line
+            if (!value) {
+                newProductLines[index] = {
+                    product_id: "",
+                    product: "",
+                    name: "",
+                    flavor: "",
+                    percent: "",
+                    quantity: 1,
+                    price: 0,
+                    quotation_price: 0,
+                    moq: "",
+                    total: 0
+                };
+                setProductLines(newProductLines);
+                return;
             }
 
-            // If not found, check in Whey_Blend
-            if (!selected) {
-                for (const flavor in Whey_Blend) {
-                    const blendProduct = Whey_Blend[flavor].find(p =>
-                        `${p.name} ${p.percent} (${flavor})` === value
-                    );
-                    if (blendProduct) {
-                        selected = blendProduct;
-                        price = blendProduct.price;
-                        break;
-                    }
-                }
+            // Determine product type and data
+            if (value.includes("Whey Blend")) {
+                productData = Whey_Blend;
+            } else if (value.includes("Whey Concentrate")) {
+                productData = Whey_Concentrate;
+            } else if (value.includes("Whey Isolate")) {
+                productData = Whey_Isolate;
+            } else if (value.includes("Mass Gainer")) {
+                productData = Mass_Gainer;
+            } else if (value.includes("Peanut Butter")) {
+                productData = Peanut_Butter;
+            } else if (value.includes("Creatine")) {
+                productData = Creatine;
+            } else if (value.includes("Pre-Workout")) {
+                productData = pre_Workout;
+            } else if (value.includes("EAA")) {
+                productData = Eaa;
+            } else if (value.includes("BCAA")) {
+                productData = Bcaa;
+            } else if (value.includes("Energy Drink")) {
+                productData = Energy_Drink;
             }
 
-            // If still not found, check in Whey_Isolate
-            if (!selected) {
-                for (const flavor in Whey_Isolate) {
-                    const isolateProduct = Whey_Isolate[flavor].find(p =>
-                        `${p.name} ${p.percent} (${flavor})` === value
-                    );
-                    if (isolateProduct) {
-                        selected = isolateProduct;
-                        price = isolateProduct.quotation_price;
-                        break;
-                    }
-                }
+            if (productData) {
+                const firstFlavor = Object.keys(productData)[0];
+                const firstVariant = productData[firstFlavor][0];
+                selected = {
+                    ...firstVariant,
+                    flavor: firstFlavor
+                };
             }
 
-            newProductLines[index] = {
-                ...newProductLines[index],
-                product_id: selected?.product_id,
-                product: value,
-                quantity: 1,
-                price: price,
-                total: price,
-            };
+            if (selected) {
+                newProductLines[index] = {
+                    ...newProductLines[index],
+                    product_id: selected.product_id,
+                    product: value,
+                    name: selected.name,
+                    flavor: selected.flavor,
+                    percent: selected.percent,
+                    quantity: 1,
+                    price: selected.price,
+                    quotation_price: selected.quotation_price,
+                    moq: selected.moq,
+                    total: selected.price
+                };
+            }
         } else if (field === 'quantity') {
             const numValue = parseInt(value) || 0;
             newProductLines[index].quantity = numValue;
@@ -286,9 +444,28 @@ const Booking = () => {
             toast.error('Maximum 9 products can be added');
             return;
         }
+
+        // Check if previous line has a product selected
+        const lastLine = productLines[productLines.length - 1];
+        if (!lastLine.product) {
+            toast.error('Please select a product first');
+            return;
+        }
+        
         setProductLines([
             ...productLines,
-            { product_id: productsData[0]?.product_id, product: "", quantity: "", price: 0, total: 0 }
+            {
+                product_id: "",
+                product: "",
+                name: "",
+                flavor: "",
+                percent: "",
+                quantity: 1,
+                price: 0,
+                quotation_price: 0,
+                moq: "",
+                total: 0
+            }
         ]);
     };
 
@@ -331,7 +508,19 @@ const Booking = () => {
                 }
             });
         } else {
-            setProductLines([{ product_id: productsData[0]?.product_id || '', product: "", quantity: "", price: 0, total: 0 }]);
+            // Initialize with empty product line
+            setProductLines([{
+                product_id: "",
+                product: "",
+                name: "",
+                flavor: "",
+                percent: "",
+                quantity: 1,
+                price: 0,
+                quotation_price: 0,
+                moq: "",
+                total: 0
+            }]);
             localStorage.removeItem("ATC_Product");
             Swal.fire({
                 title: 'Cleared',
@@ -579,15 +768,23 @@ const Booking = () => {
                                         required
                                     >
                                         <option value="">Select Product</option>
-                                        {/* Regular products */}
-                                        {productsData.map((p) => {
-                                            const isSelected = productLines.some(
-                                                (productLine, i) => i !== index && productLine.product === p.name
-                                            );
-                                            return !isSelected && (
-                                                <option key={p.product_id} value={p.name}>{p.name}</option>
-                                            );
-                                        })}
+                                        
+                                        {/* Whey Blend variants */}
+                                        <optgroup label="Whey Blend">
+                                            {Object.entries(Whey_Blend).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
 
                                         {/* Whey Concentrate variants */}
                                         <optgroup label="Whey Concentrate">
@@ -611,6 +808,125 @@ const Booking = () => {
                                             {Object.entries(Whey_Isolate).map(([flavor, variants]) =>
                                                 variants.map(variant => {
                                                     const variantName = `${variant.name} ${variant.percent} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* Mass Gainer */}
+                                        <optgroup label="Mass Gainer">
+                                            {Object.entries(Mass_Gainer).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* Peanut Butter */}
+                                        <optgroup label="Peanut Butter">
+                                            {Object.entries(Peanut_Butter).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* Creatine */}
+                                        <optgroup label="Creatine">
+                                            {Object.entries(Creatine).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* Pre-Workout */}
+                                        <optgroup label="Pre-Workout">
+                                            {Object.entries(pre_Workout).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* EAA */}
+                                        <optgroup label="EAA">
+                                            {Object.entries(Eaa).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* BCAA */}
+                                        <optgroup label="BCAA">
+                                            {Object.entries(Bcaa).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} (${flavor})`;
+                                                    const isSelected = productLines.some(
+                                                        (productLine, i) => i !== index && productLine.product === variantName
+                                                    );
+                                                    return !isSelected && (
+                                                        <option key={variant.product_id} value={variantName}>
+                                                            {variantName}
+                                                        </option>
+                                                    );
+                                                })
+                                            )}
+                                        </optgroup>
+
+                                        {/* Energy Drink */}
+                                        <optgroup label="Energy Drink">
+                                            {Object.entries(Energy_Drink).map(([flavor, variants]) =>
+                                                variants.map(variant => {
+                                                    const variantName = `${variant.name} (${flavor})`;
                                                     const isSelected = productLines.some(
                                                         (productLine, i) => i !== index && productLine.product === variantName
                                                     );
@@ -662,7 +978,7 @@ const Booking = () => {
                                         placeholder='Moq'
                                         className="form-control bg-dark text-light"
                                         value={
-                                            productsData.find((p) => p.name === line.product)?.moq || ""
+                                            line.moq || ""
                                         }
                                         readOnly
                                     />
@@ -900,7 +1216,7 @@ const Booking = () => {
                                         <div className="col-md-4">
                                             <div className="text-center">
                                                 <img
-                                                    src="/assets/images/logo/gomzi-nutrition.png"
+                                                    src="/assets/images/logo/gomzi-nutrition-black.png"
                                                     width="60%"
                                                     alt="Company Logo"
                                                 />
@@ -982,64 +1298,15 @@ const Booking = () => {
                                                     </tr>
                                                 ) : (
                                                     productLines?.map((item, index) => {
-                                                        let product = productsData.find(p => p.name === item.product);
-                                                        let quotationPrice = 0;
-                                                        let moqStr = "25 kg"; // Default MOQ for Whey products
-                                                        let displayProduct = item.product;
+                                                        if (!item || !item.product) return null;
 
-                                                        if (!product) {
-                                                            // Check in Whey_Concentrate
-                                                            for (const flavor in Whey_Concentrate) {
-                                                                const match = item.product.match(new RegExp(`Whey Concentrate (\\d+)% \\(${flavor}\\)`));
-                                                                if (match) {
-                                                                    const percent = match[1] + "%";
-                                                                    const variant = Whey_Concentrate[flavor].find(v => v.percent === percent);
-                                                                    if (variant) {
-                                                                        quotationPrice = variant.quotation_price;
-                                                                        displayProduct = `${variant.name} ${variant.percent} (${flavor})`;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                            }
+                                                        const displayProduct = item.product;
+                                                        const quotationPrice = item.quotation_price || 0;
+                                                        const moqStr = item.moq || "25 kg";
 
-                                                            // Check in Whey_Blend
-                                                            if (!quotationPrice) {
-                                                                for (const flavor in Whey_Blend) {
-                                                                    const match = item.product.match(new RegExp(`Whey Blend (\\d+)% \\(${flavor}\\)`));
-                                                                    if (match) {
-                                                                        const percent = match[1] + "%";
-                                                                        const variant = Whey_Blend[flavor].find(v => v.percent === percent);
-                                                                        if (variant) {
-                                                                            quotationPrice = variant.quotation_price;
-                                                                            displayProduct = `${variant.name} ${variant.percent} (${flavor})`;
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-
-                                                            // Check in Whey_Isolate
-                                                            if (!quotationPrice) {
-                                                                for (const flavor in Whey_Isolate) {
-                                                                    const match = item.product.match(new RegExp(`Whey Isolate (\\d+)% \\(${flavor}\\)`));
-                                                                    if (match) {
-                                                                        const percent = match[1] + "%";
-                                                                        const variant = Whey_Isolate[flavor].find(v => v.percent === percent);
-                                                                        if (variant) {
-                                                                            quotationPrice = variant.quotation_price;
-                                                                            displayProduct = `${variant.name} ${variant.percent + " Protein"} (${flavor})`;
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        } else {
-                                                            quotationPrice = product.quotation_price;
-                                                            moqStr = product.moq;
-                                                        }
-
-                                                        // Calculate total based on MOQ
-                                                        const moqNumber = parseInt(moqStr.match(/\d+/)?.[0] || 0);
+                                                        // Extract the numerical value from MOQ string
+                                                        const moqMatch = moqStr.match(/\d+/);
+                                                        const moqNumber = moqMatch ? parseInt(moqMatch[0]) : 0;
                                                         const total = quotationPrice * moqNumber;
 
                                                         return (
@@ -1067,59 +1334,15 @@ const Booking = () => {
                                                     <strong>Total Amount :-</strong>
                                                     <span className="inv-total">
                                                         {productLines?.reduce((sum, line) => {
-                                                            let product = productsData.find(p => p.name === line.product);
-                                                            let quotationPrice = 0;
-                                                            let moqStr = "25 kg"; // Default MOQ for Whey products
+                                                            if (!line || !line.product) return sum;
 
-                                                            if (!product) {
-                                                                // Check in Whey_Concentrate
-                                                                for (const flavor in Whey_Concentrate) {
-                                                                    const match = line.product.match(new RegExp(`Whey Concentrate (\\d+)% \\(${flavor}\\)`));
-                                                                    if (match) {
-                                                                        const percent = match[1] + "%";
-                                                                        const variant = Whey_Concentrate[flavor].find(v => v.percent === percent);
-                                                                        if (variant) {
-                                                                            quotationPrice = variant.quotation_price;
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                }
-
-                                                                // Check in Whey_Blend
-                                                                if (!quotationPrice) {
-                                                                    for (const flavor in Whey_Blend) {
-                                                                        const match = line.product.match(new RegExp(`Whey Blend (\\d+)% \\(${flavor}\\)`));
-                                                                        if (match) {
-                                                                            const percent = match[1] + "%";
-                                                                            const variant = Whey_Blend[flavor].find(v => v.percent === percent);
-                                                                            if (variant) {
-                                                                                quotationPrice = variant.quotation_price;
-                                                                                break;
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-
-                                                                // Check in Whey_Isolate
-                                                                if (!quotationPrice) {
-                                                                    for (const flavor in Whey_Isolate) {
-                                                                        const match = line.product.match(new RegExp(`Whey Isolate (\\d+)% \\(${flavor}\\)`));
-                                                                        if (match) {
-                                                                            const percent = match[1] + "%";
-                                                                            const variant = Whey_Isolate[flavor].find(v => v.percent === percent);
-                                                                            if (variant) {
-                                                                                quotationPrice = variant.quotation_price;
-                                                                                break;
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            } else {
-                                                                quotationPrice = product.quotation_price;
-                                                                moqStr = product.moq;
-                                                            }
-
-                                                            const moqNumber = parseInt(moqStr.match(/\d+/)?.[0] || 0);
+                                                            const quotationPrice = line.quotation_price || 0;
+                                                            const moqStr = line.moq || "25 kg";
+                                                            
+                                                            // Safely extract the number from MOQ string
+                                                            const moqMatch = moqStr.match(/\d+/);
+                                                            const moqNumber = moqMatch ? parseInt(moqMatch[0]) : 0;
+                                                            
                                                             return sum + (quotationPrice * moqNumber);
                                                         }, 0) || "-"}
                                                     </span>

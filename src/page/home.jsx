@@ -7,6 +7,7 @@ import "../assets/css/whey-products.css";
 import { isUserLoggedIn } from "../utils/auth";
 import LoginModal from "../components/popup/login";
 import BookingModal from "../components/popup/BookingModal";
+import { isProductInCart, getCartProducts } from "../utils/productStorage";
 
 // Import Swiper styles
 import "swiper/css";
@@ -22,7 +23,7 @@ const productsData = [
         name: "Whey Blend Sample(35gm)",
         flavoured: ["Mawa Kulfi", "Chocolate", "Mango", "Mocha Coffee"],
         protein: ["35%", "40%", "50%", "60%"],
-        pricerRange:"930-2305",
+        pricerRange: "930-2305",
         priceMatrix: {
             "35%": {
                 "Mawa Kulfi": 190,
@@ -59,7 +60,7 @@ const productsData = [
         name: "Whey Concentrate Sample(35gm)",
         flavoured: ["Mawa Kulfi", "Chocolate", "Mocha Coffee", "Mango"],
         protein: ["35%", "50%", "60%", "70%", "80%"],
-        pricerRange:"1295-2270",
+        pricerRange: "1295-2270",
         priceMatrix: {
             "35%": {
                 "Mawa Kulfi": 195,
@@ -102,7 +103,7 @@ const productsData = [
         name: "Whey Isolate Sample(35gm)",
         flavoured: ["Mawa Kulfi", "Chocolate", "Mocha Coffee", "Mango"],
         protein: ["35%", "40%", "50%", "60%", "70%", "80%"],
-        pricerRange:"1900-3656",
+        pricerRange: "1900-3656",
         priceMatrix: {
             "35%": {
                 "Mawa Kulfi": 200,
@@ -146,17 +147,10 @@ const productsData = [
         link: "/whey-isolate",
         moq: "100 kg",
     },
-    // {
-    //     product_id: "68ac019606800a0384e9f883",
-    //     name: "Whey Protein-1kg (35% - 40% Protein)",
-    //     price: 1170,
-    //     image: "/assets/images/product-images/whey-protein.webp",
-    //     link: "/whey-protein",
-    //     moq: "100 kg"
-    // },
     {
-        product_id: "68ad737d06800a0384ea01a0",
+        product_id: "68cbd44ff1aff9d6c5624812",
         name: "Mass Gainer Sample(35gm)",
+        flavoured: ["Chocolate"],
         price: 100,
         image: "/assets/images/product-images/mass-gainer.webp",
         link: "/mass-gainer",
@@ -165,6 +159,7 @@ const productsData = [
     {
         product_id: "68ad739506800a0384ea01a2",
         name: "Peanut Butter Sample(100gm)",
+        flavoured: ["Natural", "Chocolate", "Mango"],
         price: 120,
         image: "/assets/images/product-images/peanut-butter.webp",
         link: "/peanut-butter",
@@ -172,22 +167,16 @@ const productsData = [
     },
     {
         product_id: "68ad73e006800a0384ea01ab",
-        name: "Creatine - Flavoured Sample(20gm)",
+        flavoured: ["Lemon", "Unflavoured"],
+        name: "Creatine Sample(20gm)",
         price: 120,
         image: "/assets/images/product-images/creatine-flavored.webp",
         link: "/creatine-flavored",
         moq: "50 kg (250gm)",
     },
     {
-        product_id: "68ad742506800a0384ea01b2",
-        name: "Creatine - Unflavoured Sample(20gm)",
-        price: 120,
-        image: "/assets/images/product-images/creatine.webp",
-        link: "/creatine-unflavored",
-        moq: "50 kg (250gm)",
-    },
-    {
         product_id: "68ad744106800a0384ea01b4",
+        flavoured: ["Fruit Punch", "Cola"],
         name: "Pre-Workout Sample(20gm)",
         price: 120,
         image: "/assets/images/product-images/pre-workout.webp",
@@ -196,6 +185,7 @@ const productsData = [
     },
     {
         product_id: "68ad746a06800a0384ea01b8",
+        flavoured: ["Watermelon"],
         name: "EAA Sample(20gm)",
         price: 120,
         image: "/assets/images/product-images/eaa.webp",
@@ -204,6 +194,7 @@ const productsData = [
     },
     {
         product_id: "68ad748306800a0384ea01be",
+        flavoured: ["Orange", "Cranberry"],
         name: "BCAA Sample(20gm)",
         price: 120,
         image: "/assets/images/product-images/bcaa.webp",
@@ -213,18 +204,11 @@ const productsData = [
     {
         product_id: "68ad74cc06800a0384ea01c8",
         name: "Energy Drink - Bottle Sample(220gm)",
+        flavoured: ["Cola", "Guava", "Green Apple"],
         price: 100,
         image: "/assets/images/product-images/energy-drink.webp",
         link: "/energy-drink",
         moq: "1000 pcs",
-    },
-    {
-        product_id: "68ad74f006800a0384ea01cc",
-        name: "Energy Drink - Can Sample(220gm)",
-        price: 100,
-        image: "/assets/images/product-images/energy-drink-can.webp",
-        link: "/energy-drink-can",
-        moq: "24000 pcs",
     },
 ];
 window.Whey_Concentrate = {
@@ -292,6 +276,103 @@ window.Whey_Isolate = {
     ],
 };
 
+// Define other product variants
+window.Mass_Gainer = {
+    "Chocolate": [
+        { product_id: "68cbd44ff1aff9d6c5624812", name: "Mass Gainer", quotation_price: 420, moq: "25 kg" }
+    ]
+};
+
+window.Peanut_Butter = {
+    "Natural": [
+        { product_id: "68cbd41df1aff9d6c562480c", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
+    ],
+    "Chocolate": [
+        { product_id: "68cbd42cf1aff9d6c562480e", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
+    ],
+    "Mango": [
+        { product_id: "68cbd43cf1aff9d6c5624810", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
+    ]
+};
+
+window.Creatine = {
+    "Lemon": [
+        { product_id: "68cbd3e1f1aff9d6c5624808", name: "Creatine", quotation_price: 300, moq: "50 kg (250gm)" }
+    ],
+    "Unflavoured": [
+        { product_id: "68cbd403f1aff9d6c562480a", name: "Creatine", quotation_price: 270, moq: "50 kg (250gm)" }
+    ]
+};
+
+window.pre_Workout = {
+    "Fruit Punch": [
+        { product_id: "68cbd3ccf1aff9d6c5624804", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
+    ],
+    "Cola": [
+        { product_id: "68cbd3d5f1aff9d6c5624806", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
+    ]
+};
+
+window.Eaa = {
+    "Watermelon": [
+        { product_id: "68cbd331f1aff9d6c56247f6", name: "EAA", quotation_price: 440, moq: "50 kg (250gm)" }
+    ]
+};
+
+window.Bcaa = {
+    "Orange": [
+        { product_id: "68cbd355f1aff9d6c56247f8", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
+    ],
+    "Cranberry": [
+        { product_id: "68cbd361f1aff9d6c56247fa", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
+    ]
+};
+
+window.Creatine = {
+    "Lemon": [
+        { product_id: "68cbd3e1f1aff9d6c5624808", name: "Creatine", quotation_price: 300, moq: "50 kg (250gm)" }
+    ],
+    "Unflavoured": [
+        { product_id: "68cbd403f1aff9d6c562480a", name: "Creatine", quotation_price: 270, moq: "50 kg (250gm)" }
+    ]
+};
+
+window.pre_Workout = {
+    "Fruit Punch": [
+        { product_id: "68cbd3ccf1aff9d6c5624804", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
+    ],
+    "Cola": [
+        { product_id: "68cbd3d5f1aff9d6c5624806", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
+    ]
+};
+
+window.Eaa = {
+    "Watermelon": [
+        { product_id: "68cbd331f1aff9d6c56247f6", name: "EAA", quotation_price: 440, moq: "50 kg (250gm)" }
+    ]
+};
+
+window.Bcaa = {
+    "Orange": [
+        { product_id: "68cbd355f1aff9d6c56247f8", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
+    ],
+    "Cranberry": [
+        { product_id: "68cbd361f1aff9d6c56247fa", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
+    ]
+};
+
+window.Energy_Drink = {
+    "Cola": [
+        { product_id: "68cbd36ff1aff9d6c56247fc", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
+    ],
+    "Guava": [
+        { product_id: "68cbd37ef1aff9d6c56247fe", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
+    ],
+    "Green Apple": [
+        { product_id: "68cbd38cf1aff9d6c5624800", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
+    ]
+};
+
 window.Whey_Blend = {
     Chocolate: [
         { percent: "35%", product_id: "68b03cd406800a0384ea478c" },
@@ -349,15 +430,19 @@ export default function Home() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showBookingModal, setShowBookingModal] = useState(false);
     const [pendingProduct, setPendingProduct] = useState(null);
+    const [cartUpdate, setCartUpdate] = useState(0); // Used to trigger re-renders on cart updates
 
-    // Initialize product selections with Mawa Kulfi as default flavor for all whey products
+    // Initialize product selections with the first available flavor for each product
     const [productSelections, setProductSelections] = useState(() => {
         const initialSelections = {};
         productsData.forEach((product) => {
-            if (product.name.includes("Whey")) {
+            if (product.flavoured && product.flavoured.length > 0) {
                 initialSelections[product.product_id] = {
-                    flavor: "Mawa Kulfi",
+                    flavor: product.flavoured[0], // Set first flavor as default
                 };
+                if (product.protein && product.protein.length > 0) {
+                    initialSelections[product.product_id].protein = product.protein[0]; // Set first protein % as default
+                }
             }
         });
         return initialSelections;
@@ -386,20 +471,36 @@ export default function Home() {
             const selections = productSelections[product.product_id] || {};
             let finalProductId = product.product_id;
             let canAdd = true;
+            let productType;
 
-            // If it's a Whey product that requires selections
-            if (
-                product.name.includes("Whey Concentrate") ||
-                product.name.includes("Whey Isolate") ||
-                product.name.includes("Whey Blend")
-            ) {
+            // Check product type and handle selections
+            if (product.name.includes("Whey Concentrate")) {
+                productType = window.Whey_Concentrate;
+            } else if (product.name.includes("Whey Isolate")) {
+                productType = window.Whey_Isolate;
+            } else if (product.name.includes("Whey Blend")) {
+                productType = window.Whey_Blend;
+            } else if (product.name.includes("Mass Gainer")) {
+                productType = window.Mass_Gainer;
+            } else if (product.name.includes("Peanut Butter")) {
+                productType = window.Peanut_Butter;
+            } else if (product.name.includes("Creatine")) {
+                productType = window.Creatine;
+            } else if (product.name.includes("Pre-Workout")) {
+                productType = window.pre_Workout;
+            } else if (product.name.includes("EAA")) {
+                productType = window.Eaa;
+            } else if (product.name.includes("BCAA")) {
+                productType = window.Bcaa;
+            } else if (product.name.includes("Energy Drink")) {
+                productType = window.Energy_Drink;
+            }
+
+            if (product.name.includes("Whey")) {
                 if (!selections.protein || !selections.flavor) {
-                    toast.error(
-                        "Please select both protein percentage and flavor"
-                    );
+                    toast.error("Please select both protein percentage and flavor");
                     canAdd = false;
                 } else {
-                    let productType;
                     if (product.name.includes("Whey Concentrate")) {
                         productType = window.Whey_Concentrate;
                     } else if (product.name.includes("Whey Isolate")) {
@@ -408,9 +509,84 @@ export default function Home() {
                         productType = window.Whey_Blend;
                     }
                     const variantList = productType[selections.flavor];
-                    const variant = variantList.find(
-                        (v) => v.percent === selections.protein
-                    );
+                    const variant = variantList.find(v => v.percent === selections.protein);
+                    if (variant) {
+                        finalProductId = variant.product_id;
+                    }
+                }
+            } else if (product.name.includes("Peanut Butter")) {
+                if (!selections.flavor) {
+                    toast.error("Please select a flavor");
+                    canAdd = false;
+                } else {
+                    productType = window.Peanut_Butter;
+                    const variant = productType[selections.flavor]?.[0];
+                    if (variant) {
+                        finalProductId = variant.product_id;
+                    }
+                }
+            } else if (product.name.includes("Creatine")) {
+                if (!selections.flavor) {
+                    toast.error("Please select a flavor");
+                    canAdd = false;
+                } else {
+                    productType = window.Creatine;
+                    const variant = productType[selections.flavor]?.[0];
+                    if (variant) {
+                        finalProductId = variant.product_id;
+                    }
+                }
+            } else if (product.name.includes("Pre-Workout")) {
+                if (!selections.flavor) {
+                    toast.error("Please select a flavor");
+                    canAdd = false;
+                } else {
+                    productType = window.pre_Workout;
+                    const variant = productType[selections.flavor]?.[0];
+                    if (variant) {
+                        finalProductId = variant.product_id;
+                    }
+                }
+            } else if (product.name.includes("Energy Drink")) {
+                if (!selections.flavor) {
+                    toast.error("Please select a flavor");
+                    canAdd = false;
+                } else {
+                    productType = window.Energy_Drink;
+                    const variant = productType[selections.flavor]?.[0];
+                    if (variant) {
+                        finalProductId = variant.product_id;
+                    }
+                }
+            } else if (product.name.includes("BCAA")) {
+                if (!selections.flavor) {
+                    toast.error("Please select a flavor");
+                    canAdd = false;
+                } else {
+                    productType = window.Bcaa;
+                    const variant = productType[selections.flavor]?.[0];
+                    if (variant) {
+                        finalProductId = variant.product_id;
+                    }
+                }
+            } else if (product.name.includes("EAA")) {
+                if (!selections.flavor) {
+                    toast.error("Please select a flavor");
+                    canAdd = false;
+                } else {
+                    productType = window.Eaa;
+                    const variant = productType[selections.flavor]?.[0];
+                    if (variant) {
+                        finalProductId = variant.product_id;
+                    }
+                }
+            } else if (product.name.includes("Mass Gainer")) {
+                if (!selections.flavor) {
+                    toast.error("Please select a flavor");
+                    canAdd = false;
+                } else {
+                    productType = window.Mass_Gainer;
+                    const variant = productType[selections.flavor]?.[0];
                     if (variant) {
                         finalProductId = variant.product_id;
                     }
@@ -434,8 +610,8 @@ export default function Home() {
                     JSON.stringify([...existingProducts, productToStore])
                 );
 
-                // Trigger event to update cart count and button text
-                window.dispatchEvent(new Event("cartUpdated"));
+                // Update cart state to trigger re-render
+                setCartUpdate(prev => prev + 1);
 
                 setShowBookingModal(true);
             }
@@ -446,6 +622,51 @@ export default function Home() {
             });
             setShowLoginModal(true);
         }
+    };
+
+    const isProductInCart = (product, flavor) => {
+        const existingProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
+        let productType;
+        let variantId;
+
+        // Determine product type and get the variant ID
+        if (product.name.includes("Whey Concentrate")) {
+            productType = window.Whey_Concentrate;
+        } else if (product.name.includes("Whey Isolate")) {
+            productType = window.Whey_Isolate;
+        } else if (product.name.includes("Whey Blend")) {
+            productType = window.Whey_Blend;
+        } else if (product.name.includes("Mass Gainer")) {
+            productType = window.Mass_Gainer;
+        } else if (product.name.includes("Peanut Butter")) {
+            productType = window.Peanut_Butter;
+        } else if (product.name.includes("Creatine")) {
+            productType = window.Creatine;
+        } else if (product.name.includes("Pre-Workout")) {
+            productType = window.pre_Workout;
+        } else if (product.name.includes("EAA")) {
+            productType = window.Eaa;
+        } else if (product.name.includes("BCAA")) {
+            productType = window.Bcaa;
+        } else if (product.name.includes("Energy Drink")) {
+            productType = window.Energy_Drink;
+        }
+
+        if (productType && flavor) {
+            const variant = productType[flavor]?.[0];
+            if (variant) {
+                if (product.name.includes("Whey")) {
+                    const selections = productSelections[product.product_id] || {};
+                    const variantList = productType[flavor];
+                    const specificVariant = variantList.find(v => v.percent === selections.protein);
+                    variantId = specificVariant?.product_id;
+                } else {
+                    variantId = variant.product_id;
+                }
+            }
+        }
+
+        return existingProducts.some((p) => p.product_id === variantId);
     };
 
     useEffect(() => {
@@ -800,56 +1021,50 @@ export default function Home() {
 
                     {/* Whey Products Section */}
                     <div className="whey-products-section">
-                        {productsData
-                            .filter((product) =>
-                                [
-                                    "Whey Blend Sample(35gm)",
-                                    "Whey Concentrate Sample(35gm)",
-                                    "Whey Isolate Sample(35gm)",
-                                ].includes(product.name)
-                            )
-                            .map((product, index) => (
+                        {productsData.map((product, index) => (
+                            <div className="whey-product-container" key={index}>
                                 <div
-                                    className="whey-product-container"
-                                    key={index}
+                                    className="whey-product-card"
+                                    data-wow-delay={`${index * 0.1}s`}
                                 >
-                                    <div
-                                        className="whey-product-card"
-                                        data-wow-delay={`${index * 0.1}s`}
-                                    >
-                                        {/* Image */}
-                                        <div className="product-image-col">
-                                            <div className="product-image-wrapper">
-                                                <img
-                                                    src={getAssetPath(
-                                                        product.image
-                                                    )}
-                                                    alt={product.name}
-                                                    className="product-image"
-                                                />
-                                            </div>
+                                    {/* Image */}
+                                    <div className="product-image-col">
+                                        <div className="product-image-wrapper">
+                                            <img
+                                                src={getAssetPath(
+                                                    product.image
+                                                )}
+                                                alt={product.name}
+                                                className="product-image"
+                                            />
                                         </div>
+                                    </div>
 
-                                        {/* Details */}
-                                        <div className="product-details-col">
-                                            <div className="product-details">
-                                                <h3 className="product-name">
-                                                    {product.name.replace(
-                                                        "-1kg",
-                                                        ""
-                                                    )}
-                                                </h3>
+                                    {/* Details */}
+                                    <div className="product-details-col">
+                                        <div className="product-details">
+                                            <h3 className="product-name">
+                                                {product.name.replace(
+                                                    "-1kg",
+                                                    ""
+                                                )}
+                                            </h3>
 
+                                            {product.pricerRange && (
                                                 <div className="price-range">
                                                     <span className="label">
                                                         Price Range :{" "}
                                                         <span className="value">
-                                                            ₹{product.pricerRange}
-                                                            
+                                                            ₹
+                                                            {
+                                                                product.pricerRange
+                                                            }
                                                         </span>
                                                     </span>
                                                 </div>
-                                                {/* Flavor Buttons */}
+                                            )}
+                                            {/* Flavor Buttons */}
+                                            {product.flavoured && (
                                                 <div className="flavor-buttons mt-3">
                                                     <p className="flavor-label">
                                                         Select Flavor:
@@ -859,10 +1074,13 @@ export default function Home() {
                                                             (flavor) => (
                                                                 <button
                                                                     key={flavor}
-                                                                    className={`btn flavor-btn ${
+                                                                    className={`flavor-btn ${
                                                                         productSelections[
-                                                                            product.product_id
-                                                                        ]?.flavor === flavor
+                                                                            product
+                                                                                .product_id
+                                                                        ]
+                                                                            ?.flavor ===
+                                                                        flavor
                                                                             ? "active"
                                                                             : ""
                                                                     }`}
@@ -880,21 +1098,29 @@ export default function Home() {
                                                         )}
                                                     </div>
                                                 </div>
+                                            )}
 
-                                                {/* Protein Buttons */}
+                                            {/* Protein Buttons */}
+                                            {product.protein && (
                                                 <div className="protein-buttons mt-3">
                                                     <p className="protein-label">
-                                                        Select Protein Percentage:
+                                                        Select Protein
+                                                        Percentage:
                                                     </p>
                                                     <div className="btn-group">
                                                         {product.protein.map(
                                                             (protein) => (
                                                                 <button
-                                                                    key={protein}
-                                                                    className={`btn protein-btn ${
+                                                                    key={
+                                                                        protein
+                                                                    }
+                                                                    className={`protein-btn ${
                                                                         productSelections[
-                                                                            product.product_id
-                                                                        ]?.protein === protein
+                                                                            product
+                                                                                .product_id
+                                                                        ]
+                                                                            ?.protein ===
+                                                                        protein
                                                                             ? "active"
                                                                             : ""
                                                                     }`}
@@ -912,266 +1138,36 @@ export default function Home() {
                                                         )}
                                                     </div>
                                                 </div>
-                                                {/* <div className="flavor-selection">
-                                                    <p className="flavor-label">
-                                                        Choose Flavor:
-                                                    </p>
-                                                    <select
-                                                        className="form-select flavor-select"
-                                                        style={{
-                                                            backgroundColor:
-                                                                "#3C3C3C",
-                                                            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")`,
-                                                            cursor: "pointer",
-                                                            width: "100%",
-                                                            backgroundRepeat:
-                                                                "no-repeat",
-                                                            backgroundPosition:
-                                                                "right 10px center",
-                                                            backgroundSize:
-                                                                "16px 16px",
-                                                        }}
-                                                        onChange={(e) =>
-                                                            updateProductSelection(
-                                                                product.product_id,
-                                                                "flavor",
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                        value={
-                                                            productSelections[
-                                                                product
-                                                                    .product_id
-                                                            ]?.flavor || ""
-                                                        }
-                                                    >
-                                                        <option value="">
-                                                            Select Flavor
-                                                        </option>
-                                                        {product.flavoured.map(
-                                                            (flavor) => (
-                                                                <option
-                                                                    key={flavor}
-                                                                    value={
-                                                                        flavor
-                                                                    }
-                                                                >
-                                                                    {flavor}
-                                                                </option>
-                                                            )
-                                                        )}
-                                                    </select>
-                                                </div> */}
+                                            )}
 
-                                                {/* Price */}
-                                                <div className="price-info">
-                                                    <div className="selected-price">
-                                                        <span className="label">
-                                                            Sample Price: {"  "}
-                                                            <span className="value">
-                                                                ₹{" "}
-                                                                {product
-                                                                    .priceMatrix?.[
-                                                                    productSelections[
-                                                                        product
-                                                                            .product_id
-                                                                    ]
-                                                                        ?.protein ??
-                                                                        ""
-                                                                ]?.[
-                                                                    "Mawa Kulfi"
-                                                                ] ??
-                                                                    "Select protein percentage"}
-                                                            </span>
+                                            <div className="price-info">
+                                                <div className="selected-price">
+                                                    <span className="label">
+                                                        Sample Price:{" "}
+                                                        <span className="value">
+                                                            ₹{" "}
+                                                            {product.price}
                                                         </span>
-                                                    </div>
+                                                    </span>
                                                 </div>
+                                            </div>
 
-                                                {/* Action */}
-                                                <div className="action-area">
-                                                    <button
-                                                        onClick={() =>
-                                                            handleBookSample(
-                                                                product
-                                                            )
-                                                        }
-                                                        className="btn-highlighted book-sample-btn"
-                                                    >
-                                                        Book Sample
-                                                    </button>
-                                                </div>
+                                            {/* Action */}
+                                            <div className="action-area">
+                                                <button
+                                                    onClick={() => handleBookSample(product)}
+                                                    className={`btn-highlighted book-sample-btn ${
+                                                        isProductInCart(product, productSelections[product.product_id]?.flavor) ? 'item-added' : ''
+                                                    }`}
+                                                >
+                                                    {isProductInCart(product, productSelections[product.product_id]?.flavor) ? 'Item Added' : 'Book Sample'}
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-                    </div>
-
-                    {/* Other Products Section */}
-                    <div className="row justify-content-center">
-                        {productsData
-                            .filter(
-                                (product) =>
-                                    ![
-                                        "Whey Blend Sample(35gm)",
-                                        "Whey Concentrate Sample(35gm)",
-                                        "Whey Isolate Sample(35gm)",
-                                    ].includes(product.name)
-                            )
-                            .map((product, index) => (
-                                <div className="col-lg-4 col-md-6" key={index}>
-                                    <div
-                                        className="service-item wow fadeInUp"
-                                        data-wow-delay={`${index * 0.01}s`}
-                                    >
-                                        <div className="service-image">
-                                            <div className="image-wrapper img-fluid object-fit-cover">
-                                                <figure className="image-anime">
-                                                    <img
-                                                        src={getAssetPath(
-                                                            product.image
-                                                        )}
-                                                        alt={product.name}
-                                                        className="img-fluid object-fit-cover"
-                                                    />
-                                                </figure>
-                                            </div>
-                                        </div>
-                                        <div className="service-body">
-                                            <div className="service-content-box">
-                                                <div className="service-box-content ps-3">
-                                                    <h5 className="mb-2 mt-2">
-                                                        {product.name}
-                                                    </h5>
-                                                    <p>
-                                                        ₹{" "}
-                                                        {product.priceMatrix?.[
-                                                            productSelections[
-                                                                product
-                                                                    .product_id
-                                                            ]?.protein ?? ""
-                                                        ]?.[
-                                                            productSelections[
-                                                                product
-                                                                    .product_id
-                                                            ]?.flavor ?? ""
-                                                        ] ?? product.price}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="pricing-btn m-3">
-                                            <button
-                                                onClick={() =>
-                                                    handleBookSample(product)
-                                                }
-                                                className="btn-highlighted m-0 border-0"
-                                            >
-                                                {(() => {
-                                                    const cartProducts =
-                                                        JSON.parse(
-                                                            localStorage.getItem(
-                                                                "ATC_Product"
-                                                            )
-                                                        ) || [];
-
-                                                    // Check if it's a regular product
-                                                    if (
-                                                        cartProducts.some(
-                                                            (p) =>
-                                                                p.product_id ===
-                                                                product.product_id
-                                                        )
-                                                    ) {
-                                                        return "Item Added";
-                                                    }
-
-                                                    // If it's a Whey Concentrate, Isolate, or Blend check all variants
-                                                    if (
-                                                        product.name.includes(
-                                                            "Whey Concentrate"
-                                                        )
-                                                    ) {
-                                                        // Check if any variant of this concentrate is in cart
-                                                        for (const flavor in window.Whey_Concentrate) {
-                                                            if (
-                                                                window.Whey_Concentrate[
-                                                                    flavor
-                                                                ].some(
-                                                                    (variant) =>
-                                                                        cartProducts.some(
-                                                                            (
-                                                                                p
-                                                                            ) =>
-                                                                                p.product_id ===
-                                                                                variant.product_id
-                                                                        )
-                                                                )
-                                                            ) {
-                                                                return "Item Added";
-                                                            }
-                                                        }
-                                                    }
-
-                                                    if (
-                                                        product.name.includes(
-                                                            "Whey Isolate"
-                                                        )
-                                                    ) {
-                                                        // Check if any variant of this isolate is in cart
-                                                        for (const flavor in window.Whey_Isolate) {
-                                                            if (
-                                                                window.Whey_Isolate[
-                                                                    flavor
-                                                                ].some(
-                                                                    (variant) =>
-                                                                        cartProducts.some(
-                                                                            (
-                                                                                p
-                                                                            ) =>
-                                                                                p.product_id ===
-                                                                                variant.product_id
-                                                                        )
-                                                                )
-                                                            ) {
-                                                                return "Item Added";
-                                                            }
-                                                        }
-                                                    }
-
-                                                    if (
-                                                        product.name.includes(
-                                                            "Whey Blend"
-                                                        )
-                                                    ) {
-                                                        // Check if any variant of this blend is in cart
-                                                        for (const flavor in window.Whey_Blend) {
-                                                            if (
-                                                                window.Whey_Blend[
-                                                                    flavor
-                                                                ].some(
-                                                                    (variant) =>
-                                                                        cartProducts.some(
-                                                                            (
-                                                                                p
-                                                                            ) =>
-                                                                                p.product_id ===
-                                                                                variant.product_id
-                                                                        )
-                                                                )
-                                                            ) {
-                                                                return "Item Added";
-                                                            }
-                                                        }
-                                                    }
-
-                                                    return "Book Sample";
-                                                })()}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -1300,134 +1296,6 @@ export default function Home() {
             </div>
 
             <VideoReview />
-
-            {/* <div className="our-faqs">
-                <div className="container">
-                    <div className="row section-row">
-                        <div className="col-lg-12">
-                            <div className="section-title">
-                                <h3 className="wow fadeInUp">FAQ</h3>
-                                <h2 className="text-anime-style-2" data-cursor="-opaque">Frequently asked <span>questions</span></h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-lg-6">
-                            <div className="faq-accordion" id="faqaccordion">
-                                <div className="accordion-item wow fadeInUp">
-                                    <h2 className="accordion-header" id="heading1">
-                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                            1. Is protein only used for muscle development?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse1" className="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#faqaccordion">
-                                        <div className="accordion-body">
-                                            <p>A lot of people think that protein is only used for muscle growth and repair, however it can provide a lot of other benefits, such as refueling your stores of nutrients and amino acids which have been lost during exercise.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <h2 className="accordion-header" id="heading2">
-                                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                            2. What is whey protein?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse2" className="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#faqaccordion">
-                                        <div className="accordion-body">
-                                            <p>Whey is a "complete" protein, meaning it contains all the essential amino acids that the human body requires for proper growth and function. Whey protein is also a rich source of the branched chain amino acids: Leucine, Isoleucine and L-valine.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <h2 className="accordion-header" id="heading3">
-                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                            3. Difference between whey protein isolate and whey protein concentrate?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse3" className="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#faqaccordion">
-                                        <div className="accordion-body">
-                                            <p>As a protein source, whey protein isolate is about 90-95% protein, compared to whey protein concentrate at 75-85% protein. Unlike concentrate, whey protein isolate contains almost no sugar, lactose or fat. Because it contains more protein, whey protein concentrate is the most economical option per gram of protein.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <h2 className="accordion-header" id="heading4">
-                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                            4. Can those who are lactose intolerant eat whey protein?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse4" className="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#faqaccordion">
-                                        <div className="accordion-body">
-                                            <p>Whey protein isolate is virtually free of lactose, but may contain trace amounts (0.5g per serving). Most people who are lactose intolerant are able to safely consume whey without any negative side effects however a medical practitioner should always be consulted before taking if there are any doubts.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-6">
-                            <div className="faq-accordion" id="faqaccordion1">
-                                <div className="accordion-item wow fadeInUp">
-                                    <h2 className="accordion-header" id="heading5">
-                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
-                                            5. If whey protein concentrate is 80% protein, what is the other 20%?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse5" className="accordion-collapse collapse show" aria-labelledby="heading5" data-bs-parent="#faqaccordion1">
-                                        <div className="accordion-body">
-                                            <p>Every protein powder, whether it's whey, soy, casein, etc., has moisture. In fact, 5% of the total formula is water. Another 3-5% is made up of naturally occurring minerals in whey. The remaining 10-12% is a combination of carbs and fat.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="accordion-item wow fadeInUp" data-wow-delay="0.2s">
-                                    <h2 className="accordion-header" id="heading6">
-                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                                            6. Will A Higher Protein Diet Harm My Kidneys?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse6" className="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#faqaccordion1">
-                                        <div className="accordion-body">
-                                            <p>According to a study published in the "American Journal of Kidney Disease," Anyone who is currently suffering from chronic kidney disease should avoid high-protein diets. For otherwise healthy folk, your current protein intake should not pose a threat to your kidneys, make sure to keep your total daily protein consumption reasonable and consume sufficient water to counteract the water loss.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="accordion-item wow fadeInUp" data-wow-delay="0.4s">
-                                    <h2 className="accordion-header" id="heading7">
-                                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
-                                            7. Will More Protein Help Me Build Muscle Faster?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse7" className="accordion-collapse collapse " aria-labelledby="heading7" data-bs-parent="#faqaccordion1">
-                                        <div className="accordion-body">
-                                            <p>Yes, but only to some degree. Not all dietary protein you eat goes toward protein synthesis. Once you get beyond protein needed for muscle growth and repair, it can be broken down for energy. A protein intake beyond 30-40% of your daily calories probably won't provide additional muscle-building benefits, and it will cut into your fat and carbohydrate intake, which may actually hinder your goals.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="accordion-item wow fadeInUp" data-wow-delay="0.6s">
-                                    <h2 className="accordion-header" id="heading8">
-                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
-                                            8. Is It True The Body Can Only Use 30 Grams Of Protein At Once?
-                                        </button>
-                                    </h2>
-                                    <div id="collapse8" className="accordion-collapse collapse" aria-labelledby="heading8" data-bs-parent="#faqaccordion1">
-                                        <div className="accordion-body">
-                                            <p>You're going to want all the protein you can eat but more isn't always better. Once you turn on protein synthesis and initiate the muscle-building process, you can't turn it on "more" in one meal. While 30 grams of protein may mean across multiple meals will actually help you boost protein synthesis many times over the course of a day. It will probably be easier on your digestive system as well.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-
             <Footer />
             <Toaster
                 position="top-right"

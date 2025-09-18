@@ -51,6 +51,19 @@ export const removeProductFromCart = (productId) => {
     }
 };
 
+export const isProductInCart = (productId) => {
+    try {
+        const existingProducts = localStorage.getItem("ATC_Product");
+        if (!existingProducts) return false;
+
+        const products = JSON.parse(existingProducts);
+        return products.some(p => p.product_id === productId);
+    } catch (error) {
+        console.error("Error checking product in cart:", error);
+        return false;
+    }
+};
+
 export const clearCart = () => {
     localStorage.removeItem("ATC_Product");
 };
