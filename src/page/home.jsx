@@ -7,7 +7,6 @@ import "../assets/css/whey-products.css";
 import { isUserLoggedIn } from "../utils/auth";
 import LoginModal from "../components/popup/login";
 import BookingModal from "../components/popup/BookingModal";
-import { isProductInCart, getCartProducts } from "../utils/productStorage";
 
 // Import Swiper styles
 import "swiper/css";

@@ -74,7 +74,7 @@ export const createOrder = async (orderData) => {
             name,
             email,
             mobile,
-            item_type: "PURE_GO_MEAL_PRODUCT"
+            item_type: "PURE_GO_SAMPLE_MEAL_PRODUCT"
         };
 
         // Check Authentication
