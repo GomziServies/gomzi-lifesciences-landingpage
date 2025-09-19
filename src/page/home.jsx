@@ -202,7 +202,7 @@ const productsData = [
     },
     {
         product_id: "68ad74cc06800a0384ea01c8",
-        name: "Energy Drink - Bottle Sample(220gm)",
+        name: "Energy Drink - Bottle Sample(220ml)",
         flavoured: ["Cola", "Guava", "Green Apple"],
         price: 100,
         image: "/assets/images/product-images/energy-drink.webp",
