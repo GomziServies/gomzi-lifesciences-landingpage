@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NutritionHeader from "../components/partials/Header/nutritionsheader";
 import Footer from "../components/partials/Footer/footer";
 import Swiper from "swiper";
@@ -147,7 +147,7 @@ const productsData = [
         moq: "100 kg",
     },
     {
-        product_id: "68cbd44ff1aff9d6c5624812",
+        product_id: "68cd0321e71a48752796bee9",
         name: "Mass Gainer Sample(35gm)",
         flavoured: ["Chocolate"],
         price: 100,
@@ -212,190 +212,190 @@ const productsData = [
 ];
 window.Whey_Concentrate = {
     Chocolate: [
-        { percent: "35%", product_id: "68aef32e06800a0384ea3faf" },
-        { percent: "50%", product_id: "68aef3a806800a0384ea4080" },
-        { percent: "60%", product_id: "68aef4a706800a0384ea4095" },
-        { percent: "70%", product_id: "68aef5b806800a0384ea40a9" },
-        { percent: "80%", product_id: "68aef66406800a0384ea40cd" },
+        { percent: "35%", product_id: "68ccfd5ee71a48752796b91a" },
+        { percent: "50%", product_id: "68ccfd5ee71a48752796b91a" },
+        { percent: "60%", product_id: "68ccfd7be71a48752796b920" },
+        { percent: "70%", product_id: "68ccfdb3e71a48752796b942" },
+        { percent: "80%", product_id: "68ccfde9e71a48752796b956" },
     ],
     "Mawa Kulfi": [
-        { percent: "35%", product_id: "68aef29506800a0384ea3e42" },
-        { percent: "50%", product_id: "68aef36c06800a0384ea4075" },
-        { percent: "60%", product_id: "68aef47006800a0384ea4090" },
-        { percent: "70%", product_id: "68aef58c06800a0384ea40a5" },
-        { percent: "80%", product_id: "68aef63606800a0384ea40c9" },
+        { percent: "35%", product_id: "68ccfd0ce71a48752796b910" },
+        { percent: "50%", product_id: "68ccfd43e71a48752796b916" },
+        { percent: "60%", product_id: "68ccfd68e71a48752796b91c" },
+        { percent: "70%", product_id: "68ccfda2e71a48752796b922" },
+        { percent: "80%", product_id: "68ccfdbce71a48752796b94e" },
     ],
     "Mocha Coffee": [
-        { percent: "35%", product_id: "68aef30106800a0384ea3f35" },
-        { percent: "50%", product_id: "68aef39406800a0384ea407e" },
-        { percent: "60%", product_id: "68aef48906800a0384ea4092" },
-        { percent: "70%", product_id: "68aef5a906800a0384ea40a7" },
-        { percent: "80%", product_id: "68aef65006800a0384ea40cb" },
+        { percent: "35%", product_id: "68ccfd26e71a48752796b912" },
+        { percent: "50%", product_id: "68ccfd56e71a48752796b918" },
+        { percent: "60%", product_id: "68ccfd71e71a48752796b91e" },
+        { percent: "70%", product_id: "68ccfdaae71a48752796b934" },
+        { percent: "80%", product_id: "68ccfdc7e71a48752796b950" },
     ],
     Mango: [
-        { percent: "35%", product_id: "68b029fe06800a0384ea45e4" },
-        { percent: "50%", product_id: "68b02a2606800a0384ea45ea" },
-        { percent: "60%", product_id: "68b02a5806800a0384ea45f6" },
-        { percent: "70%", product_id: "68b02a6806800a0384ea45f8" },
-        { percent: "80%", product_id: "68b02a7c06800a0384ea45fa" },
+        { percent: "35%", product_id: "68ccff68e71a48752796bd07" },
+        { percent: "50%", product_id: "68ccff74e71a48752796bd6b" },
+        { percent: "60%", product_id: "68ccff7de71a48752796bd6d" },
+        { percent: "70%", product_id: "68ccff88e71a48752796bdd1" },
+        { percent: "80%", product_id: "68ccff93e71a48752796be35" },
     ],
 };
 window.Whey_Isolate = {
     Chocolate: [
-        { percent: "35%", product_id: "68aef71b06800a0384ea40e5" },
-        { percent: "40%", product_id: "68aef76906800a0384ea40eb" },
-        { percent: "50%", product_id: "68aef80406800a0384ea4112" },
-        { percent: "60%", product_id: "68aef88306800a0384ea4124" },
-        { percent: "70%", product_id: "68aef8d606800a0384ea412a" },
-        { percent: "80%", product_id: "68aef96e06800a0384ea4153" },
+        { percent: "35%", product_id: "68ccfea5e71a48752796b98e" },
+        { percent: "40%", product_id: "68ccfec4e71a48752796b994" },
+        { percent: "50%", product_id: "68ccfee0e71a48752796b9a8" },
+        { percent: "60%", product_id: "68ccfef4e71a48752796bb32" },
+        { percent: "70%", product_id: "68ccff2ae71a48752796bc5e" },
+        { percent: "80%", product_id: "68ccff4be71a48752796bc73" },
     ],
     "Mawa Kulfi": [
-        { percent: "35%", product_id: "68aef70c06800a0384ea40e3" },
-        { percent: "40%", product_id: "68aef75306800a0384ea40e9" },
-        { percent: "50%", product_id: "68aef7ea06800a0384ea4110" },
-        { percent: "60%", product_id: "68aef86c06800a0384ea4122" },
-        { percent: "70%", product_id: "68aef8c206800a0384ea4128" },
-        { percent: "80%", product_id: "68aef95306800a0384ea4151" },
+        { percent: "35%", product_id: "68ccfe9ce71a48752796b98b" },
+        { percent: "40%", product_id: "68ccfebae71a48752796b992" },
+        { percent: "50%", product_id: "68ccfed6e71a48752796b99a" },
+        { percent: "60%", product_id: "68ccfef4e71a48752796bb32" },
+        { percent: "70%", product_id: "68ccff13e71a48752796bc5c" },
+        { percent: "80%", product_id: "68ccff3fe71a48752796bc71" },
     ],
     "Mocha Coffee": [
-        { percent: "35%", product_id: "68aef72d06800a0384ea40e7" },
-        { percent: "40%", product_id: "68aef77b06800a0384ea40ed" },
-        { percent: "50%", product_id: "68aef81106800a0384ea4114" },
-        { percent: "60%", product_id: "68aef89b06800a0384ea4126" },
-        { percent: "70%", product_id: "68aef8e806800a0384ea412c" },
-        { percent: "80%", product_id: "68aef98106800a0384ea4155" },
+        { percent: "35%", product_id: "68ccfeb1e71a48752796b990" },
+        { percent: "40%", product_id: "68ccfecde71a48752796b998" },
+        { percent: "50%", product_id: "68ccfeeae71a48752796bace" },
+        { percent: "60%", product_id: "68cd30fde71a48752796cb2d" },
+        { percent: "70%", product_id: "68ccff35e71a48752796bc6f" },
+        { percent: "80%", product_id: "68ccff5ae71a48752796bc7f" },
     ],
     Mango: [
-        { percent: "35%", product_id: "68b02a9d06800a0384ea4605" },
-        { percent: "40%", product_id: "68b02ab106800a0384ea460b" },
-        { percent: "50%", product_id: "68b02ad606800a0384ea460f" },
-        { percent: "60%", product_id: "68b02b4006800a0384ea4602" },
-        { percent: "70%", product_id: "68b02aee06800a0384ea4613" },
-        { percent: "80%", product_id: "68b02b1e06800a0384ea4619" },
+        { percent: "35%", product_id: "68ccffe4e71a48752796be60" },
+        { percent: "40%", product_id: "68ccfff0e71a48752796be62" },
+        { percent: "50%", product_id: "68ccfff9e71a48752796be64" },
+        { percent: "60%", product_id: "68cd0004e71a48752796be66" },
+        { percent: "70%", product_id: "68cd000fe71a48752796be68" },
+        { percent: "80%", product_id: "68cd001fe71a48752796be6a" },
     ],
 };
 
 // Define other product variants
 window.Mass_Gainer = {
     "Chocolate": [
-        { product_id: "68cbd44ff1aff9d6c5624812", name: "Mass Gainer", quotation_price: 420, moq: "25 kg" }
+        { product_id: "68cd0321e71a48752796bee9", name: "Mass Gainer", quotation_price: 420, moq: "25 kg" }
     ]
 };
 
 window.Peanut_Butter = {
     "Natural": [
-        { product_id: "68cbd41df1aff9d6c562480c", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
+        { product_id: "68cd0304e71a48752796bed3", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
     ],
     "Chocolate": [
-        { product_id: "68cbd42cf1aff9d6c562480e", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
+        { product_id: "68cd030de71a48752796bedd", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
     ],
     "Mango": [
-        { product_id: "68cbd43cf1aff9d6c5624810", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
+        { product_id: "68cd0316e71a48752796bee3", name: "Peanut Butter", quotation_price: 150, moq: "100 kg" }
     ]
 };
 
 window.Creatine = {
     "Lemon": [
-        { product_id: "68cbd3e1f1aff9d6c5624808", name: "Creatine", quotation_price: 300, moq: "50 kg (250gm)" }
+        { product_id: "68cd02ede71a48752796bec2", name: "Creatine", quotation_price: 300, moq: "50 kg (250gm)" }
     ],
     "Unflavoured": [
-        { product_id: "68cbd403f1aff9d6c562480a", name: "Creatine", quotation_price: 270, moq: "50 kg (250gm)" }
+        { product_id: "68cd02fae71a48752796bec4", name: "Creatine", quotation_price: 270, moq: "50 kg (250gm)" }
     ]
 };
 
 window.pre_Workout = {
     "Fruit Punch": [
-        { product_id: "68cbd3ccf1aff9d6c5624804", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
+        { product_id: "68cd02d5e71a48752796bebe", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
     ],
     "Cola": [
-        { product_id: "68cbd3d5f1aff9d6c5624806", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
+        { product_id: "68cd02e4e71a48752796bec0", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
     ]
 };
 
 window.Eaa = {
     "Watermelon": [
-        { product_id: "68cbd331f1aff9d6c56247f6", name: "EAA", quotation_price: 440, moq: "50 kg (250gm)" }
+        { product_id: "68cd0292e71a48752796beb0", name: "EAA", quotation_price: 440, moq: "50 kg (250gm)" }
     ]
 };
 
 window.Bcaa = {
     "Orange": [
-        { product_id: "68cbd355f1aff9d6c56247f8", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
+        { product_id: "68cd029ce71a48752796beb2", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
     ],
     "Cranberry": [
-        { product_id: "68cbd361f1aff9d6c56247fa", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
+        { product_id: "68cd02a7e71a48752796beb4", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
     ]
 };
 
 window.Creatine = {
     "Lemon": [
-        { product_id: "68cbd3e1f1aff9d6c5624808", name: "Creatine", quotation_price: 300, moq: "50 kg (250gm)" }
+        { product_id: "68cd02ede71a48752796bec2", name: "Creatine", quotation_price: 300, moq: "50 kg (250gm)" }
     ],
     "Unflavoured": [
-        { product_id: "68cbd403f1aff9d6c562480a", name: "Creatine", quotation_price: 270, moq: "50 kg (250gm)" }
+        { product_id: "68cd02fae71a48752796bec4", name: "Creatine", quotation_price: 270, moq: "50 kg (250gm)" }
     ]
 };
 
 window.pre_Workout = {
     "Fruit Punch": [
-        { product_id: "68cbd3ccf1aff9d6c5624804", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
+        { product_id: "68cd02d5e71a48752796bebe", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
     ],
     "Cola": [
-        { product_id: "68cbd3d5f1aff9d6c5624806", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
+        { product_id: "68cd02e4e71a48752796bec0", name: "Pre-Workout", quotation_price: 440, moq: "50 kg" }
     ]
 };
 
 window.Eaa = {
     "Watermelon": [
-        { product_id: "68cbd331f1aff9d6c56247f6", name: "EAA", quotation_price: 440, moq: "50 kg (250gm)" }
+        { product_id: "68cd0292e71a48752796beb0", name: "EAA", quotation_price: 440, moq: "50 kg (250gm)" }
     ]
 };
 
 window.Bcaa = {
     "Orange": [
-        { product_id: "68cbd355f1aff9d6c56247f8", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
+        { product_id: "68cd029ce71a48752796beb2", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
     ],
     "Cranberry": [
-        { product_id: "68cbd361f1aff9d6c56247fa", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
+        { product_id: "68cd02a7e71a48752796beb4", name: "BCAA", quotation_price: 440, moq: "50 kg (250gm)" }
     ]
 };
 
 window.Energy_Drink = {
     "Cola": [
-        { product_id: "68cbd36ff1aff9d6c56247fc", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
+        { product_id: "68cd02b0e71a48752796beb6", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
     ],
     "Guava": [
-        { product_id: "68cbd37ef1aff9d6c56247fe", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
+        { product_id: "68cd02b9e71a48752796beb8", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
     ],
     "Green Apple": [
-        { product_id: "68cbd38cf1aff9d6c5624800", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
+        { product_id: "68cd02c4e71a48752796beba", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" }
     ]
 };
 
 window.Whey_Blend = {
     Chocolate: [
-        { percent: "35%", product_id: "68b03cd406800a0384ea478c" },
-        { percent: "40%", product_id: "68b03cf206800a0384ea478e" },
-        { percent: "50%", product_id: "68b03d2606800a0384ea479b" },
-        { percent: "60%", product_id: "68b03d4206800a0384ea479d" },
+        { percent: "35%", product_id: "68cd00efe71a48752796be7e" },
+        { percent: "40%", product_id: "68cd0109e71a48752796be80" },
+        { percent: "50%", product_id: "68cd0113e71a48752796be82" },
+        { percent: "60%", product_id: "68cd011ee71a48752796be84" },
     ],
     "Mawa Kulfi": [
-        { percent: "35%", product_id: "68b03b9406800a0384ea476f" },
-        { percent: "40%", product_id: "68b03baf06800a0384ea4771" },
-        { percent: "50%", product_id: "68b03bbd06800a0384ea4773" },
-        { percent: "60%", product_id: "68b03bcd06800a0384ea4775" },
+        { percent: "35%", product_id: "68cd00b5e71a48752796be76" },
+        { percent: "40%", product_id: "68cd00cae71a48752796be78" },
+        { percent: "50%", product_id: "68cd00d8e71a48752796be7a" },
+        { percent: "60%", product_id: "68cd00e5e71a48752796be7c" },
     ],
     "Mocha Coffee": [
-        { percent: "35%", product_id: "68b03ddd06800a0384ea47e5" },
-        { percent: "40%", product_id: "68b03deb06800a0384ea47e7" },
-        { percent: "50%", product_id: "68b03df506800a0384ea47e9" },
-        { percent: "60%", product_id: "68b03e0206800a0384ea47eb" },
+        { percent: "35%", product_id: "68cd0128e71a48752796be86" },
+        { percent: "40%", product_id: "68cd0131e71a48752796be88" },
+        { percent: "50%", product_id: "68cd016fe71a48752796be8a" },
+        { percent: "60%", product_id: "68cd017ae71a48752796be8c" },
     ],
     Mango: [
-        { percent: "35%", product_id: "68b03a6306800a0384ea4750" },
-        { percent: "40%", product_id: "68b03ab206800a0384ea4752" },
-        { percent: "50%", product_id: "68b03b0706800a0384ea4754" },
-        { percent: "60%", product_id: "68b03b1306800a0384ea4756" },
+        { percent: "35%", product_id: "68cd0037e71a48752796be6e" },
+        { percent: "40%", product_id: "68cd0041e71a48752796be70" },
+        { percent: "50%", product_id: "68cd0113e71a48752796be82" },
+        { percent: "60%", product_id: "68cd011ee71a48752796be84" },
     ],
 };
 
