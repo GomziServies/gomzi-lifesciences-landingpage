@@ -1142,12 +1142,12 @@ export default function Home() {
                                             <div className="price-info">
                                                 <div className="selected-price">
                                                     <span className="label">
-                                                        Sample Price:{" "}
+                                                        Sample Price:{ " " }
                                                         <span className="value">
-                                                            ₹{" "}
-                                                            {product.price}
+                                                            ₹ { product.price }
                                                         </span>
                                                     </span>
+                                                    <div className="tax-note">(All taxes and charges included)</div>
                                                 </div>
                                             </div>
 
