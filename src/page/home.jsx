@@ -22,7 +22,7 @@ const productsData = [
         name: "Whey Blend Sample(35gm)",
         flavoured: ["Mawa Kulfi", "Chocolate", "Mango", "Mocha Coffee"],
         protein: ["35%", "40%", "50%", "60%"],
-        pricerRange: "930-2305",
+        pricerRange: "750-1650",
         priceMatrix: {
             "35%": {
                 "Mawa Kulfi": 190,
@@ -1059,6 +1059,7 @@ export default function Home() {
                                                                 product.pricerRange
                                                             }
                                                         </span>
+                                                       {' '} per kg
                                                     </span>
                                                 </div>
                                             )}
