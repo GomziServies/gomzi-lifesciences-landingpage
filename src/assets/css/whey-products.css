@@ -2,6 +2,31 @@
   padding: 60px 0;
 }
 
+/* Offer Banners */
+.offer-banners {
+  background-color: #000;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 60px 0 ;
+}
+
+.offer-banners img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.offer-banners .desktop-banner,
+.offer-banners .mobile-banner {
+  line-height: 0;
+}
+
+/* Remove any default margins/padding that might affect banner placement */
+.hero {
+  margin-top: 0;
+  padding-top: 0;
+}
+
 /* Card Container */
 .whey-product-container {
   margin-bottom: 50px;

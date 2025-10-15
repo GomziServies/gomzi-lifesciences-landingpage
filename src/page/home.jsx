@@ -737,6 +737,24 @@ export default function Home() {
             )}
             <NutritionHeader />
 
+            {/* Offer Banners */}
+            <div className="offer-banners">
+                <div className="desktop-banner d-none d-lg-block">
+                    <img 
+                        src={getAssetPath("/assets/images/offer-banner.jpg")} 
+                        alt="Special Offer" 
+                        className="img-fluid"
+                    />
+                </div>
+                <div className="mobile-banner d-lg-none">
+                    <img 
+                        src={getAssetPath("/assets/images/offer-banner-mobile.jpg")} 
+                        alt="Special Offer" 
+                        className="img-fluid"
+                    />
+                </div>
+            </div>
+
             <div className="hero">
                 <div className="hero-bg-video">
                     {/* <video autoPlay muted loop id="myVideo"><source src="assets/media/artistic-it-company-video.mp4" type="video/mp4" /></video> */}

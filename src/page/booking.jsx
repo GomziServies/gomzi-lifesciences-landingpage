@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import '../assets/css/style.css';
+import '../assets/css/payment-options.css'; // Add the new CSS file
 import { isUserLoggedIn } from '../utils/auth';
 
 const Booking = () => {
@@ -172,6 +173,7 @@ const Booking = () => {
         pin_code: "",
         state: "",
         country: "",
+        payment_method: "COD" // Changed default to COD
     });
 
     const [productLines, setProductLines] = useState(() => {
@@ -310,7 +312,7 @@ const Booking = () => {
                         price: productData?.price || 0,
                         quotation_price: productData?.quotation_price || 0,
                         moq: productData?.moq || "",
-                        total: (productData?.quotation_price || 0) * (savedProduct.quantity || 0)
+                        total: (productData?.price || 0) * (savedProduct.quantity || 0)  // Changed from quotation_price to price
                     };
                 });
             } catch (e) {
@@ -639,12 +641,14 @@ const Booking = () => {
 
         setIsLoading(true);
         try {
-            // First load Razorpay script
-            const res = await loadRazorpay();
-            if (!res) {
-                toast.error('Razorpay SDK failed to load');
-                setIsLoading(false);
-                return;
+            // Load Razorpay script only for online payment
+            if (formData.payment_method === "ONLINE") {
+                const res = await loadRazorpay();
+                if (!res) {
+                    toast.error('Razorpay SDK failed to load');
+                    setIsLoading(false);
+                    return;
+                }
             }
 
             const orderData = {
@@ -675,11 +679,11 @@ const Booking = () => {
                 pin_code: formData.pin_code,
                 state: formData.state,
                 country: formData.country,
-                payment_mode: 'ONLINE',
+                payment_mode: formData.payment_method, // Use selected payment method
                 name: formData.name,
                 email: formData.email,
                 mobile: formData.mobile,
-                downloadQuotationPDF: downloadQuotationPDF
+                downloadQuotationPDF: downloadQuotationPDF // Pass the download function
             };
 
             await createOrder(orderData);
@@ -692,38 +696,43 @@ const Booking = () => {
     };
 
 
-    const downloadQuotationPDF = async (formData) => {
+    const downloadQuotationPDF = async () => {
         const quotationContent = document.getElementById("quotationContent");
         if (!quotationContent) {
             console.error("Quotation content not found.");
             return;
         }
 
-        const doc = new jsPDF({
-            orientation: "portrait",
-            unit: "mm",
-            format: "a4",
-        });
+        try {
+            const doc = new jsPDF({
+                orientation: "portrait",
+                unit: "mm",
+                format: "a4",
+            });
 
-        const margin = 10;
-        const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin;
-        const contentHeight = doc.internal.pageSize.getHeight() - 2 * margin;
+            const margin = 10;
+            const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin;
+            const contentHeight = doc.internal.pageSize.getHeight() - 2 * margin;
 
-        const canvas = await html2canvas(quotationContent, { scale: 2, useCORS: true });
-        const imgData = canvas.toDataURL("image/jpeg", 1);
+            const canvas = await html2canvas(quotationContent, { scale: 2, useCORS: true });
+            const imgData = canvas.toDataURL("image/jpeg", 1);
 
-        doc.addImage(imgData, "JPEG", margin, margin, contentWidth, contentHeight);
+            doc.addImage(imgData, "JPEG", margin, margin, contentWidth, contentHeight);
 
-        // Create Blob and trigger download
-        const pdfBlob = doc.output("blob");
-        const url = window.URL.createObjectURL(pdfBlob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "quotation.pdf");
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        window.URL.revokeObjectURL(url);
+            // Create Blob and trigger download
+            const pdfBlob = doc.output("blob");
+            const url = window.URL.createObjectURL(pdfBlob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "quotation.pdf");
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Error generating PDF:", error);
+            // Even if PDF generation fails, we shouldn't prevent the order completion
+        }
     };
 
     useEffect(() => {
@@ -1139,7 +1148,63 @@ const Booking = () => {
                             />
                         </div>
 
-
+                        {/* Payment Method Selection */}
+                        <div className="payment-method-container d-none">
+                            <h3 className="payment-method-title">Payment Method</h3>
+                            <div className="payment-options">
+                                <div 
+                                    className={`payment-option ${formData.payment_method === "ONLINE" ? "selected" : ""}`}
+                                    onClick={() => setFormData({...formData, payment_method: "ONLINE"})}
+                                    data-payment="online"
+                                >
+                                    <input
+                                        type="radio"
+                                        id="onlinePayment"
+                                        name="payment_method"
+                                        value="ONLINE"
+                                        checked={formData.payment_method === "ONLINE"}
+                                        onChange={handleChange}
+                                    />
+                                    <label htmlFor="onlinePayment" className="payment-option-label">
+                                        <div className="payment-option-icon">
+                                            <i className="fas fa-credit-card"></i>
+                                        </div>
+                                        <div className="payment-option-text">
+                                            Online Payment
+                                            <div className="payment-option-description">
+                                                Pay securely using Razorpay
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div 
+                                    className={`payment-option ${formData.payment_method === "COD" ? "selected" : ""}`}
+                                    onClick={() => setFormData({...formData, payment_method: "COD"})}
+                                    data-payment="cod"
+                                >
+                                    <input
+                                        type="radio"
+                                        id="codPayment"
+                                        name="payment_method"
+                                        value="COD"
+                                        checked={formData.payment_method === "COD"}
+                                        onChange={handleChange}
+                                    />
+                                    <label htmlFor="codPayment" className="payment-option-label">
+                                        <div className="payment-option-icon">
+                                            <i className="fas fa-money-bill-wave"></i>
+                                        </div>
+                                        <div className="payment-option-text">
+                                            Cash on Delivery
+                                            <div className="payment-option-description">
+                                                Pay when you receive your order
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
                         <div className="col-12 text-center mt-4">
                             <div className="contact-form-btn">
@@ -1170,7 +1235,7 @@ const Booking = () => {
 
             <div
                 className="col-md-6 mt-3"
-                style={{ height: '0px', overflow: 'hidden' }}
+                style={{ height: '0px', overflow: 'hidden', position: 'absolute', left: '-9999px' }}
             >
                 <div id="quotationContent">
                     <div className="card">

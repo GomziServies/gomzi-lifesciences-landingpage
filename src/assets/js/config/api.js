@@ -51,20 +51,17 @@ export const createOrder = async (orderData) => {
 
         const ATC_Product = JSON.parse(localStorage.getItem("ATC_Product")) || [];
 
-        // const SampleProducts = [{
-        //     product_id: ATC_Product.length <= 3 ? "68a2c8e006800a0384e9cc6a" : "68ac019606800a0384e9f883",
-        //     quantity: 1,
-        //     landing_page: true
-        // }];
-
         const updatedProducts = ATC_Product.map(product => ({
             ...product,
             landing_page: true
         }));
 
+        // Map frontend payment mode to backend expected value
+        const backendPaymentMode = payment_mode === 'COD' ? 'Cash On Delivery' : payment_mode;
+
         const payload = {
             products: updatedProducts,
-            payment_mode,
+            payment_mode: backendPaymentMode, // Use the mapped value
             address_line_1,
             address_line_2,
             city,
@@ -92,50 +89,120 @@ export const createOrder = async (orderData) => {
         // Make API call to create order
         const result = await axiosInstance.post('meals/create-order', payload);
 
-        if (
-            (result?.data?.status === 200 && result.data.message === "COD Order Created Successfully") ||
-            (result?.status === 200 && result.response === "OK" && result.message === "COD Order Created Successfully")
-        ) {
-
-            Swal.fire({
-                title: "Success",
-                text: "Please check your email for the invoice.",
-                icon: "success",
-            }).then(() => {
-                localStorage.removeItem("tmp_ProductPurchasePayload");
-                localStorage.removeItem("ATC_Product");
-            });
-
-            return { showLoginModal: false, success: true };
-        } else if (result?.data?.data) {
-
-            const paymentData = result.data.data;
-
-            paymentData.handler = async () => {
-                localStorage.removeItem("tmp_ProductPurchasePayload");
-
+        if (payment_mode === 'COD') {
+            // Handle COD order
+            if (
+                (result?.data?.status === 200 && result.data.message === "COD Order Created Successfully") ||
+                (result?.status === 200 && result.response === "OK" && result.message === "COD Order Created Successfully")
+            ) {
+                // Download quotation PDF before showing success message
                 if (typeof orderData.downloadQuotationPDF === "function") {
-                    orderData.downloadQuotationPDF();
+                    try {
+                        await orderData.downloadQuotationPDF();
+                    } catch (pdfError) {
+                        console.error("Error downloading PDF:", pdfError);
+                    }
                 }
+
                 Swal.fire({
                     title: "Success",
-                    text: "Your payment is successful. The quotation will be downloaded automatically.",
+                    text: "Your order has been placed successfully. Please check your email for the invoice.",
+                    // text: "Your COD order has been placed successfully. Please check your email for the invoice.",
                     icon: "success",
                 }).then(() => {
+                    localStorage.removeItem("tmp_ProductPurchasePayload");
                     localStorage.removeItem("ATC_Product");
-                    window.location.href = "/thank-you";
+                    // Redirect to thank you page with payment mode parameter
+                    window.location.href = "/thank-you?payment_mode=COD";
                 });
-            };
 
-            paymentData.hidden = { contact: false, email: false };
+                return { showLoginModal: false, success: true };
+            } else {
+                // Handle case where COD order creation failed
+                Swal.fire({
+                    title: "Error",
+                    text: result?.data?.message || "Failed to create COD order. Please try again.",
+                    icon: "error",
+                });
+                return { showLoginModal: false, success: false };
+            }
+        } else {
+            // Handle online payment (Razorpay)
+            if (
+                (result?.data?.status === 200 && result.data.message === "COD Order Created Successfully") ||
+                (result?.status === 200 && result.response === "OK" && result.message === "COD Order Created Successfully")
+            ) {
 
-            new window.Razorpay(paymentData).open();
+                // Download quotation PDF before showing success message
+                if (typeof orderData.downloadQuotationPDF === "function") {
+                    try {
+                        await orderData.downloadQuotationPDF();
+                    } catch (pdfError) {
+                        console.error("Error downloading PDF:", pdfError);
+                    }
+                }
 
-            return { showLoginModal: false, success: true };
+                Swal.fire({
+                    title: "Success",
+                    text: "Please check your email for the invoice.",
+                    icon: "success",
+                }).then(() => {
+                    localStorage.removeItem("tmp_ProductPurchasePayload");
+                    localStorage.removeItem("ATC_Product");
+                });
+
+                return { showLoginModal: false, success: true };
+            } else if (result?.data?.data) {
+
+                const paymentData = result.data.data;
+
+                paymentData.handler = async () => {
+                    localStorage.removeItem("tmp_ProductPurchasePayload");
+
+                    // Download quotation PDF before showing success message
+                    if (typeof orderData.downloadQuotationPDF === "function") {
+                        try {
+                            await orderData.downloadQuotationPDF();
+                        } catch (pdfError) {
+                            console.error("Error downloading PDF:", pdfError);
+                        }
+                    }
+                    
+                    Swal.fire({
+                        title: "Success",
+                        text: "Your payment is successful. The quotation will be downloaded automatically.",
+                        icon: "success",
+                    }).then(() => {
+                        localStorage.removeItem("ATC_Product");
+                        // Redirect to thank you page with payment mode parameter
+                        window.location.href = "/thank-you?payment_mode=ONLINE";
+                    });
+                };
+
+                paymentData.hidden = { contact: false, email: false };
+
+                new window.Razorpay(paymentData).open();
+
+                return { showLoginModal: false, success: true };
+            } else {
+                // Handle case where online payment initialization failed
+                Swal.fire({
+                    title: "Error",
+                    text: result?.data?.message || "Failed to initialize payment. Please try again.",
+                    icon: "error",
+                });
+                return { showLoginModal: false, success: false };
+            }
         }
 
 
     } catch (error) {
+        console.error("Order creation error:", error);
+        Swal.fire({
+            title: "Error",
+            text: error.message || "Something went wrong. Please try again later.",
+            icon: "error",
+        });
         return {
             success: false,
             message: error.message || "Something went wrong"
