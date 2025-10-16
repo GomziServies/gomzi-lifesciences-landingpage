@@ -926,7 +926,7 @@ body:has(.offcanvas) {
 
 .hero {
   position: relative;
-  padding: 250px 0 135px;
+  padding: 150px 0 135px
 }
 
 .hero::before {
@@ -5450,6 +5450,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .hero.bg-image {
     padding: 215px 0 120px;
   }
+
 
   .hero-content {
     margin-bottom: 30px;

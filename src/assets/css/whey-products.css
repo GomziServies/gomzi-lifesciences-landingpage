@@ -24,7 +24,6 @@
 /* Remove any default margins/padding that might affect banner placement */
 .hero {
   margin-top: 0;
-  padding-top: 0;
 }
 
 /* Card Container */

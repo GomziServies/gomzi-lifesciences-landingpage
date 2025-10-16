@@ -737,30 +737,12 @@ export default function Home() {
             )}
             <NutritionHeader />
 
-            {/* Offer Banners */}
-            <div className="offer-banners">
-                <div className="desktop-banner d-none d-lg-block">
-                    <img 
-                        src={getAssetPath("/assets/images/offer-banner.jpg")} 
-                        alt="Special Offer" 
-                        className="img-fluid"
-                    />
-                </div>
-                <div className="mobile-banner d-lg-none">
-                    <img 
-                        src={getAssetPath("/assets/images/offer-banner-mobile.jpg")} 
-                        alt="Special Offer" 
-                        className="img-fluid"
-                    />
-                </div>
-            </div>
-
             <div className="hero">
                 <div className="hero-bg-video">
                     {/* <video autoPlay muted loop id="myVideo"><source src="assets/media/artistic-it-company-video.mp4" type="video/mp4" /></video> */}
                 </div>
                 <div className="container">
-                    <div className="row align-items-center">
+                    <div className="row align-items-center hero-section">
                         <div className="col-lg-6">
                             <div className="hero-content">
                                 <div className="section-title">
@@ -773,16 +755,14 @@ export default function Home() {
                                     >
                                         Your Nutrition Brand,
                                         <span> Our Premium Products</span> –
-                                        Launch Today !
+                                        Start Your Brand –<br /> <span> Get Free Sample</span>
                                     </h2>
                                     <p
                                         className="wow fadeInUp"
                                         data-wow-delay="0.2s"
                                     >
                                         {" "}
-                                        Peanut Butter, Protein Bars, Whey
-                                        Protein & Energy Drinks – Fully
-                                        White-Labeled for Your Brand .
+                                        Explore Our Range – Peanut Butter, Protein Bars & More. Book Your Free Sample!
                                     </p>
                                 </div>
 
@@ -801,7 +781,7 @@ export default function Home() {
                                             }}
                                             className="btn-default"
                                         >
-                                            Start Your Brand Now
+                                            Book your Free Sample Now
                                         </button>
                                     </div>
                                 </div>
