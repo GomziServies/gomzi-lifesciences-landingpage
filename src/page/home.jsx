@@ -429,7 +429,7 @@ export default function Home() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showBookingModal, setShowBookingModal] = useState(false);
     const [pendingProduct, setPendingProduct] = useState(null);
-    const [_cartUpdate, setCartUpdate] = useState(0); // Used to trigger re-renders on cart updates
+    const [, setCartUpdate] = useState(0); // Used to trigger re-renders on cart updates
 
     // Initialize product selections with the first available flavor for each product
     const [productSelections, setProductSelections] = useState(() => {
