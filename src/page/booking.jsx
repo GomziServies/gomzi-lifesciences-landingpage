@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
 import { axiosInstance, createOrder } from '../assets/js/config/api';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import '../assets/css/style.css';
@@ -216,7 +216,7 @@ const Booking = () => {
     const [sampleQty, setSampleQty] = useState(1);
     const SAMPLE_BOX_PRICE = 777;
 
-    const [productLines, setProductLines] = useState(() => {
+    const [productLines] = useState(() => {
         const savedProducts = localStorage.getItem("ATC_Product");
         if (savedProducts) {
             try {
@@ -388,6 +388,7 @@ const Booking = () => {
 
 
 
+    /*
     const handleProductChange = (index, field, value) => {
         const newProductLines = [...productLines];
 
@@ -573,6 +574,8 @@ const Booking = () => {
             });
         }
     };
+    */
+
     const handleChange = async (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
