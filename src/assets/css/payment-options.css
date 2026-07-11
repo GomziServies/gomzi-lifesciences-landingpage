@@ -29,12 +29,12 @@
 }
 
 .payment-option:hover {
-    border-color: #007bff;
+    border-color: #88c349;
 }
 
 .payment-option.selected {
-    border-color: #007bff;
-    background-color: rgba(0, 123, 255, 0.1);
+    border-color: #88c349;
+    background-color: rgba(136, 195, 73, 0.1);
 }
 
 .payment-option input[type="radio"] {
@@ -64,12 +64,7 @@
     margin-top: 5px;
 }
 
-/* Default selection for COD */
-.payment-option[data-payment="cod"].selected,
-.payment-option[data-payment="cod"] {
-    border-color: #007bff;
-    background-color: rgba(0, 123, 255, 0.1);
-}
+/* Selection handled dynamically via selected class */
 
 @media (max-width: 768px) {
     .payment-options {

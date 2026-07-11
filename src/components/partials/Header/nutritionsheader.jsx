@@ -98,9 +98,9 @@ function NutritionHeader() {
               {/* Logo Start */}
               <a className="navbar-brand" href="./">
                 <img
-                  src={getAssetPath("/assets/images/logo192.png")}
-                  alt="Logo"
-                  className="logo-h"
+                  src={getAssetPath("/assets/images/logo/gomzi-nutrition-new.png")}
+                  alt="Gomzi Nutrition"
+                  style={{ height: "55px", width: "auto" }}
                 />
               </a>
 
@@ -109,7 +109,7 @@ function NutritionHeader() {
                 {userInfo ? (
                   <div className="d-flex align-items-center">
                     <div className="position-relative">
-                      <button
+                      <button 
                         onClick={toggleUserMenu}
                         className="btn d-flex align-items-center"
                         style={{
@@ -120,7 +120,7 @@ function NutritionHeader() {
                         }}
                       >
                         <span className="me-2 text-white">
-                          Hi, {userInfo.user.first_name}
+                          Hi, {userInfo.user.first_name} {userInfo.user.last_name}
                         </span>
                         <i className="far fa-user text-white"></i>
                       </button>

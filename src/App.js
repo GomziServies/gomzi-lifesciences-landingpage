@@ -13,6 +13,7 @@ import "./assets/css/swiper-bundle.min.css";
 import Home from "./page/home";
 import ThankYou from "./components/thank-you";
 import UserProfile from "./page/account/profile";
+import WhatsappBtn from "./components/whatsapp-btn";
 
 import { Toaster } from "react-hot-toast";
 
@@ -46,6 +47,7 @@ function App() {
                 }}
                 icon={false}
             />
+            <WhatsappBtn />
         </Router>
 
     );

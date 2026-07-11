@@ -12,37 +12,54 @@ import { isUserLoggedIn } from '../utils/auth';
 const Booking = () => {
     const [isLoading, setIsLoading] = useState(false);
     const Creatine = {
-        "lemon": [
-            { name: "Creatine", price: 120, quotation_price: 300, product_id: "68cd02ede71a48752796bec2", moq: "50 kg (250gm)" }
-        ],
-        "unflavoured": [
-            { name: "Creatine", price: 120, quotation_price: 270, product_id: "68cd02fae71a48752796bec4", moq: "50 kg (250gm)" }
-        ]
-    }
+        "Fruit Punch": [{ name: "Creatine", price: 120, quotation_price: 300, product_id: "68cd02ede71a48752796bec2", moq: "50 kg (250gm)" }],
+        "Green Apple": [{ name: "Creatine", price: 120, quotation_price: 300, product_id: "68cd02ede71a48752796bec2", moq: "50 kg (250gm)" }],
+        "Tangy Orange": [{ name: "Creatine", price: 120, quotation_price: 300, product_id: "68cd02ede71a48752796bec2", moq: "50 kg (250gm)" }],
+        "Pineapple": [{ name: "Creatine", price: 120, quotation_price: 300, product_id: "68cd02ede71a48752796bec2", moq: "50 kg (250gm)" }],
+        "Kiwi": [{ name: "Creatine", price: 120, quotation_price: 300, product_id: "68cd02ede71a48752796bec2", moq: "50 kg (250gm)" }],
+        "Watermelon": [{ name: "Creatine", price: 120, quotation_price: 300, product_id: "68cd02ede71a48752796bec2", moq: "50 kg (250gm)" }],
+        "Lemon": [{ name: "Creatine", price: 120, quotation_price: 300, product_id: "68cd02ede71a48752796bec2", moq: "50 kg (250gm)" }],
+        "unflavoured": [{ name: "Creatine", price: 120, quotation_price: 270, product_id: "68cd02fae71a48752796bec4", moq: "50 kg (250gm)" }]
+    };
 
-    const  pre_Workout = {
-        "Fruit Punch": [
-            { name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02d5e71a48752796bebe", moq: "50 kg (250gm)" }
-        ],
-        "Cola": [
-            { name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02e4e71a48752796bec0", moq: "50 kg (250gm)" }
-        ]
-    }
+    const pre_Workout = {
+        "Fruit Punch": [{ name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02d5e71a48752796bebe", moq: "50 kg (250gm)" }],
+        "Green Apple": [{ name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02d5e71a48752796bebe", moq: "50 kg (250gm)" }],
+        "Tangy Orange": [{ name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02d5e71a48752796bebe", moq: "50 kg (250gm)" }],
+        "Pineapple": [{ name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02e4e71a48752796bec0", moq: "50 kg (250gm)" }],
+        "Kiwi": [{ name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02e4e71a48752796bec0", moq: "50 kg (250gm)" }],
+        "Watermelon": [{ name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02e4e71a48752796bec0", moq: "50 kg (250gm)" }],
+        "Lemon": [{ name: "Pre-Workout", price: 120, quotation_price: 440, product_id: "68cd02e4e71a48752796bec0", moq: "50 kg (250gm)" }]
+    };
 
     const Mass_Gainer = {
-        "Chocolate": [
-            { name: "Mass Gainer", price: 100, quotation_price: 420, product_id: "68cd0321e71a48752796bee9", moq: "25 kg" }
-        ]
-    }
+        "Chocolate": [{ name: "Mass Gainer", price: 100, quotation_price: 420, product_id: "68cd0321e71a48752796bee9", moq: "25 kg" }]
+    };
+    Mass_Gainer["Belgium Chocolate"] = Mass_Gainer["Chocolate"];
+    Mass_Gainer["Coffee"] = Mass_Gainer["Chocolate"];
+    Mass_Gainer["Mava Kulfi"] = Mass_Gainer["Chocolate"];
+    Mass_Gainer["Vanilla Caramel"] = Mass_Gainer["Chocolate"];
+    Mass_Gainer["Coconut Caramel"] = Mass_Gainer["Chocolate"];
+    Mass_Gainer["Mango"] = Mass_Gainer["Chocolate"];
+    Mass_Gainer["Cookies and Cream"] = Mass_Gainer["Chocolate"];
 
     const Peanut_Butter = {
         "Natural": [
             { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cd0304e71a48752796bed3", moq: "100 kg" },
         ],
+        "Classic": [
+            { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cd0304e71a48752796bed3", moq: "100 kg" },
+        ],
         "Chocolate": [
             { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cd030de71a48752796bedd", moq: "100 kg" },
         ],
-        "Mango": [
+        "White Chocolate": [
+            { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cd030de71a48752796bedd", moq: "100 kg" },
+        ],
+        "Mango Chia Seeds": [
+            { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cd0316e71a48752796bee3", moq: "100 kg" },
+        ],
+        "Cookies and Cream": [
             { name: "Peanut Butter", price: 120, quotation_price: 150, product_id: "68cd0316e71a48752796bee3", moq: "100 kg" },
         ]
     };
@@ -51,21 +68,26 @@ const Booking = () => {
         "Cola":[ { name: "Energy Drink - Bottle", price: 100, quotation_price: 30, product_id: "68cd02b0e71a48752796beb6", moq: "1000 nos" }],
         "Guava":[ { name: "Energy Drink - Bottle", price: 100, quotation_price: 30, product_id: "68cd02b9e71a48752796beb8", moq: "1000 nos" }],
         "Green Apple":[ { name: "Energy Drink - Bottle", price: 100, quotation_price: 30, product_id: "68cd02c4e71a48752796beba", moq: "1000 nos" }],
-    }
+    };
 
     const Eaa = {
-        "Watermelon": [
-            { name: "EAA", price: 120, quotation_price: 440, product_id: "68cd0292e71a48752796beb0", moq: "50 kg (250gm)" }
-        ],
+        "Fruit Punch": [{ name: "EAA", price: 120, quotation_price: 440, product_id: "68cd0292e71a48752796beb0", moq: "50 kg (250gm)" }],
+        "Green Apple": [{ name: "EAA", price: 120, quotation_price: 440, product_id: "68cd0292e71a48752796beb0", moq: "50 kg (250gm)" }],
+        "Tangy Orange": [{ name: "EAA", price: 120, quotation_price: 440, product_id: "68cd0292e71a48752796beb0", moq: "50 kg (250gm)" }],
+        "Pineapple": [{ name: "EAA", price: 120, quotation_price: 440, product_id: "68cd0292e71a48752796beb0", moq: "50 kg (250gm)" }],
+        "Kiwi": [{ name: "EAA", price: 120, quotation_price: 440, product_id: "68cd0292e71a48752796beb0", moq: "50 kg (250gm)" }],
+        "Watermelon": [{ name: "EAA", price: 120, quotation_price: 440, product_id: "68cd0292e71a48752796beb0", moq: "50 kg (250gm)" }],
+        "Lemon": [{ name: "EAA", price: 120, quotation_price: 440, product_id: "68cd0292e71a48752796beb0", moq: "50 kg (250gm)" }]
     };
 
     const Bcaa = {
-        "Cranberry": [
-            { name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd02a7e71a48752796beb4", moq: "50 kg (250gm)" }
-        ],
-        "Orange": [
-            { name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd029ce71a48752796beb2", moq: "50 kg (250gm)" }
-        ]
+        "Fruit Punch": [{ name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd029ce71a48752796beb2", moq: "50 kg (250gm)" }],
+        "Green Apple": [{ name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd029ce71a48752796beb2", moq: "50 kg (250gm)" }],
+        "Tangy Orange": [{ name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd029ce71a48752796beb2", moq: "50 kg (250gm)" }],
+        "Pineapple": [{ name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd02a7e71a48752796beb4", moq: "50 kg (250gm)" }],
+        "Kiwi": [{ name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd02a7e71a48752796beb4", moq: "50 kg (250gm)" }],
+        "Watermelon": [{ name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd02a7e71a48752796beb4", moq: "50 kg (250gm)" }],
+        "Lemon": [{ name: "BCAA", price: 120, quotation_price: 440, product_id: "68cd02a7e71a48752796beb4", moq: "50 kg (250gm)" }]
     };
 
     const Whey_Concentrate = {
@@ -98,6 +120,11 @@ const Booking = () => {
             { percent: "80%", name: "Whey Concentrate", price: 195, quotation_price: 2100, product_id: "68ccff93e71a48752796be35", moq: "25 kg" }
         ]
     };
+    Whey_Concentrate["Belgium Chocolate"] = Whey_Concentrate["Chocolate"];
+    Whey_Concentrate["Coffee"] = Whey_Concentrate["Mocha Coffee"];
+    Whey_Concentrate["Vanilla Caramel"] = Whey_Concentrate["Chocolate"];
+    Whey_Concentrate["Coconut Caramel"] = Whey_Concentrate["Chocolate"];
+    Whey_Concentrate["Cookies and Cream"] = Whey_Concentrate["Chocolate"];
 
     const Whey_Blend = {
         "Chocolate": [
@@ -125,6 +152,11 @@ const Booking = () => {
             { percent: "60%", name: "Whey Blend", price: 190, quotation_price: 2115, product_id: "68cd011ee71a48752796be84", moq: "25 kg" }
         ]
     };
+    Whey_Blend["Belgium Chocolate"] = Whey_Blend["Chocolate"];
+    Whey_Blend["Coffee"] = Whey_Blend["Mocha Coffee"];
+    Whey_Blend["Vanilla Caramel"] = Whey_Blend["Chocolate"];
+    Whey_Blend["Coconut Caramel"] = Whey_Blend["Chocolate"];
+    Whey_Blend["Cookies and Cream"] = Whey_Blend["Chocolate"];
 
     const Whey_Isolate = {
         "Chocolate": [
@@ -160,6 +192,11 @@ const Booking = () => {
             { percent: "80%", name: "Whey Isolate", price: 200, quotation_price: 3487, product_id: "68cd001fe71a48752796be6a", moq: "25 kg" }
         ]
     };
+    Whey_Isolate["Belgium Chocolate"] = Whey_Isolate["Chocolate"];
+    Whey_Isolate["Coffee"] = Whey_Isolate["Mocha Coffee"];
+    Whey_Isolate["Vanilla Caramel"] = Whey_Isolate["Chocolate"];
+    Whey_Isolate["Coconut Caramel"] = Whey_Isolate["Chocolate"];
+    Whey_Isolate["Cookies and Cream"] = Whey_Isolate["Chocolate"];
 
     const today = new Date().toISOString().split("T")[0];
     const [formData, setFormData] = useState({
@@ -173,8 +210,11 @@ const Booking = () => {
         pin_code: "",
         state: "",
         country: "",
-        payment_method: "COD" // Changed default to COD
+        payment_method: "ONLINE" // Changed default to ONLINE
     });
+
+    const [sampleQty, setSampleQty] = useState(1);
+    const SAMPLE_BOX_PRICE = 777;
 
     const [productLines, setProductLines] = useState(() => {
         const savedProducts = localStorage.getItem("ATC_Product");
@@ -603,21 +643,6 @@ const Booking = () => {
             }
         }
 
-        const productValidation = productLines.every((line, index) => {
-            if (!line.product) {
-                toast.error(`Select a product for line ${index + 1}`);
-                return false;
-            }
-            if (!line.quantity) {
-                toast.error(`Enter quantity for ${line.product || "this product"}`);
-                return false;
-            }
-
-            return true;
-        });
-
-        if (!productValidation) return false;
-
 
         return true;
     };
@@ -652,14 +677,16 @@ const Booking = () => {
             }
 
             const orderData = {
-                products: productLines.map(line => ({
-                    id: line.product_id,
-                    name: line.product,
-                    price: line.price,
-                    quantity: parseInt(line.quantity),
-                    total: line.total
-                })),
-                orderTotal: productLines.reduce((sum, line) => sum + (line.total || 0), 0),
+                products: [
+                    {
+                        id: "68cd035ee71a48752796be00",
+                        name: "Gomzi Life Sciences Sample Box",
+                        price: SAMPLE_BOX_PRICE,
+                        quantity: sampleQty,
+                        total: SAMPLE_BOX_PRICE * sampleQty
+                    }
+                ],
+                orderTotal: SAMPLE_BOX_PRICE * sampleQty,
                 customerInfo: {
                     name: formData.name,
                     email: formData.email,
@@ -679,11 +706,12 @@ const Booking = () => {
                 pin_code: formData.pin_code,
                 state: formData.state,
                 country: formData.country,
-                payment_mode: formData.payment_method, // Use selected payment method
+                payment_mode: formData.payment_method,
                 name: formData.name,
                 email: formData.email,
                 mobile: formData.mobile,
-                downloadQuotationPDF: downloadQuotationPDF // Pass the download function
+                sampleQty: sampleQty,
+                downloadQuotationPDF: downloadQuotationPDF
             };
 
             await createOrder(orderData);
@@ -764,284 +792,105 @@ const Booking = () => {
                 <form onSubmit={(e) => e.preventDefault()}>
                     <div className="row overflow-hidden p-1">
 
-                        <h5 className='mb-1  mt-3'>Supplements :</h5>
-
-                        {productLines.map((line, index) => (
-                            <div key={line.product_id || index} className="row mx-0 g-3 mb-3">
-                                {/* Product select */}
-                                <div className="form-group col-12 col-sm-6 col-md-4 px-2">
-                                    <select
-                                        className="form-control bg-dark text-light"
-                                        value={line.product}
-                                        onChange={(e) => handleProductChange(index, 'product', e.target.value)}
-                                        required
-                                    >
-                                        <option value="">Select Product</option>
-                                        
-                                        {/* Whey Blend variants */}
-                                        <optgroup label="Whey Blend">
-                                            {Object.entries(Whey_Blend).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Whey Concentrate variants */}
-                                        <optgroup label="Whey Concentrate">
-                                            {Object.entries(Whey_Concentrate).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Whey Isolate variants */}
-                                        <optgroup label="Whey Isolate">
-                                            {Object.entries(Whey_Isolate).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Mass Gainer */}
-                                        <optgroup label="Mass Gainer">
-                                            {Object.entries(Mass_Gainer).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Peanut Butter */}
-                                        <optgroup label="Peanut Butter">
-                                            {Object.entries(Peanut_Butter).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Creatine */}
-                                        <optgroup label="Creatine">
-                                            {Object.entries(Creatine).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Pre-Workout */}
-                                        <optgroup label="Pre-Workout">
-                                            {Object.entries(pre_Workout).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* EAA */}
-                                        <optgroup label="EAA">
-                                            {Object.entries(Eaa).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* BCAA */}
-                                        <optgroup label="BCAA">
-                                            {Object.entries(Bcaa).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Energy Drink */}
-                                        <optgroup label="Energy Drink">
-                                            {Object.entries(Energy_Drink).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-
-                                        {/* Whey Blend variants */}
-                                        <optgroup label="Whey Blend">
-                                            {Object.entries(Whey_Blend).map(([flavor, variants]) =>
-                                                variants.map(variant => {
-                                                    const variantName = `${variant.name} ${variant.percent} (${flavor})`;
-                                                    const isSelected = productLines.some(
-                                                        (productLine, i) => i !== index && productLine.product === variantName
-                                                    );
-                                                    return !isSelected && (
-                                                        <option key={variant.product_id} value={variantName}>
-                                                            {variantName}
-                                                        </option>
-                                                    );
-                                                })
-                                            )}
-                                        </optgroup>
-                                    </select>
-                                </div>
-
-                                {/* Quantity */}
-                                <div className="form-group col-5 col-sm-4 col-md-4 px-2">
-                                    <input
-                                        type="number"
-                                        className="form-control bg-dark text-light"
-                                        placeholder="Enter Quantity"
-                                        value={line.quantity}
-                                        onChange={(e) => handleProductChange(index, 'quantity', e.target.value)}
-                                        min="1"
-                                        required
-                                    />
-                                </div>
-
-                                {/* MOQ */}
-                                {/* <div className="form-group col-6 col-sm-6 col-md-2">
-                                    <input
-                                        type="text"
-                                        placeholder='Moq'
-                                        className="form-control bg-dark text-light"
-                                        value={
-                                            line.moq || ""
-                                        }
-                                        readOnly
-                                    />
-                                </div> */}
-
-                                {/* Price */}
-                                {/* <div className="form-group col-6 col-sm-6 col-md-2">
-                                    <input
-                                        type="text"
-                                        className="form-control bg-dark text-light"
-                                        value={line.price ? `₹${line.price}` : ""}
-                                        placeholder="Rate"
-                                        readOnly
-                                    />
-                                </div> */}
-
-                                {/* Total Price */}
-                                <div className='form-group col-5 col-sm-6  col-md-3 px-2'>
-                                    <input
-                                        type="text"
-                                        className="form-control bg-dark text-light"
-                                        value={line.total ? `₹${line.total}` : ""}
-                                        placeholder="Total Price"
-                                        readOnly
-                                    />
-                                </div>
-
-                                {/* Delete button */}
-                                {productLines.length >= 1 && (
-                                    <div className="form-group col-2 col-sm-1 col-md-1 px-1">
-                                        <button
-                                            type="button"
-                                            className="form-control bg-dark text-light border border-1 border-danger d-flex justify-content-center align-items-center"
-                                            onClick={() => removeProductLine(index)}
-                                        >
-                                            <i className="fas fa-trash-alt fs-5 text-danger"></i>
-                                        </button>
+                        {/* ── Sample Box Info Card ── */}
+                        <div className="row mx-0 mb-4 mt-2">
+                            <div className="col-12 px-2">
+                                <div
+                                    className="px-4 py-3"
+                                    style={{
+                                        background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+                                        border: '1px solid rgba(144, 238, 144, 0.3)',
+                                        borderRadius: '12px',
+                                        boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+                                    }}
+                                >
+                                    {/* Top row: icon + name + price */}
+                                    <div className="d-flex align-items-center justify-content-between mb-3">
+                                        <div className="d-flex align-items-center gap-3">
+                                            <div style={{
+                                                background: 'rgba(144, 238, 144, 0.1)',
+                                                borderRadius: '10px',
+                                                padding: '10px 12px',
+                                                border: '1px solid rgba(144, 238, 144, 0.2)'
+                                            }}>
+                                                <i className="fas fa-box-open fs-4" style={{ color: '#90ee90' }}></i>
+                                            </div>
+                                            <div>
+                                                <div className="fw-bold" style={{ color: '#fff', fontSize: '16px' }}>
+                                                    Gomzi Life Sciences Sample Box
+                                                </div>
+                                                <div className="mt-1" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px' }}>
+                                                    Full assorted supplement sample kit
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="text-end">
+                                            <div className="fw-bold" style={{ color: '#90ee90', fontSize: '22px' }}>₹{SAMPLE_BOX_PRICE * sampleQty}</div>
+                                            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '11px' }}>₹{SAMPLE_BOX_PRICE} × {sampleQty}</div>
+                                        </div>
                                     </div>
-                                )}
 
-                                {/* Add button => only last line */}
-                                {index === productLines.length - 1 && (
-                                    <div className="form-group col-6 col-sm-3 col-md-3 mt-3 ms-auto pe-0 d-flex justify-content-end align-items-center">
-                                        <button
-                                            type="button"
-                                            className=" bg-primary btn btn-primary p-2 px-3 d-flex justify-content-center align-items-center gap-2"
-                                            onClick={addProductLine}
-                                        >
-                                            <i className="fas fa-plus"></i>  Add
-                                        </button>
+                                    {/* Bottom row: qty controls */}
+                                    <div className="d-flex align-items-center gap-3">
+                                        <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>Quantity:</span>
+                                        <div className="d-flex align-items-center" style={{
+                                            background: 'rgba(255,255,255,0.05)',
+                                            border: '1px solid rgba(144,238,144,0.25)',
+                                            borderRadius: '8px',
+                                            overflow: 'hidden'
+                                        }}>
+                                            <button
+                                                type="button"
+                                                onClick={() => setSampleQty(q => Math.max(1, q - 1))}
+                                                style={{
+                                                    background: 'transparent',
+                                                    border: 'none',
+                                                    color: '#90ee90',
+                                                    width: '36px',
+                                                    height: '36px',
+                                                    fontSize: '18px',
+                                                    cursor: 'pointer',
+                                                    lineHeight: 1
+                                                }}
+                                            >−</button>
+                                            <input
+                                                type="number"
+                                                min="1"
+                                                value={sampleQty}
+                                                onChange={(e) => setSampleQty(Math.max(1, parseInt(e.target.value) || 1))}
+                                                style={{
+                                                    width: '48px',
+                                                    textAlign: 'center',
+                                                    background: 'transparent',
+                                                    border: 'none',
+                                                    color: '#fff',
+                                                    fontSize: '15px',
+                                                    fontWeight: '600',
+                                                    outline: 'none'
+                                                }}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setSampleQty(q => q + 1)}
+                                                style={{
+                                                    background: 'transparent',
+                                                    border: 'none',
+                                                    color: '#90ee90',
+                                                    width: '36px',
+                                                    height: '36px',
+                                                    fontSize: '18px',
+                                                    cursor: 'pointer',
+                                                    lineHeight: 1
+                                                }}
+                                            >+</button>
+                                        </div>
+                                        <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px' }}>
+                                            Total: <span style={{ color: '#90ee90', fontWeight: '600' }}>₹{SAMPLE_BOX_PRICE * sampleQty}</span>
+                                        </span>
                                     </div>
-                                )}
+                                </div>
                             </div>
-                        ))}
+                        </div>
 
                         <h5 className='mb-4 ms-2'>Personal Details :</h5>
 
@@ -1148,63 +997,6 @@ const Booking = () => {
                             />
                         </div>
 
-                        {/* Payment Method Selection */}
-                        <div className="payment-method-container d-none">
-                            <h3 className="payment-method-title">Payment Method</h3>
-                            <div className="payment-options">
-                                <div 
-                                    className={`payment-option ${formData.payment_method === "ONLINE" ? "selected" : ""}`}
-                                    onClick={() => setFormData({...formData, payment_method: "ONLINE"})}
-                                    data-payment="online"
-                                >
-                                    <input
-                                        type="radio"
-                                        id="onlinePayment"
-                                        name="payment_method"
-                                        value="ONLINE"
-                                        checked={formData.payment_method === "ONLINE"}
-                                        onChange={handleChange}
-                                    />
-                                    <label htmlFor="onlinePayment" className="payment-option-label">
-                                        <div className="payment-option-icon">
-                                            <i className="fas fa-credit-card"></i>
-                                        </div>
-                                        <div className="payment-option-text">
-                                            Online Payment
-                                            <div className="payment-option-description">
-                                                Pay securely using Razorpay
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                                
-                                <div 
-                                    className={`payment-option ${formData.payment_method === "COD" ? "selected" : ""}`}
-                                    onClick={() => setFormData({...formData, payment_method: "COD"})}
-                                    data-payment="cod"
-                                >
-                                    <input
-                                        type="radio"
-                                        id="codPayment"
-                                        name="payment_method"
-                                        value="COD"
-                                        checked={formData.payment_method === "COD"}
-                                        onChange={handleChange}
-                                    />
-                                    <label htmlFor="codPayment" className="payment-option-label">
-                                        <div className="payment-option-icon">
-                                            <i className="fas fa-money-bill-wave"></i>
-                                        </div>
-                                        <div className="payment-option-text">
-                                            Cash on Delivery
-                                            <div className="payment-option-description">
-                                                Pay when you receive your order
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div className="col-12 text-center mt-4">
                             <div className="contact-form-btn">

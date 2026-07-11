@@ -49,12 +49,14 @@ export const createOrder = async (orderData) => {
         const { address_line_1, address_line_2, city, pin_code, state, country,
             payment_mode, name, email, mobile } = orderData;
 
-        const ATC_Product = JSON.parse(localStorage.getItem("ATC_Product")) || [];
-
-        const updatedProducts = ATC_Product.map(product => ({
-            ...product,
-            landing_page: true
-        }));
+        // Fixed Sample Box product — quantity from user selection
+        const updatedProducts = [
+            {
+                product_id: "68cd035ee71a48752796be00",
+                quantity: orderData.sampleQty || 1,
+                landing_page: true
+            }
+        ];
 
         // Map frontend payment mode to backend expected value
         const backendPaymentMode = payment_mode === 'COD' ? 'Cash On Delivery' : payment_mode;

@@ -511,7 +511,9 @@ var smoothBehaviorForElement = {};
 function scheduleClearCache() {
     clearTimeout(clearCacheTimer);
     clearCacheTimer = setInterval(function () { 
-        cacheX = cacheY = smoothBehaviorForElement = {}; 
+        cacheX = {}; 
+        cacheY = {}; 
+        smoothBehaviorForElement = {}; 
     }, 1*1000);
 }
 

@@ -26,7 +26,7 @@ const VideoReview = () => {
                     <div className="col-lg-12">
                         <div className="section-title">
                             {/* <h3 className="wow fadeInUp">Video Review</h3> */}
-                            <h2 className="text-anime-style-2" data-cursor="-opaque">Our most recent<span> production</span></h2>
+                            <h2 className="text-anime-style-2" data-cursor="-opaque">Our Most Recent<span> Production</span></h2>
                         </div>
                     </div>
                 </div>

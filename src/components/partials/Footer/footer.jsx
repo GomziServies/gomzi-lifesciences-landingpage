@@ -59,7 +59,7 @@ function Footer() {
                           <img src="assets/images/icon-mail-accent.svg" alt="" />
                         </div>
                         <div className="footer-contact-item-content">
-                          <p>gomzinutrition@gmail.com</p>
+                          <p>info@gomzilifescience.in</p>
                         </div>
                       </div>
                       <div className="footer-contact-item">
@@ -77,7 +77,15 @@ function Footer() {
                       <img src="assets/images/icon-phone-accent.svg" alt="" />
                     </div>
                     <div className="footer-contact-content">
-                      <p>Gautam Jani</p>
+                      <p>Gomzi Life Science LLP</p>
+                      <h3>+91 83200 77993</h3>
+                    </div>
+                  </div>
+                  <div className="footer-contact-box contact-box-second">
+                    <div className="icon-box">
+                      <img src="assets/images/icon-phone-accent.svg" alt="" />
+                    </div>
+                    <div className="footer-contact-content">
                       <h3>+91 88668 42520</h3>
                     </div>
                   </div>
@@ -90,7 +98,7 @@ function Footer() {
                     <div className="footer-links">
                       <h3>Quick link</h3>
                       <ul>
-                        <li><a href="index.html">home</a></li>
+                        <li><a href="/">home</a></li>
                         <li><a href="/profile">Profile</a></li>
                       </ul>
                     </div>

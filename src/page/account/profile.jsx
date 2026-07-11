@@ -146,6 +146,29 @@ function UserProfile() {
             const response = await axiosInstance.get("/account/profile");
             const userData = response.data.data;
             if (userData) {
+                // Update localStorage so header and other components sync instantly
+                const userInfoStr = localStorage.getItem("user_info");
+                if (userInfoStr) {
+                    try {
+                        const userInfo = JSON.parse(userInfoStr);
+                        userInfo.user = {
+                            ...userInfo.user,
+                            first_name: userData.user.first_name || "",
+                            last_name: userData.user.last_name || "",
+                            email: userData.user.email || "",
+                            profile_image: userData.user.profile_image || null,
+                        };
+                        localStorage.setItem("user_info", JSON.stringify(userInfo));
+                        
+                        // Dispatch custom event to notify header
+                        window.dispatchEvent(new CustomEvent('userInfoUpdated', {
+                            detail: { userInfo }
+                        }));
+                    } catch (e) {
+                        console.error("Error parsing user_info from localStorage:", e);
+                    }
+                }
+
                 setFormData((prevData) => ({
                     ...prevData,
                     user_id: userData.user.uid || "",
