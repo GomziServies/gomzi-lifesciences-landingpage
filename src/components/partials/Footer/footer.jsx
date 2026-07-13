@@ -59,7 +59,7 @@ function Footer() {
                           <img src="assets/images/icon-mail-accent.svg" alt="" />
                         </div>
                         <div className="footer-contact-item-content">
-                          <p>info@gomzilifescience.in</p>
+                          <p>infogomzilifesciences@gmail.com</p>
                         </div>
                       </div>
                       <div className="footer-contact-item">

@@ -809,7 +809,7 @@ export default function Home() {
                   <h2
                     className="text-anime-style-2"
                     data-cursor="-opaque"
-                    style={{ fontSize: "56px", lineHeight: "1.15" }}
+                    style={{ fontSize: "clamp(30px, 4vw + 16px, 56px)", lineHeight: "1.15" }}
                   >
                     Launch Your Premium
                     <span> Supplement Brand</span>
@@ -818,7 +818,7 @@ export default function Home() {
                     className="wow fadeInUp"
                     data-wow-delay="0.2s"
                     style={{
-                      fontSize: "24px",
+                      fontSize: "clamp(16px, 1.5vw + 12px, 24px)",
                       marginTop: "15px",
                       color: "#88c349",
                       fontWeight: "bold",
@@ -946,7 +946,7 @@ export default function Home() {
                     </span>
                     <h3 style={{
                       color: '#fff',
-                      fontSize: '26px',
+                      fontSize: 'clamp(18px, 2vw + 12px, 26px)',
                       fontWeight: '850',
                       margin: 0,
                       lineHeight: '1.3',
@@ -1274,7 +1274,7 @@ export default function Home() {
           <h2
             className="text-anime-style-2"
             data-cursor="-opaque"
-            style={{ fontSize: "36px" }}
+            style={{ fontSize: "clamp(24px, 2.5vw + 14px, 36px)" }}
           >
             All Combo <span>Book Your Sample</span>
           </h2>
