@@ -14,7 +14,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import VideoReview from "../components/video-review";
 import WhyChooseUs from "../components/whyChooseUs";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const productsData = [
   {
@@ -385,9 +385,10 @@ export default function Home() {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [pendingProduct, setPendingProduct] = useState(null);
-  const [, setCartUpdate] = useState(0); // Used to trigger re-renders on cart updates
+  // const [, setCartUpdate] = useState(0); // Used to trigger re-renders on cart updates
 
   // Initialize product selections with the first available flavor for each product
+  /*
   const [productSelections, setProductSelections] = useState(() => {
     const initialSelections = {};
     productsData.forEach((product) => {
@@ -402,7 +403,9 @@ export default function Home() {
     });
     return initialSelections;
   });
+  */
 
+  /*
   const updateProductSelection = (productId, type, value) => {
     setProductSelections((prev) => ({
       ...prev,
@@ -628,6 +631,7 @@ export default function Home() {
 
     return existingProducts.some((p) => p.product_id === variantId);
   };
+  */
 
   useEffect(() => {
     new Swiper(".testimonial-slider .swiper", {
@@ -654,6 +658,7 @@ export default function Home() {
   // Set default values for protein and flavor on component mount
   useEffect(() => {
     // 1. Default values set karo
+    /*
     productsData.forEach((product) => {
       if (product.protein && product.flavoured) {
         setProductSelections((prev) => ({
@@ -665,6 +670,7 @@ export default function Home() {
         }));
       }
     });
+    */
 
     // 2. Booking modal ek j vaar open thay
     const atcProducts = JSON.parse(localStorage.getItem("ATC_Product"));
