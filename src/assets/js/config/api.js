@@ -97,19 +97,9 @@ export const createOrder = async (orderData) => {
                 (result?.data?.status === 200 && result.data.message === "COD Order Created Successfully") ||
                 (result?.status === 200 && result.response === "OK" && result.message === "COD Order Created Successfully")
             ) {
-                // Download quotation PDF before showing success message
-                if (typeof orderData.downloadQuotationPDF === "function") {
-                    try {
-                        await orderData.downloadQuotationPDF();
-                    } catch (pdfError) {
-                        console.error("Error downloading PDF:", pdfError);
-                    }
-                }
-
                 Swal.fire({
                     title: "Success",
                     text: "Your order has been placed successfully. Please check your email for the invoice.",
-                    // text: "Your COD order has been placed successfully. Please check your email for the invoice.",
                     icon: "success",
                 }).then(() => {
                     localStorage.removeItem("tmp_ProductPurchasePayload");
@@ -134,16 +124,6 @@ export const createOrder = async (orderData) => {
                 (result?.data?.status === 200 && result.data.message === "COD Order Created Successfully") ||
                 (result?.status === 200 && result.response === "OK" && result.message === "COD Order Created Successfully")
             ) {
-
-                // Download quotation PDF before showing success message
-                if (typeof orderData.downloadQuotationPDF === "function") {
-                    try {
-                        await orderData.downloadQuotationPDF();
-                    } catch (pdfError) {
-                        console.error("Error downloading PDF:", pdfError);
-                    }
-                }
-
                 Swal.fire({
                     title: "Success",
                     text: "Please check your email for the invoice.",
@@ -161,18 +141,9 @@ export const createOrder = async (orderData) => {
                 paymentData.handler = async () => {
                     localStorage.removeItem("tmp_ProductPurchasePayload");
 
-                    // Download quotation PDF before showing success message
-                    if (typeof orderData.downloadQuotationPDF === "function") {
-                        try {
-                            await orderData.downloadQuotationPDF();
-                        } catch (pdfError) {
-                            console.error("Error downloading PDF:", pdfError);
-                        }
-                    }
-                    
                     Swal.fire({
                         title: "Success",
-                        text: "Your payment is successful. The quotation will be downloaded automatically.",
+                        text: "Your payment is successful.",
                         icon: "success",
                     }).then(() => {
                         localStorage.removeItem("ATC_Product");

@@ -713,8 +713,7 @@ const Booking = () => {
                 name: formData.name,
                 email: formData.email,
                 mobile: formData.mobile,
-                sampleQty: sampleQty,
-                downloadQuotationPDF: downloadQuotationPDF
+                sampleQty: sampleQty
             };
 
             await createOrder(orderData);
