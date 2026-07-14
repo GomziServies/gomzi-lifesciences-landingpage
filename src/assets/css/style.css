@@ -455,3 +455,13 @@
 .rotate {
   animation: rotate360 1s linear;
 }
+
+/* Hide number input spin-buttons (arrows) */
+.hide-spin-buttons::-webkit-outer-spin-button,
+.hide-spin-buttons::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.hide-spin-buttons {
+  -moz-appearance: textfield;
+}

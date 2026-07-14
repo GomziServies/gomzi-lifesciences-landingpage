@@ -67,7 +67,7 @@ function Footer() {
                           <img src="assets/images/icon-location-accent.svg" alt="" />
                         </div>
                         <div className="footer-contact-item-content">
-                          <p>547,548, First Floor, RJD Textiles Park, Hazira Rd, Ichchhapor, Pal, Surat, Gujarat 394510</p>
+                          <p>443, 444, 445 RJD Textiles Park, Hazira Rd, Ichchhapor, Surat, Gujarat 394510</p>
                         </div>
                       </div>
                     </div>

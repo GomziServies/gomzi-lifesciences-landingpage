@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
-import { axiosInstance, createOrder } from '../assets/js/config/api';
+import { createOrder } from '../assets/js/config/api';
 // import Swal from 'sweetalert2';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -576,51 +576,9 @@ const Booking = () => {
     };
     */
 
-    const handleChange = async (e) => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-
-        // Only call API if changed field is name, email, or mobile
-        if (["name", "email", "mobile"].includes(name)) {
-            try {
-                let payload = {};
-
-                if (name === "name") {
-                    // Split first & last name
-                    const [first_name, ...rest] = value.trim().split(" ");
-                    const last_name = rest.join(" ");
-                    payload = { first_name, last_name };
-
-                    // Update user_info in localStorage
-                    const userInfo = JSON.parse(localStorage.getItem('user_info'));
-                    if (userInfo) {
-                        userInfo.user.first_name = first_name;
-                        userInfo.user.last_name = last_name;
-                        localStorage.setItem('user_info', JSON.stringify(userInfo));
-
-                        // Dispatch event to notify header component
-                        window.dispatchEvent(new CustomEvent('userInfoUpdated', {
-                            detail: { userInfo }
-                        }));
-                    }
-                } else {
-                    payload = { [name]: value };
-                }
-
-                await axiosInstance.post(
-                    "/account/update-profile",
-                    payload
-                );
-
-            } catch (error) {
-                console.error(`Error updating ${name}:`, error);
-                toast.error(
-                    name === "name"
-                        ? "Error updating name"
-                        : `Error updating ${name}`
-                );
-            }
-        }
     };
 
 
@@ -860,6 +818,7 @@ const Booking = () => {
                                                 min="1"
                                                 value={sampleQty}
                                                 onChange={(e) => setSampleQty(Math.max(1, parseInt(e.target.value) || 1))}
+                                                className="hide-spin-buttons"
                                                 style={{
                                                     width: '48px',
                                                     textAlign: 'center',
@@ -1016,7 +975,7 @@ const Booking = () => {
                                         </span>
                                     ) : (
                                         <>
-                                            <span className="btn-text-desktop">Get a Quotation &amp; Book My Sample Now</span>
+                                            <span className="btn-text-desktop">Book My Sample Now</span>
                                             <span className="btn-text-mobile">Book My Sample Now</span>
                                         </>
                                     )}

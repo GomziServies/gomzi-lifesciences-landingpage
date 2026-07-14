@@ -63,11 +63,13 @@ body {
   font-weight: 400;
   line-height: 1.1em;
   color: var(--text-color);
-  background: url("/public/assets/images/section-bg-circle-shape.png")
-    var(--dark-color);
-  background-repeat: repeat-y;
-  background-position: top 900px center;
-  background-size: 100% auto;
+  background-color: var(--dark-color);
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px),
+    url("/public/assets/images/section-bg-circle-shape.png");
+  background-repeat: repeat, repeat-y;
+  background-position: center, top 900px center;
+  background-size: 24px 24px, 100% auto;
 }
 p {
   line-height: 1.7em;
@@ -6748,7 +6750,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media only screen and (max-width: 767px) {
   body {
-    background-size: 200% auto;
+    background-size: 24px 24px, 200% auto;
   }
 
   .section-title h1 {
