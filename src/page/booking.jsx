@@ -9,6 +9,8 @@ import '../assets/css/style.css';
 import '../assets/css/payment-options.css'; // Add the new CSS file
 import { isUserLoggedIn } from '../utils/auth';
 
+let lastSyncedQty = null;
+
 const Booking = () => {
     const [isLoading, setIsLoading] = useState(false);
     const Creatine = {
@@ -217,7 +219,10 @@ const Booking = () => {
     const SAMPLE_BOX_PRICE = 999;
 
     useEffect(() => {
-        addSampleToCart(sampleQty);
+        if (lastSyncedQty !== sampleQty) {
+            lastSyncedQty = sampleQty;
+            addSampleToCart(sampleQty);
+        }
     }, [sampleQty]);
 
     const [productLines] = useState(() => {

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import '../../assets/css/login.css';
 
-const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
+const LoginModal = ({ onClose, pendingProduct, onLoginSuccess }) => {
   const [showModal, setShowModal] = useState(true);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [otpDialogOpen, setOtpDialogOpen] = useState(false);
@@ -26,9 +26,14 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
   const getUserData = async () => {
     try {
       const response = await axiosInstance.get("/account/profile");
-      localStorage.setItem("user_info", JSON.stringify(response.data.data));
+      const userInfo = response.data.data;
+      localStorage.setItem("user_info", JSON.stringify(userInfo));
+      // Dispatch custom event to notify Header component instantly
+      window.dispatchEvent(new CustomEvent('userInfoUpdated', {
+        detail: { userInfo }
+      }));
     } catch (error) {
-      console.error("Error in handleAgreeAndConfirm:", error);
+      console.error("Error in getUserData:", error);
     }
   };
 
@@ -115,9 +120,11 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
           );
 
           window.dispatchEvent(new Event("cartUpdated"));
+        }
+
+        if (onLoginSuccess) {
           handleClose();
-          BookingModalOpen(true);
-          window.location.href = "/";
+          onLoginSuccess();
         } else {
           handleClose();
           window.location.reload();
@@ -195,8 +202,13 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
           );
 
           window.dispatchEvent(new Event("cartUpdated"));
-          window.location.href = "/booking-page";
+        }
+
+        if (onLoginSuccess) {
+          handleClose();
+          onLoginSuccess();
         } else {
+          handleClose();
           window.location.reload();
         }
       } else {
@@ -272,8 +284,13 @@ const LoginModal = ({ onClose, pendingProduct, BookingModalOpen }) => {
           );
 
           window.dispatchEvent(new Event("cartUpdated"));
-          window.location.href = "/";
+        }
+
+        if (onLoginSuccess) {
+          handleClose();
+          onLoginSuccess();
         } else {
+          handleClose();
           window.location.reload();
         }
       } else {
