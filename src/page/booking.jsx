@@ -3,8 +3,8 @@ import { Toaster, toast } from 'react-hot-toast';
 
 import { createOrder, addSampleToCart } from '../assets/js/config/api';
 // import Swal from 'sweetalert2';
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
+// import html2canvas from "html2canvas";
 import '../assets/css/style.css';
 import '../assets/css/payment-options.css'; // Add the new CSS file
 import { isUserLoggedIn } from '../utils/auth';
@@ -693,6 +693,7 @@ const Booking = () => {
     };
 
 
+    /*
     const downloadQuotationPDF = async () => {
         const quotationContent = document.getElementById("quotationContent");
         if (!quotationContent) {
@@ -731,6 +732,7 @@ const Booking = () => {
             // Even if PDF generation fails, we shouldn't prevent the order completion
         }
     };
+    */
 
     useEffect(() => {
         if (!isUserLoggedIn()) {

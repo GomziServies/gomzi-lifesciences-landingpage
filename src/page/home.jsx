@@ -610,7 +610,6 @@ export default function Home() {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [pendingProduct, setPendingProduct] = useState(null);
-  const [openBookingOnLogin, setOpenBookingOnLogin] = useState(false);
   // const [, setCartUpdate] = useState(0); // Used to trigger re-renders on cart updates
 
   // Initialize product selections with the first available flavor for each product
@@ -920,13 +919,11 @@ export default function Home() {
           onClose={() => {
             setShowLoginModal(false);
             setPendingProduct(null);
-            setOpenBookingOnLogin(false);
           }}
           onLoginSuccess={() => {
             setShowLoginModal(false);
             setShowBookingModal(true);
             setPendingProduct(null);
-            setOpenBookingOnLogin(false);
           }}
           pendingProduct={pendingProduct}
         />
@@ -1081,7 +1078,6 @@ export default function Home() {
                         if (isUserLoggedIn()) {
                           setShowBookingModal(true);
                         } else {
-                          setOpenBookingOnLogin(true);
                           setShowLoginModal(true);
                         }
                       }}
@@ -1593,7 +1589,6 @@ export default function Home() {
                 if (isUserLoggedIn()) {
                   setShowBookingModal(true);
                 } else {
-                  setOpenBookingOnLogin(true);
                   setShowLoginModal(true);
                 }
               }}
