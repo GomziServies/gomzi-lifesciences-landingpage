@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
-import { createOrder } from '../assets/js/config/api';
+import { createOrder, addSampleToCart } from '../assets/js/config/api';
 // import Swal from 'sweetalert2';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -214,7 +214,11 @@ const Booking = () => {
     });
 
     const [sampleQty, setSampleQty] = useState(1);
-    const SAMPLE_BOX_PRICE = 777;
+    const SAMPLE_BOX_PRICE = 999;
+
+    useEffect(() => {
+        addSampleToCart(sampleQty);
+    }, [sampleQty]);
 
     const [productLines] = useState(() => {
         const savedProducts = localStorage.getItem("ATC_Product");

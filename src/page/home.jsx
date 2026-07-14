@@ -20,14 +20,59 @@ const productsData = [
   {
     product_id: "68a2c8e006800a0384e9cc6a",
     name: "Whey Blend Sample(35gm)",
-    flavoured: ["Chocolate", "Belgium Chocolate", "Coffee", "Mava Kulfi", "Vanilla Caramel", "Coconut Caramel", "Mango", "Cookies and Cream"],
+    flavoured: [
+      "Chocolate",
+      "Belgium Chocolate",
+      "Coffee",
+      "Mava Kulfi",
+      "Vanilla Caramel",
+      "Coconut Caramel",
+      "Mango",
+      "Cookies and Cream",
+    ],
     protein: ["35%", "40%", "50%", "60%"],
     pricerRange: "750-1650",
     priceMatrix: {
-      "35%": { "Chocolate": 190, "Belgium Chocolate": 190, "Coffee": 190, "Mava Kulfi": 190, "Vanilla Caramel": 190, "Coconut Caramel": 190, "Mango": 190, "Cookies and Cream": 190 },
-      "40%": { "Chocolate": 190, "Belgium Chocolate": 190, "Coffee": 190, "Mava Kulfi": 190, "Vanilla Caramel": 190, "Coconut Caramel": 190, "Mango": 190, "Cookies and Cream": 190 },
-      "50%": { "Chocolate": 190, "Belgium Chocolate": 190, "Coffee": 190, "Mava Kulfi": 190, "Vanilla Caramel": 190, "Coconut Caramel": 190, "Mango": 190, "Cookies and Cream": 190 },
-      "60%": { "Chocolate": 190, "Belgium Chocolate": 190, "Coffee": 190, "Mava Kulfi": 190, "Vanilla Caramel": 190, "Coconut Caramel": 190, "Mango": 190, "Cookies and Cream": 190 },
+      "35%": {
+        Chocolate: 190,
+        "Belgium Chocolate": 190,
+        Coffee: 190,
+        "Mava Kulfi": 190,
+        "Vanilla Caramel": 190,
+        "Coconut Caramel": 190,
+        Mango: 190,
+        "Cookies and Cream": 190,
+      },
+      "40%": {
+        Chocolate: 190,
+        "Belgium Chocolate": 190,
+        Coffee: 190,
+        "Mava Kulfi": 190,
+        "Vanilla Caramel": 190,
+        "Coconut Caramel": 190,
+        Mango: 190,
+        "Cookies and Cream": 190,
+      },
+      "50%": {
+        Chocolate: 190,
+        "Belgium Chocolate": 190,
+        Coffee: 190,
+        "Mava Kulfi": 190,
+        "Vanilla Caramel": 190,
+        "Coconut Caramel": 190,
+        Mango: 190,
+        "Cookies and Cream": 190,
+      },
+      "60%": {
+        Chocolate: 190,
+        "Belgium Chocolate": 190,
+        Coffee: 190,
+        "Mava Kulfi": 190,
+        "Vanilla Caramel": 190,
+        "Coconut Caramel": 190,
+        Mango: 190,
+        "Cookies and Cream": 190,
+      },
     },
     price: 190,
     image: "/assets/images/product-images/whey-blend.webp",
@@ -37,15 +82,69 @@ const productsData = [
   {
     product_id: "68ad732d06800a0384ea019a",
     name: "Whey Concentrate Sample(35gm)",
-    flavoured: ["Chocolate", "Belgium Chocolate", "Coffee", "Mava Kulfi", "Vanilla Caramel", "Coconut Caramel", "Mango", "Cookies and Cream"],
+    flavoured: [
+      "Chocolate",
+      "Belgium Chocolate",
+      "Coffee",
+      "Mava Kulfi",
+      "Vanilla Caramel",
+      "Coconut Caramel",
+      "Mango",
+      "Cookies and Cream",
+    ],
     protein: ["35%", "50%", "60%", "70%", "80%"],
     pricerRange: "1295-2270",
     priceMatrix: {
-      "35%": { "Chocolate": 195, "Belgium Chocolate": 195, "Coffee": 195, "Mava Kulfi": 195, "Vanilla Caramel": 195, "Coconut Caramel": 195, "Mango": 195, "Cookies and Cream": 195 },
-      "50%": { "Chocolate": 195, "Belgium Chocolate": 195, "Coffee": 195, "Mava Kulfi": 195, "Vanilla Caramel": 195, "Coconut Caramel": 195, "Mango": 195, "Cookies and Cream": 195 },
-      "60%": { "Chocolate": 195, "Belgium Chocolate": 195, "Coffee": 195, "Mava Kulfi": 195, "Vanilla Caramel": 195, "Coconut Caramel": 195, "Mango": 195, "Cookies and Cream": 195 },
-      "70%": { "Chocolate": 195, "Belgium Chocolate": 195, "Coffee": 195, "Mava Kulfi": 195, "Vanilla Caramel": 195, "Coconut Caramel": 195, "Mango": 195, "Cookies and Cream": 195 },
-      "80%": { "Chocolate": 195, "Belgium Chocolate": 195, "Coffee": 195, "Mava Kulfi": 195, "Vanilla Caramel": 195, "Coconut Caramel": 195, "Mango": 195, "Cookies and Cream": 195 },
+      "35%": {
+        Chocolate: 195,
+        "Belgium Chocolate": 195,
+        Coffee: 195,
+        "Mava Kulfi": 195,
+        "Vanilla Caramel": 195,
+        "Coconut Caramel": 195,
+        Mango: 195,
+        "Cookies and Cream": 195,
+      },
+      "50%": {
+        Chocolate: 195,
+        "Belgium Chocolate": 195,
+        Coffee: 195,
+        "Mava Kulfi": 195,
+        "Vanilla Caramel": 195,
+        "Coconut Caramel": 195,
+        Mango: 195,
+        "Cookies and Cream": 195,
+      },
+      "60%": {
+        Chocolate: 195,
+        "Belgium Chocolate": 195,
+        Coffee: 195,
+        "Mava Kulfi": 195,
+        "Vanilla Caramel": 195,
+        "Coconut Caramel": 195,
+        Mango: 195,
+        "Cookies and Cream": 195,
+      },
+      "70%": {
+        Chocolate: 195,
+        "Belgium Chocolate": 195,
+        Coffee: 195,
+        "Mava Kulfi": 195,
+        "Vanilla Caramel": 195,
+        "Coconut Caramel": 195,
+        Mango: 195,
+        "Cookies and Cream": 195,
+      },
+      "80%": {
+        Chocolate: 195,
+        "Belgium Chocolate": 195,
+        Coffee: 195,
+        "Mava Kulfi": 195,
+        "Vanilla Caramel": 195,
+        "Coconut Caramel": 195,
+        Mango: 195,
+        "Cookies and Cream": 195,
+      },
     },
     price: 195,
     image: "/assets/images/product-images/whey-concentrate.webp",
@@ -55,16 +154,79 @@ const productsData = [
   {
     product_id: "68ad735906800a0384ea019e",
     name: "Whey Isolate Sample(35gm)",
-    flavoured: ["Chocolate", "Belgium Chocolate", "Coffee", "Mava Kulfi", "Vanilla Caramel", "Coconut Caramel", "Mango", "Cookies and Cream"],
+    flavoured: [
+      "Chocolate",
+      "Belgium Chocolate",
+      "Coffee",
+      "Mava Kulfi",
+      "Vanilla Caramel",
+      "Coconut Caramel",
+      "Mango",
+      "Cookies and Cream",
+    ],
     protein: ["35%", "40%", "50%", "60%", "70%", "80%"],
     pricerRange: "1900-3656",
     priceMatrix: {
-      "35%": { "Chocolate": 200, "Belgium Chocolate": 200, "Coffee": 200, "Mava Kulfi": 200, "Vanilla Caramel": 200, "Coconut Caramel": 200, "Mango": 200, "Cookies and Cream": 200 },
-      "40%": { "Chocolate": 200, "Belgium Chocolate": 200, "Coffee": 200, "Mava Kulfi": 200, "Vanilla Caramel": 200, "Coconut Caramel": 200, "Mango": 200, "Cookies and Cream": 200 },
-      "50%": { "Chocolate": 200, "Belgium Chocolate": 200, "Coffee": 200, "Mava Kulfi": 200, "Vanilla Caramel": 200, "Coconut Caramel": 200, "Mango": 200, "Cookies and Cream": 200 },
-      "60%": { "Chocolate": 200, "Belgium Chocolate": 200, "Coffee": 200, "Mava Kulfi": 200, "Vanilla Caramel": 200, "Coconut Caramel": 200, "Mango": 200, "Cookies and Cream": 200 },
-      "70%": { "Chocolate": 200, "Belgium Chocolate": 200, "Coffee": 200, "Mava Kulfi": 200, "Vanilla Caramel": 200, "Coconut Caramel": 200, "Mango": 200, "Cookies and Cream": 200 },
-      "80%": { "Chocolate": 200, "Belgium Chocolate": 200, "Coffee": 200, "Mava Kulfi": 200, "Vanilla Caramel": 200, "Coconut Caramel": 200, "Mango": 200, "Cookies and Cream": 200 },
+      "35%": {
+        Chocolate: 200,
+        "Belgium Chocolate": 200,
+        Coffee: 200,
+        "Mava Kulfi": 200,
+        "Vanilla Caramel": 200,
+        "Coconut Caramel": 200,
+        Mango: 200,
+        "Cookies and Cream": 200,
+      },
+      "40%": {
+        Chocolate: 200,
+        "Belgium Chocolate": 200,
+        Coffee: 200,
+        "Mava Kulfi": 200,
+        "Vanilla Caramel": 200,
+        "Coconut Caramel": 200,
+        Mango: 200,
+        "Cookies and Cream": 200,
+      },
+      "50%": {
+        Chocolate: 200,
+        "Belgium Chocolate": 200,
+        Coffee: 200,
+        "Mava Kulfi": 200,
+        "Vanilla Caramel": 200,
+        "Coconut Caramel": 200,
+        Mango: 200,
+        "Cookies and Cream": 200,
+      },
+      "60%": {
+        Chocolate: 200,
+        "Belgium Chocolate": 200,
+        Coffee: 200,
+        "Mava Kulfi": 200,
+        "Vanilla Caramel": 200,
+        "Coconut Caramel": 200,
+        Mango: 200,
+        "Cookies and Cream": 200,
+      },
+      "70%": {
+        Chocolate: 200,
+        "Belgium Chocolate": 200,
+        Coffee: 200,
+        "Mava Kulfi": 200,
+        "Vanilla Caramel": 200,
+        "Coconut Caramel": 200,
+        Mango: 200,
+        "Cookies and Cream": 200,
+      },
+      "80%": {
+        Chocolate: 200,
+        "Belgium Chocolate": 200,
+        Coffee: 200,
+        "Mava Kulfi": 200,
+        "Vanilla Caramel": 200,
+        "Coconut Caramel": 200,
+        Mango: 200,
+        "Cookies and Cream": 200,
+      },
     },
     price: 200,
     image: "/assets/images/product-images/whey-isolate.webp",
@@ -74,7 +236,16 @@ const productsData = [
   {
     product_id: "68cd0321e71a48752796bee9",
     name: "Mass Gainer Sample(35gm)",
-    flavoured: ["Chocolate", "Belgium Chocolate", "Coffee", "Mava Kulfi", "Vanilla Caramel", "Coconut Caramel", "Mango", "Cookies and Cream"],
+    flavoured: [
+      "Chocolate",
+      "Belgium Chocolate",
+      "Coffee",
+      "Mava Kulfi",
+      "Vanilla Caramel",
+      "Coconut Caramel",
+      "Mango",
+      "Cookies and Cream",
+    ],
     price: 100,
     image: "/assets/images/product-images/mass-gainer.webp",
     link: "/mass-gainer",
@@ -83,7 +254,14 @@ const productsData = [
   {
     product_id: "68ad739506800a0384ea01a2",
     name: "Peanut Butter Sample(100gm)",
-    flavoured: ["Natural", "Classic", "Chocolate", "White Chocolate", "Mango Chia Seeds", "Cookies and Cream"],
+    flavoured: [
+      "Natural",
+      "Classic",
+      "Chocolate",
+      "White Chocolate",
+      "Mango Chia Seeds",
+      "Cookies and Cream",
+    ],
     price: 120,
     image: "/assets/images/product-images/peanut-butter.webp",
     link: "/peanut-butter",
@@ -91,7 +269,15 @@ const productsData = [
   },
   {
     product_id: "68ad73e006800a0384ea01ab",
-    flavoured: ["Fruit Punch", "Green Apple", "Tangy Orange", "Pineapple", "Kiwi", "Watermelon", "Lemon"],
+    flavoured: [
+      "Fruit Punch",
+      "Green Apple",
+      "Tangy Orange",
+      "Pineapple",
+      "Kiwi",
+      "Watermelon",
+      "Lemon",
+    ],
     name: "Creatine Sample(20gm)",
     price: 120,
     image: "/assets/images/product-images/creatine-flavored.webp",
@@ -100,7 +286,15 @@ const productsData = [
   },
   {
     product_id: "68ad744106800a0384ea01b4",
-    flavoured: ["Fruit Punch", "Green Apple", "Tangy Orange", "Pineapple", "Kiwi", "Watermelon", "Lemon"],
+    flavoured: [
+      "Fruit Punch",
+      "Green Apple",
+      "Tangy Orange",
+      "Pineapple",
+      "Kiwi",
+      "Watermelon",
+      "Lemon",
+    ],
     name: "Pre-Workout Sample(20gm)",
     price: 120,
     image: "/assets/images/product-images/pre-workout.webp",
@@ -109,7 +303,15 @@ const productsData = [
   },
   {
     product_id: "68ad746a06800a0384ea01b8",
-    flavoured: ["Fruit Punch", "Green Apple", "Tangy Orange", "Pineapple", "Kiwi", "Watermelon", "Lemon"],
+    flavoured: [
+      "Fruit Punch",
+      "Green Apple",
+      "Tangy Orange",
+      "Pineapple",
+      "Kiwi",
+      "Watermelon",
+      "Lemon",
+    ],
     name: "EAA Sample(20gm)",
     price: 120,
     image: "/assets/images/product-images/eaa.webp",
@@ -118,7 +320,15 @@ const productsData = [
   },
   {
     product_id: "68ad748306800a0384ea01be",
-    flavoured: ["Fruit Punch", "Green Apple", "Tangy Orange", "Pineapple", "Kiwi", "Watermelon", "Lemon"],
+    flavoured: [
+      "Fruit Punch",
+      "Green Apple",
+      "Tangy Orange",
+      "Pineapple",
+      "Kiwi",
+      "Watermelon",
+      "Lemon",
+    ],
     name: "BCAA Sample(20gm)",
     price: 120,
     image: "/assets/images/product-images/bcaa.webp",
@@ -145,13 +355,13 @@ const defaultConcentrateIds = [
 ];
 
 window.Whey_Concentrate = {
-  "Chocolate": defaultConcentrateIds,
+  Chocolate: defaultConcentrateIds,
   "Belgium Chocolate": defaultConcentrateIds,
-  "Coffee": defaultConcentrateIds,
+  Coffee: defaultConcentrateIds,
   "Mawa Kulfi": defaultConcentrateIds,
   "Vanilla Caramel": defaultConcentrateIds,
   "Coconut Caramel": defaultConcentrateIds,
-  "Mango": defaultConcentrateIds,
+  Mango: defaultConcentrateIds,
   "Cookies and Cream": defaultConcentrateIds,
 };
 
@@ -165,13 +375,13 @@ const defaultIsolateIds = [
 ];
 
 window.Whey_Isolate = {
-  "Chocolate": defaultIsolateIds,
+  Chocolate: defaultIsolateIds,
   "Belgium Chocolate": defaultIsolateIds,
-  "Coffee": defaultIsolateIds,
+  Coffee: defaultIsolateIds,
   "Mawa Kulfi": defaultIsolateIds,
   "Vanilla Caramel": defaultIsolateIds,
   "Coconut Caramel": defaultIsolateIds,
-  "Mango": defaultIsolateIds,
+  Mango: defaultIsolateIds,
   "Cookies and Cream": defaultIsolateIds,
 };
 
@@ -185,13 +395,13 @@ const defaultGainerData = [
 ];
 
 window.Mass_Gainer = {
-  "Chocolate": defaultGainerData,
+  Chocolate: defaultGainerData,
   "Belgium Chocolate": defaultGainerData,
-  "Coffee": defaultGainerData,
+  Coffee: defaultGainerData,
   "Mawa Kulfi": defaultGainerData,
   "Vanilla Caramel": defaultGainerData,
   "Coconut Caramel": defaultGainerData,
-  "Mango": defaultGainerData,
+  Mango: defaultGainerData,
   "Cookies and Cream": defaultGainerData,
 };
 
@@ -201,13 +411,13 @@ const makePB = (id) => [
     name: "Peanut Butter",
     quotation_price: 150,
     moq: "100 kg",
-  }
+  },
 ];
 
 window.Peanut_Butter = {
-  "Natural": makePB("68cd0304e71a48752796bed3"),
-  "Classic": makePB("68cd0304e71a48752796bed3"),
-  "Chocolate": makePB("68cd030de71a48752796bedd"),
+  Natural: makePB("68cd0304e71a48752796bed3"),
+  Classic: makePB("68cd0304e71a48752796bed3"),
+  Chocolate: makePB("68cd030de71a48752796bedd"),
   "White Chocolate": makePB("68cd030de71a48752796bedd"),
   "Mango Chia Seeds": makePB("68cd0316e71a48752796bee3"),
   "Cookies and Cream": makePB("68cd0316e71a48752796bee3"),
@@ -219,18 +429,18 @@ const makeCreatine = (id, price) => [
     name: "Creatine",
     quotation_price: price,
     moq: "50 kg (250gm)",
-  }
+  },
 ];
 
 window.Creatine = {
   "Fruit Punch": makeCreatine("68cd02ede71a48752796bec2", 300),
   "Green Apple": makeCreatine("68cd02ede71a48752796bec2", 300),
   "Tangy Orange": makeCreatine("68cd02ede71a48752796bec2", 300),
-  "Pineapple": makeCreatine("68cd02ede71a48752796bec2", 300),
-  "Kiwi": makeCreatine("68cd02ede71a48752796bec2", 300),
-  "Watermelon": makeCreatine("68cd02ede71a48752796bec2", 300),
-  "Lemon": makeCreatine("68cd02ede71a48752796bec2", 300),
-  "Unflavoured": makeCreatine("68cd02fae71a48752796bec4", 270),
+  Pineapple: makeCreatine("68cd02ede71a48752796bec2", 300),
+  Kiwi: makeCreatine("68cd02ede71a48752796bec2", 300),
+  Watermelon: makeCreatine("68cd02ede71a48752796bec2", 300),
+  Lemon: makeCreatine("68cd02ede71a48752796bec2", 300),
+  Unflavoured: makeCreatine("68cd02fae71a48752796bec4", 270),
 };
 
 const makePreWorkout = (id) => [
@@ -239,17 +449,17 @@ const makePreWorkout = (id) => [
     name: "Pre-Workout",
     quotation_price: 440,
     moq: "50 kg",
-  }
+  },
 ];
 
 window.pre_Workout = {
   "Fruit Punch": makePreWorkout("68cd02d5e71a48752796bebe"),
   "Green Apple": makePreWorkout("68cd02d5e71a48752796bebe"),
   "Tangy Orange": makePreWorkout("68cd02d5e71a48752796bebe"),
-  "Pineapple": makePreWorkout("68cd02e4e71a48752796bec0"),
-  "Kiwi": makePreWorkout("68cd02e4e71a48752796bec0"),
-  "Watermelon": makePreWorkout("68cd02e4e71a48752796bec0"),
-  "Lemon": makePreWorkout("68cd02e4e71a48752796bec0"),
+  Pineapple: makePreWorkout("68cd02e4e71a48752796bec0"),
+  Kiwi: makePreWorkout("68cd02e4e71a48752796bec0"),
+  Watermelon: makePreWorkout("68cd02e4e71a48752796bec0"),
+  Lemon: makePreWorkout("68cd02e4e71a48752796bec0"),
 };
 
 const makeEAA = (id) => [
@@ -258,17 +468,17 @@ const makeEAA = (id) => [
     name: "EAA",
     quotation_price: 440,
     moq: "50 kg (250gm)",
-  }
+  },
 ];
 
 window.Eaa = {
   "Fruit Punch": makeEAA("68cd0292e71a48752796beb0"),
   "Green Apple": makeEAA("68cd0292e71a48752796beb0"),
   "Tangy Orange": makeEAA("68cd0292e71a48752796beb0"),
-  "Pineapple": makeEAA("68cd0292e71a48752796beb0"),
-  "Kiwi": makeEAA("68cd0292e71a48752796beb0"),
-  "Watermelon": makeEAA("68cd0292e71a48752796beb0"),
-  "Lemon": makeEAA("68cd0292e71a48752796beb0"),
+  Pineapple: makeEAA("68cd0292e71a48752796beb0"),
+  Kiwi: makeEAA("68cd0292e71a48752796beb0"),
+  Watermelon: makeEAA("68cd0292e71a48752796beb0"),
+  Lemon: makeEAA("68cd0292e71a48752796beb0"),
 };
 
 const makeBCAA = (id) => [
@@ -277,28 +487,43 @@ const makeBCAA = (id) => [
     name: "BCAA",
     quotation_price: 440,
     moq: "50 kg (250gm)",
-  }
+  },
 ];
 
 window.Bcaa = {
   "Fruit Punch": makeBCAA("68cd029ce71a48752796beb2"),
   "Green Apple": makeBCAA("68cd029ce71a48752796beb2"),
   "Tangy Orange": makeBCAA("68cd029ce71a48752796beb2"),
-  "Pineapple": makeBCAA("68cd02a7e71a48752796beb4"),
-  "Kiwi": makeBCAA("68cd02a7e71a48752796beb4"),
-  "Watermelon": makeBCAA("68cd02a7e71a48752796beb4"),
-  "Lemon": makeBCAA("68cd02a7e71a48752796beb4"),
+  Pineapple: makeBCAA("68cd02a7e71a48752796beb4"),
+  Kiwi: makeBCAA("68cd02a7e71a48752796beb4"),
+  Watermelon: makeBCAA("68cd02a7e71a48752796beb4"),
+  Lemon: makeBCAA("68cd02a7e71a48752796beb4"),
 };
 
 window.Energy_Drink = {
   Cola: [
-    { product_id: "68cd02b0e71a48752796beb6", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" },
+    {
+      product_id: "68cd02b0e71a48752796beb6",
+      name: "Energy Drink - Bottle",
+      quotation_price: 30,
+      moq: "1000 nos",
+    },
   ],
   Guava: [
-    { product_id: "68cd02b9e71a48752796beb8", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" },
+    {
+      product_id: "68cd02b9e71a48752796beb8",
+      name: "Energy Drink - Bottle",
+      quotation_price: 30,
+      moq: "1000 nos",
+    },
   ],
   "Green Apple": [
-    { product_id: "68cd02c4e71a48752796beba", name: "Energy Drink - Bottle", quotation_price: 30, moq: "1000 nos" },
+    {
+      product_id: "68cd02c4e71a48752796beba",
+      name: "Energy Drink - Bottle",
+      quotation_price: 30,
+      moq: "1000 nos",
+    },
   ],
 };
 
@@ -310,13 +535,13 @@ const defaultBlendIds = [
 ];
 
 window.Whey_Blend = {
-  "Chocolate": defaultBlendIds,
+  Chocolate: defaultBlendIds,
   "Belgium Chocolate": defaultBlendIds,
-  "Coffee": defaultBlendIds,
+  Coffee: defaultBlendIds,
   "Mawa Kulfi": defaultBlendIds,
   "Vanilla Caramel": defaultBlendIds,
   "Coconut Caramel": defaultBlendIds,
-  "Mango": defaultBlendIds,
+  Mango: defaultBlendIds,
   "Cookies and Cream": defaultBlendIds,
 };
 
@@ -815,7 +1040,10 @@ export default function Home() {
                   <h2
                     className="text-anime-style-2"
                     data-cursor="-opaque"
-                    style={{ fontSize: "clamp(30px, 4vw + 16px, 56px)", lineHeight: "1.15" }}
+                    style={{
+                      fontSize: "clamp(30px, 4vw + 16px, 56px)",
+                      lineHeight: "1.15",
+                    }}
                   >
                     Launch Your Premium
                     <span> Supplement Brand</span>
@@ -830,7 +1058,8 @@ export default function Home() {
                       fontWeight: "bold",
                     }}
                   >
-                    Book Your Sample Today <span style={{ color: '#fff' }}>In Just ₹777/-</span>
+                    Book Your Sample Today{" "}
+                    <span style={{ color: "#fff" }}>In Just ₹999/-</span>
                   </p>
                 </div>
 
@@ -888,38 +1117,43 @@ export default function Home() {
                     objectFit: "cover",
                     opacity: 0.75,
                     border: "none",
-                    pointerEvents: "none"
+                    pointerEvents: "none",
                   }}
                 ></iframe>
 
                 {/* Premium Thumbnail Overlay */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)',
-                  zIndex: 1
-                }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background:
+                      "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)",
+                    zIndex: 1,
+                  }}
+                >
                   {/* Play Button - Mathematically Centered */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '43%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '80px',
-                    height: '80px',
-                    backgroundColor: '#88c349',
-                    borderRadius: '50%',
-                    boxShadow: '0 0 40px rgba(136, 195, 73, 0.9)',
-                    animation: 'pulse 2s infinite',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transition: 'all 0.3s ease'
-                  }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "43%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      width: "80px",
+                      height: "80px",
+                      backgroundColor: "#88c349",
+                      borderRadius: "50%",
+                      boxShadow: "0 0 40px rgba(136, 195, 73, 0.9)",
+                      animation: "pulse 2s infinite",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "all 0.3s ease",
+                    }}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -927,7 +1161,7 @@ export default function Home() {
                       width="38px"
                       height="38px"
                       style={{
-                        marginLeft: '5px' // Offsets the visual weight of play triangle to look perfectly centered
+                        marginLeft: "5px", // Offsets the visual weight of play triangle to look perfectly centered
                       }}
                     >
                       <path d="M8 5v14l11-7z" />
@@ -935,31 +1169,44 @@ export default function Home() {
                   </div>
 
                   {/* Title - Positioned higher up and made larger */}
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '80px',
-                    left: 0,
-                    width: '100%',
-                    textAlign: 'center',
-                    padding: '0 20px',
-                    boxSizing: 'border-box',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    lineHeight: '1.4'
-                  }}>
-                    <span style={{ display: 'block', fontSize: '13px', color: '#88c349', fontWeight: '700', marginBottom: '8px', letterSpacing: '2.5px' }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "80px",
+                      left: 0,
+                      width: "100%",
+                      textAlign: "center",
+                      padding: "0 20px",
+                      boxSizing: "border-box",
+                      textTransform: "uppercase",
+                      letterSpacing: "1px",
+                      lineHeight: "1.4",
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "13px",
+                        color: "#88c349",
+                        fontWeight: "700",
+                        marginBottom: "8px",
+                        letterSpacing: "2.5px",
+                      }}
+                    >
                       Watch Process
                     </span>
-                    <h3 style={{
-                      color: '#fff',
-                      fontSize: 'clamp(18px, 2vw + 12px, 26px)',
-                      fontWeight: '850',
-                      margin: 0,
-                      lineHeight: '1.3',
-                      textShadow: '0 2px 12px rgba(0,0,0,0.9)'
-                    }}>
+                    <h3
+                      style={{
+                        color: "#fff",
+                        fontSize: "clamp(18px, 2vw + 12px, 26px)",
+                        fontWeight: "850",
+                        margin: 0,
+                        lineHeight: "1.3",
+                        textShadow: "0 2px 12px rgba(0,0,0,0.9)",
+                      }}
+                    >
                       How We Deliver <br />
-                      <span style={{ color: '#88c349' }}>Your Sample</span>
+                      <span style={{ color: "#88c349" }}>Your Sample</span>
                     </h3>
                   </div>
                 </div>
@@ -1117,7 +1364,10 @@ export default function Home() {
             </div>
           </div>
 
-          <h2 className="products-section-title wow fadeInUp" data-wow-delay="0.1s">
+          <h2
+            className="products-section-title wow fadeInUp"
+            data-wow-delay="0.1s"
+          >
             Products That You Will Get In <span>Sample Box</span>
           </h2>
 
@@ -1210,11 +1460,13 @@ export default function Home() {
                     <div className="sample-box-details mt-3 text-center">
                       <h4 className="box-title">Gomzi Sample Testing Kit</h4>
                       <p className="box-subtitle">
-                        Taste and test our complete product line before placing a private label manufacturing order. Includes 10 high-quality product samples across multiple flavors.
+                        Taste and test our complete product line before placing
+                        a private label manufacturing order. Includes 10
+                        high-quality product samples across multiple flavors.
                       </p>
                       <div className="box-price-tag mt-3">
                         <span className="price-label">Price:</span>
-                        <span className="price-value">₹777/-</span>
+                        <span className="price-value">₹999/-</span>
                       </div>
                     </div>
                   </div>
@@ -1223,21 +1475,43 @@ export default function Home() {
 
               {/* Right Column: List of 10 Products Included in the Box */}
               <div className="col-lg-7 col-md-12">
-                <div className="box-products-list wow fadeInUp" data-wow-delay="0.2s">
+                <div
+                  className="box-products-list wow fadeInUp"
+                  data-wow-delay="0.2s"
+                >
                   <div className="list-header mb-4">
                     <h3 className="list-title">10 Premium Samples Inside:</h3>
-                    <p className="list-subtitle">Your testing kit contains samples of all the following products:</p>
+                    <p className="list-subtitle">
+                      Your testing kit contains samples of all the following
+                      products:
+                    </p>
                   </div>
 
                   <div className="products-grid">
                     {productsData.map((product, index) => (
                       <div className="box-product-item-card" key={index}>
                         <div className="card-top-header">
-                          <span className="product-index-badge">{index + 1}</span>
-                          <h4 className="box-product-name">{product.name.replace(" Sample(35gm)", "").replace(" Sample(100gm)", "").replace(" Sample(20gm)", "").replace(" Sample(220ml)", "")}</h4>
-                          <span className="product-size-badge">{product.name.includes("Bottle") ? "220ml" : product.name.includes("100gm") ? "100gm" : product.name.includes("20gm") ? "20gm" : "35gm"}</span>
+                          <span className="product-index-badge">
+                            {index + 1}
+                          </span>
+                          <h4 className="box-product-name">
+                            {product.name
+                              .replace(" Sample(35gm)", "")
+                              .replace(" Sample(100gm)", "")
+                              .replace(" Sample(20gm)", "")
+                              .replace(" Sample(220ml)", "")}
+                          </h4>
+                          <span className="product-size-badge">
+                            {product.name.includes("Bottle")
+                              ? "220ml"
+                              : product.name.includes("100gm")
+                                ? "100gm"
+                                : product.name.includes("20gm")
+                                  ? "20gm"
+                                  : "35gm"}
+                          </span>
                         </div>
-                        
+
                         <p className="box-product-desc">
                           {getProductDescription(product.name)}
                         </p>
@@ -1245,10 +1519,17 @@ export default function Home() {
                         {/* Protein Badge (if applicable) */}
                         {product.protein && (
                           <div className="mt-3">
-                            <span className="badge-section-label">Available Protein Percentages:</span>
+                            <span className="badge-section-label">
+                              Available Protein Percentages:
+                            </span>
                             <div className="d-flex flex-wrap gap-2 mt-1">
                               {product.protein.map((prot) => (
-                                <span key={prot} className="box-badge-pill protein-pill">{prot}</span>
+                                <span
+                                  key={prot}
+                                  className="box-badge-pill protein-pill"
+                                >
+                                  {prot}
+                                </span>
                               ))}
                             </div>
                           </div>
@@ -1257,10 +1538,17 @@ export default function Home() {
                         {/* Flavors Badges */}
                         {product.flavoured && (
                           <div className="mt-3">
-                            <span className="badge-section-label">Available Flavours:</span>
+                            <span className="badge-section-label">
+                              Available Flavours:
+                            </span>
                             <div className="d-flex flex-wrap gap-2 mt-1">
                               {product.flavoured.map((flv) => (
-                                <span key={flv} className="box-badge-pill flavor-pill">{flv}</span>
+                                <span
+                                  key={flv}
+                                  className="box-badge-pill flavor-pill"
+                                >
+                                  {flv}
+                                </span>
                               ))}
                             </div>
                           </div>

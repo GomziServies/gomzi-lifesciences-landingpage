@@ -152,6 +152,17 @@ export const createOrder = async (orderData) => {
                     });
                 };
 
+                paymentData.modal = {
+                    ondismiss: async () => {
+                        try {
+                            await axiosInstance.delete('/order-cart/clear-cart?item_type=FG_MEAL_PRODUCT');
+                            await axiosInstance.delete('/order-cart/clear-cart?item_type=PURE_GO_SAMPLE_MEAL_PRODUCT');
+                        } catch (err) {
+                            console.error('Failed to clear active cart on dismiss:', err);
+                        }
+                    }
+                };
+
                 paymentData.hidden = { contact: false, email: false };
 
                 new window.Razorpay(paymentData).open();
@@ -210,3 +221,19 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+export const addSampleToCart = async (quantity = 1) => {
+    try {
+        const authorization = localStorage.getItem('fg_group_user_authorization');
+        if (!authorization) return;
+
+        const payload = {
+            item_id: "68cd035ee71a48752796be00",
+            item_type: "FG_MEAL_PRODUCT",
+            quantity: quantity
+        };
+        await axiosInstance.post('/order-cart/add-item', payload);
+    } catch (error) {
+        console.error('Failed to add sample to cart:', error);
+    }
+};

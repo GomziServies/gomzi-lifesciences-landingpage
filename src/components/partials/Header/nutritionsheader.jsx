@@ -50,8 +50,7 @@ function NutritionHeader() {
 
   useEffect(() => {
     const updateCartCount = () => {
-      const atcProducts =
-        JSON.parse(localStorage.getItem("ATC_Product")) || [];
+      const atcProducts = JSON.parse(localStorage.getItem("ATC_Product")) || [];
       setCartItemsCount(atcProducts.length);
     };
 
@@ -98,7 +97,9 @@ function NutritionHeader() {
               {/* Logo Start */}
               <a className="navbar-brand" href="./">
                 <img
-                  src={getAssetPath("/assets/images/logo/gomzi-nutrition-new.png")}
+                  src={getAssetPath(
+                    "/assets/images/logo/gomzi-nutrition-new.png",
+                  )}
                   alt="Gomzi Nutrition"
                   style={{ height: "55px", width: "auto" }}
                 />
@@ -109,7 +110,7 @@ function NutritionHeader() {
                 {userInfo ? (
                   <div className="d-flex align-items-center">
                     <div className="position-relative">
-                      <button 
+                      <button
                         onClick={toggleUserMenu}
                         className="btn d-flex align-items-center"
                         style={{
@@ -120,7 +121,8 @@ function NutritionHeader() {
                         }}
                       >
                         <span className="me-2 text-white">
-                          Hi, {userInfo.user.first_name} {userInfo.user.last_name}
+                          Hi, {userInfo.user.first_name}{" "}
+                          {userInfo.user.last_name}
                         </span>
                         <i className="far fa-user text-white"></i>
                       </button>
@@ -136,9 +138,7 @@ function NutritionHeader() {
                           }}
                         >
                           <Link
-                            onClick={() =>
-                              (window.location.href = "/profile")
-                            }
+                            onClick={() => (window.location.href = "/profile")}
                             className="d-block w-100 text-center px-3 py-2 text-dark text-decoration-none"
                             style={{ fontSize: "14px" }}
                           >
