@@ -31,4 +31,11 @@ const apiConfig = {
   PRODUCT_ID: productId,
 };
 
+console.log("API Config Initialized:", {
+  hostname,
+  BASE_URL: apiConfig.BASE_URL,
+  PRODUCT_ID: apiConfig.PRODUCT_ID,
+  RAZORPAY_MERCHANT_ID: apiConfig.RAZORPAY_MERCHANT_ID
+});
+
 export default apiConfig;
