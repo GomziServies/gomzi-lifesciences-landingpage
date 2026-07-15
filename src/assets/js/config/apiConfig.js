@@ -15,9 +15,20 @@ if (
   // baseUrl = "http://localhost:80";
 }
 
+let productId = "68cd035ee71a48752796be00"; // default for localhost
+
+if (baseUrl.startsWith("https://dev-api.fggroup.in")) {
+  productId = "6a572fbd0c65445b73834557";
+} else if (baseUrl.startsWith("https://api.fggroup.in")) {
+  productId = "6a57310e53680b1a284f8d71";
+} else if (baseUrl.startsWith("http://localhost")) {
+  productId = "68cd035ee71a48752796be00";
+}
+
 const apiConfig = {
   BASE_URL: baseUrl,
   RAZORPAY_MERCHANT_ID: razorpayMerchantId,
+  PRODUCT_ID: productId,
 };
 
 export default apiConfig;
