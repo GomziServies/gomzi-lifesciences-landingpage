@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
 import { createOrder, addSampleToCart } from '../assets/js/config/api';
+import apiConfig from '../assets/js/config/apiConfig';
 // import Swal from 'sweetalert2';
 // import jsPDF from "jspdf";
 // import html2canvas from "html2canvas";
@@ -649,7 +650,7 @@ const Booking = () => {
             const orderData = {
                 products: [
                     {
-                        id: "68cd035ee71a48752796be00",
+                        id: apiConfig.PRODUCT_ID,
                         name: "Gomzi Life Sciences Sample Box",
                         price: SAMPLE_BOX_PRICE,
                         quantity: sampleQty,

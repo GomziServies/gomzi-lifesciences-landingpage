@@ -52,7 +52,7 @@ export const createOrder = async (orderData) => {
         // Fixed Sample Box product — quantity from user selection
         const updatedProducts = [
             {
-                product_id: "68cd035ee71a48752796be00",
+                product_id: apiConfig.PRODUCT_ID,
                 quantity: orderData.sampleQty || 1,
                 landing_page: true
             }
@@ -228,7 +228,7 @@ export const addSampleToCart = async (quantity = 1) => {
         if (!authorization) return;
 
         const payload = {
-            item_id: "68cd035ee71a48752796be00",
+            item_id: apiConfig.PRODUCT_ID,
             item_type: "FG_MEAL_PRODUCT",
             quantity: quantity
         };
