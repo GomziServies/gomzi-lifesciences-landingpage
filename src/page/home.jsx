@@ -335,15 +335,15 @@ const productsData = [
     link: "/bcaa",
     moq: "50 kg (250gm)",
   },
-  {
-    product_id: "68ad74cc06800a0384ea01c8",
-    name: "Energy Drink - Bottle Sample(220ml)",
-    flavoured: ["Cola", "Guava", "Green Apple"],
-    price: 100,
-    image: "/assets/images/product-images/energy-drink.webp",
-    link: "/energy-drink",
-    moq: "1000 pcs",
-  },
+  // {
+  //   product_id: "68ad74cc06800a0384ea01c8",
+  //   name: "Energy Drink - Bottle Sample(220ml)",
+  //   flavoured: ["Cola", "Guava", "Green Apple"],
+  //   price: 100,
+  //   image: "/assets/images/product-images/energy-drink.webp",
+  //   link: "/energy-drink",
+  //   moq: "1000 pcs",
+  // },
 ];
 
 const defaultConcentrateIds = [
@@ -1466,7 +1466,7 @@ export default function Home() {
                       <h4 className="box-title">Gomzi Sample Testing Kit</h4>
                       <p className="box-subtitle">
                         Taste and test our complete product line before placing
-                        a private label manufacturing order. Includes 10
+                        a private label manufacturing order. Includes 9
                         high-quality product samples across multiple flavors.
                       </p>
                       <div className="box-price-tag mt-3">
@@ -1485,7 +1485,7 @@ export default function Home() {
                   data-wow-delay="0.2s"
                 >
                   <div className="list-header mb-4">
-                    <h3 className="list-title">10 Premium Samples Inside:</h3>
+                    <h3 className="list-title">9 Premium Samples Inside:</h3>
                     <p className="list-subtitle">
                       Your testing kit contains samples of all the following
                       products:
