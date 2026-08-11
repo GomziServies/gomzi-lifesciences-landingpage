@@ -47,23 +47,40 @@ publicAxiosInstance.interceptors.request.use(
 export const createOrder = async (orderData) => {
     try {
         const { address_line_1, address_line_2, city, pin_code, state, country,
-            payment_mode, name, email, mobile } = orderData;
+            payment_mode, name, email, mobile, remarks } = orderData;
 
-        // Fixed Sample Box product — quantity from user selection
-        const updatedProducts = [
-            {
-                product_id: apiConfig.PRODUCT_ID,
-                quantity: orderData.sampleQty || 1,
-                landing_page: true
-            }
-        ];
+        // Sample products — quantity and products from user selection
+        // Each product entry = 1 selected sample; count determines tier pricing (1=299, 2=499, 3=699, 4=899, 5+=999)
+        // On new backend: hasLandingPageProduct tier logic handles amount.
+        // On current dev server: delivery_charges adjusts the total to match frontend shown price.
+        const selectedProductsArray = orderData.products && Array.isArray(orderData.products) && orderData.products.length > 0
+            ? orderData.products
+            : [{ id: apiConfig.PRODUCT_ID, quantity: 1 }];
+
+        const updatedProducts = selectedProductsArray.map(p => ({
+            product_id: apiConfig.PRODUCT_ID,
+            quantity: p.quantity || 1,
+            landing_page: true
+        }));
+
+        // Tier price as determined by frontend (299 / 499 / 699 / 899 / 999)
+        const targetAmount = orderData.orderTotal || 999;
+
+        // Backend (old deployed) calculates: price_from_db × products.length
+        // We use delivery_charges to bridge the gap: delivery_charges = targetAmount - (db_price × count)
+        // delivery_charges can be negative to reduce the total.
+        // When new backend deploys (with hasLandingPageProduct tier logic), delivery_charges = 0 (not sent).
+        const productCountForBackend = updatedProducts.length;
+        // DB price per product is 999 on current dev server (landing_page fallback sets price=999)
+        const estimatedBackendTotal = 999 * productCountForBackend;
+        const deliveryChargesAdjustment = targetAmount - estimatedBackendTotal;
 
         // Map frontend payment mode to backend expected value
         const backendPaymentMode = payment_mode === 'COD' ? 'Cash On Delivery' : payment_mode;
 
         const payload = {
             products: updatedProducts,
-            payment_mode: backendPaymentMode, // Use the mapped value
+            payment_mode: backendPaymentMode,
             address_line_1,
             address_line_2,
             city,
@@ -73,7 +90,10 @@ export const createOrder = async (orderData) => {
             name,
             email,
             mobile,
-            item_type: "PURE_GO_SAMPLE_MEAL_PRODUCT"
+            remarks: remarks || "",
+            item_type: "PURE_GO_SAMPLE_MEAL_PRODUCT",
+            // Adjust total to match the tier price shown to the user
+            ...(deliveryChargesAdjustment !== 0 && { delivery_charges: deliveryChargesAdjustment }),
         };
 
         // Check Authentication

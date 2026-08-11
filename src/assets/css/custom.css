@@ -7971,6 +7971,62 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background: rgba(136, 195, 73, 0.07);
 }
 
+.featured-whey-card {
+  border-color: rgba(136, 195, 73, 0.3) !important;
+  background: rgba(136, 195, 73, 0.03) !important;
+}
+
+.whey-variant-select {
+  background-color: #181c20 !important;
+  color: #88c349 !important;
+  border: 1px solid rgba(136, 195, 73, 0.5) !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  padding: 5px 12px !important;
+  cursor: pointer;
+  max-width: 190px;
+}
+
+.whey-variant-select:focus {
+  border-color: #88c349 !important;
+  box-shadow: 0 0 10px rgba(136, 195, 73, 0.3) !important;
+}
+
+.protein-select {
+  background-color: #181c20 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  cursor: pointer;
+  width: auto !important;
+}
+
+.pricing-structure-wrapper {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pricing-range-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #90ee90;
+  background: rgba(144, 238, 144, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(144, 238, 144, 0.2);
+}
+
 @media (max-width: 991px) {
   .sample-box-showcase {
     padding: 20px;

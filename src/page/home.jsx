@@ -610,6 +610,95 @@ export default function Home() {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [pendingProduct, setPendingProduct] = useState(null);
+
+  const [isWheyOpen, setIsWheyOpen] = useState(true);
+  const [openWheyVariant, setOpenWheyVariant] = useState("Whey Isolate");
+  const [openAccordions, setOpenAccordions] = useState({});
+
+  const toggleAccordion = (index) => {
+    setOpenAccordions((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
+  const getProductFlavors = (name, itemFlavors) => {
+    if (itemFlavors && Array.isArray(itemFlavors) && itemFlavors.length > 0) return itemFlavors;
+    if (name.includes("Mass Gainer")) {
+      return ["Chocolate", "Vanilla", "Banana", "Strawberry", "Cookies and Cream"];
+    }
+    if (name.includes("Peanut Butter")) {
+      return ["Crunchy Natural", "Smooth Natural", "Chocolate Crunchy"];
+    }
+    if (name.includes("Creatine")) {
+      return ["Unflavored", "Fruit Punch", "Green Apple", "Tangy Orange", "Cola"];
+    }
+    if (name.includes("Pre-Workout")) {
+      return ["Fruit Punch", "Green Apple", "Tangy Orange", "Watermelon", "Cola", "Blue Raspberry"];
+    }
+    if (name.includes("EAA")) {
+      return ["Fruit Punch", "Green Apple", "Tangy Orange", "Pineapple", "Kiwi", "Watermelon", "Lemon"];
+    }
+    if (name.includes("BCAA")) {
+      return ["Fruit Punch", "Green Apple", "Tangy Orange", "Pineapple", "Kiwi", "Watermelon", "Lemon"];
+    }
+    return [];
+  };
+
+  const wheyVariantsData = [
+    {
+      variant: "Whey Isolate",
+      fullName: "Whey Isolate Sample(35gm)",
+      protein: ["35%", "40%", "50%", "60%", "70%", "80%"],
+      pricerRange: "1900 - 3656",
+      flavoured: [
+        "Chocolate",
+        "Belgium Chocolate",
+        "Coffee",
+        "Mava Kulfi",
+        "Vanilla Caramel",
+        "Coconut Caramel",
+        "Mango",
+        "Cookies and Cream",
+      ],
+    },
+    {
+      variant: "Whey Concentrate",
+      fullName: "Whey Concentrate Sample(35gm)",
+      protein: ["35%", "50%", "60%", "70%", "80%"],
+      pricerRange: "1295 - 2270",
+      flavoured: [
+        "Chocolate",
+        "Belgium Chocolate",
+        "Coffee",
+        "Mava Kulfi",
+        "Vanilla Caramel",
+        "Coconut Caramel",
+        "Mango",
+        "Cookies and Cream",
+      ],
+    },
+    {
+      variant: "Whey Blend",
+      fullName: "Whey Blend Sample(35gm)",
+      protein: ["35%", "40%", "50%", "60%"],
+      pricerRange: "750 - 1650",
+      flavoured: [
+        "Chocolate",
+        "Belgium Chocolate",
+        "Coffee",
+        "Mava Kulfi",
+        "Vanilla Caramel",
+        "Coconut Caramel",
+        "Mango",
+        "Cookies and Cream",
+      ],
+    },
+  ];
+
+  const otherProducts = productsData.filter(
+    (p) => !p.name.includes("Whey Blend") && !p.name.includes("Whey Concentrate") && !p.name.includes("Whey Isolate")
+  );
   // const [, setCartUpdate] = useState(0); // Used to trigger re-renders on cart updates
 
   // Initialize product selections with the first available flavor for each product
@@ -1005,7 +1094,7 @@ export default function Home() {
             <iframe
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/qPPHckQhGp4?autoplay=1&mute=0"
+              src="https://www.youtube.com/embed/yxuFDII41sg?autoplay=1&mute=0"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1064,7 +1153,7 @@ export default function Home() {
                     }}
                   >
                     Book Your Sample Today{" "}
-                    <span style={{ color: "#fff" }}>In Just ₹999/-</span>
+                    <span style={{ color: "#fff" }}>In Just ₹299/-</span>
                   </p>
                 </div>
 
@@ -1112,7 +1201,7 @@ export default function Home() {
                 <iframe
                   width="100%"
                   height="100%"
-                  src="https://www.youtube.com/embed/qPPHckQhGp4?autoplay=1&mute=1&loop=1&playlist=qPPHckQhGp4&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+                  src="https://www.youtube.com/embed/yxuFDII41sg?autoplay=1&mute=1&loop=1&playlist=yxuFDII41sg&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
                   title="YouTube background preview"
                   frameBorder="0"
                   allow="autoplay; encrypted-media"
@@ -1466,100 +1555,209 @@ export default function Home() {
                       <h4 className="box-title">Gomzi Sample Testing Kit</h4>
                       <p className="box-subtitle">
                         Taste and test our complete product line before placing
-                        a private label manufacturing order. Includes 9
+                        a private label manufacturing order. Includes 7 (If you buy a full kit )
                         high-quality product samples across multiple flavors.
                       </p>
-                      <div className="box-price-tag mt-3">
-                        <span className="price-label">Price:</span>
-                        <span className="price-value">₹999/-</span>
+                      <div className="box-price-tag mt-3" style={{ maxWidth: '250px' }}>
+                        <span className="price-label">Starts From:</span>
+                        <span className="price-value">₹299/-</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: List of 10 Products Included in the Box */}
+              {/* Right Column: List of Products Included in the Box */}
               <div className="col-lg-7 col-md-12">
                 <div
                   className="box-products-list wow fadeInUp"
                   data-wow-delay="0.2s"
                 >
                   <div className="list-header mb-4">
-                    <h3 className="list-title">9 Premium Samples Inside:</h3>
+                    <h3 className="list-title">7 Premium Sample Lines Inside:</h3>
                     <p className="list-subtitle">
-                      Your testing kit contains samples of all the following
-                      products:
+                      Your testing kit contains 9 total sample packs across all the following product lines:
                     </p>
                   </div>
 
                   <div className="products-grid">
-                    {productsData.map((product, index) => (
-                      <div className="box-product-item-card" key={index}>
-                        <div className="card-top-header">
-                          <span className="product-index-badge">
-                            {index + 1}
-                          </span>
-                          <h4 className="box-product-name">
-                            {product.name
-                              .replace(" Sample(35gm)", "")
-                              .replace(" Sample(100gm)", "")
-                              .replace(" Sample(20gm)", "")
-                              .replace(" Sample(220ml)", "")}
-                          </h4>
+                    {/* Featured Item 1: Whey Protein Accordion */}
+                    <div className="box-product-item-card featured-whey-card mb-3">
+                      {/* Main Accordion Header */}
+                      <div
+                        className="card-top-header d-flex align-items-center justify-content-between"
+                        onClick={() => setIsWheyOpen(!isWheyOpen)}
+                        style={{ cursor: "pointer", userSelect: "none" }}
+                      >
+                        <div className="d-flex align-items-center gap-2 flex-wrap">
+                          <span className="product-index-badge">1</span>
+                          <h4 className="box-product-name mb-0">Whey Protein</h4>
                           <span className="product-size-badge">
-                            {product.name.includes("Bottle")
-                              ? "220ml"
-                              : product.name.includes("100gm")
-                                ? "100gm"
-                                : product.name.includes("20gm")
-                                  ? "20gm"
-                                  : "35gm"}
+                            3 Variants (35gm each)
                           </span>
                         </div>
-
-                        <p className="box-product-desc">
-                          {getProductDescription(product.name)}
-                        </p>
-
-                        {/* Protein Badge (if applicable) */}
-                        {product.protein && (
-                          <div className="mt-3">
-                            <span className="badge-section-label">
-                              Available Protein Percentages:
-                            </span>
-                            <div className="d-flex flex-wrap gap-2 mt-1">
-                              {product.protein.map((prot) => (
-                                <span
-                                  key={prot}
-                                  className="box-badge-pill protein-pill"
-                                >
-                                  {prot}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Flavors Badges */}
-                        {product.flavoured && (
-                          <div className="mt-3">
-                            <span className="badge-section-label">
-                              Available Flavours:
-                            </span>
-                            <div className="d-flex flex-wrap gap-2 mt-1">
-                              {product.flavoured.map((flv) => (
-                                <span
-                                  key={flv}
-                                  className="box-badge-pill flavor-pill"
-                                >
-                                  {flv}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        )}
+                        <div className="d-flex align-items-center gap-2">
+                          <i
+                            className={`fas fa-chevron-${isWheyOpen ? "up" : "down"} text-success fs-5 ms-2`}
+                          ></i>
+                        </div>
                       </div>
-                    ))}
+
+                      {/* Accordion Body */}
+                      {isWheyOpen && (
+                        <div className="whey-accordion-body mt-3 pt-3 border-top border-secondary">
+                          {/* Accordion Variant Selection Buttons */}
+                          <div className="d-flex flex-wrap gap-2 mb-3">
+                            {wheyVariantsData.map((v) => (
+                              <button
+                                key={v.variant}
+                                type="button"
+                                className={`btn btn-sm ${openWheyVariant === v.variant ? "btn-success fw-bold" : "btn-outline-secondary text-light"}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setOpenWheyVariant(v.variant);
+                                }}
+                                style={
+                                  openWheyVariant === v.variant
+                                    ? { backgroundColor: "#88c349", color: "#181c20", border: "none" }
+                                    : {}
+                                }
+                              >
+                                {v.variant}
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Accordion Content for Selected Variant */}
+                          {wheyVariantsData.map((v) => {
+                            if (openWheyVariant !== v.variant) return null;
+                            return (
+                              <div
+                                key={v.variant}
+                                className="whey-variant-accordion-item p-3 rounded"
+                                style={{
+                                  background: "rgba(0,0,0,0.25)",
+                                  border: "1px solid rgba(136,195,73,0.25)",
+                                }}
+                              >
+                                <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+                                  <h5
+                                    className="text-light fw-bold mb-0"
+                                    style={{ fontSize: "15px" }}
+                                  >
+                                    <i className="fas fa-check-circle text-success me-2"></i>
+                                    {v.variant}{" "}
+                                    <small className="text-muted fs-7">
+                                      (35gm Sample)
+                                    </small>
+                                  </h5>
+                                </div>
+
+                                {/* Available Flavours */}
+                                {v.flavoured && (
+                                  <div>
+                                    <span className="badge-section-label">
+                                      Available Flavours ({v.flavoured.length}):
+                                    </span>
+                                    <div className="d-flex flex-wrap gap-2 mt-1">
+                                      {v.flavoured.map((flv) => (
+                                        <span
+                                          key={flv}
+                                          className="box-badge-pill flavor-pill"
+                                        >
+                                          {flv}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Remaining Product Cards as Accordions (Items 2-7) */}
+                    {otherProducts.map((product, index) => {
+                      const itemIndex = index + 2;
+                      const isExpanded = !!openAccordions[itemIndex];
+                      const cleanName = product.name
+                        .replace(" Sample(35gm)", "")
+                        .replace(" Sample(100gm)", "")
+                        .replace(" Sample(20gm)", "")
+                        .replace(" Sample(220ml)", "");
+                      const sizeText = product.name.includes("Bottle")
+                        ? "220ml"
+                        : product.name.includes("100gm")
+                          ? "100gm"
+                          : product.name.includes("20gm")
+                            ? "20gm"
+                            : "35gm";
+
+                      const flavorsList = getProductFlavors(cleanName, product.flavoured);
+
+                      return (
+                        <div className="box-product-item-card mb-3" key={product.product_id || index}>
+                          {/* Accordion Header */}
+                          <div
+                            className="card-top-header d-flex align-items-center justify-content-between"
+                            onClick={() => toggleAccordion(itemIndex)}
+                            style={{ cursor: "pointer", userSelect: "none" }}
+                          >
+                            <div className="d-flex align-items-center gap-2 flex-wrap">
+                              <span className="product-index-badge">
+                                {itemIndex}
+                              </span>
+                              <h4 className="box-product-name mb-0">
+                                {cleanName}
+                              </h4>
+                              <span className="product-size-badge">
+                                {sizeText}
+                              </span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                              <i
+                                className={`fas fa-chevron-${isExpanded ? "up" : "down"} text-success fs-5 ms-2`}
+                              ></i>
+                            </div>
+                          </div>
+
+                          {/* Accordion Body */}
+                          {isExpanded && (
+                            <div className="product-accordion-body mt-3 pt-3 border-top border-secondary">
+                              <div
+                                className="p-3 rounded"
+                                style={{
+                                  background: "rgba(0,0,0,0.25)",
+                                  border: "1px solid rgba(136,195,73,0.15)",
+                                }}
+                              >
+                                {flavorsList && flavorsList.length > 0 ? (
+                                  <div>
+                                    <span className="badge-section-label">
+                                      Available Flavours ({flavorsList.length}):
+                                    </span>
+                                    <div className="d-flex flex-wrap gap-2 mt-1">
+                                      {flavorsList.map((flv) => (
+                                        <span
+                                          key={flv}
+                                          className="box-badge-pill flavor-pill"
+                                        >
+                                          {flv}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <span className="text-muted fs-7">Standard Unflavored Premium Formula</span>
+                                )}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

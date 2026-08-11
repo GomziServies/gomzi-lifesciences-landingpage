@@ -213,18 +213,47 @@ const Booking = () => {
         pin_code: "",
         state: "",
         country: "",
+        remarks: "",
         payment_method: "ONLINE" // Changed default to ONLINE
     });
 
-    const [sampleQty, setSampleQty] = useState(1);
-    const SAMPLE_BOX_PRICE = 999;
+    const SAMPLE_PRODUCTS_LIST = [
+        { id: "68ad735906800a0384ea019e", name: "Whey Protein (35gm)" },
+        { id: "68cd0321e71a48752796bee9", name: "Mass Gainer (35gm)" },
+        { id: "68ad739506800a0384ea01a2", name: "Peanut Butter (100gm)" },
+        { id: "68ad73e006800a0384ea01ab", name: "Creatine (20gm)" },
+        { id: "68ad744106800a0384ea01b4", name: "Pre-Workout (20gm)" },
+        { id: "68ad746a06800a0384ea01b8", name: "EAA (20gm)" },
+        { id: "68ad748306800a0384ea01be", name: "BCAA (20gm)" }
+    ];
+
+    const [isFullKit, setIsFullKit] = useState(false);
+    const [selectedSampleIds, setSelectedSampleIds] = useState([]);
+
+    const calculateTierPrice = () => {
+        if (isFullKit) return 999;
+        const count = selectedSampleIds.length;
+        if (count === 0) return 0;
+        if (count === 1) return 299;
+        if (count === 2) return 499;
+        if (count === 3) return 699;
+        if (count === 4) return 899;
+        return 999;
+    };
+
+    const currentTotalPrice = calculateTierPrice();
+    const SAMPLE_BOX_PRICE = currentTotalPrice;
 
     useEffect(() => {
-        if (lastSyncedQty !== sampleQty) {
-            lastSyncedQty = sampleQty;
-            addSampleToCart(sampleQty);
+        const currentQty = isFullKit ? 7 : selectedSampleIds.length;
+        if (lastSyncedQty !== currentQty) {
+            lastSyncedQty = currentQty;
+            addSampleToCart(currentQty);
         }
-    }, [sampleQty]);
+        if (!isFullKit && selectedSampleIds.length >= SAMPLE_PRODUCTS_LIST.length) {
+            setIsFullKit(true);
+        }
+    }, [selectedSampleIds, isFullKit]);
 
     const [productLines] = useState(() => {
         const savedProducts = localStorage.getItem("ATC_Product");
@@ -635,6 +664,11 @@ const Booking = () => {
             return;
         }
 
+        if (!isFullKit && selectedSampleIds.length === 0) {
+            toast.error('Please select at least 1 sample product.');
+            return;
+        }
+
         setIsLoading(true);
         try {
             // Load Razorpay script only for online payment
@@ -647,17 +681,30 @@ const Booking = () => {
                 }
             }
 
-            const orderData = {
-                products: [
+            const calculatedPrice = calculateTierPrice();
+            const selectedProductsPayload = isFullKit
+                ? [
                     {
                         id: apiConfig.PRODUCT_ID,
                         name: "Gomzi Life Sciences Sample Box",
-                        price: SAMPLE_BOX_PRICE,
-                        quantity: sampleQty,
-                        total: SAMPLE_BOX_PRICE * sampleQty
+                        price: 999,
+                        quantity: 1,
+                        total: 999
                     }
-                ],
-                orderTotal: SAMPLE_BOX_PRICE * sampleQty,
+                ]
+                : SAMPLE_PRODUCTS_LIST
+                    .filter(p => selectedSampleIds.includes(p.id))
+                    .map(p => ({
+                        id: p.id,
+                        name: p.name,
+                        price: Math.round(calculatedPrice / selectedSampleIds.length),
+                        quantity: 1,
+                        total: Math.round(calculatedPrice / selectedSampleIds.length)
+                    }));
+
+            const orderData = {
+                products: selectedProductsPayload,
+                orderTotal: calculatedPrice,
                 customerInfo: {
                     name: formData.name,
                     email: formData.email,
@@ -681,7 +728,8 @@ const Booking = () => {
                 name: formData.name,
                 email: formData.email,
                 mobile: formData.mobile,
-                sampleQty: sampleQty
+                remarks: formData.remarks,
+                sampleQty: 1
             };
 
             await createOrder(orderData);
@@ -745,11 +793,20 @@ const Booking = () => {
             const userInfo = JSON.parse(localStorage.getItem('user_info'));
 
             if (userInfo) {
+                const fullName = (
+                    (userInfo.user?.first_name || '') + " " + (userInfo.user?.last_name || '')
+                ).trim();
+
+                const isDefaultFGUser =
+                    !fullName ||
+                    fullName.toUpperCase() === 'FG USER' ||
+                    fullName.toUpperCase() === 'FGUSER';
+
                 setFormData(prevData => ({
                     ...prevData,
-                    name: userInfo.user.first_name + " " + userInfo.user.last_name || '',
-                    email: userInfo.user.email || '',
-                    mobile: userInfo.user.mobile || '',
+                    name: isDefaultFGUser ? '' : fullName,
+                    email: userInfo.user?.email || '',
+                    mobile: userInfo.user?.mobile || '',
                 }));
             }
         }
@@ -777,7 +834,7 @@ const Booking = () => {
                                     }}
                                 >
                                     {/* Top row: icon + name + price */}
-                                    <div className="d-flex align-items-center justify-content-between mb-3">
+                                    <div className="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                                         <div className="d-flex align-items-center gap-3">
                                             <div style={{
                                                 background: 'rgba(144, 238, 144, 0.1)',
@@ -789,78 +846,104 @@ const Booking = () => {
                                             </div>
                                             <div>
                                                 <div className="fw-bold" style={{ color: '#fff', fontSize: '16px' }}>
-                                                    Gomzi Life Sciences Sample Box
+                                                    Gomzi Life Sciences Sample Kit
                                                 </div>
                                                 <div className="mt-1" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px' }}>
-                                                    Full assorted supplement sample kit
+                                                    {isFullKit ? 'Full assorted supplement sample kit (All 7 Product Lines)' : `${selectedSampleIds.length} Sample Product(s) Selected`}
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="text-end">
-                                            <div className="fw-bold" style={{ color: '#90ee90', fontSize: '22px' }}>₹{SAMPLE_BOX_PRICE * sampleQty}</div>
-                                            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '11px' }}>₹{SAMPLE_BOX_PRICE} × {sampleQty}</div>
+                                            <div className="fw-bold" style={{ color: '#90ee90', fontSize: '24px' }}>₹{currentTotalPrice}</div>
+                                            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px' }}>
+                                                {isFullKit ? 'Full Kit Special Price' : `${selectedSampleIds.length} item(s)`}
+                                            </div>
                                         </div>
                                     </div>
 
-                                    {/* Bottom row: qty controls */}
-                                    <div className="d-flex align-items-center gap-3">
-                                        <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>Quantity:</span>
-                                        <div className="d-flex align-items-center" style={{
-                                            background: 'rgba(255,255,255,0.05)',
-                                            border: '1px solid rgba(144,238,144,0.25)',
-                                            borderRadius: '8px',
-                                            overflow: 'hidden'
-                                        }}>
-                                            <button
-                                                type="button"
-                                                onClick={() => setSampleQty(q => Math.max(1, q - 1))}
-                                                style={{
-                                                    background: 'transparent',
-                                                    border: 'none',
-                                                    color: '#90ee90',
-                                                    width: '36px',
-                                                    height: '36px',
-                                                    fontSize: '18px',
-                                                    cursor: 'pointer',
-                                                    lineHeight: 1
-                                                }}
-                                            >−</button>
-                                            <input
-                                                type="number"
-                                                min="1"
-                                                value={sampleQty}
-                                                onChange={(e) => setSampleQty(Math.max(1, parseInt(e.target.value) || 1))}
-                                                className="hide-spin-buttons"
-                                                style={{
-                                                    width: '48px',
-                                                    textAlign: 'center',
-                                                    background: 'transparent',
-                                                    border: 'none',
-                                                    color: '#fff',
-                                                    fontSize: '15px',
-                                                    fontWeight: '600',
-                                                    outline: 'none'
-                                                }}
-                                            />
-                                            <button
-                                                type="button"
-                                                onClick={() => setSampleQty(q => q + 1)}
-                                                style={{
-                                                    background: 'transparent',
-                                                    border: 'none',
-                                                    color: '#90ee90',
-                                                    width: '36px',
-                                                    height: '36px',
-                                                    fontSize: '18px',
-                                                    cursor: 'pointer',
-                                                    lineHeight: 1
-                                                }}
-                                            >+</button>
-                                        </div>
-                                        <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px' }}>
-                                            Total: <span style={{ color: '#90ee90', fontWeight: '600' }}>₹{SAMPLE_BOX_PRICE * sampleQty}</span>
-                                        </span>
+
+
+                                    {/* Mode Selection Buttons */}
+                                    <div className="d-flex gap-2 mb-3">
+                                        <button
+                                            type="button"
+                                            className={`btn btn-sm flex-fill ${!isFullKit ? 'btn-success fw-bold' : 'btn-outline-secondary text-light'}`}
+                                            onClick={() => {
+                                                setIsFullKit(false);
+                                                setSelectedSampleIds([]); // Start with no items selected
+                                            }}
+                                            style={!isFullKit ? { backgroundColor: '#90ee90', color: '#1a1a2e', border: 'none' } : {}}
+                                        >
+                                            <i className="fas fa-sliders-h me-1"></i> Select Individual Samples
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className={`btn btn-sm flex-fill ${isFullKit ? 'btn-success fw-bold' : 'btn-outline-secondary text-light'}`}
+                                            onClick={() => {
+                                                setIsFullKit(true);
+                                                setSelectedSampleIds(SAMPLE_PRODUCTS_LIST.map(p => p.id));
+                                            }}
+                                            style={isFullKit ? { backgroundColor: '#90ee90', color: '#1a1a2e', border: 'none' } : {}}
+                                        >
+                                            <i className="fas fa-check-circle me-1"></i> Full Box (All 7 Samples - ₹999)
+                                        </button>
                                     </div>
+
+                                    {/* Custom Products Checkbox Grid */}
+                                    {!isFullKit && (
+                                        <div className="mt-3 p-3 rounded" style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                                            <div className="d-flex justify-content-between align-items-center mb-2">
+                                                <div className="fw-bold text-light" style={{ fontSize: '13px' }}>
+                                                    Select Sample Products ({selectedSampleIds.length} selected):
+                                                </div>
+                                                {selectedSampleIds.length === 0 && (
+                                                    <div className="text-warning fw-bold" style={{ fontSize: '12px' }}>
+                                                        ⚠️ Select at least 1 product
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="row g-2">
+                                                {SAMPLE_PRODUCTS_LIST.map(product => {
+                                                    const isChecked = selectedSampleIds.includes(product.id);
+                                                    return (
+                                                        <div className="col-12 col-sm-6 col-md-4" key={product.id}>
+                                                            <label
+                                                                className="d-flex align-items-center p-2 rounded cursor-pointer"
+                                                                style={{
+                                                                    background: isChecked ? 'rgba(144, 238, 144, 0.1)' : 'rgba(255,255,255,0.02)',
+                                                                    border: isChecked ? '1px solid rgba(144, 238, 144, 0.4)' : '1px solid rgba(255,255,255,0.05)',
+                                                                    cursor: 'pointer',
+                                                                    transition: 'all 0.2s ease'
+                                                                }}
+                                                            >
+                                                                <input
+                                                                    type="checkbox"
+                                                                    className="form-check-input me-2 mt-0"
+                                                                    checked={isChecked}
+                                                                    onChange={() => {
+                                                                        if (isChecked) {
+                                                                            setSelectedSampleIds(prev => prev.filter(id => id !== product.id));
+                                                                        } else {
+                                                                            const updated = [...selectedSampleIds, product.id];
+                                                                            if (updated.length >= SAMPLE_PRODUCTS_LIST.length) {
+                                                                                setIsFullKit(true);
+                                                                                setSelectedSampleIds(SAMPLE_PRODUCTS_LIST.map(p => p.id));
+                                                                            } else {
+                                                                                setSelectedSampleIds(updated);
+                                                                            }
+                                                                        }
+                                                                    }}
+                                                                />
+                                                                <span style={{ fontSize: '12px', color: isChecked ? '#fff' : '#bcbcbc' }}>
+                                                                    {product.name}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -967,6 +1050,16 @@ const Booking = () => {
                                 value={formData.country}
                                 onChange={handleChange}
                                 required
+                            />
+                        </div>
+                        <div className="form-group col-12 mb-3">
+                            <textarea
+                                name="remarks"
+                                className="form-control bg-dark text-light"
+                                placeholder="Remarks / Special Instructions (Optional)"
+                                value={formData.remarks}
+                                onChange={handleChange}
+                                rows={2}
                             />
                         </div>
 
