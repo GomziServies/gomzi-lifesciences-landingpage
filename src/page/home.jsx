@@ -569,6 +569,7 @@ const testimonialsData = [
   },
 ];
 
+// eslint-disable-next-line no-unused-vars
 const getProductDescription = (name) => {
   if (name.includes("Whey Blend")) {
     return "A premium blend of fast-absorbing Whey Protein Concentrate and Isolate, optimized for maximum muscle recovery, protein synthesis, and elite performance. Smooth texture with high mixability.";

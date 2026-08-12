@@ -12,6 +12,16 @@ import { isUserLoggedIn } from '../utils/auth';
 
 let lastSyncedQty = null;
 
+const SAMPLE_PRODUCTS_LIST = [
+    { id: "68ad735906800a0384ea019e", name: "Whey Protein (35gm)" },
+    { id: "68cd0321e71a48752796bee9", name: "Mass Gainer (35gm)" },
+    { id: "68ad739506800a0384ea01a2", name: "Peanut Butter (100gm)" },
+    { id: "68ad73e006800a0384ea01ab", name: "Creatine (20gm)" },
+    { id: "68ad744106800a0384ea01b4", name: "Pre-Workout (20gm)" },
+    { id: "68ad746a06800a0384ea01b8", name: "EAA (20gm)" },
+    { id: "68ad748306800a0384ea01be", name: "BCAA (20gm)" }
+];
+
 const Booking = () => {
     const [isLoading, setIsLoading] = useState(false);
     const Creatine = {
@@ -217,16 +227,6 @@ const Booking = () => {
         payment_method: "ONLINE" // Changed default to ONLINE
     });
 
-    const SAMPLE_PRODUCTS_LIST = [
-        { id: "68ad735906800a0384ea019e", name: "Whey Protein (35gm)" },
-        { id: "68cd0321e71a48752796bee9", name: "Mass Gainer (35gm)" },
-        { id: "68ad739506800a0384ea01a2", name: "Peanut Butter (100gm)" },
-        { id: "68ad73e006800a0384ea01ab", name: "Creatine (20gm)" },
-        { id: "68ad744106800a0384ea01b4", name: "Pre-Workout (20gm)" },
-        { id: "68ad746a06800a0384ea01b8", name: "EAA (20gm)" },
-        { id: "68ad748306800a0384ea01be", name: "BCAA (20gm)" }
-    ];
-
     const [isFullKit, setIsFullKit] = useState(false);
     const [selectedSampleIds, setSelectedSampleIds] = useState([]);
 
@@ -242,7 +242,6 @@ const Booking = () => {
     };
 
     const currentTotalPrice = calculateTierPrice();
-    const SAMPLE_BOX_PRICE = currentTotalPrice;
 
     useEffect(() => {
         const currentQty = isFullKit ? 7 : selectedSampleIds.length;
