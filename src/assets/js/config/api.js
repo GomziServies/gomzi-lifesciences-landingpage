@@ -92,8 +92,8 @@ export const createOrder = async (orderData) => {
             mobile,
             remarks: remarks || "",
             item_type: "PURE_GO_SAMPLE_MEAL_PRODUCT",
-            // Adjust total to match the tier price shown to the user
-            ...(deliveryChargesAdjustment !== 0 && { delivery_charges: deliveryChargesAdjustment }),
+            // Adjust total if deliveryChargesAdjustment is positive
+            ...(deliveryChargesAdjustment > 0 && { delivery_charges: deliveryChargesAdjustment }),
         };
 
         // Check Authentication
