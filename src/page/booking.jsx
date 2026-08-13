@@ -682,28 +682,27 @@ const Booking = () => {
 
             const calculatedPrice = calculateTierPrice();
             const selectedProductsPayload = isFullKit
-                ? [
-                    {
-                        id: apiConfig.PRODUCT_ID,
-                        name: "Gomzi Life Sciences Sample Box",
-                        price: 999,
-                        quantity: 1,
-                        total: 999
-                    }
-                ]
+                ? SAMPLE_PRODUCTS_LIST.map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    price: Math.round(999 / SAMPLE_PRODUCTS_LIST.length),
+                    quantity: 1,
+                    total: Math.round(999 / SAMPLE_PRODUCTS_LIST.length)
+                }))
                 : SAMPLE_PRODUCTS_LIST
                     .filter(p => selectedSampleIds.includes(p.id))
                     .map(p => ({
                         id: p.id,
                         name: p.name,
-                        price: Math.round(calculatedPrice / selectedSampleIds.length),
+                        price: Math.round(calculatedPrice / (selectedSampleIds.length || 1)),
                         quantity: 1,
-                        total: Math.round(calculatedPrice / selectedSampleIds.length)
+                        total: Math.round(calculatedPrice / (selectedSampleIds.length || 1))
                     }));
 
             const orderData = {
                 products: selectedProductsPayload,
                 orderTotal: calculatedPrice,
+                is_full_kit: isFullKit,
                 customerInfo: {
                     name: formData.name,
                     email: formData.email,
@@ -1371,4 +1370,4 @@ const Booking = () => {
     )
 }
 
-export default Booking
+export default Booking;

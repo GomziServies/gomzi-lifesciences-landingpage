@@ -58,8 +58,9 @@ export const createOrder = async (orderData) => {
             : [{ id: apiConfig.PRODUCT_ID, quantity: 1 }];
 
         const updatedProducts = selectedProductsArray.map(p => ({
-            product_id: apiConfig.PRODUCT_ID,
+            product_id: p.id || p.product_id || apiConfig.PRODUCT_ID,
             quantity: p.quantity || 1,
+            name: p.name || undefined,
             landing_page: true
         }));
 
@@ -92,6 +93,7 @@ export const createOrder = async (orderData) => {
             mobile,
             remarks: remarks || "",
             item_type: "PURE_GO_SAMPLE_MEAL_PRODUCT",
+            is_full_kit: orderData.is_full_kit || false,
             // Adjust total if deliveryChargesAdjustment is positive
             ...(deliveryChargesAdjustment > 0 && { delivery_charges: deliveryChargesAdjustment }),
         };
@@ -256,4 +258,4 @@ export const addSampleToCart = async (quantity = 1) => {
     } catch (error) {
         console.error('Failed to add sample to cart:', error);
     }
-};
+};
