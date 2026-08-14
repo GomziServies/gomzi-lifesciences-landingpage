@@ -624,24 +624,60 @@ export default function Home() {
   };
 
   const getProductFlavors = (name, itemFlavors) => {
-    if (itemFlavors && Array.isArray(itemFlavors) && itemFlavors.length > 0) return itemFlavors;
+    if (itemFlavors && Array.isArray(itemFlavors) && itemFlavors.length > 0)
+      return itemFlavors;
     if (name.includes("Mass Gainer")) {
-      return ["Chocolate", "Vanilla", "Banana", "Strawberry", "Cookies and Cream"];
+      return [
+        "Chocolate",
+        "Vanilla",
+        "Banana",
+        "Strawberry",
+        "Cookies and Cream",
+      ];
     }
     if (name.includes("Peanut Butter")) {
       return ["Crunchy Natural", "Smooth Natural", "Chocolate Crunchy"];
     }
     if (name.includes("Creatine")) {
-      return ["Unflavored", "Fruit Punch", "Green Apple", "Tangy Orange", "Cola"];
+      return [
+        "Unflavored",
+        "Fruit Punch",
+        "Green Apple",
+        "Tangy Orange",
+        "Cola",
+      ];
     }
     if (name.includes("Pre-Workout")) {
-      return ["Fruit Punch", "Green Apple", "Tangy Orange", "Watermelon", "Cola", "Blue Raspberry"];
+      return [
+        "Fruit Punch",
+        "Green Apple",
+        "Tangy Orange",
+        "Watermelon",
+        "Cola",
+        "Blue Raspberry",
+      ];
     }
     if (name.includes("EAA")) {
-      return ["Fruit Punch", "Green Apple", "Tangy Orange", "Pineapple", "Kiwi", "Watermelon", "Lemon"];
+      return [
+        "Fruit Punch",
+        "Green Apple",
+        "Tangy Orange",
+        "Pineapple",
+        "Kiwi",
+        "Watermelon",
+        "Lemon",
+      ];
     }
     if (name.includes("BCAA")) {
-      return ["Fruit Punch", "Green Apple", "Tangy Orange", "Pineapple", "Kiwi", "Watermelon", "Lemon"];
+      return [
+        "Fruit Punch",
+        "Green Apple",
+        "Tangy Orange",
+        "Pineapple",
+        "Kiwi",
+        "Watermelon",
+        "Lemon",
+      ];
     }
     return [];
   };
@@ -698,7 +734,10 @@ export default function Home() {
   ];
 
   const otherProducts = productsData.filter(
-    (p) => !p.name.includes("Whey Blend") && !p.name.includes("Whey Concentrate") && !p.name.includes("Whey Isolate")
+    (p) =>
+      !p.name.includes("Whey Blend") &&
+      !p.name.includes("Whey Concentrate") &&
+      !p.name.includes("Whey Isolate"),
   );
   // const [, setCartUpdate] = useState(0); // Used to trigger re-renders on cart updates
 
@@ -1159,7 +1198,7 @@ export default function Home() {
                 </div>
 
                 <div
-                  className="hero-content-body wow fadeInUp"
+                  className="hero-content-body wow fadeInUp hero-sample-button"
                   data-wow-delay="0.4s"
                 >
                   <div className="hero-btn">
@@ -1556,15 +1595,37 @@ export default function Home() {
                       <h4 className="box-title">Gomzi Sample Testing Kit</h4>
                       <p className="box-subtitle">
                         Taste and test our complete product line before placing
-                        a private label manufacturing order. Includes 7 (If you buy a full kit )
-                        high-quality product samples across multiple flavors.
+                        a private label manufacturing order. Includes 7 (If you
+                        buy a full kit ) high-quality product samples across
+                        multiple flavors.
                       </p>
-                      <div className="box-price-tag mt-3" style={{ maxWidth: '250px' }}>
+                      <div
+                        className="box-price-tag mt-3"
+                        style={{ maxWidth: "250px" }}
+                      >
                         <span className="price-label">Starts From:</span>
                         <span className="price-value">₹299/-</span>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Mobile Only: Book Your Sample */}
+              <div className="mobile-sample-book-btn">
+                <div className="hero-btn">
+                  <button
+                    onClick={() => {
+                      if (isUserLoggedIn()) {
+                        setShowBookingModal(true);
+                      } else {
+                        setShowLoginModal(true);
+                      }
+                    }}
+                    className="btn-default"
+                  >
+                    Book your Sample
+                  </button>
                 </div>
               </div>
 
@@ -1575,9 +1636,12 @@ export default function Home() {
                   data-wow-delay="0.2s"
                 >
                   <div className="list-header mb-4">
-                    <h3 className="list-title">7 Premium Sample Lines Inside:</h3>
+                    <h3 className="list-title">
+                      7 Premium Sample Lines Inside:
+                    </h3>
                     <p className="list-subtitle">
-                      Your testing kit contains 9 total sample packs across all the following product lines:
+                      Your testing kit contains 9 total sample packs across all
+                      the following product lines:
                     </p>
                   </div>
 
@@ -1590,9 +1654,11 @@ export default function Home() {
                         onClick={() => setIsWheyOpen(!isWheyOpen)}
                         style={{ cursor: "pointer", userSelect: "none" }}
                       >
-                        <div className="d-flex align-items-center gap-2 flex-wrap">
+                        <div className="whey-header-content">
                           <span className="product-index-badge">1</span>
-                          <h4 className="box-product-name mb-0">Whey Protein</h4>
+                          <h4 className="box-product-name mb-0">
+                            Whey Protein
+                          </h4>
                           <span className="product-size-badge">
                             3 Variants (35gm each)
                           </span>
@@ -1620,7 +1686,11 @@ export default function Home() {
                                 }}
                                 style={
                                   openWheyVariant === v.variant
-                                    ? { backgroundColor: "#88c349", color: "#181c20", border: "none" }
+                                    ? {
+                                        backgroundColor: "#88c349",
+                                        color: "#181c20",
+                                        border: "none",
+                                      }
                                     : {}
                                 }
                               >
@@ -1696,10 +1766,16 @@ export default function Home() {
                             ? "20gm"
                             : "35gm";
 
-                      const flavorsList = getProductFlavors(cleanName, product.flavoured);
+                      const flavorsList = getProductFlavors(
+                        cleanName,
+                        product.flavoured,
+                      );
 
                       return (
-                        <div className="box-product-item-card mb-3" key={product.product_id || index}>
+                        <div
+                          className="box-product-item-card mb-3"
+                          key={product.product_id || index}
+                        >
                           {/* Accordion Header */}
                           <div
                             className="card-top-header d-flex align-items-center justify-content-between"
@@ -1751,7 +1827,9 @@ export default function Home() {
                                     </div>
                                   </div>
                                 ) : (
-                                  <span className="text-muted fs-7">Standard Unflavored Premium Formula</span>
+                                  <span className="text-muted fs-7">
+                                    Standard Unflavored Premium Formula
+                                  </span>
                                 )}
                               </div>
                             </div>
@@ -1889,3 +1967,4 @@ export default function Home() {
     </>
   );
 }
+

@@ -8043,3 +8043,131 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     overflow-y: visible;
   }
 }
+
+
+.mobile-sample-book-btn {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .hero-sample-button {
+    display: none !important;
+  }
+
+  .mobile-sample-book-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .mobile-sample-book-btn .hero-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+.whey-header-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+
+@media (max-width: 767.98px) {
+
+  .box-product-item-card .card-top-header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 24px !important;
+    align-items: center !important;
+    column-gap: 6px !important;
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+  }
+
+
+  .box-product-item-card .card-top-header > div:first-child,
+  .box-product-item-card .whey-header-content {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 5px !important;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+    flex: 1 1 auto !important;
+  }
+
+
+  .box-product-item-card .product-index-badge {
+    flex: 0 0 26px !important;
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+
+  .box-product-item-card .box-product-name {
+    flex: 0 1 auto !important;
+    white-space: nowrap !important;
+    font-size: 15px !important;
+    min-width: 0 !important;
+  }
+
+
+  .box-product-item-card .product-size-badge {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    min-width: max-content !important;
+    width: max-content !important;
+    max-width: none !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    font-size: 8px !important;
+    line-height: 1.2 !important;
+    padding: 4px 5px !important;
+  }
+
+
+  .box-product-item-card .card-top-header > div:last-child {
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 24px !important;
+    margin: 0 !important;
+  }
+
+
+  .box-product-item-card .card-top-header > div:last-child i {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    font-size: 17px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+  }
+
+
+  .featured-whey-card .whey-header-content {
+    gap: 4px !important;
+  }
+
+  .featured-whey-card .box-product-name {
+  flex: 0 0 75px !important;
+  width: 75px !important;
+  white-space: normal !important;
+  line-height: 1.05 !important;
+  font-size: 15px !important;
+  margin: 0 !important;
+}
+  .featured-whey-card .product-size-badge {
+    font-size: 8px !important;
+    padding: 4px 5px !important;
+  }
+
+}
