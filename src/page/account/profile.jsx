@@ -123,6 +123,11 @@ function UserProfile() {
         }
     };
 
+    const isDefaultName = (firstName, lastName) => {
+        const fullName = `${firstName || ''} ${lastName || ''}`.trim().toUpperCase();
+        return !fullName || fullName === 'FG USER' || fullName === 'FGUSER' || (firstName?.trim().toUpperCase() === 'FG' && lastName?.trim().toUpperCase() === 'USER');
+    };
+
     const updateData = async () => {
         try {
             const response = await axiosInstance.post(
@@ -146,6 +151,13 @@ function UserProfile() {
             const response = await axiosInstance.get("/account/profile");
             const userData = response.data.data;
             if (userData) {
+                const rawFirstName = userData.user.first_name || "";
+                const rawLastName = userData.user.last_name || "";
+                const isDefault = isDefaultName(rawFirstName, rawLastName);
+
+                const cleanFirstName = isDefault ? "" : rawFirstName;
+                const cleanLastName = isDefault ? "" : rawLastName;
+
                 // Update localStorage so header and other components sync instantly
                 const userInfoStr = localStorage.getItem("user_info");
                 if (userInfoStr) {
@@ -153,8 +165,8 @@ function UserProfile() {
                         const userInfo = JSON.parse(userInfoStr);
                         userInfo.user = {
                             ...userInfo.user,
-                            first_name: userData.user.first_name || "",
-                            last_name: userData.user.last_name || "",
+                            first_name: cleanFirstName,
+                            last_name: cleanLastName,
                             email: userData.user.email || "",
                             profile_image: userData.user.profile_image || null,
                         };
@@ -172,8 +184,8 @@ function UserProfile() {
                 setFormData((prevData) => ({
                     ...prevData,
                     user_id: userData.user.uid || "",
-                    first_name: userData.user.first_name || "",
-                    last_name: userData.user.last_name || "",
+                    first_name: cleanFirstName,
+                    last_name: cleanLastName,
                     mobile: userData.user.mobile || "",
                     email: userData.user.email || "",
                     profilePhoto: userData.user.profile_image
@@ -193,6 +205,10 @@ function UserProfile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!formData.first_name || !formData.first_name.trim()) {
+            toast.error("Please enter your First Name");
+            return;
+        }
         setLoading(true);
         await updateData();
         setLoading(false);
@@ -249,7 +265,9 @@ function UserProfile() {
                         </Col>
                         <Col md={4}>
                             <h4 className="font-weight-bold mb-3">
-                                {formData.first_name} {formData.last_name}
+                                {formData.first_name || formData.last_name
+                                    ? `${formData.first_name} ${formData.last_name}`.trim()
+                                    : "User Profile"}
                             </h4>
                             <input
                                 accept="image/*"

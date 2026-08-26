@@ -121,8 +121,16 @@ function NutritionHeader() {
                         }}
                       >
                         <span className="me-2 text-white">
-                          Hi, {userInfo.user.first_name}{" "}
-                          {userInfo.user.last_name}
+                          Hi, {(() => {
+                            const fn = (userInfo.user?.first_name || "").trim();
+                            const ln = (userInfo.user?.last_name || "").trim();
+                            const full = `${fn} ${ln}`.trim();
+                            const upper = full.toUpperCase();
+                            if (!full || upper === "FG USER" || upper === "FGUSER" || (fn.toUpperCase() === "FG" && ln.toUpperCase() === "USER")) {
+                              return "User";
+                            }
+                            return full;
+                          })()}
                         </span>
                         <i className="far fa-user text-white"></i>
                       </button>

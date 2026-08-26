@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
-import { createOrder, addSampleToCart } from '../assets/js/config/api';
+import { createOrder, addSampleToCart, axiosInstance } from '../assets/js/config/api';
 // import Swal from 'sweetalert2';
 // import jsPDF from "jspdf";
 // import html2canvas from "html2canvas";
@@ -728,6 +728,38 @@ const Booking = () => {
                 remarks: formData.remarks,
                 sampleQty: 1
             };
+
+            // Auto-update user profile with the entered name so it persists across account and admin
+            try {
+                const nameParts = (formData.name || '').trim().split(' ');
+                const firstName = nameParts[0] || '';
+                const lastName = nameParts.slice(1).join(' ') || '';
+
+                if (firstName) {
+                    await axiosInstance.post('/account/update-profile', {
+                        first_name: firstName,
+                        last_name: lastName,
+                        email: formData.email,
+                    });
+
+                    const userInfoStr = localStorage.getItem('user_info');
+                    if (userInfoStr) {
+                        const userInfo = JSON.parse(userInfoStr);
+                        userInfo.user = {
+                            ...userInfo.user,
+                            first_name: firstName,
+                            last_name: lastName,
+                            email: formData.email || userInfo.user?.email,
+                        };
+                        localStorage.setItem('user_info', JSON.stringify(userInfo));
+                        window.dispatchEvent(new CustomEvent('userInfoUpdated', {
+                            detail: { userInfo }
+                        }));
+                    }
+                }
+            } catch (profileErr) {
+                console.warn('Could not update profile name during booking:', profileErr);
+            }
 
             await createOrder(orderData);
 
